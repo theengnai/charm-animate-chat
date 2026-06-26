@@ -16,28 +16,22 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         transition={{ duration: 0.5 }}
         className="relative flex h-full w-full flex-col items-center justify-center px-6 pt-24 pb-16"
       >
-        {/* eyebrow */}
+        {/* diamond brand mark */}
         <motion.div
-          className="mb-6 flex items-center gap-3"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mb-10 flex items-center justify-center"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.span
-            className="block h-px bg-copper"
-            initial={{ width: 0 }}
-            animate={{ width: 48 }}
-            transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          />
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.45em] text-copper-deep">
-            Ecosmart · Engineered Within
-          </span>
-          <motion.span
-            className="block h-px bg-copper"
-            initial={{ width: 0 }}
-            animate={{ width: 48 }}
-            transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          />
+          <div className="grid h-11 w-11 place-items-center rotate-45 border-2 border-copper-light">
+            <div
+              className="h-6 w-6 -rotate-45"
+              style={{
+                background:
+                  "linear-gradient(135deg,#f0c79a 0%,#d89060 45%,#b4592c 100%)",
+              }}
+            />
+          </div>
         </motion.div>
 
         {/* headline */}
@@ -46,30 +40,30 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
           style={{
             fontFamily: '"Instrument Serif", serif',
             fontWeight: 400,
-            lineHeight: 1.02,
+            lineHeight: 1.05,
             letterSpacing: "-0.02em",
-            fontSize: "clamp(2.6rem, 6.2vw, 5.2rem)",
+            fontSize: "clamp(2.6rem, 6vw, 5rem)",
           }}
           initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: 0.65, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.6, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
         >
-          Find materials that feel like <span className="text-copper">home</span>.
+          Sourcing the soul of <span className="text-copper">sustainable</span> structure.
         </motion.h1>
 
         <motion.p
-          className="mt-5 max-w-xl text-center text-base text-ink-soft md:text-[1.05rem]"
+          className="mt-5 max-w-xl text-center text-base text-ink-soft md:text-lg"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.7 }}
           style={{ lineHeight: 1.65 }}
         >
-          Walk into ECOSMART's material library and ask anything —
-          travertine, terracotta, MCM, decking, façades.
+          Consult ECOSMART AI to specify high-performance travertine, terracotta,
+          MCM and sustainable cladding — tuned to your project, climate, and detail.
         </motion.p>
 
-        {/* chat — sits at the doorway of the house */}
-        <div className="relative z-10 mt-10 flex w-full flex-col items-center">
+        {/* chat centerpiece */}
+        <div className="relative z-10 mt-12 flex w-full flex-col items-center">
           <ChatCard
             onSend={() => {
               setPulse(true);
@@ -77,6 +71,26 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
             }}
           />
         </div>
+
+        {/* compliance line */}
+        <motion.div
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 opacity-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ delay: 1.7, duration: 0.8 }}
+        >
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
+            Architectural Compliance
+          </span>
+          <span className="h-1 w-1 rounded-full bg-ink-soft/60" />
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
+            Low Carbon Sourcing
+          </span>
+          <span className="h-1 w-1 rounded-full bg-ink-soft/60" />
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
+            GCC Tested Supply
+          </span>
+        </motion.div>
       </motion.div>
     </HeroStage>
   );

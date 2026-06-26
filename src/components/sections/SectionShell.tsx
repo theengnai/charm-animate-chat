@@ -96,28 +96,6 @@ export function SectionShell({
               </motion.p>
             )}
 
-            {meta.bullets && (
-              <motion.ul
-                initial="hidden"
-                animate="show"
-                variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.85 } } }}
-                className="mt-8 space-y-3"
-              >
-                {meta.bullets.map((b) => (
-                  <motion.li
-                    key={b}
-                    variants={{
-                      hidden: { opacity: 0, x: -10 },
-                      show: { opacity: 1, x: 0 },
-                    }}
-                    className="flex items-center gap-3 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-ink"
-                  >
-                    <span className="h-px w-6 bg-copper" />
-                    {b}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            )}
 
             {(meta.primaryCta || meta.secondaryCta) && (
               <motion.div

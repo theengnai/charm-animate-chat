@@ -115,6 +115,7 @@ function Index() {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
+      <IntroOverlay />
       <TopBar />
       <SectionRail labels={RAIL} active={active} onPick={go} />
 

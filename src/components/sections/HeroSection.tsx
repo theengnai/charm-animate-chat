@@ -21,17 +21,17 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         <motion.h1
           className="relative z-10 mx-auto max-w-4xl text-center text-ink"
           style={{
-            fontFamily: '"Jost", system-ui, sans-serif',
-            fontWeight: 300,
+            fontFamily: '"Instrument Serif", serif',
+            fontWeight: 400,
             lineHeight: 1.05,
-            letterSpacing: "-0.025em",
+            letterSpacing: "-0.02em",
             fontSize: "clamp(2.6rem, 6vw, 5rem)",
           }}
           initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ delay: 0.6, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
         >
-          Sourcing the soul of <span className="text-copper">sustainable</span> structure.
+          Find the right <span className="text-copper">materials</span> for your projects.
         </motion.h1>
 
         <motion.p

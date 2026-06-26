@@ -1,14 +1,11 @@
 import { motion } from "framer-motion";
 import { ChatCard } from "@/components/hero/ChatCard";
-
 import { HeroStage } from "@/components/hero/HeroStage";
 import { useState } from "react";
 
 export function HeroSection({ active }: { active: boolean; onPickItem?: (i: number) => void }) {
   const [, setPulse] = useState(false);
   if (!active) return null;
-
-  const HEADLINE = "Find the right materials";
 
   return (
     <HeroStage>
@@ -17,65 +14,56 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative flex h-full w-full flex-col items-center justify-center px-6 pt-28 pb-20"
+        className="relative flex h-full w-full flex-col items-center justify-center px-6 pt-24 pb-16"
       >
-        {/* eyebrow rule */}
+        {/* diamond brand mark */}
         <motion.div
-          className="mb-5 flex items-center gap-3"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.6 }}
+          className="mb-10 flex items-center justify-center"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.span
-            className="block h-px bg-copper"
-            initial={{ width: 0 }}
-            animate={{ width: 64 }}
-            transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          />
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.45em] text-copper-deep">
-            Ecosmart · Intelligent Materials
-          </span>
-          <motion.span
-            className="block h-px bg-copper"
-            initial={{ width: 0 }}
-            animate={{ width: 64 }}
-            transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          />
+          <div className="grid h-11 w-11 place-items-center rotate-45 border-2 border-copper-light">
+            <div
+              className="h-6 w-6 -rotate-45"
+              style={{
+                background:
+                  "linear-gradient(135deg,#f0c79a 0%,#d89060 45%,#b4592c 100%)",
+              }}
+            />
+          </div>
         </motion.div>
 
         {/* headline */}
-        <h1 className="display-serifish relative z-10 text-center text-ink" style={{ fontWeight: 300 }}>
-          <span className="block overflow-hidden pb-3">
-            {HEADLINE.split(" ").map((w, i) => (
-              <motion.span
-                key={`${w}-${i}`}
-                className="mr-3 inline-block leading-[1.15]"
-                initial={{ y: 80, opacity: 0, filter: "blur(8px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                transition={{
-                  duration: 0.85,
-                  delay: 0.7 + i * 0.07,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                style={{ fontSize: "clamp(2.4rem, 5.4vw, 4.6rem)" }}
-              >
-                {w}
-              </motion.span>
-            ))}
-          </span>
-          <motion.span
-            className="mt-1 block text-copper-deep leading-[1.15] pb-2"
-            initial={{ y: 60, opacity: 0, filter: "blur(8px)" }}
-            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
-            style={{ fontSize: "clamp(2.4rem, 5.4vw, 4.6rem)", fontWeight: 400 }}
-          >
-            for your projects.
-          </motion.span>
-        </h1>
+        <motion.h1
+          className="relative z-10 mx-auto max-w-4xl text-center text-ink"
+          style={{
+            fontFamily: '"Instrument Serif", serif',
+            fontWeight: 400,
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
+            fontSize: "clamp(2.6rem, 6vw, 5rem)",
+          }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ delay: 0.6, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Sourcing the soul of <span className="text-copper">sustainable</span> structure.
+        </motion.h1>
 
-        {/* chat */}
-        <div className="relative z-10 mt-10 flex w-full flex-col items-center">
+        <motion.p
+          className="mt-5 max-w-xl text-center text-base text-ink-soft md:text-lg"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.85, duration: 0.7 }}
+          style={{ lineHeight: 1.65 }}
+        >
+          Consult ECOSMART AI to specify high-performance travertine, terracotta,
+          MCM and sustainable cladding — tuned to your project, climate, and detail.
+        </motion.p>
+
+        {/* chat centerpiece */}
+        <div className="relative z-10 mt-12 flex w-full flex-col items-center">
           <ChatCard
             onSend={() => {
               setPulse(true);
@@ -84,15 +72,24 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
           />
         </div>
 
-        {/* scroll cue */}
+        {/* compliance line */}
         <motion.div
+          className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 opacity-50"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.95, duration: 0.6 }}
-          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[0.58rem] uppercase tracking-[0.35em] text-ink-soft"
+          animate={{ opacity: 0.5 }}
+          transition={{ delay: 1.7, duration: 0.8 }}
         >
-          Scroll
-          <span className="h-8 w-px animate-pulse bg-copper" />
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
+            Architectural Compliance
+          </span>
+          <span className="h-1 w-1 rounded-full bg-ink-soft/60" />
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
+            Low Carbon Sourcing
+          </span>
+          <span className="h-1 w-1 rounded-full bg-ink-soft/60" />
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
+            GCC Tested Supply
+          </span>
         </motion.div>
       </motion.div>
     </HeroStage>

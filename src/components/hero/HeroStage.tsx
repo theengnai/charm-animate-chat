@@ -71,31 +71,6 @@ export function HeroStage({ children }: { children: ReactNode }) {
         }}
       />
 
-      {/* product marquee */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute left-0 right-0 top-20 z-[1] overflow-hidden"
-        initial={{ opacity: 0, x: 80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        style={{
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-          maskImage:
-            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-        }}
-      >
-        <div className="flex w-max animate-[marquee_40s_linear_infinite] gap-10 whitespace-nowrap py-1 font-mono text-[0.62rem] uppercase tracking-[0.4em] text-ink-soft/70">
-          {Array.from({ length: 4 }).flatMap((_, k) =>
-            PRODUCTS.map((p) => (
-              <span key={`${k}-${p}`} className="inline-flex items-center gap-10">
-                {p}
-                <span className="h-1 w-1 rounded-full bg-copper" />
-              </span>
-            ))
-          )}
-        </div>
-      </motion.div>
 
       {/* parallax stage: blob + rings */}
       <div

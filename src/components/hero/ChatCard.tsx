@@ -179,6 +179,9 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             Try a topic · Or describe your project in your own words
           </motion.p>
         </motion.div>
+
+        {/* glassy voice orb embedded at bottom-center of the card */}
+        <VoiceOrb />
       </motion.div>
     </div>
   );

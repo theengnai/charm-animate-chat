@@ -75,7 +75,7 @@ const SECTIONS: Record<number, SectionMeta> = {
   3: {
     index: 4, total: TOTAL,
     eyebrow: "Visualizer",
-    title: "Visualize in real time.",
+    title: "Visualize your project in real time.",
     subtitle: "See it before you build it.",
     body:
       "Drop materials onto your plan or render and watch surfaces resolve at the right scale, joint, and tone — no plug-ins, no waiting.",
@@ -87,7 +87,7 @@ const SECTIONS: Record<number, SectionMeta> = {
   4: {
     index: 5, total: TOTAL,
     eyebrow: "Samples",
-    title: "Request samples with confidence.",
+    title: "Request physical samples with confidence.",
     subtitle: "Hold the material in your hand.",
     body:
       "Order curated sample boxes shipped across the GCC. Every sample arrives with its specification card and finish reference.",
@@ -99,7 +99,7 @@ const SECTIONS: Record<number, SectionMeta> = {
   5: {
     index: 6, total: TOTAL,
     eyebrow: "Gallery",
-    title: "Inspiring projects, applied.",
+    title: "Discover inspiring projects and applications.",
     subtitle: "Real surfaces. Real conditions.",
     body:
       "Browse built work using the same materials and systems — façades, interiors, and details documented for reference and reuse.",
@@ -111,7 +111,7 @@ const SECTIONS: Record<number, SectionMeta> = {
   6: {
     index: 7, total: TOTAL,
     eyebrow: "Technical",
-    title: "Specifications you can trust.",
+    title: "Access technical specifications and documentation.",
     subtitle: "Drawings, data, declarations.",
     body:
       "Every product carries its full technical record — CAD blocks, BIM, test data and environmental declarations — ready to drop into your set.",

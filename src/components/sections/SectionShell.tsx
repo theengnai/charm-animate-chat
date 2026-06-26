@@ -38,7 +38,7 @@ export function SectionShell({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid h-full w-full grid-cols-1 items-center gap-10 px-8 pt-24 pb-28 md:px-20 lg:grid-cols-2 lg:gap-16"
+          className="grid h-full w-full grid-cols-1 items-center gap-6 overflow-y-auto px-6 pt-20 pb-20 md:gap-10 md:px-8 md:pt-24 md:pb-28 lg:grid-cols-2 lg:gap-16 lg:px-20"
         >
           {/* text column */}
           <div className="relative flex flex-col justify-center">

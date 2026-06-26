@@ -78,8 +78,8 @@ export function SectionShell({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.55 }}
-                className="display-serifish mt-3 text-2xl italic text-copper md:text-3xl"
-                style={{ fontStyle: "italic", fontWeight: 400 }}
+                className="display-serifish mt-3 text-2xl text-copper md:text-3xl"
+                style={{ fontWeight: 400 }}
               >
                 {meta.subtitle}
               </motion.p>

@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import {
+  ArrowUp,
+  LayoutPanelTop,
+  Grid3x3,
+  Waves,
+  Layers,
+  TreePine,
+  Square,
+  Boxes,
+  type LucideIcon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 const PLACEHOLDERS = [
@@ -9,14 +19,14 @@ const PLACEHOLDERS = [
   "Compare stone and porcelain…",
 ];
 
-const TOPICS = [
-  "Wall Panel",
-  "Flooring",
-  "Flexible Stone",
-  "MCM",
-  "WPC Decking",
-  "SPC",
-  "EPS Systems",
+const TOPICS: { label: string; icon: LucideIcon }[] = [
+  { label: "Wall Panel", icon: LayoutPanelTop },
+  { label: "Flooring", icon: Grid3x3 },
+  { label: "Flexible Stone", icon: Waves },
+  { label: "MCM", icon: Layers },
+  { label: "WPC Decking", icon: TreePine },
+  { label: "SPC", icon: Square },
+  { label: "EPS Systems", icon: Boxes },
 ];
 
 export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {

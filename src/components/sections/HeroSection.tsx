@@ -64,7 +64,7 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
             ))}
           </span>
           <motion.span
-            className="mt-1 block italic text-copper-deep leading-[1.15] pb-2"
+            className="mt-1 block text-copper-deep leading-[1.15] pb-2"
             initial={{ y: 60, opacity: 0, filter: "blur(8px)" }}
             animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 0.9, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}

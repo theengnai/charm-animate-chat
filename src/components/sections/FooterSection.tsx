@@ -37,7 +37,7 @@ export function FooterSection({ active }: { active: boolean }) {
         >
           Let&apos;s build something
           <br />
-          <span className="italic text-copper-deep" style={{ fontWeight: 400 }}>
+          <span className="text-copper-deep" style={{ fontWeight: 400 }}>
             worth standing on.
           </span>
         </motion.h2>

@@ -81,9 +81,9 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
         }}
       >
         {/* input row */}
-        <div className="relative flex items-center px-3 py-3 md:px-4 md:py-3">
+        <div className="relative flex items-center gap-2 px-2 py-2 md:gap-3 md:px-4 md:py-3">
           <div
-            className="ml-3 grid h-9 w-9 shrink-0 place-items-center rounded-xl"
+            className="ml-1 hidden h-9 w-9 shrink-0 place-items-center rounded-xl sm:grid"
             style={{
               background:
                 "linear-gradient(135deg, rgba(240,199,154,0.35), rgba(216,144,96,0.18))",
@@ -93,16 +93,16 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             <Sparkles className="h-4 w-4 text-copper" strokeWidth={1.6} />
           </div>
 
-          <div className="relative flex-1">
+          <div className="relative min-w-0 flex-1">
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full bg-transparent px-5 py-5 text-lg text-ink outline-none md:text-xl"
+              className="w-full bg-transparent px-3 py-4 text-base text-ink outline-none md:px-5 md:py-5 md:text-xl"
               aria-label="Ask Ecosmart"
             />
             {!value && (
-              <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-lg text-ink-soft/55 md:text-xl">
+              <span className="pointer-events-none absolute left-3 top-1/2 max-w-full -translate-y-1/2 truncate pr-2 text-base text-ink-soft/55 md:left-5 md:text-xl">
                 {typed}
                 <span className="ml-0.5 inline-block w-[2px] animate-[caret_1s_steps(2)_infinite] bg-copper/70">
                   &nbsp;
@@ -116,7 +116,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             onClick={() => submit()}
             whileHover={{ scale: 1.04, y: -1 }}
             whileTap={{ scale: 0.96 }}
-            className="mr-1 flex h-12 shrink-0 items-center gap-2 rounded-xl px-5 text-sm font-medium text-canvas md:text-[0.95rem]"
+            className="mr-1 flex h-11 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-medium text-canvas md:h-12 md:px-5 md:text-[0.95rem]"
             style={{
               background:
                 "linear-gradient(135deg,#f0c79a 0%,#d89060 45%,#b4592c 100%)",
@@ -124,7 +124,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             }}
             aria-label="Consult"
           >
-            Consult
+            <span className="hidden sm:inline">Consult</span>
             <ArrowUp className="h-4 w-4 rotate-45" strokeWidth={2.4} />
           </motion.button>
         </div>

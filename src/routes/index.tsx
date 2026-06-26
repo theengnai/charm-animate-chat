@@ -6,6 +6,7 @@ import { SectionRail } from "@/components/nav/SectionRail";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SectionShell, type SectionMeta } from "@/components/sections/SectionShell";
 import { FooterSection } from "@/components/sections/FooterSection";
+import { IntroOverlay } from "@/components/intro/IntroOverlay";
 
 import imgDesign from "@/assets/section-design.jpg";
 import imgMaterials from "@/assets/section-materials.jpg";
@@ -114,6 +115,7 @@ function Index() {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
+      <IntroOverlay />
       <TopBar />
       <SectionRail labels={RAIL} active={active} onPick={go} />
 

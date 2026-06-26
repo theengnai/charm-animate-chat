@@ -66,7 +66,7 @@ export function SectionShell({
                     delay: 0.2 + i * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="display-serifish mr-3 inline-block text-5xl md:text-6xl lg:text-7xl"
+                  className="display-serifish mr-3 inline-block text-4xl md:text-6xl lg:text-7xl"
                 >
                   {word}
                 </motion.span>

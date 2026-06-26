@@ -61,14 +61,6 @@ export function IntroOverlay() {
               animate={{ clipPath: "inset(0 0% 0 0)" }}
               transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1], delay: 0.25 }}
             />
-            <motion.span
-              className="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-white/70"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
-            >
-              Engineered Within
-            </motion.span>
           </motion.div>
         </motion.div>
       )}

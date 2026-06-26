@@ -114,13 +114,13 @@ export function HeroStage({ children }: { children: ReactNode }) {
             viewBox="0 0 512 512"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             initial={{ scale: 0.6, opacity: 0, rotate: 0 }}
-            animate={{ scale: 1, opacity: 0.55, rotate: 360 }}
+            animate={{ scale: 1, opacity: 0.22, rotate: 360 }}
             transition={{
               scale: { duration: 1.2, delay: 0.25 },
               opacity: { duration: 1.2, delay: 0.25 },
               rotate: { duration: 44, repeat: Infinity, ease: "linear" },
             }}
-            style={{ filter: "blur(28px)", mixBlendMode: "multiply" }}
+            style={{ filter: "blur(40px)", mixBlendMode: "multiply" }}
           >
             <motion.path
               fill="#D89060"

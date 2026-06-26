@@ -34,25 +34,22 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
           Find the right <span className="text-copper">materials</span> for your projects.
         </motion.h1>
 
-        <motion.p
-          className="mt-5 max-w-xl text-center text-base text-ink-soft md:text-lg"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.85, duration: 0.7 }}
-          style={{ lineHeight: 1.65 }}
-        >
-          Consult ECOSMART AI to specify high-performance travertine, terracotta,
-          MCM and sustainable cladding — tuned to your project, climate, and detail.
-        </motion.p>
-
         {/* chat centerpiece */}
-        <div className="relative z-10 mt-12 flex w-full flex-col items-center">
+        <div className="relative z-10 mt-10 flex w-full flex-col items-center">
           <ChatCard
             onSend={() => {
               setPulse(true);
               window.setTimeout(() => setPulse(false), 900);
             }}
           />
+          <motion.p
+            className="mt-4 max-w-md text-center text-xs text-ink-soft/70 md:text-sm"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
+          >
+            Specify travertine, terracotta, MCM and sustainable cladding — tuned to your project.
+          </motion.p>
         </div>
 
         {/* compliance line */}

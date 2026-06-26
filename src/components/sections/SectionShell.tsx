@@ -38,7 +38,7 @@ export function SectionShell({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid h-full w-full grid-cols-1 items-center gap-10 px-8 pt-24 pb-28 md:px-20 lg:grid-cols-2 lg:gap-16"
+          className="grid h-full w-full grid-cols-1 items-center gap-6 overflow-y-auto px-6 pt-20 pb-20 md:gap-10 md:px-8 md:pt-24 md:pb-28 lg:grid-cols-2 lg:gap-16 lg:px-20"
         >
           {/* text column */}
           <div className="relative flex flex-col justify-center">
@@ -66,7 +66,7 @@ export function SectionShell({
                     delay: 0.2 + i * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="display-serifish mr-3 inline-block text-5xl md:text-6xl lg:text-7xl"
+                  className="display-serifish mr-3 inline-block text-4xl md:text-6xl lg:text-7xl"
                 >
                   {word}
                 </motion.span>
@@ -161,7 +161,7 @@ export function SectionShell({
 
           {/* image column */}
           {meta.image && (
-            <div className="relative h-[55vh] w-full">
+            <div className="relative h-[34vh] w-full md:h-[45vh] lg:h-[55vh]">
               <motion.div
                 initial={{ scale: 1.1, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

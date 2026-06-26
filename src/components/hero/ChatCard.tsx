@@ -56,18 +56,18 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
   };
 
   return (
-    <div className="relative w-full max-w-[720px]">
+    <div className="relative w-full max-w-[880px]">
       <motion.div
         initial={{ opacity: 0, y: 28, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
-        className="relative rounded-[2rem] px-6 pt-6 pb-7 md:px-8 md:pt-7 md:pb-8"
+        className="relative rounded-[2.25rem] px-7 pt-8 pb-9 md:px-12 md:pt-10 md:pb-12"
         style={{
-          background: "rgba(250, 247, 241, 0.88)",
-          backdropFilter: "blur(20px) saturate(140%)",
-          border: "1px solid rgba(180, 89, 44, 0.18)",
+          background: "rgba(250, 247, 241, 0.92)",
+          backdropFilter: "blur(24px) saturate(150%)",
+          border: "1px solid rgba(180, 89, 44, 0.28)",
           boxShadow:
-            "0 50px 120px -40px rgba(122,58,27,0.28), 0 12px 30px -12px rgba(180,89,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7)",
+            "0 80px 160px -40px rgba(122,58,27,0.38), 0 24px 60px -20px rgba(180,89,44,0.28), 0 0 0 1px rgba(216,144,96,0.08), inset 0 1px 0 rgba(255,255,255,0.85)",
         }}
       >
         {/* inner copper glow on top edge */}
@@ -103,10 +103,10 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           transition={{ delay: 1.35, duration: 0.6 }}
         >
           <div
-            className="group relative flex items-center gap-3 rounded-2xl px-5 py-5 transition-all focus-within:border-copper/60 focus-within:shadow-[0_18px_50px_-20px_rgba(180,89,44,0.45)]"
+            className="group relative flex items-center gap-3 rounded-2xl px-6 py-6 md:py-7 transition-all focus-within:border-copper/60 focus-within:shadow-[0_22px_60px_-22px_rgba(180,89,44,0.55)]"
             style={{
-              background: "rgba(255, 251, 244, 0.9)",
-              border: "1px solid rgba(180, 89, 44, 0.22)",
+              background: "rgba(255, 251, 244, 0.95)",
+              border: "1px solid rgba(180, 89, 44, 0.28)",
             }}
           >
             <input
@@ -114,11 +114,11 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && submit()}
               placeholder=""
-              className="flex-1 bg-transparent text-base text-ink outline-none md:text-lg"
+              className="flex-1 bg-transparent text-lg text-ink outline-none md:text-xl"
               aria-label="Chat input"
             />
             {!value && (
-              <span className="pointer-events-none absolute left-[1.5rem] text-base text-ink-soft/65 md:text-lg">
+              <span className="pointer-events-none absolute left-[1.75rem] text-lg text-ink-soft/65 md:text-xl">
                 {typed}
                 <span className="ml-0.5 inline-block w-[2px] animate-[caret_1s_steps(2)_infinite] bg-copper/70">&nbsp;</span>
               </span>
@@ -128,15 +128,15 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
               onClick={() => submit()}
               whileHover={{ scale: 1.08, rotate: -8 }}
               whileTap={{ scale: 0.92 }}
-              className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-canvas"
+              className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-canvas"
               style={{
                 background:
                   "linear-gradient(135deg,#f0c79a 0%,#d89060 45%,#b4592c 100%)",
-                boxShadow: "0 12px 28px -6px rgba(180,89,44,0.55)",
+                boxShadow: "0 16px 36px -8px rgba(180,89,44,0.6)",
               }}
               aria-label="Send"
             >
-              <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
+              <ArrowUp className="h-6 w-6" strokeWidth={2.4} />
             </motion.button>
           </div>
         </motion.div>

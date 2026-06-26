@@ -125,6 +125,7 @@
   0%,100% { transform: scaleY(0.3); }
   50% { transform: scaleY(1); }
 }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 @utility no-scrollbar {
   scrollbar-width: none;

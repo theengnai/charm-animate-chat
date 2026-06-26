@@ -134,26 +134,29 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
 
         {/* suggested topics row */}
         <div
-          className="flex flex-wrap items-center gap-2.5 px-6 py-6"
+          className="px-6 py-6"
           style={{ background: "rgba(250,247,241,0.6)" }}
         >
-          <span className="mr-2 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
+          <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
             Suggested topics
-          </span>
-          {TOPICS.map((label, i) => (
-            <motion.button
-              key={label}
-              type="button"
-              onClick={() => submit(`Tell me about ${label}`)}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 + i * 0.05, duration: 0.4 }}
-              whileHover={{ y: -2 }}
-              className="rounded-full border border-copper-light/35 bg-white px-4 py-2 text-sm text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep"
-            >
-              {label}
-            </motion.button>
-          ))}
+          </div>
+          <div className="flex flex-wrap gap-2.5">
+            {TOPICS.map(({ label, Icon }, i) => (
+              <motion.button
+                key={label}
+                type="button"
+                onClick={() => submit(`Tell me about ${label}`)}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3 + i * 0.05, duration: 0.4 }}
+                whileHover={{ y: -2 }}
+                className="inline-flex items-center gap-2 rounded-full border border-copper-light/35 bg-white px-4 py-2 text-sm text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep"
+              >
+                <Icon className="h-3.5 w-3.5 text-copper" strokeWidth={1.8} />
+                {label}
+              </motion.button>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -57,6 +57,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Our AI pairs your concept with the right material palette, climate response, and detailing — so every line you draw is already buildable.",
     bullets: ["Concept matching", "Climate-aware palettes", "Detail libraries"],
     image: imgDesign,
+    primaryCta: { label: "Start a design brief" },
+    secondaryCta: { label: "See design services" },
   },
   2: {
     index: 3, total: TOTAL,
@@ -67,6 +69,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "A living library of architectural materials — sourced, vetted, and ready to specify. Filter by finish, format, performance, or feeling.",
     bullets: ["GCC-tested suppliers", "Full technical sheets", "Live stock & lead times"],
     image: imgMaterials,
+    primaryCta: { label: "Explore the library" },
+    secondaryCta: { label: "Talk to a specialist" },
   },
   3: {
     index: 4, total: TOTAL,
@@ -77,6 +81,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Drop materials onto your plan or render and watch surfaces resolve at the right scale, joint, and tone — no plug-ins, no waiting.",
     bullets: ["Drag & apply", "True-scale joints", "Light-aware preview"],
     image: imgVisualizer,
+    primaryCta: { label: "Try the visualizer" },
+    secondaryCta: { label: "Watch a demo" },
   },
   4: {
     index: 5, total: TOTAL,
@@ -87,6 +93,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Order curated sample boxes shipped across the GCC. Every sample arrives with its specification card and finish reference.",
     bullets: ["Same-week dispatch", "Spec card included", "Free for trade"],
     image: imgSamples,
+    primaryCta: { label: "Request samples" },
+    secondaryCta: { label: "View sample kits" },
   },
   5: {
     index: 6, total: TOTAL,
@@ -97,6 +105,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Browse built work using the same materials and systems — façades, interiors, and details documented for reference and reuse.",
     bullets: ["Built case studies", "Detail breakdowns", "Photographed in situ"],
     image: imgGallery,
+    primaryCta: { label: "Browse projects" },
+    secondaryCta: { label: "Submit your project" },
   },
   6: {
     index: 7, total: TOTAL,
@@ -107,6 +117,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Every product carries its full technical record — CAD blocks, BIM, test data and environmental declarations — ready to drop into your set.",
     bullets: ["CAD · BIM · IFC", "EPDs & test reports", "Installation manuals"],
     image: imgTechnical,
+    primaryCta: { label: "Download spec pack" },
+    secondaryCta: { label: "Open BIM library" },
   },
 };
 

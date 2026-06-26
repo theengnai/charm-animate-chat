@@ -1,5 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
+
+export interface SectionCta {
+  label: string;
+  onClick?: () => void;
+}
 
 export interface SectionMeta {
   index: number;
@@ -12,6 +18,8 @@ export interface SectionMeta {
   image?: string;
   flavor?: ReactNode;
   imageAlt?: string;
+  primaryCta?: SectionCta;
+  secondaryCta?: SectionCta;
 }
 
 export function SectionShell({
@@ -109,6 +117,45 @@ export function SectionShell({
                   </motion.li>
                 ))}
               </motion.ul>
+            )}
+
+            {(meta.primaryCta || meta.secondaryCta) && (
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-10 flex flex-wrap items-center gap-3"
+              >
+                {meta.primaryCta && (
+                  <motion.button
+                    type="button"
+                    onClick={meta.primaryCta.onClick}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm text-canvas"
+                    style={{
+                      background:
+                        "linear-gradient(135deg,#d89060 0%,#b4592c 100%)",
+                      boxShadow: "0 14px 30px -10px rgba(180,89,44,0.5)",
+                    }}
+                  >
+                    <span className="font-medium tracking-wide">{meta.primaryCta.label}</span>
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2} />
+                  </motion.button>
+                )}
+                {meta.secondaryCta && (
+                  <button
+                    type="button"
+                    onClick={meta.secondaryCta.onClick}
+                    className="group inline-flex items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-6 py-3 text-sm text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04]"
+                  >
+                    <span className="relative">
+                      {meta.secondaryCta.label}
+                      <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-copper transition-all duration-300 group-hover:w-full" />
+                    </span>
+                  </button>
+                )}
+              </motion.div>
             )}
           </div>
 

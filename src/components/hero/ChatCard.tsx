@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { VoiceOrb } from "@/components/hero/VoiceOrb";
 import {
   ArrowUp,
   LayoutPanelTop,

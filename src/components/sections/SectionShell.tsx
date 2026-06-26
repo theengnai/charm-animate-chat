@@ -1,5 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
+
+export interface SectionCta {
+  label: string;
+  onClick?: () => void;
+}
 
 export interface SectionMeta {
   index: number;
@@ -12,6 +18,8 @@ export interface SectionMeta {
   image?: string;
   flavor?: ReactNode;
   imageAlt?: string;
+  primaryCta?: SectionCta;
+  secondaryCta?: SectionCta;
 }
 
 export function SectionShell({

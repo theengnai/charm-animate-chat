@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import {
+  ArrowUp,
+  LayoutPanelTop,
+  Grid3x3,
+  Waves,
+  Layers,
+  TreePine,
+  Square,
+  Boxes,
+  type LucideIcon,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 const PLACEHOLDERS = [
@@ -9,14 +19,14 @@ const PLACEHOLDERS = [
   "Compare stone and porcelain…",
 ];
 
-const TOPICS = [
-  "Wall Panel",
-  "Flooring",
-  "Flexible Stone",
-  "MCM",
-  "WPC Decking",
-  "SPC",
-  "EPS Systems",
+const TOPICS: { label: string; icon: LucideIcon }[] = [
+  { label: "Wall Panel", icon: LayoutPanelTop },
+  { label: "Flooring", icon: Grid3x3 },
+  { label: "Flexible Stone", icon: Waves },
+  { label: "MCM", icon: Layers },
+  { label: "WPC Decking", icon: TreePine },
+  { label: "SPC", icon: Square },
+  { label: "EPS Systems", icon: Boxes },
 ];
 
 export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
@@ -138,22 +148,23 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           transition={{ delay: 1.5, duration: 0.6 }}
         >
           <div className="flex flex-wrap justify-center gap-2">
-            {TOPICS.map((t, i) => (
+            {TOPICS.map(({ label, icon: Icon }, i) => (
               <motion.button
-                key={t}
+                key={label}
                 type="button"
-                onClick={() => submit(`Tell me about ${t}`)}
+                onClick={() => submit(`Tell me about ${label}`)}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5 + i * 0.05, duration: 0.4 }}
                 whileHover={{ y: -2 }}
-                className="group relative overflow-hidden rounded-full px-4 py-2 text-xs text-ink transition-all hover:text-copper-deep md:text-[0.8rem]"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-4 py-2 text-xs text-ink transition-all hover:text-copper-deep md:text-[0.8rem]"
                 style={{
                   background: "rgba(255, 251, 244, 0.7)",
                   border: "1px solid rgba(180, 89, 44, 0.2)",
                 }}
               >
-                <span className="relative z-10">{t}</span>
+                <Icon className="relative z-10 h-3.5 w-3.5 text-copper transition-transform duration-300 group-hover:scale-110" strokeWidth={1.6} />
+                <span className="relative z-10">{label}</span>
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-copper/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               </motion.button>
             ))}

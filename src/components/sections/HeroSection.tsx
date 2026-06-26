@@ -21,10 +21,10 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         <motion.h1
           className="relative z-10 mx-auto max-w-4xl text-center text-ink"
           style={{
-            fontFamily: '"Instrument Serif", serif',
-            fontWeight: 400,
+            fontFamily: '"Jost", system-ui, sans-serif',
+            fontWeight: 300,
             lineHeight: 1.05,
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.025em",
             fontSize: "clamp(2.6rem, 6vw, 5rem)",
           }}
           initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}

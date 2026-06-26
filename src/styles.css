@@ -7,7 +7,7 @@
 @theme inline {
   --font-display: "Jost", system-ui, sans-serif;
   --font-body: "Hanken Grotesk", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: "Hanken Grotesk", system-ui, sans-serif;
 
   --color-canvas: var(--canvas);
   --color-canvas-2: var(--canvas-2);

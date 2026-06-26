@@ -16,16 +16,15 @@ export function HeroSection({ active, onPickItem }: { active: boolean; onPickIte
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative grid h-full w-full place-items-center px-6 pt-24"
+      className="relative grid h-full w-full place-items-center px-6 pt-20"
     >
       <motion.h1
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.15 }}
-        className="display-serifish absolute top-[8vh] left-1/2 -translate-x-1/2 text-center text-5xl md:text-6xl lg:text-[4.5rem]"
+        className="display-serifish absolute top-[6vh] left-1/2 -translate-x-1/2 text-center text-3xl md:text-4xl lg:text-[2.6rem] text-ink-soft"
       >
-        Find the Right Materials
-        <br />
+        Find the Right Materials{" "}
         <span className="italic text-copper-deep" style={{ fontWeight: 400 }}>
           for Your Projects.
         </span>
@@ -33,10 +32,15 @@ export function HeroSection({ active, onPickItem }: { active: boolean; onPickIte
 
       <OrbitRing onPick={onPickItem} />
 
-      <div className="relative flex flex-col items-center gap-8">
-        <div className="relative">
-          <Orb size={110} active={pulse} />
-        </div>
+      <div className="relative flex flex-col items-center gap-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative -mb-6"
+        >
+          <Orb size={84} active={pulse} />
+        </motion.div>
         <ChatCard onSend={() => { setPulse(true); window.setTimeout(() => setPulse(false), 900); }} />
         <VoiceInput />
       </div>

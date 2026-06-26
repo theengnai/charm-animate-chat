@@ -151,11 +151,6 @@ export function VoiceOrb() {
           )}
         </AnimatePresence>
 
-        {!listening && (
-          <span className="pr-3 pl-1 font-mono text-[0.55rem] uppercase tracking-[0.35em] text-ink-soft">
-            Voice
-          </span>
-        )}
       </motion.div>
     </div>
   );

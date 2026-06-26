@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 import { VoiceOrb } from "@/components/hero/VoiceOrb";
-import { ArrowUp, Sparkles } from "lucide-react";
+import {
+  ArrowUp,
+  Sparkles,
+  Mountain,
+  Flame,
+  LayoutGrid,
+  TreePine,
+  Waves,
+  Square,
+  Package,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 const PLACEHOLDERS = [
@@ -10,14 +20,14 @@ const PLACEHOLDERS = [
   "Plan a warm minimal interior in flexible stone…",
 ];
 
-const TOPICS = [
-  "Travertine",
-  "Terracotta",
-  "MCM Panels",
-  "WPC Decking",
-  "Flexible Stone",
-  "SPC Flooring",
-  "EPS Systems",
+const TOPICS: { label: string; Icon: typeof Mountain }[] = [
+  { label: "Travertine", Icon: Mountain },
+  { label: "Terracotta", Icon: Flame },
+  { label: "MCM Panels", Icon: LayoutGrid },
+  { label: "WPC Decking", Icon: TreePine },
+  { label: "Flexible Stone", Icon: Waves },
+  { label: "SPC Flooring", Icon: Square },
+  { label: "EPS Systems", Icon: Package },
 ];
 
 export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {

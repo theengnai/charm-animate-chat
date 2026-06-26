@@ -62,7 +62,7 @@ export function VoiceOrb() {
   }, [listening]);
 
   return (
-    <div className="pointer-events-auto absolute left-1/2 -bottom-10 z-20 -translate-x-1/2">
+    <div className="pointer-events-auto absolute left-1/2 -bottom-7 z-20 -translate-x-1/2">
       <motion.div
         layout
         transition={{ type: "spring", stiffness: 260, damping: 26 }}

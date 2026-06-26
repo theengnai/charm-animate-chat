@@ -199,10 +199,6 @@ export function SectionShell({
                 />
               </motion.div>
               {meta.flavor}
-              {/* corner monogram */}
-              <div className="absolute -top-3 right-4 font-mono text-[0.65rem] tracking-[0.25em] text-ink-soft">
-                ECOSMART · {meta.eyebrow}
-              </div>
             </div>
           )}
         </motion.div>

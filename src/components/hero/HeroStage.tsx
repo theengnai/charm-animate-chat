@@ -1,43 +1,13 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, type ReactNode } from "react";
-
-const BLOB_PATHS = [
-  "M421,310 C421,400 343,475 256,475 C169,475 91,400 91,310 C91,220 169,135 256,135 C343,135 421,220 421,310 Z",
-  "M438,290 C455,395 348,495 251,475 C141,452 78,365 95,272 C111,178 188,118 282,142 C376,167 421,185 438,290 Z",
-  "M412,322 C428,418 332,492 240,478 C137,463 70,378 99,278 C124,193 213,118 309,148 C397,176 396,226 412,322 Z",
-  "M425,300 C442,392 358,488 258,478 C150,467 82,393 92,290 C102,188 188,128 287,140 C386,152 408,208 425,300 Z",
-];
-
-const PRODUCTS = [
-  "Wall Panel",
-  "Flooring",
-  "Flexible Stone",
-  "MCM",
-  "WPC Decking",
-  "SPC",
-  "EPS Systems",
-];
+import { type ReactNode } from "react";
 
 export function HeroStage({ children }: { children: ReactNode }) {
-  const parallaxRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const el = parallaxRef.current;
-      if (!el) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 14;
-      const y = (e.clientY / window.innerHeight - 0.5) * 14;
-      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
-
   return (
     <div
       className="relative h-full w-full overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #FFF8EC 0%, #FAF7F1 45%, #F4ECDD 100%)",
+        background:
+          "linear-gradient(180deg, #FFF8EC 0%, #FAF7F1 50%, #F1E7D4 100%)",
       }}
     >
       {/* paper grain */}
@@ -52,7 +22,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         <rect width="100%" height="100%" filter="url(#hero-grain)" />
       </svg>
 
-      {/* architectural grid, masked to edges */}
+      {/* blueprint grid — soft, faded to center */}
       <motion.div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -61,130 +31,114 @@ export function HeroStage({ children }: { children: ReactNode }) {
         transition={{ duration: 0.9 }}
         style={{
           backgroundImage:
-            "linear-gradient(to right, #E3DCCD 1px, transparent 1px), linear-gradient(to bottom, #E3DCCD 1px, transparent 1px)",
-          backgroundSize: "96px 96px",
+            "linear-gradient(to right, #D8C9AC 1px, transparent 1px), linear-gradient(to bottom, #D8C9AC 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
           WebkitMaskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 35%, black 90%)",
+            "radial-gradient(ellipse 75% 70% at 50% 55%, transparent 25%, black 95%)",
           maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 35%, black 90%)",
-          opacity: 0.45,
+            "radial-gradient(ellipse 75% 70% at 50% 55%, transparent 25%, black 95%)",
+          opacity: 0.35,
         }}
       />
 
-
-      {/* parallax stage: blob + rings */}
-      <div
-        ref={parallaxRef}
-        className="pointer-events-none absolute inset-0 transition-transform duration-500 ease-out"
+      {/* dimension lines top + bottom */}
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-20 mx-auto opacity-30"
+        width="100%"
+        height="14"
+        viewBox="0 0 1200 14"
+        preserveAspectRatio="none"
       >
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          {/* liquid copper blob */}
-          <motion.svg
-            width="640"
-            height="640"
-            viewBox="0 0 512 512"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            initial={{ scale: 0.55, opacity: 0, rotate: 0 }}
-            animate={{ scale: 1, opacity: 0.32, rotate: -360 }}
-            transition={{
-              scale: { duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] },
-              opacity: { duration: 1.2, delay: 0.15 },
-              rotate: { duration: 60, repeat: Infinity, ease: "linear" },
-            }}
-            style={{ filter: "blur(80px)" }}
-          >
-            <defs>
-              <linearGradient id="copperBlob" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F0C79A" />
-                <stop offset="55%" stopColor="#D89060" />
-                <stop offset="100%" stopColor="#B4592C" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              fill="url(#copperBlob)"
-              animate={{ d: [...BLOB_PATHS, BLOB_PATHS[0]] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </motion.svg>
+        <line x1="120" y1="7" x2="1080" y2="7" stroke="#7A3A1B" strokeWidth="0.5" strokeDasharray="2 5" />
+        <line x1="120" y1="1" x2="120" y2="13" stroke="#7A3A1B" strokeWidth="0.5" />
+        <line x1="1080" y1="1" x2="1080" y2="13" stroke="#7A3A1B" strokeWidth="0.5" />
+      </svg>
 
-          {/* secondary smaller blob */}
-          <motion.svg
-            width="380"
-            height="380"
-            viewBox="0 0 512 512"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            initial={{ scale: 0.6, opacity: 0, rotate: 0 }}
-            animate={{ scale: 1, opacity: 0.22, rotate: 360 }}
-            transition={{
-              scale: { duration: 1.2, delay: 0.25 },
-              opacity: { duration: 1.2, delay: 0.25 },
-              rotate: { duration: 44, repeat: Infinity, ease: "linear" },
-            }}
-            style={{ filter: "blur(40px)", mixBlendMode: "multiply" }}
-          >
-            <motion.path
-              fill="#D89060"
-              animate={{ d: [BLOB_PATHS[2], BLOB_PATHS[0], BLOB_PATHS[3], BLOB_PATHS[1], BLOB_PATHS[2]] }}
-              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </motion.svg>
+      {/* GIANT HOUSE SILHOUETTE — echoing the logo */}
+      <motion.svg
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        width="1100"
+        height="780"
+        viewBox="0 0 1100 780"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <defs>
+          <linearGradient id="houseFill" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#B4592C" stopOpacity="0.10" />
+            <stop offset="55%" stopColor="#B4592C" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="#B4592C" stopOpacity="0.02" />
+          </linearGradient>
+          <linearGradient id="houseEdge" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#7A3A1B" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#B4592C" stopOpacity="0.25" />
+          </linearGradient>
+        </defs>
 
-          {/* dashed orbiting rings */}
-          <svg
-            width="780"
-            height="540"
-            viewBox="0 0 780 540"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{ animation: "spin-slow 28s linear infinite" }}
-          >
-            <motion.ellipse
-              cx="390"
-              cy="270"
-              rx="370"
-              ry="240"
-              fill="none"
-              stroke="#B4592C"
-              strokeOpacity="0.35"
-              strokeWidth="1"
-              strokeDasharray="4 8"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.1, delay: 0.35, ease: "easeOut" }}
-            />
-            <circle cx="760" cy="270" r="4" fill="#B4592C" />
-          </svg>
-          <svg
-            width="620"
-            height="420"
-            viewBox="0 0 620 420"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{ animation: "spin-reverse 44s linear infinite" }}
-          >
-            <motion.ellipse
-              cx="310"
-              cy="210"
-              rx="290"
-              ry="180"
-              fill="none"
-              stroke="#7A3A1B"
-              strokeOpacity="0.25"
-              strokeWidth="0.8"
-              strokeDasharray="2 6"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.1, delay: 0.45, ease: "easeOut" }}
-            />
-            <circle cx="20" cy="210" r="3" fill="#D89060" />
-          </svg>
-        </div>
-      </div>
+        {/* ground line */}
+        <line x1="50" y1="730" x2="1050" y2="730" stroke="#7A3A1B" strokeOpacity="0.35" strokeWidth="1" />
+        <line x1="50" y1="734" x2="1050" y2="734" stroke="#7A3A1B" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="3 6" />
+
+        {/* main house: rectangular body + pitched roof + door cutout (logo motif) */}
+        <motion.path
+          d="M 270 730 L 270 320 L 550 130 L 830 320 L 830 730 Z"
+          fill="url(#houseFill)"
+          stroke="url(#houseEdge)"
+          strokeWidth="1.25"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.0, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        />
+
+        {/* door cutout — the negative-space mark from the logo */}
+        <motion.rect
+          x="520"
+          y="500"
+          width="60"
+          height="230"
+          fill="#FAF7F1"
+          stroke="#7A3A1B"
+          strokeOpacity="0.35"
+          strokeWidth="1"
+          initial={{ opacity: 0, scaleY: 0 }}
+          animate={{ opacity: 1, scaleY: 1 }}
+          transition={{ duration: 0.8, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
+          style={{ transformOrigin: "550px 730px" }}
+        />
+
+        {/* roof ridge marker */}
+        <circle cx="550" cy="130" r="3" fill="#B4592C" />
+
+        {/* eave annotation — left */}
+        <line x1="270" y1="320" x2="180" y2="320" stroke="#7A3A1B" strokeOpacity="0.4" strokeWidth="0.6" strokeDasharray="2 4" />
+        <text x="175" y="316" fill="#7A3A1B" fillOpacity="0.55" fontSize="9" textAnchor="end" letterSpacing="3" fontFamily="ui-monospace, monospace">FAÇADE · 01</text>
+
+        {/* eave annotation — right */}
+        <line x1="830" y1="320" x2="920" y2="320" stroke="#7A3A1B" strokeOpacity="0.4" strokeWidth="0.6" strokeDasharray="2 4" />
+        <text x="925" y="316" fill="#7A3A1B" fillOpacity="0.55" fontSize="9" letterSpacing="3" fontFamily="ui-monospace, monospace">ROOF · 02</text>
+
+        {/* ground annotation */}
+        <line x1="200" y1="730" x2="200" y2="755" stroke="#7A3A1B" strokeOpacity="0.4" strokeWidth="0.6" />
+        <text x="200" y="767" fill="#7A3A1B" fillOpacity="0.55" fontSize="9" textAnchor="middle" letterSpacing="3" fontFamily="ui-monospace, monospace">GROUND · 00</text>
+      </motion.svg>
 
       {/* left-rail vertical monogram */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-6 top-1/2 z-[1] -translate-y-1/2 origin-left -rotate-90 font-mono text-[0.55rem] uppercase tracking-[0.5em] text-ink-soft/45"
       >
-        ECOSMART AI · 2026 · ENGINEERED WITHIN
+        ECOSMART · ELEVATION 01 · 2026
+      </div>
+
+      {/* right-rail scale */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-6 top-1/2 z-[1] -translate-y-1/2 origin-right rotate-90 font-mono text-[0.55rem] uppercase tracking-[0.5em] text-ink-soft/45"
+      >
+        SCALE · 1:100 · INTELLIGENT MATERIALS
       </div>
 
       <div className="relative z-10 h-full w-full">{children}</div>

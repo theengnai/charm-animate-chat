@@ -75,21 +75,13 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         </h1>
 
         {/* chat */}
-        <div className="relative z-10 mt-10 flex w-full flex-col items-center gap-4">
+        <div className="relative z-10 mt-10 flex w-full flex-col items-center">
           <ChatCard
             onSend={() => {
               setPulse(true);
               window.setTimeout(() => setPulse(false), 900);
             }}
           />
-          <motion.div
-            className="w-full max-w-[720px] px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.85, duration: 0.6 }}
-          >
-            <VoiceInput />
-          </motion.div>
         </div>
 
         {/* scroll cue */}

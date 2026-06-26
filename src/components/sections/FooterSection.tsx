@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Box, Users, FileText, Truck } from "lucide-react";
+import { Brain, Box, Users, FileText, Truck, ShieldCheck } from "lucide-react";
 
 const SERVICES = [
   { icon: Brain, label: "AI Material Advisor" },
@@ -7,6 +7,7 @@ const SERVICES = [
   { icon: Users, label: "Professional Design Services" },
   { icon: FileText, label: "Technical Documentation" },
   { icon: Truck, label: "GCC Delivery & Logistics" },
+  { icon: ShieldCheck, label: "Quality Assurance & Warranty" },
 ];
 
 export function FooterSection({ active }: { active: boolean }) {

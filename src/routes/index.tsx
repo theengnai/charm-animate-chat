@@ -138,7 +138,7 @@ function Index() {
           initial={{ y: "8%", opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "-8%", opacity: 0 }}
-          transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }}
+          transition={{ duration: 0.55, ease: [0.65, 0, 0.35, 1] }}
           className="relative z-10 h-full w-full"
         >
           {active === 0 && <HeroSection active onPickItem={go} />}

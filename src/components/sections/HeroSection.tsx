@@ -16,23 +16,6 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         transition={{ duration: 0.5 }}
         className="relative flex h-full w-full flex-col items-center justify-center px-6 pt-24 pb-16"
       >
-        {/* diamond brand mark */}
-        <motion.div
-          className="mb-10 flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="grid h-11 w-11 place-items-center rotate-45 border-2 border-copper-light">
-            <div
-              className="h-6 w-6 -rotate-45"
-              style={{
-                background:
-                  "linear-gradient(135deg,#f0c79a 0%,#d89060 45%,#b4592c 100%)",
-              }}
-            />
-          </div>
-        </motion.div>
 
         {/* headline */}
         <motion.h1

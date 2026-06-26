@@ -126,8 +126,8 @@ export function SectionShell({
                   src={meta.image}
                   alt={meta.imageAlt ?? meta.title}
                   className="h-full w-full object-cover"
-                  loading="lazy"
                 />
+
                 {/* copper overlay peel */}
                 <motion.div
                   initial={{ y: 0 }}

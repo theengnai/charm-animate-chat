@@ -13,7 +13,7 @@ export function useSnapSections(count: number) {
       setActive(next);
       window.setTimeout(() => {
         locked.current = false;
-      }, 1100);
+      }, 650);
     },
     [active, count],
   );

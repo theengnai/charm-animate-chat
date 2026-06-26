@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ChatCard } from "@/components/hero/ChatCard";
-import { VoiceInput } from "@/components/hero/VoiceInput";
+
 import { HeroStage } from "@/components/hero/HeroStage";
 import { useState } from "react";
 

@@ -42,18 +42,6 @@ export function SectionShell({
         >
           {/* text column */}
           <div className="relative flex flex-col justify-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-center gap-4"
-            >
-              <span className="font-mono text-xs tracking-[0.3em] text-copper">
-                {String(meta.index).padStart(2, "0")} / {String(meta.total).padStart(2, "0")}
-              </span>
-              <span className="h-px flex-1 max-w-[6rem] bg-line" />
-              <span className="eyebrow">{meta.eyebrow}</span>
-            </motion.div>
 
             <div className="mt-6 overflow-hidden">
               {meta.title.split(" ").map((word, i) => (

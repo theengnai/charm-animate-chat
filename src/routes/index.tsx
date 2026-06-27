@@ -135,11 +135,11 @@ function Index() {
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
-          initial={{ y: "8%", opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "-8%", opacity: 0 }}
-          transition={{ duration: 0.55, ease: [0.65, 0, 0.35, 1] }}
-          className="relative z-10 h-full w-full"
+          initial={{ scale: 0.88, opacity: 0, filter: "blur(12px)" }}
+          animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+          exit={{ scale: 1.12, opacity: 0, filter: "blur(8px)" }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 h-full w-full will-change-transform"
         >
           {active === 0 && <HeroSection active onPickItem={go} />}
           {active >= 1 && active <= 6 && (

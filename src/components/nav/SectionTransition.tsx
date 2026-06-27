@@ -9,7 +9,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
  * memory blowups (page reloads / tab crashes on real devices).
  */
 export function SectionTransition({ activeKey }: { activeKey: number }) {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(true);
   const [visibleKey, setVisibleKey] = useState<number | null>(null);
   const maskId = `door-mask-${visibleKey}`;
   const gradId = `door-grad-${visibleKey}`;

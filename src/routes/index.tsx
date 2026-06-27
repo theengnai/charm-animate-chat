@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useSnapSections } from "@/hooks/useSnapSections";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { TopBar } from "@/components/nav/TopBar";
 import { SectionRail } from "@/components/nav/SectionRail";
 import { HeroSection } from "@/components/sections/HeroSection";

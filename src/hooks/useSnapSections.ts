@@ -28,7 +28,7 @@ export function useSnapSections(count: number) {
       setActive(next);
       window.setTimeout(() => {
         locked.current = false;
-      }, 650);
+      }, 1450);
     },
     [active, count],
   );

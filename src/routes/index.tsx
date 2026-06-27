@@ -7,6 +7,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { SectionShell, type SectionMeta } from "@/components/sections/SectionShell";
 import { FooterSection } from "@/components/sections/FooterSection";
 import { IntroOverlay } from "@/components/intro/IntroOverlay";
+import { SectionTransition } from "@/components/nav/SectionTransition";
 
 import imgDesign from "@/assets/section-design.jpg";
 import imgMaterials from "@/assets/section-materials.jpg";
@@ -148,6 +149,9 @@ function Index() {
           {active === 7 && <FooterSection active />}
         </motion.div>
       </AnimatePresence>
+
+      <SectionTransition activeKey={active} />
+
 
       {/* section counter bottom-left */}
       <div className="fixed bottom-6 left-8 z-30 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-ink-soft">

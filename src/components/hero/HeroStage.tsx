@@ -21,7 +21,7 @@ const PRODUCTS = [
 
 export function HeroStage({ children }: { children: ReactNode }) {
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(true);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {

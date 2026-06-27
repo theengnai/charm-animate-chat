@@ -43,7 +43,7 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
             }}
           />
           <motion.p
-            className="mt-[50px] max-w-md text-center text-xs text-ink-soft/70 md:text-sm"
+            className="mt-[50px] w-[calc(100%-3rem)] max-w-md px-2 text-center text-xs text-ink-soft/70 md:w-full md:px-0 md:text-sm"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}

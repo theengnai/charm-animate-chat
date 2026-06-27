@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSnapSections } from "@/hooks/useSnapSections";
 import { TopBar } from "@/components/nav/TopBar";
 import { SectionRail } from "@/components/nav/SectionRail";
@@ -133,22 +133,19 @@ function Index() {
       <SectionRail labels={RAIL} active={active} onPick={go} />
 
       {/* slide stack */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={active}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 h-full w-full"
-        >
-          {active === 0 && <HeroSection active onPickItem={go} />}
-          {active >= 1 && active <= 6 && (
-            <SectionShell active meta={SECTIONS[active]} />
-          )}
-          {active === 7 && <FooterSection active />}
-        </motion.div>
-      </AnimatePresence>
+      <motion.div
+        key={active}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 h-full w-full"
+      >
+        {active === 0 && <HeroSection active onPickItem={go} />}
+        {active >= 1 && active <= 6 && (
+          <SectionShell active meta={SECTIONS[active]} />
+        )}
+        {active === 7 && <FooterSection active />}
+      </motion.div>
 
       <SectionTransition activeKey={active} />
 

@@ -84,9 +84,9 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
               "radial-gradient(circle, rgba(255,235,200,0.9), rgba(255,210,170,0) 70%)",
             filter: "blur(8px)",
           }}
-          initial={{ opacity: 0, scale: 0.4 }}
-          animate={{ opacity: [0, 0, 0.9, 0], scale: [0.4, 0.8, 4, 10] }}
-          transition={{ duration: 2.2, times: [0, 0.35, 0.7, 1], ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.3 }}
+          animate={{ opacity: [0, 0.9, 0], scale: [0.3, 3, 12] }}
+          transition={{ duration: 1.8, times: [0, 0.55, 1], ease: "easeOut" }}
         />
       </motion.div>
     </AnimatePresence>

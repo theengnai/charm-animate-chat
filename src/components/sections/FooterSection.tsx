@@ -34,7 +34,7 @@ export function FooterSection({ active }: { active: boolean }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="display-serifish mt-6 max-w-3xl text-5xl md:text-6xl lg:text-[4.5rem]"
+          className="display-serifish mt-6 max-w-3xl text-3xl md:text-5xl lg:text-[4.5rem]"
         >
           Let&apos;s build something
           <br />

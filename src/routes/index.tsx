@@ -129,12 +129,17 @@ function Index() {
   const { active, go } = useSnapSections(TOTAL);
   const isMobile = useIsMobile(true);
   const [displayed, setDisplayed] = useState(active);
+  const [transitioning, setTransitioning] = useState(false);
 
   useEffect(() => {
     if (active === displayed) return;
+    setTransitioning(true);
     // Wait for the transition logo to fully cover the screen before swapping content.
-    const delay = isMobile ? 550 : 700;
-    const t = window.setTimeout(() => setDisplayed(active), delay);
+    const swapDelay = isMobile ? 550 : 700;
+    const t = window.setTimeout(() => {
+      setDisplayed(active);
+      setTransitioning(false);
+    }, swapDelay);
     return () => window.clearTimeout(t);
   }, [active, displayed, isMobile]);
 
@@ -148,8 +153,8 @@ function Index() {
       <motion.div
         key={displayed}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        animate={{ opacity: transitioning ? 0 : 1 }}
+        transition={{ duration: transitioning ? 0.18 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 h-full w-full"
       >
         {displayed === 0 && <HeroSection active onPickItem={go} />}

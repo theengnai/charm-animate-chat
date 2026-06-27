@@ -134,7 +134,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
 
         {/* suggested topics row */}
         <div
-          className="px-6 py-6"
+          className="px-4 py-4 md:px-6 md:py-6"
           style={{ background: "rgba(250,247,241,0.6)" }}
         >
           <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">

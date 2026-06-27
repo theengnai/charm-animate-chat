@@ -66,7 +66,7 @@ export function SectionShell({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.55 }}
-                className="display-serifish mt-3 text-2xl text-copper md:text-3xl"
+                className="display-serifish mt-3 text-lg text-copper md:text-2xl"
                 style={{ fontWeight: 400 }}
               >
                 {meta.subtitle}

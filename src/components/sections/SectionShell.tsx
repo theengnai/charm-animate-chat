@@ -102,7 +102,7 @@ export function SectionShell({
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-10 flex flex-wrap items-center gap-3"
+                className="mt-8 flex flex-nowrap items-center gap-2 md:gap-3"
               >
                 {meta.primaryCta && (
                   <motion.button
@@ -110,7 +110,7 @@ export function SectionShell({
                     onClick={meta.primaryCta.onClick}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm text-canvas"
+                    className="group inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-xs text-canvas md:px-6 md:py-3 md:text-sm"
                     style={{
                       background:
                         "linear-gradient(135deg,#d89060 0%,#b4592c 100%)",

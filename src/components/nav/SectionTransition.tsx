@@ -1,20 +1,35 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
- * Portal transition — keyed on activeKey so it remounts cleanly on every
- * section change. The logo icon scales smoothly from small to huge,
- * anchored on its doorway slit. The slit grows until it covers the
- * viewport, revealing the next section through it.
- *
- * Icon geometry (viewBox 49 x 53):
- *   slit center → (74.65%, 67.45%) of the icon's bounding box.
+ * Portal transition — the logo icon scales smoothly from small to huge,
+ * anchored on its doorway slit. On mobile we use a lightweight fade
+ * instead, because the masked SVG scaling to 20x+ causes rasterization
+ * memory blowups (page reloads / tab crashes on real devices).
  */
 export function SectionTransition({ activeKey }: { activeKey: number }) {
+  const isMobile = useIsMobile();
   const maskId = `door-mask-${activeKey}`;
   const gradId = `door-grad-${activeKey}`;
 
-  // Skip the very first render so the intro overlay isn't doubled up.
   if (activeKey === 0) return null;
+
+  if (isMobile) {
+    return (
+      <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
+        <motion.div
+          key={activeKey}
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(180deg,#B4592C 0%,#9c4a23 100%)",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 0.8, times: [0, 0.45, 1], ease: "easeInOut" }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">

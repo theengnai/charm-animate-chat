@@ -38,10 +38,11 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
           className="absolute inset-0"
           style={{
             background: "linear-gradient(180deg,#B4592C 0%,#9c4a23 100%)",
+            willChange: "transform",
           }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{ duration: 0.8, times: [0, 0.45, 1], ease: "easeInOut" }}
+          initial={{ y: "-100%" }}
+          animate={{ y: ["-100%", "0%", "100%"] }}
+          transition={{ duration: 0.9, times: [0, 0.5, 1], ease: [0.76, 0, 0.24, 1] }}
         />
       </div>
     );

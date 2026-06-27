@@ -52,25 +52,6 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
           </motion.p>
         </div>
 
-        {/* compliance line */}
-        <motion.div
-          className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 opacity-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ delay: 1.7, duration: 0.8 }}
-        >
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
-            Architectural Compliance
-          </span>
-          <span className="h-1 w-1 rounded-full bg-ink-soft/60" />
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
-            Low Carbon Sourcing
-          </span>
-          <span className="h-1 w-1 rounded-full bg-ink-soft/60" />
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.35em] text-ink-soft">
-            GCC Tested Supply
-          </span>
-        </motion.div>
       </motion.div>
     </HeroStage>
   );

@@ -38,7 +38,7 @@ export function SectionShell({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid h-full w-full grid-cols-1 items-center gap-6 overflow-y-auto px-6 pt-20 pb-20 md:gap-10 md:px-8 md:pt-24 md:pb-28 lg:grid-cols-2 lg:gap-16 lg:px-20"
+          className="grid h-full w-full grid-cols-1 items-center gap-4 overflow-hidden px-5 pt-20 pb-16 md:gap-10 md:px-8 md:pt-24 md:pb-28 lg:grid-cols-2 lg:gap-16 lg:px-20"
         >
           {/* text column */}
           <div className="relative flex flex-col justify-center">
@@ -102,7 +102,7 @@ export function SectionShell({
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-10 flex flex-wrap items-center gap-3"
+                className="mt-8 flex flex-nowrap items-center gap-2 md:gap-3"
               >
                 {meta.primaryCta && (
                   <motion.button
@@ -110,7 +110,7 @@ export function SectionShell({
                     onClick={meta.primaryCta.onClick}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
-                    className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm text-canvas"
+                    className="group inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-xs text-canvas md:px-6 md:py-3 md:text-sm"
                     style={{
                       background:
                         "linear-gradient(135deg,#d89060 0%,#b4592c 100%)",
@@ -125,7 +125,7 @@ export function SectionShell({
                   <button
                     type="button"
                     onClick={meta.secondaryCta.onClick}
-                    className="group inline-flex items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-6 py-3 text-sm text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04]"
+                    className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-4 py-2.5 text-xs text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04] md:px-6 md:py-3 md:text-sm"
                   >
                     <span className="relative">
                       {meta.secondaryCta.label}
@@ -139,7 +139,7 @@ export function SectionShell({
 
           {/* image column */}
           {meta.image && (
-            <div className="relative h-[34vh] w-full md:h-[45vh] lg:h-[55vh]">
+            <div className="relative h-[26vh] w-full md:h-[45vh] lg:h-[55vh]">
               <motion.div
                 initial={{ scale: 1.1, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

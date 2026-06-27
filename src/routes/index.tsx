@@ -150,6 +150,9 @@ function Index() {
         </motion.div>
       </AnimatePresence>
 
+      <SectionTransition activeKey={active} />
+
+
       {/* section counter bottom-left */}
       <div className="fixed bottom-6 left-8 z-30 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-ink-soft">
         <span className="text-copper">{String(active + 1).padStart(2, "0")}</span>

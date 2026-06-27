@@ -78,7 +78,7 @@ export function SectionShell({
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.7 }}
-                className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-ink-soft"
+                className="mt-4 max-w-md text-[0.8rem] leading-relaxed text-ink-soft md:mt-6 md:text-[0.95rem]"
               >
                 {meta.body}
               </motion.p>

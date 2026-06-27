@@ -125,7 +125,7 @@ export function SectionShell({
                   <button
                     type="button"
                     onClick={meta.secondaryCta.onClick}
-                    className="group inline-flex items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-6 py-3 text-sm text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04]"
+                    className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-4 py-2.5 text-xs text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04] md:px-6 md:py-3 md:text-sm"
                   >
                     <span className="relative">
                       {meta.secondaryCta.label}

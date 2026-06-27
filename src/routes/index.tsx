@@ -127,6 +127,16 @@ const SECTIONS: Record<number, SectionMeta> = {
 
 function Index() {
   const { active, go } = useSnapSections(TOTAL);
+  const isMobile = useIsMobile(true);
+  const [displayed, setDisplayed] = useState(active);
+
+  useEffect(() => {
+    if (active === displayed) return;
+    // Wait for the transition logo to fully cover the screen before swapping content.
+    const delay = isMobile ? 550 : 700;
+    const t = window.setTimeout(() => setDisplayed(active), delay);
+    return () => window.clearTimeout(t);
+  }, [active, displayed, isMobile]);
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
@@ -136,17 +146,17 @@ function Index() {
 
       {/* slide stack */}
       <motion.div
-        key={active}
+        key={displayed}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 h-full w-full"
       >
-        {active === 0 && <HeroSection active onPickItem={go} />}
-        {active >= 1 && active <= 6 && (
-          <SectionShell active meta={SECTIONS[active]} />
+        {displayed === 0 && <HeroSection active onPickItem={go} />}
+        {displayed >= 1 && displayed <= 6 && (
+          <SectionShell active meta={SECTIONS[displayed]} />
         )}
-        {active === 7 && <FooterSection active />}
+        {displayed === 7 && <FooterSection active />}
       </motion.div>
 
       <SectionTransition activeKey={active} />

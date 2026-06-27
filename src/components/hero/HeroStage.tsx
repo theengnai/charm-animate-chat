@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const BLOB_PATHS = [
   "M421,310 C421,400 343,475 256,475 C169,475 91,400 91,310 C91,220 169,135 256,135 C343,135 421,220 421,310 Z",
@@ -20,6 +21,7 @@ const PRODUCTS = [
 
 export function HeroStage({ children }: { children: ReactNode }) {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -32,6 +34,36 @@ export function HeroStage({ children }: { children: ReactNode }) {
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
+
+  if (isMobile) {
+    return (
+      <div
+        className="relative h-full w-full overflow-hidden"
+        style={{
+          background: "linear-gradient(180deg, #FFF8EC 0%, #FAF7F1 48%, #F4ECDD 100%)",
+        }}
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(227,220,205,0.55) 1px, transparent 1px), linear-gradient(to bottom, rgba(227,220,205,0.55) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+            opacity: 0.45,
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-[48%] h-[42vh] w-[42vh] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25"
+          style={{
+            background: "radial-gradient(circle, #D89060 0%, rgba(216,144,96,0.35) 42%, transparent 72%)",
+          }}
+        />
+        <div className="relative z-10 h-full w-full">{children}</div>
+      </div>
+    );
+  }
 
   return (
     <div

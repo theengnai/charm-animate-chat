@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
@@ -9,16 +10,31 @@ import { useIsMobile } from "@/hooks/use-mobile";
  */
 export function SectionTransition({ activeKey }: { activeKey: number }) {
   const isMobile = useIsMobile();
-  const maskId = `door-mask-${activeKey}`;
-  const gradId = `door-grad-${activeKey}`;
+  const [visibleKey, setVisibleKey] = useState<number | null>(null);
+  const maskId = `door-mask-${visibleKey}`;
+  const gradId = `door-grad-${visibleKey}`;
 
-  if (activeKey === 0) return null;
+  useEffect(() => {
+    if (activeKey === 0) {
+      setVisibleKey(null);
+      return;
+    }
+
+    setVisibleKey(activeKey);
+    const timer = window.setTimeout(() => {
+      setVisibleKey((key) => (key === activeKey ? null : key));
+    }, 1500);
+
+    return () => window.clearTimeout(timer);
+  }, [activeKey]);
+
+  if (visibleKey == null) return null;
 
   if (isMobile) {
     return (
       <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
         <motion.div
-          key={activeKey}
+          key={visibleKey}
           className="absolute inset-0"
           style={{
             background: "linear-gradient(180deg,#B4592C 0%,#9c4a23 100%)",
@@ -34,7 +50,7 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
   return (
     <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
       <motion.div
-        key={activeKey}
+        key={visibleKey}
         className="absolute"
         style={{
           width: "40vmin",

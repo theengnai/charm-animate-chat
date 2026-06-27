@@ -4,9 +4,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * Portal transition — the logo icon scales smoothly from small to huge,
- * anchored on its doorway slit. On mobile we use a lightweight fade
- * instead, because the masked SVG scaling to 20x+ causes rasterization
- * memory blowups (page reloads / tab crashes on real devices).
+ * anchored on its doorway slit. Mobile uses the same shape but with a
+ * larger starting footprint and smaller scale ceiling to keep raster
+ * memory low (avoids tab crashes on real devices).
  */
 export function SectionTransition({ activeKey }: { activeKey: number }) {
   const isMobile = useIsMobile(true);
@@ -30,23 +30,9 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
 
   if (visibleKey == null) return null;
 
-  if (isMobile) {
-    return (
-      <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
-        <motion.div
-          key={visibleKey}
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(180deg,#B4592C 0%,#9c4a23 100%)",
-            willChange: "transform",
-          }}
-          initial={{ y: "-100%" }}
-          animate={{ y: ["-100%", "0%", "100%"] }}
-          transition={{ duration: 0.9, times: [0, 0.5, 1], ease: [0.76, 0, 0.24, 1] }}
-        />
-      </div>
-    );
-  }
+  const baseVmin = isMobile ? 70 : 40;
+  const targetScale = isMobile ? 9 : 22;
+  const duration = isMobile ? 1.1 : 1.4;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
@@ -54,19 +40,19 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
         key={visibleKey}
         className="absolute"
         style={{
-          width: "40vmin",
-          height: "calc(40vmin * 53 / 49)",
-          left: "calc(50vw - 40vmin * 0.7465)",
-          top: "calc(50vh - 40vmin * 53 / 49 * 0.6745)",
+          width: `${baseVmin}vmin`,
+          height: `calc(${baseVmin}vmin * 53 / 49)`,
+          left: `calc(50vw - ${baseVmin}vmin * 0.7465)`,
+          top: `calc(50vh - ${baseVmin}vmin * 53 / 49 * 0.6745)`,
           transformOrigin: "74.6531% 67.4528%",
           willChange: "transform, opacity",
         }}
-        initial={{ scale: 0.1, opacity: 0 }}
-        animate={{ scale: 22, opacity: [0, 1, 1, 0] }}
+        initial={{ scale: 0.15, opacity: 0 }}
+        animate={{ scale: targetScale, opacity: [0, 1, 1, 0] }}
         transition={{
-          duration: 1.4,
+          duration,
           ease: [0.55, 0, 0.45, 1],
-          opacity: { duration: 1.4, times: [0, 0.15, 0.85, 1], ease: "linear" },
+          opacity: { duration, times: [0, 0.15, 0.85, 1], ease: "linear" },
         }}
       >
         <svg

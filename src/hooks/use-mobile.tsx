@@ -14,7 +14,10 @@ export function useIsMobile(defaultValue = false) {
     widthQuery.addEventListener("change", onChange);
     touchQuery.addEventListener("change", onChange);
     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT || touchQuery.matches);
-    return () => mql.removeEventListener("change", onChange);
+    return () => {
+      widthQuery.removeEventListener("change", onChange);
+      touchQuery.removeEventListener("change", onChange);
+    };
   }, []);
 
   return isMobile ?? defaultValue;

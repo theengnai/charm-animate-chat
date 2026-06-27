@@ -140,7 +140,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
             Suggested topics
           </div>
-          <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-wrap gap-1.5 md:gap-2.5">
             {TOPICS.map(({ label, Icon }, i) => (
               <motion.button
                 key={label}
@@ -150,9 +150,9 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3 + i * 0.05, duration: 0.4 }}
                 whileHover={{ y: -2 }}
-                className="inline-flex items-center gap-2 rounded-full border border-copper-light/35 bg-white px-4 py-2 text-sm text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep"
+                className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-white px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
               >
-                <Icon className="h-3.5 w-3.5 text-copper" strokeWidth={1.8} />
+                <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
                 {label}
               </motion.button>
             ))}

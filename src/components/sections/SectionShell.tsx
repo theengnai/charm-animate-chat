@@ -139,7 +139,7 @@ export function SectionShell({
 
           {/* image column */}
           {meta.image && (
-            <div className="relative h-[34vh] w-full md:h-[45vh] lg:h-[55vh]">
+            <div className="relative h-[26vh] w-full md:h-[45vh] lg:h-[55vh]">
               <motion.div
                 initial={{ scale: 1.1, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

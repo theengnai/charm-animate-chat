@@ -1,45 +1,42 @@
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
- * Portal transition — the logo icon scales up from small, the doorway
- * (cream slit) grows until it covers the viewport, revealing the next
- * section through it. The logo is never split: a single masked SVG
- * scales around the slit's center point.
+ * Portal transition — the logo icon scales smoothly from small to huge,
+ * anchored on its doorway slit. The slit grows until it covers the viewport,
+ * revealing the next section through it. Single continuous motion.
  *
- * Geometry (icon viewBox 49 x 53):
- *   slit x: 33.125 → 40.0264   → center 36.5757 → 74.65% of width
- *   slit y: 18.4951 → 53       → center 35.7476 → 67.45% of height
+ * Icon geometry (viewBox 49 x 53):
+ *   slit center → (74.65%, 67.45%) of the icon's bounding box.
  */
 export function SectionTransition({ activeKey }: { activeKey: number }) {
   const maskId = `door-mask-${activeKey}`;
+  const gradId = `door-grad-${activeKey}`;
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <motion.div
         key={activeKey}
         className="pointer-events-none fixed inset-0 z-[60] overflow-hidden"
         initial={{ opacity: 1 }}
-        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.25 }}
+        transition={{ duration: 0.2 }}
       >
         <motion.div
           className="absolute"
           style={{
-            width: "26vmin",
-            height: "calc(26vmin * 53 / 49)",
-            // Anchor the slit's center at the viewport center.
-            left: "calc(50vw - 26vmin * 0.7465)",
-            top: "calc(50vh - 26vmin * 53 / 49 * 0.6745)",
+            width: "40vmin",
+            height: "calc(40vmin * 53 / 49)",
+            left: "calc(50vw - 40vmin * 0.7465)",
+            top: "calc(50vh - 40vmin * 53 / 49 * 0.6745)",
             transformOrigin: "74.6531% 67.4528%",
-            filter: "drop-shadow(0 40px 80px rgba(60,20,5,0.35))",
+            willChange: "transform, opacity",
           }}
-          initial={{ scale: 0.08, opacity: 0 }}
-          animate={{ scale: 80, opacity: 1 }}
+          initial={{ scale: 0.1, opacity: 0 }}
+          animate={{ scale: 22, opacity: 1 }}
           transition={{
-            duration: 1.8,
+            duration: 1.4,
             ease: [0.55, 0, 0.45, 1],
-            opacity: { duration: 0.35, ease: "easeOut" },
+            opacity: { duration: 0.25, ease: "easeOut" },
           }}
         >
           <svg
@@ -50,7 +47,6 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
           >
             <defs>
               <mask id={maskId}>
-                {/* white = visible copper, black = transparent doorway */}
                 <rect width="49" height="53" fill="white" />
                 <rect
                   x="33.125"
@@ -60,7 +56,7 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
                   fill="black"
                 />
               </mask>
-              <linearGradient id={`copper-${activeKey}`} x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#B4592C" />
                 <stop offset="100%" stopColor="#9c4a23" />
               </linearGradient>
@@ -68,26 +64,11 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
             <rect
               width="49"
               height="53"
-              fill={`url(#copper-${activeKey})`}
+              fill={`url(#${gradId})`}
               mask={`url(#${maskId})`}
             />
           </svg>
         </motion.div>
-
-        {/* warm light bloom from the doorway, anchored at viewport center */}
-        <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{
-            width: "10vmin",
-            height: "10vmin",
-            background:
-              "radial-gradient(circle, rgba(255,235,200,0.9), rgba(255,210,170,0) 70%)",
-            filter: "blur(8px)",
-          }}
-          initial={{ opacity: 0, scale: 0.3 }}
-          animate={{ opacity: [0, 0.9, 0], scale: [0.3, 3, 12] }}
-          transition={{ duration: 1.8, times: [0, 0.55, 1], ease: "easeOut" }}
-        />
       </motion.div>
     </AnimatePresence>
   );

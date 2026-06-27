@@ -34,12 +34,12 @@ export function SectionTransition({ activeKey }: { activeKey: number }) {
             transformOrigin: "74.6531% 67.4528%",
             filter: "drop-shadow(0 40px 80px rgba(60,20,5,0.35))",
           }}
-          initial={{ scale: 0.12, opacity: 0 }}
-          animate={{ scale: [0.12, 1, 60], opacity: [0, 1, 1] }}
+          initial={{ scale: 0.08, opacity: 0 }}
+          animate={{ scale: 80, opacity: 1 }}
           transition={{
-            duration: 2.2,
-            times: [0, 0.45, 1],
-            ease: [0.76, 0, 0.24, 1],
+            duration: 1.8,
+            ease: [0.55, 0, 0.45, 1],
+            opacity: { duration: 0.35, ease: "easeOut" },
           }}
         >
           <svg

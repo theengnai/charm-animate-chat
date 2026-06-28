@@ -41,7 +41,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         className="relative h-full w-full overflow-hidden"
         style={{
           background:
-            "linear-gradient(180deg, color-mix(in oklab, var(--canvas) 92%, white) 0%, var(--canvas) 48%, var(--canvas-2) 100%)",
+            "linear-gradient(180deg, var(--canvas-2) 0%, var(--canvas) 50%, var(--canvas-2) 100%)",
         }}
       >
         <div
@@ -71,7 +71,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
       className="relative h-full w-full overflow-hidden"
       style={{
         background:
-          "linear-gradient(180deg, color-mix(in oklab, var(--canvas) 92%, white) 0%, var(--canvas) 45%, var(--canvas-2) 100%)",
+          "linear-gradient(180deg, var(--canvas-2) 0%, var(--canvas) 50%, var(--canvas-2) 100%)",
       }}
     >
       {/* paper grain */}

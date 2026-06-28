@@ -52,20 +52,20 @@ const RAIL = [
 const SECTIONS: Record<number, SectionMeta> = {
   1: {
     index: 2, total: TOTAL,
-    eyebrow: "Design",
-    title: "Intelligent design support.",
-    subtitle: "From sketch to specification.",
+    eyebrow: "Visualizer",
+    title: "Visualize your project in real time.",
+    subtitle: "See it before you build it.",
     body:
-      "Our AI pairs your concept with the right material palette, climate response, and detailing — so every line you draw is already buildable.",
-    bullets: ["Concept matching", "Climate-aware palettes", "Detail libraries"],
-    image: imgDesign,
-    primaryCta: { label: "Start a design brief" },
-    secondaryCta: { label: "See design services" },
+      "Drop materials onto your plan or render and watch surfaces resolve at the right scale, joint, and tone — no plug-ins, no waiting.",
+    bullets: ["Drag & apply", "True-scale joints", "Light-aware preview"],
+    image: imgVisualizer,
+    primaryCta: { label: "Try the visualizer" },
+    secondaryCta: { label: "Watch a demo" },
   },
   2: {
     index: 3, total: TOTAL,
-    eyebrow: "Materials",
-    title: "Curated material selection.",
+    eyebrow: "Products & Solutions",
+    title: "Curated products and material systems.",
     subtitle: "Travertine, terracotta, terrazzo.",
     body:
       "A living library of architectural materials — sourced, vetted, and ready to specify. Filter by finish, format, performance, or feeling.",
@@ -76,15 +76,15 @@ const SECTIONS: Record<number, SectionMeta> = {
   },
   3: {
     index: 4, total: TOTAL,
-    eyebrow: "Visualizer",
-    title: "Visualize your project in real time.",
-    subtitle: "See it before you build it.",
+    eyebrow: "Projects & Applications",
+    title: "Discover inspiring projects and applications.",
+    subtitle: "Real surfaces. Real conditions.",
     body:
-      "Drop materials onto your plan or render and watch surfaces resolve at the right scale, joint, and tone — no plug-ins, no waiting.",
-    bullets: ["Drag & apply", "True-scale joints", "Light-aware preview"],
-    image: imgVisualizer,
-    primaryCta: { label: "Try the visualizer" },
-    secondaryCta: { label: "Watch a demo" },
+      "Browse built work using the same materials and systems — façades, interiors, and details documented for reference and reuse.",
+    bullets: ["Built case studies", "Detail breakdowns", "Photographed in situ"],
+    image: imgGallery,
+    primaryCta: { label: "Browse projects" },
+    secondaryCta: { label: "Submit your project" },
   },
   4: {
     index: 5, total: TOTAL,
@@ -100,19 +100,19 @@ const SECTIONS: Record<number, SectionMeta> = {
   },
   5: {
     index: 6, total: TOTAL,
-    eyebrow: "Gallery",
-    title: "Discover inspiring projects and applications.",
-    subtitle: "Real surfaces. Real conditions.",
+    eyebrow: "Professional Design Support",
+    title: "SRMD — Specification, Research & Material Design.",
+    subtitle: "From sketch to specification.",
     body:
-      "Browse built work using the same materials and systems — façades, interiors, and details documented for reference and reuse.",
-    bullets: ["Built case studies", "Detail breakdowns", "Photographed in situ"],
-    image: imgGallery,
-    primaryCta: { label: "Browse projects" },
-    secondaryCta: { label: "Submit your project" },
+      "Our team pairs your concept with the right material palette, climate response, and detailing — so every line you draw is already buildable.",
+    bullets: ["Concept matching", "Climate-aware palettes", "Detail libraries"],
+    image: imgDesign,
+    primaryCta: { label: "Start a design brief" },
+    secondaryCta: { label: "See design services" },
   },
   6: {
     index: 7, total: TOTAL,
-    eyebrow: "Technical",
+    eyebrow: "Technical Resources",
     title: "Access technical specifications and documentation.",
     subtitle: "Drawings, data, declarations.",
     body:
@@ -121,6 +121,18 @@ const SECTIONS: Record<number, SectionMeta> = {
     image: imgTechnical,
     primaryCta: { label: "Download spec pack" },
     secondaryCta: { label: "Open BIM library" },
+  },
+  7: {
+    index: 8, total: TOTAL,
+    eyebrow: "Become a Partner",
+    title: "Build with Ecosmart.",
+    subtitle: "Architects, contractors, distributors.",
+    body:
+      "Join our growing network of design and trade partners across the GCC. Get priority access to new collections, technical training, and co-marketing on landmark projects.",
+    bullets: ["Trade pricing & priority samples", "Technical & spec training", "Co-marketed case studies"],
+    image: imgGallery,
+    primaryCta: { label: "Apply to partner" },
+    secondaryCta: { label: "Download partner deck" },
   },
 };
 

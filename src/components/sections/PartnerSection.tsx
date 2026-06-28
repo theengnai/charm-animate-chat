@@ -206,7 +206,7 @@ export function PartnerSection({ active }: { active: boolean }) {
               boxShadow: "0 14px 30px -10px rgba(180,89,44,0.5)",
             }}
           >
-            {sent ? "Sent ✓" : "Submit application"}
+            {sent ? "Sent ✓" : "Let's Talk Partnership"}
             <ArrowUpRight
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               strokeWidth={2}

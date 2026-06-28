@@ -169,10 +169,9 @@ function Index() {
         className="relative z-10 h-full w-full"
       >
         {displayed === 0 && <HeroSection active onPickItem={go} />}
-        {displayed >= 1 && displayed <= 6 && (
+        {displayed >= 1 && displayed <= 7 && (
           <SectionShell active meta={SECTIONS[displayed]} />
         )}
-        {displayed === 7 && <FooterSection active />}
       </motion.div>
 
       <SectionTransition activeKey={active} />

@@ -73,7 +73,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
       />
 
       <div
-        className="relative overflow-hidden rounded-[1.75rem] bg-white"
+        className="relative overflow-hidden rounded-[1.75rem] bg-canvas"
         style={{
           boxShadow:
             "0 30px 80px -30px rgba(122,58,27,0.22), 0 8px 24px -10px rgba(26,23,20,0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
@@ -135,7 +135,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
         {/* suggested topics row */}
         <div
           className="px-4 py-4 md:px-6 md:py-6"
-          style={{ background: "rgba(250,247,241,0.6)" }}
+          style={{ background: "color-mix(in oklab, var(--canvas-2) 60%, transparent)" }}
         >
           <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
             Suggested topics
@@ -150,7 +150,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3 + i * 0.05, duration: 0.4 }}
                 whileHover={{ y: -2 }}
-                className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-white px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
+                className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-canvas px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
               >
                 <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
                 {label}

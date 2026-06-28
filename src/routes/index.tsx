@@ -7,7 +7,6 @@ import { TopBar } from "@/components/nav/TopBar";
 import { SectionRail } from "@/components/nav/SectionRail";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SectionShell, type SectionMeta } from "@/components/sections/SectionShell";
-import { FooterSection } from "@/components/sections/FooterSection";
 import { IntroOverlay } from "@/components/intro/IntroOverlay";
 import { SectionTransition } from "@/components/nav/SectionTransition";
 

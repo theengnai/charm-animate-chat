@@ -9,6 +9,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { SectionShell, type SectionMeta } from "@/components/sections/SectionShell";
 import { IntroOverlay } from "@/components/intro/IntroOverlay";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { PartnerSection } from "@/components/sections/PartnerSection";
 import { SectionTransition } from "@/components/nav/SectionTransition";
 
 import imgDesign from "@/assets/section-design.jpg";
@@ -123,18 +124,6 @@ const SECTIONS: Record<number, SectionMeta> = {
     primaryCta: { label: "Download spec pack" },
     secondaryCta: { label: "Open BIM library" },
   },
-  7: {
-    index: 8, total: TOTAL,
-    eyebrow: "Become a Partner",
-    title: "Build with Ecosmart.",
-    subtitle: "Architects, contractors, distributors.",
-    body:
-      "Join our growing network of design and trade partners across the GCC. Get priority access to new collections, technical training, and co-marketing on landmark projects.",
-    bullets: ["Trade pricing & priority samples", "Technical & spec training", "Co-marketed case studies"],
-    image: imgGallery,
-    primaryCta: { label: "Apply to partner" },
-    secondaryCta: { label: "Download partner deck" },
-  },
 };
 
 function Index() {
@@ -170,9 +159,10 @@ function Index() {
         className="relative z-10 h-full w-full"
       >
         {displayed === 0 && <HeroSection active onPickItem={go} />}
-        {displayed >= 1 && displayed <= 7 && (
+        {displayed >= 1 && displayed <= 6 && (
           <SectionShell active meta={SECTIONS[displayed]} />
         )}
+        {displayed === 7 && <PartnerSection active />}
       </motion.div>
 
       <SectionTransition activeKey={active} />

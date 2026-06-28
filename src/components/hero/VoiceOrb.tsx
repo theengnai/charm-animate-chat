@@ -67,14 +67,9 @@ export function VoiceOrb() {
         layout
         transition={{ type: "spring", stiffness: 260, damping: 26 }}
         className="flex items-center gap-2 rounded-full px-2 py-2"
-        style={{
-          background: "rgba(255, 247, 235, 0.55)",
-          backdropFilter: "blur(18px) saturate(160%)",
-          border: "1px solid rgba(180, 89, 44, 0.28)",
-          boxShadow:
-            "0 18px 40px -14px rgba(122,58,27,0.35), 0 4px 12px -4px rgba(180,89,44,0.2), inset 0 1px 0 rgba(255,255,255,0.7)",
-        }}
+        style={{ background: "transparent" }}
       >
+
         <AnimatePresence initial={false}>
           {listening && (
             <motion.div

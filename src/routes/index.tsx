@@ -40,13 +40,13 @@ const TOTAL = 8;
 
 const RAIL = [
   "Ecosmart AI",
-  "Design",
-  "Materials",
   "Visualizer",
+  "Products",
+  "Projects",
   "Samples",
-  "Gallery",
+  "Design Support",
   "Technical",
-  "System",
+  "Partner",
 ];
 
 const SECTIONS: Record<number, SectionMeta> = {

@@ -184,6 +184,7 @@ function Index() {
         <span className="mx-2 opacity-50">/</span>
         {String(TOTAL).padStart(2, "0")}
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

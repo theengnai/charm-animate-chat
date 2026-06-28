@@ -85,7 +85,7 @@ export function PartnerSection({ active }: { active: boolean }) {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="mt-4 max-w-md text-[0.8rem] leading-relaxed text-ink-soft md:mt-6 md:text-[0.95rem]"
         >
-          Architects, contractors and distributors across the GCC — join our partner network for trade pricing, technical training, and co-marketed projects.
+          Join EcoSmart's growing network of architects, distributors, contractors and solution partners across Saudi Arabia and the GCC.
         </motion.p>
 
         <motion.ul
@@ -206,7 +206,7 @@ export function PartnerSection({ active }: { active: boolean }) {
               boxShadow: "0 14px 30px -10px rgba(180,89,44,0.5)",
             }}
           >
-            {sent ? "Sent ✓" : "Submit application"}
+            {sent ? "Sent ✓" : "Let's Talk Partnership"}
             <ArrowUpRight
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               strokeWidth={2}

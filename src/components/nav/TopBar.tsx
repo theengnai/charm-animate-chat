@@ -1,5 +1,7 @@
 import { Menu } from "lucide-react";
 import logoAsset from "@/assets/ecosmart-logo.svg.asset.json";
+import { LangSwitcher } from "@/components/nav/LangSwitcher";
+import { ThemeToggle } from "@/components/nav/ThemeToggle";
 
 const NAV = ["Products", "Services", "Projects", "Resources", "About Us"];
 
@@ -23,12 +25,14 @@ export function TopBar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           <span
             className="hidden rounded-full border border-copper/50 px-4 py-2 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-copper md:inline-block"
           >
             Launching Soon
           </span>
+          <LangSwitcher />
+          <ThemeToggle />
           <button
             type="button"
             className="grid h-10 w-10 place-items-center rounded-full border border-line bg-canvas/80 backdrop-blur"
@@ -41,3 +45,4 @@ export function TopBar() {
     </header>
   );
 }
+

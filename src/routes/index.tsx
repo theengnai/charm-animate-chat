@@ -8,6 +8,7 @@ import { SectionRail } from "@/components/nav/SectionRail";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SectionShell, type SectionMeta } from "@/components/sections/SectionShell";
 import { IntroOverlay } from "@/components/intro/IntroOverlay";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { SectionTransition } from "@/components/nav/SectionTransition";
 
 import imgDesign from "@/assets/section-design.jpg";
@@ -183,6 +184,7 @@ function Index() {
         <span className="mx-2 opacity-50">/</span>
         {String(TOTAL).padStart(2, "0")}
       </div>
+      <WhatsAppButton />
     </div>
   );
 }

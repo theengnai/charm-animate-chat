@@ -43,7 +43,6 @@ const EXPERTISE = [
     Icon: Triangle,
     title: "Architectural Surfaces",
     body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications.",
-    highlight: true,
   },
   {
     n: "03",
@@ -189,19 +188,13 @@ function AboutPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className={`group relative grid grid-cols-[44px_56px_1fr_2fr] items-start gap-4 px-4 py-6 transition-all duration-300 ease-out md:gap-6 md:py-8 ${
-                      e.highlight ? "bg-copper/[0.08]" : "hover:bg-canvas-2/60"
-                    }`}
+                    className="group relative grid grid-cols-[44px_56px_1fr_2fr] items-start gap-4 px-4 py-6 transition-all duration-300 ease-out hover:bg-canvas-2/60 md:gap-6 md:py-8"
                   >
                     <span className="pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">{e.n}</span>
-                    <span className={`grid h-11 w-11 place-items-center rounded-full border transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${
-                      e.highlight
-                        ? "border-copper/40 bg-copper/10 text-copper"
-                        : "border-copper/30 bg-canvas text-copper group-hover:border-copper group-hover:bg-copper group-hover:text-canvas"
-                    }`}>
+                    <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/30 bg-canvas text-copper transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:border-copper group-hover:bg-copper group-hover:text-canvas">
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </span>
-                    <h3 className={`pt-2 text-base font-medium transition-colors duration-300 md:text-lg ${e.highlight ? "text-copper" : "group-hover:text-copper"}`}>{e.title}</h3>
+                    <h3 className="pt-2 text-base font-medium transition-colors duration-300 group-hover:text-copper md:text-lg">{e.title}</h3>
                     <p className="pt-2 text-sm leading-relaxed text-ink-soft transition-transform duration-300 group-hover:translate-x-1 md:text-base">{e.body}</p>
                   </motion.li>
                 );

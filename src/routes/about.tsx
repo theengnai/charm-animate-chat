@@ -215,7 +215,7 @@ function AboutPage() {
             We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
           </p>
 
-          <div className="mt-16 overflow-hidden rounded-2xl border border-line/40 bg-canvas shadow-[0_4px_24px_-8px_rgba(0,0,0,0.06)]">
+          <div className="mt-16 overflow-hidden rounded-2xl border border-line/40 bg-canvas">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
               {APPROACH.map((a, i) => {
                 const Icon = a.Icon;

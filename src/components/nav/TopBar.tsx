@@ -14,8 +14,23 @@ const NAV: { label: string; href: string }[] = [
 ];
 
 export function TopBar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-6 py-5 md:px-10">
+    <header
+      className={`fixed inset-x-0 top-0 z-40 px-6 py-5 transition-all duration-300 md:px-10 ${
+        scrolled
+          ? "border-b border-line/40 bg-canvas/80 shadow-sm backdrop-blur-xl"
+          : "bg-transparent"
+      }`}
+    >
       <div className="flex items-center justify-between gap-6">
         <a href="/" className="flex items-center">
           <img src={logoAsset.url} alt="Ecosmart" className="h-8 w-auto md:h-9" />

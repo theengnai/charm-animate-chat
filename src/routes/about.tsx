@@ -289,9 +289,8 @@ function AboutPage() {
                 </div>
                 <div className="relative mt-6 p-6 md:p-8">
                   {/* partial frame */}
-                  <span className="pointer-events-none absolute top-0 left-0 h-px w-2/3 bg-copper/40" />
+                  <span className="pointer-events-none absolute top-0 left-0 h-px w-full bg-copper/40" />
                   <span className="pointer-events-none absolute top-0 left-0 h-2/3 w-px bg-copper/40" />
-                  <span className="pointer-events-none absolute top-0 right-0 h-px w-10 bg-copper/40" />
 
                   <span className="font-mono text-xs uppercase tracking-[0.25em] text-copper">
                     {s.n} / {s.cat}

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
@@ -66,11 +66,11 @@ const EXPERTISE = [
 ];
 
 const APPROACH = [
-  { sym: "◆", title: "Material Expertise", body: "Deep product knowledge across façade, surface, and finishing categories to guide you to the right solution." },
-  { sym: "◇", title: "Design Guidance", body: "Collaborative support from concept to specification — helping architects and designers make confident material decisions." },
-  { sym: "⬡", title: "Visualization Support", body: "Digital tools and rendered previews that let you see exactly how materials will look in your project before commitment." },
-  { sym: "⬢", title: "Technical Assistance", body: "Detailed specifications, shop drawings, and engineering support to ensure seamless integration and installation." },
-  { sym: "○", title: "Reliable Supply", body: "Established partnerships with leading global manufacturers, ensuring consistent quality and timely delivery across the GCC." },
+  { Icon: Layers, title: "Material Expertise", body: "Deep product knowledge across façade, surface, and finishing categories to guide you to the right solution." },
+  { Icon: Compass, title: "Design Guidance", body: "Collaborative support from concept to specification — helping architects and designers make confident material decisions." },
+  { Icon: Eye, title: "Visualization Support", body: "Digital tools and rendered previews that let you see exactly how materials will look in your project before commitment." },
+  { Icon: Wrench, title: "Technical Assistance", body: "Detailed specifications, shop drawings, and engineering support to ensure seamless integration and installation." },
+  { Icon: Truck, title: "Reliable Supply", body: "Established partnerships with leading global manufacturers, ensuring consistent quality and timely delivery across the GCC." },
 ];
 
 const SOLUTIONS = [
@@ -213,26 +213,31 @@ function AboutPage() {
             We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
           </p>
 
-          <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-md border border-line/60 bg-line/60 md:grid-cols-2 lg:grid-cols-5">
-            {APPROACH.map((a, i) => (
-              <motion.div
-                key={a.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="bg-canvas p-6"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-ink-soft">
-                    {String(i + 1).padStart(2, "0")} / 05
-                  </span>
-                  <span className="text-lg text-copper">{a.sym}</span>
-                </div>
-                <h3 className="mt-8 text-base font-medium">{a.title}</h3>
-                <p className="mt-3 text-[0.78rem] leading-relaxed text-ink-soft">{a.body}</p>
-              </motion.div>
-            ))}
+          <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line/60 bg-line/60 md:grid-cols-2 lg:grid-cols-5">
+            {APPROACH.map((a, i) => {
+              const Icon = a.Icon;
+              return (
+                <motion.div
+                  key={a.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: i * 0.06 }}
+                  className="group flex flex-col bg-canvas p-8 md:p-10"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                      {String(i + 1).padStart(2, "0")} / 05
+                    </span>
+                    <span className="grid h-10 w-10 place-items-center rounded-full border border-copper/40 text-copper transition-colors group-hover:bg-copper group-hover:text-canvas">
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </span>
+                  </div>
+                  <h3 className="mt-10 text-lg font-medium md:text-xl">{a.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

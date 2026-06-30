@@ -72,7 +72,7 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html, body { background: var(--canvas); color: var(--ink); min-height: 100%; overflow-x: hidden; overscroll-behavior: none; }
+  html, body { background: var(--canvas); color: var(--ink); min-height: 100%; overflow-x: hidden; }
   html { background: var(--canvas); }
   body {
     font-family: var(--font-body);

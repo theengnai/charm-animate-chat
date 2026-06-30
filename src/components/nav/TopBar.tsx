@@ -1,9 +1,16 @@
 import { Menu } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/ecosmart-logo.svg.asset.json";
 import { LangSwitcher } from "@/components/nav/LangSwitcher";
 import { ThemeToggle } from "@/components/nav/ThemeToggle";
 
-const NAV = ["Products", "Services", "Projects", "Resources", "About Us"];
+const NAV: { label: string; href: string }[] = [
+  { label: "Products", href: "/" },
+  { label: "Services", href: "/" },
+  { label: "Projects", href: "/" },
+  { label: "Resources", href: "/" },
+  { label: "About Us", href: "/about" },
+];
 
 export function TopBar() {
   return (

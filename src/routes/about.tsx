@@ -34,32 +34,32 @@ export const Route = createFileRoute("/about")({
 const EXPERTISE = [
   {
     n: "01",
-    sym: "⊞",
+    Icon: LayoutGrid,
     title: "Façade Systems",
     body: "Comprehensive curtain wall, ventilated façade, and cladding solutions engineered for performance and aesthetic precision.",
   },
   {
     n: "02",
-    sym: "◮",
+    Icon: Triangle,
     title: "Architectural Surfaces",
     body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications.",
     highlight: true,
   },
   {
     n: "03",
-    sym: "⌂",
+    Icon: Home,
     title: "Interior Finishes",
     body: "Curated interior materials including wall panels, feature surfaces, and decorative finishes that elevate every space.",
   },
   {
     n: "04",
-    sym: "⚲",
+    Icon: TreePine,
     title: "Outdoor Solutions",
     body: "Weather-resistant decking, pergola systems, and landscape materials designed for the demanding GCC climate.",
   },
   {
     n: "05",
-    sym: "◐",
+    Icon: Contrast,
     title: "Technical Design Support",
     body: "End-to-end technical guidance — from material selection and specification to detailed shop drawings and installation oversight.",
   },

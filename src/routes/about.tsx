@@ -215,93 +215,33 @@ function AboutPage() {
             We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
           </p>
 
-          <div className="mt-20">
-            {/* Process timeline — desktop */}
-            <div className="hidden lg:block">
-              <div className="relative h-[480px]">
-                {/* Connecting rail */}
-                <div className="absolute top-[240px] left-0 h-px w-full bg-line/40" aria-hidden="true" />
-                <div
-                  className="absolute top-[240px] left-0 h-px origin-left bg-gradient-to-r from-copper/80 via-copper/40 to-copper/20"
-                  style={{ width: "88%" }}
-                  aria-hidden="true"
-                />
-
-                <div className="grid h-full grid-cols-5">
-                  {APPROACH.map((a, i) => {
-                    const Icon = a.Icon;
-                    const isTop = i % 2 === 0;
-                    return (
-                      <motion.div
-                        key={a.title}
-                        initial={{ opacity: 0, y: isTop ? -20 : 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                        className="group relative h-full"
-                      >
-                        {/* Card content */}
-                        <div
-                          className={`absolute left-0 w-full px-5 ${
-                            isTop ? "top-0 pb-8" : "bottom-0 pt-8"
-                          }`}
-                        >
-                          <div className="text-center">
-                            <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-ink-soft">
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
-                            <h3 className="display-serifish mt-2 text-xl leading-tight">{a.title}</h3>
-                            <p className="mt-3 text-sm leading-relaxed text-ink-soft">{a.body}</p>
-                          </div>
-                        </div>
-
-                        {/* Vertical connector */}
-                        <div
-                          className={`absolute left-1/2 w-px -translate-x-1/2 bg-copper/30 ${
-                            isTop ? "top-[160px] h-[44px]" : "bottom-[160px] h-[44px]"
-                          }`}
-                          aria-hidden="true"
-                        />
-
-                        {/* Icon node on the rail */}
-                        <div className="absolute left-1/2 top-[240px] z-10 -translate-x-1/2 -translate-y-1/2">
-                          <div className="relative">
-                            <span className="grid h-[84px] w-[84px] place-items-center rounded-full border border-copper/40 bg-canvas text-copper transition-all duration-500 ease-out group-hover:scale-110 group-hover:border-copper group-hover:bg-copper group-hover:text-canvas">
-                              <Icon className="h-8 w-8" strokeWidth={1.25} />
-                            </span>
-                            <span className="absolute -top-1 -right-1 grid h-7 w-7 place-items-center rounded-full bg-copper text-[0.65rem] font-bold text-canvas">
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* Stacked cards — mobile / tablet */}
-            <div className="grid grid-cols-1 gap-4 lg:hidden">
+          <div className="mt-16 overflow-hidden rounded-2xl border border-line/40 bg-canvas shadow-[0_4px_24px_-8px_rgba(0,0,0,0.06)]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
               {APPROACH.map((a, i) => {
                 const Icon = a.Icon;
+                const isLast = i === APPROACH.length - 1;
                 return (
                   <motion.div
                     key={a.title}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="group flex items-start gap-5 rounded-2xl border border-line/40 bg-canvas p-5 transition-all duration-300 hover:bg-canvas-2/40"
+                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className={`group flex flex-col bg-canvas p-8 transition-all duration-500 ease-out hover:bg-canvas-2/50 md:p-10 ${
+                      isLast ? "" : "border-b border-line/40 md:border-b-0 md:border-r"
+                    }`}
                   >
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-copper/40 text-copper transition-all duration-300 group-hover:scale-110 group-hover:border-copper group-hover:bg-copper group-hover:text-canvas">
-                      <Icon className="h-6 w-6" strokeWidth={1.25} />
-                    </span>
-                    <div>
-                      <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-ink-soft">{String(i + 1).padStart(2, "0")} / 05</span>
-                      <h3 className="display-serifish mt-1 text-lg leading-tight">{a.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-soft">{a.body}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                        {String(i + 1).padStart(2, "0")} / 05
+                      </span>
+                      <span className="grid h-10 w-10 place-items-center rounded-full border border-copper/40 text-copper transition-all duration-300 group-hover:bg-copper group-hover:text-canvas">
+                        <Icon className="h-5 w-5" strokeWidth={1.5} />
+                      </span>
                     </div>
+                    <h3 className="display-serifish mt-10 text-xl leading-tight md:text-2xl">{a.title}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+                    <div className="mt-8 h-px w-0 bg-copper/40 transition-all duration-500 group-hover:w-1/2" />
                   </motion.div>
                 );
               })}

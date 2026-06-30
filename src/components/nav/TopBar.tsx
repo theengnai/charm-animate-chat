@@ -22,13 +22,13 @@ export function TopBar() {
 
         <nav className="hidden items-center gap-10 lg:flex">
           {NAV.map((n) => (
-            <a
-              key={n}
-              href="#"
+            <Link
+              key={n.label}
+              to={n.href}
               className="eyebrow text-[0.68rem] transition-colors hover:text-copper"
             >
-              {n}
-            </a>
+              {n.label}
+            </Link>
           ))}
         </nav>
 

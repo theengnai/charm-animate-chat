@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/ecosmart-logo.svg.asset.json";

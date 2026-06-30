@@ -66,11 +66,11 @@ const EXPERTISE = [
 ];
 
 const APPROACH = [
-  { sym: "◆", title: "Material Expertise", body: "Deep product knowledge across façade, surface, and finishing categories to guide you to the right solution." },
-  { sym: "◇", title: "Design Guidance", body: "Collaborative support from concept to specification — helping architects and designers make confident material decisions." },
-  { sym: "⬡", title: "Visualization Support", body: "Digital tools and rendered previews that let you see exactly how materials will look in your project before commitment." },
-  { sym: "⬢", title: "Technical Assistance", body: "Detailed specifications, shop drawings, and engineering support to ensure seamless integration and installation." },
-  { sym: "○", title: "Reliable Supply", body: "Established partnerships with leading global manufacturers, ensuring consistent quality and timely delivery across the GCC." },
+  { Icon: Layers, title: "Material Expertise", body: "Deep product knowledge across façade, surface, and finishing categories to guide you to the right solution." },
+  { Icon: Compass, title: "Design Guidance", body: "Collaborative support from concept to specification — helping architects and designers make confident material decisions." },
+  { Icon: Eye, title: "Visualization Support", body: "Digital tools and rendered previews that let you see exactly how materials will look in your project before commitment." },
+  { Icon: Wrench, title: "Technical Assistance", body: "Detailed specifications, shop drawings, and engineering support to ensure seamless integration and installation." },
+  { Icon: Truck, title: "Reliable Supply", body: "Established partnerships with leading global manufacturers, ensuring consistent quality and timely delivery across the GCC." },
 ];
 
 const SOLUTIONS = [

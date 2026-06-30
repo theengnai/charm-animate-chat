@@ -261,7 +261,7 @@ function AboutPage() {
       <section className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-7xl">
           <SectionLabel n="04">Solutions</SectionLabel>
-          <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
+          <div className="mt-8 flex flex-wrap items-end justify-between gap-6 border-b border-line/60 pb-6">
             <h2 className="display-serifish text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
               A portfolio of <em className="italic text-copper">proven</em> solutions.
             </h2>
@@ -274,7 +274,7 @@ function AboutPage() {
             </Link>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-3">
+          <div className="mt-20 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-3">
             {SOLUTIONS.map((s, i) => (
               <motion.article
                 key={s.n}

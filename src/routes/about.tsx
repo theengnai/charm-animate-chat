@@ -222,31 +222,37 @@ function AboutPage() {
             We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
           </p>
 
-          <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line/60 bg-line/60 md:grid-cols-2 lg:grid-cols-5">
-            {APPROACH.map((a, i) => {
-              const Icon = a.Icon;
-              return (
-                <motion.div
-                  key={a.title}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: i * 0.06 }}
-                  className="group flex flex-col bg-canvas p-8 md:p-10"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
-                      {String(i + 1).padStart(2, "0")} / 05
-                    </span>
-                    <span className="grid h-10 w-10 place-items-center rounded-full border border-copper/40 text-copper transition-colors group-hover:bg-copper group-hover:text-canvas">
-                      <Icon className="h-5 w-5" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                  <h3 className="mt-10 text-lg font-medium md:text-xl">{a.title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
-                </motion.div>
-              );
-            })}
+          <div className="mt-16 overflow-hidden rounded-2xl border border-line/40 bg-canvas shadow-[0_4px_24px_-8px_rgba(0,0,0,0.06)]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
+              {APPROACH.map((a, i) => {
+                const Icon = a.Icon;
+                const isLast = i === APPROACH.length - 1;
+                return (
+                  <motion.div
+                    key={a.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className={`group flex flex-col bg-canvas p-8 transition-all duration-500 ease-out hover:bg-canvas-2/50 md:p-10 ${
+                      isLast ? "" : "border-b border-line/40 md:border-b-0 md:border-r"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                        {String(i + 1).padStart(2, "0")} / 05
+                      </span>
+                      <span className="grid h-10 w-10 place-items-center rounded-full border border-copper/40 text-copper transition-all duration-300 group-hover:bg-copper group-hover:text-canvas">
+                        <Icon className="h-5 w-5" strokeWidth={1.5} />
+                      </span>
+                    </div>
+                    <h3 className="display-serifish mt-10 text-xl leading-tight md:text-2xl">{a.title}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+                    <div className="mt-8 h-px w-0 bg-copper/40 transition-all duration-500 group-hover:w-1/2" />
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

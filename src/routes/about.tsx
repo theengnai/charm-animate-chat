@@ -261,22 +261,22 @@ function AboutPage() {
             </h2>
             <Link
               to="/"
-              className="group inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-ink"
+              className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.25em] text-ink"
             >
               Explore all products
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </Link>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-3">
             {SOLUTIONS.map((s, i) => (
               <motion.article
                 key={s.n}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="group overflow-hidden rounded-md border border-line/60 bg-canvas"
+                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className={`group ${i === 1 ? "md:mt-28" : ""}`}
               >
                 <div className="aspect-[4/3] w-full overflow-hidden">
                   <img
@@ -288,16 +288,21 @@ function AboutPage() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                 </div>
-                <div className="p-6">
-                  <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-ink-soft">
+                <div className="relative mt-6 p-6 md:p-8">
+                  {/* partial frame */}
+                  <span className="pointer-events-none absolute top-0 left-0 h-px w-2/3 bg-copper/40" />
+                  <span className="pointer-events-none absolute top-0 left-0 h-2/3 w-px bg-copper/40" />
+                  <span className="pointer-events-none absolute top-0 right-0 h-px w-10 bg-copper/40" />
+
+                  <span className="font-mono text-xs uppercase tracking-[0.25em] text-copper">
                     {s.n} / {s.cat}
                   </span>
-                  <h3 className="mt-4 text-lg font-medium">{s.title}</h3>
-                  <p className="mt-2 text-[0.82rem] leading-relaxed text-ink-soft">{s.body}</p>
-                  <div className="mt-6 flex items-center justify-between border-t border-line/60 pt-4">
-                    <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-ink-soft">{s.n}</span>
-                    <span className="grid h-8 w-8 place-items-center rounded-full border border-line/80 text-ink transition-colors group-hover:border-copper group-hover:text-copper">
-                      <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
+                  <h3 className="mt-4 text-xl font-medium md:text-2xl">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{s.body}</p>
+                  <div className="mt-8 flex items-center justify-between">
+                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">{s.n}</span>
+                    <span className="grid h-10 w-10 place-items-center rounded-full border border-line/80 text-ink transition-all duration-300 group-hover:border-copper group-hover:bg-copper group-hover:text-canvas">
+                      <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
                     </span>
                   </div>
                 </div>

@@ -43,7 +43,6 @@ const EXPERTISE = [
     Icon: Triangle,
     title: "Architectural Surfaces",
     body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications.",
-    highlight: true,
   },
   {
     n: "03",

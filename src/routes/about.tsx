@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck, LayoutGrid, Triangle, Home, TreePine, Contrast } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
@@ -34,32 +34,32 @@ export const Route = createFileRoute("/about")({
 const EXPERTISE = [
   {
     n: "01",
-    sym: "⊞",
+    Icon: LayoutGrid,
     title: "Façade Systems",
     body: "Comprehensive curtain wall, ventilated façade, and cladding solutions engineered for performance and aesthetic precision.",
   },
   {
     n: "02",
-    sym: "◮",
+    Icon: Triangle,
     title: "Architectural Surfaces",
     body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications.",
     highlight: true,
   },
   {
     n: "03",
-    sym: "⌂",
+    Icon: Home,
     title: "Interior Finishes",
     body: "Curated interior materials including wall panels, feature surfaces, and decorative finishes that elevate every space.",
   },
   {
     n: "04",
-    sym: "⚲",
+    Icon: TreePine,
     title: "Outdoor Solutions",
     body: "Weather-resistant decking, pergola systems, and landscape materials designed for the demanding GCC climate.",
   },
   {
     n: "05",
-    sym: "◐",
+    Icon: Contrast,
     title: "Technical Design Support",
     body: "End-to-end technical guidance — from material selection and specification to detailed shop drawings and installation oversight.",
   },
@@ -179,24 +179,33 @@ function AboutPage() {
               </p>
             </div>
 
-            <ul className="divide-y divide-line/60 border-y border-line/60">
-              {EXPERTISE.map((e, i) => (
-                <motion.li
-                  key={e.n}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className={`group grid grid-cols-[40px_44px_1fr_2fr] items-start gap-4 px-2 py-5 transition-colors md:gap-6 md:py-6 ${
-                    e.highlight ? "bg-copper/[0.08]" : "hover:bg-canvas-2/60"
-                  }`}
-                >
-                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.25em] text-ink-soft">{e.n}</span>
-                  <span className={`text-xl ${e.highlight ? "text-copper" : "text-ink-soft"}`}>{e.sym}</span>
-                  <h3 className={`text-base font-medium md:text-lg ${e.highlight ? "text-copper" : ""}`}>{e.title}</h3>
-                  <p className="text-[0.82rem] leading-relaxed text-ink-soft md:text-sm">{e.body}</p>
-                </motion.li>
-              ))}
+            <ul className="divide-y divide-line/60 overflow-hidden rounded-xl border border-line/60">
+              {EXPERTISE.map((e, i) => {
+                const Icon = e.Icon;
+                return (
+                  <motion.li
+                    key={e.n}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className={`group relative grid grid-cols-[44px_56px_1fr_2fr] items-start gap-4 px-4 py-6 transition-all duration-300 ease-out md:gap-6 md:py-8 ${
+                      e.highlight ? "bg-copper/[0.08]" : "hover:bg-canvas-2/60"
+                    }`}
+                  >
+                    <span className="pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">{e.n}</span>
+                    <span className={`grid h-11 w-11 place-items-center rounded-full border transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${
+                      e.highlight
+                        ? "border-copper/40 bg-copper/10 text-copper"
+                        : "border-copper/30 bg-canvas text-copper group-hover:border-copper group-hover:bg-copper group-hover:text-canvas"
+                    }`}>
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </span>
+                    <h3 className={`pt-2 text-base font-medium transition-colors duration-300 md:text-lg ${e.highlight ? "text-copper" : "group-hover:text-copper"}`}>{e.title}</h3>
+                    <p className="pt-2 text-sm leading-relaxed text-ink-soft transition-transform duration-300 group-hover:translate-x-1 md:text-base">{e.body}</p>
+                  </motion.li>
+                );
+              })}
             </ul>
           </div>
         </div>

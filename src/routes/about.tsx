@@ -101,28 +101,30 @@ function VisionReveal() {
 function StackedItem({
   i,
   total,
-  progress,
   children,
 }: {
   i: number;
   total: number;
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
   children: React.ReactNode;
 }) {
-  const appearStart = i / total;
-  const appearEnd = appearStart + 0.6 / total;
-  const stackOffset = (total - 1 - i) * 14;
-  const stackScale = 1 - (total - 1 - i) * 0.03;
-  const y = useTransform(progress, [0, appearStart, appearEnd, 1], [140, 140, 0, -stackOffset]);
-  const opacity = useTransform(progress, [0, appearStart, appearEnd], [0, 0, 1]);
-  const scale = useTransform(progress, [0, appearStart, appearEnd, 1], [0.94, 0.94, 1, stackScale]);
+  const ref = useRef<HTMLDivElement>(null);
+  const isLast = i === total - 1;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], isLast ? [1, 1] : [1, 0.92]);
+  const opacity = useTransform(scrollYProgress, [0, 1], isLast ? [1, 1] : [1, 0.55]);
+  const topOffset = 96 + i * 14;
   return (
-    <motion.div
-      className="absolute inset-x-0 top-0"
-      style={{ y, opacity, scale, zIndex: i + 1 }}
-    >
-      {children}
-    </motion.div>
+    <div ref={ref} className="relative h-screen">
+      <motion.div
+        className="sticky origin-top"
+        style={{ top: `${topOffset}px`, scale, opacity }}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
@@ -133,8 +135,8 @@ function PinnedStackSection({
   headingLead,
   headingItalic,
   body,
-  count,
-  children,
+  items,
+  renderCard,
 }: {
   id?: string;
   label: string;
@@ -142,21 +144,14 @@ function PinnedStackSection({
   headingLead: string;
   headingItalic: string;
   body: string;
-  count: number;
-  children: (progress: ReturnType<typeof useScroll>["scrollYProgress"]) => React.ReactNode;
+  items: unknown[];
+  renderCard: (item: never, i: number) => React.ReactNode;
 }) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   return (
-    <section
-      id={id}
-      ref={ref}
-      className="relative"
-      style={{ height: `${(count + 1) * 90}vh` }}
-    >
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 md:px-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16 lg:px-16">
-          <div>
+    <section id={id} className="relative px-5 md:px-10 lg:px-16">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+        <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center">
+          <div className="py-10 lg:py-0">
             <SectionLabel n={label}>{kicker}</SectionLabel>
             <h2 className="display-serifish mt-8 text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
               {headingLead} <em className="italic text-copper">{headingItalic}</em>
@@ -165,12 +160,19 @@ function PinnedStackSection({
               {body}
             </p>
           </div>
-          <div className="relative h-[360px] md:h-[320px]">{children(scrollYProgress)}</div>
+        </div>
+        <div>
+          {items.map((item, i) => (
+            <StackedItem key={i} i={i} total={items.length}>
+              {renderCard(item as never, i)}
+            </StackedItem>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
 
 
 function AboutPage() {

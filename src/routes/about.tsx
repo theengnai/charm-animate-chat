@@ -222,7 +222,7 @@ function AboutPage() {
             We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
           </p>
 
-          <div className="mt-16 space-y-6">
+          <div className="mt-16">
             {APPROACH.map((a, i) => {
               const Icon = a.Icon;
               return (

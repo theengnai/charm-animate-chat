@@ -98,18 +98,80 @@ function VisionReveal() {
   );
 }
 
-function StackCard({ i, total, children }: { i: number; total: number; children: React.ReactNode }) {
-  const top = 96 + i * 24;
-  const scale = 1 - (total - 1 - i) * 0.02;
+function StackedItem({
+  i,
+  total,
+  progress,
+  children,
+}: {
+  i: number;
+  total: number;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+  children: React.ReactNode;
+}) {
+  const appearStart = i / total;
+  const appearEnd = appearStart + 0.6 / total;
+  const stackOffset = (total - 1 - i) * 14;
+  const stackScale = 1 - (total - 1 - i) * 0.03;
+  const y = useTransform(progress, [0, appearStart, appearEnd, 1], [140, 140, 0, -stackOffset]);
+  const opacity = useTransform(progress, [0, appearStart, appearEnd], [0, 0, 1]);
+  const scale = useTransform(progress, [0, appearStart, appearEnd, 1], [0.94, 0.94, 1, stackScale]);
   return (
-    <div
-      className="sticky"
-      style={{ top: `${top}px`, zIndex: i + 1, transform: `scale(${scale})`, transformOrigin: "top center" }}
+    <motion.div
+      className="absolute inset-x-0 top-0"
+      style={{ y, opacity, scale, zIndex: i + 1 }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
+
+function PinnedStackSection({
+  id,
+  label,
+  kicker,
+  headingLead,
+  headingItalic,
+  body,
+  count,
+  children,
+}: {
+  id?: string;
+  label: string;
+  kicker: string;
+  headingLead: string;
+  headingItalic: string;
+  body: string;
+  count: number;
+  children: (progress: ReturnType<typeof useScroll>["scrollYProgress"]) => React.ReactNode;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  return (
+    <section
+      id={id}
+      ref={ref}
+      className="relative"
+      style={{ height: `${(count + 1) * 90}vh` }}
+    >
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 md:px-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16 lg:px-16">
+          <div>
+            <SectionLabel n={label}>{kicker}</SectionLabel>
+            <h2 className="display-serifish mt-8 text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+              {headingLead} <em className="italic text-copper">{headingItalic}</em>
+            </h2>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
+              {body}
+            </p>
+          </div>
+          <div className="relative h-[360px] md:h-[320px]">{children(scrollYProgress)}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 function AboutPage() {
   return (

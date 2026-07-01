@@ -128,7 +128,7 @@ function StackedItem({
   );
 }
 
-function PinnedStackSection({
+function PinnedStackSection<T>({
   id,
   label,
   kicker,
@@ -144,8 +144,8 @@ function PinnedStackSection({
   headingLead: string;
   headingItalic: string;
   body: string;
-  items: unknown[];
-  renderCard: (item: never, i: number) => React.ReactNode;
+  items: T[];
+  renderCard: (item: T, i: number) => React.ReactNode;
 }) {
   return (
     <section id={id} className="relative px-5 md:px-10 lg:px-16">
@@ -161,10 +161,10 @@ function PinnedStackSection({
             </p>
           </div>
         </div>
-        <div>
+        <div className="pb-[20vh]">
           {items.map((item, i) => (
             <StackedItem key={i} i={i} total={items.length}>
-              {renderCard(item as never, i)}
+              {renderCard(item, i)}
             </StackedItem>
           ))}
         </div>
@@ -172,6 +172,7 @@ function PinnedStackSection({
     </section>
   );
 }
+
 
 
 

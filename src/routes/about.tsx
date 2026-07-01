@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck, LayoutGrid, Triangle, Home, TreePine, Contrast } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -32,36 +33,11 @@ export const Route = createFileRoute("/about")({
 });
 
 const EXPERTISE = [
-  {
-    n: "01",
-    Icon: LayoutGrid,
-    title: "Façade Systems",
-    body: "Comprehensive curtain wall, ventilated façade, and cladding solutions engineered for performance and aesthetic precision.",
-  },
-  {
-    n: "02",
-    Icon: Triangle,
-    title: "Architectural Surfaces",
-    body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications.",
-  },
-  {
-    n: "03",
-    Icon: Home,
-    title: "Interior Finishes",
-    body: "Curated interior materials including wall panels, feature surfaces, and decorative finishes that elevate every space.",
-  },
-  {
-    n: "04",
-    Icon: TreePine,
-    title: "Outdoor Solutions",
-    body: "Weather-resistant decking, pergola systems, and landscape materials designed for the demanding GCC climate.",
-  },
-  {
-    n: "05",
-    Icon: Contrast,
-    title: "Technical Design Support",
-    body: "End-to-end technical guidance — from material selection and specification to detailed shop drawings and installation oversight.",
-  },
+  { n: "01", Icon: LayoutGrid, title: "Façade Systems", body: "Comprehensive curtain wall, ventilated façade, and cladding solutions engineered for performance and aesthetic precision." },
+  { n: "02", Icon: Triangle, title: "Architectural Surfaces", body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications." },
+  { n: "03", Icon: Home, title: "Interior Finishes", body: "Curated interior materials including wall panels, feature surfaces, and decorative finishes that elevate every space." },
+  { n: "04", Icon: TreePine, title: "Outdoor Solutions", body: "Weather-resistant decking, pergola systems, and landscape materials designed for the demanding GCC climate." },
+  { n: "05", Icon: Contrast, title: "Technical Design Support", body: "End-to-end technical guidance — from material selection and specification to detailed shop drawings and installation oversight." },
 ];
 
 const APPROACH = [
@@ -78,7 +54,7 @@ const SOLUTIONS = [
   { n: "03", cat: "Finishes", title: "Interior & Outdoor Finishes", body: "Curated materials for interior feature walls, outdoor living, and landscape applications.", img: solInterior },
 ];
 
-const STRIP = [solArchitect, detailFabric, solFacade, solInterior];
+const STRIP = [solArchitect, detailFabric, solFacade, solInterior, solArchitect, detailFabric, solFacade, solInterior];
 
 const FOOTER_COLS = [
   { h: "Solutions", items: ["Façade Systems", "Architectural Surfaces", "Interior Finishes", "Outdoor Solutions", "Custom Projects"] },
@@ -87,12 +63,50 @@ const FOOTER_COLS = [
   { h: "Resources", items: ["Product Library", "Case Studies", "Journal", "Certifications"] },
 ];
 
-function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
+const VISION_TEXT =
+  "To become the leading platform for architectural surface and façade solutions in Saudi Arabia and the GCC, connecting innovative materials, design expertise and modern customer experiences.";
+
+function SectionLabel({ n, children, tone = "dark" }: { n: string; children: React.ReactNode; tone?: "dark" | "light" }) {
+  const color = tone === "light" ? "text-canvas/70" : "text-ink-soft";
+  const line = tone === "light" ? "bg-canvas/30" : "bg-ink/20";
   return (
-    <div className="flex items-center gap-3 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+    <div className={`flex items-center gap-3 font-mono text-[0.62rem] uppercase tracking-[0.28em] ${color}`}>
       <span>{n}</span>
-      <span className="h-px w-8 bg-ink/20" />
+      <span className={`h-px w-8 ${line}`} />
       <span>{children}</span>
+    </div>
+  );
+}
+
+function VisionReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.4"] });
+  const words = VISION_TEXT.split(" ");
+  return (
+    <div ref={ref} className="display-serifish border-l-2 border-copper pl-8 text-2xl italic leading-[1.3] md:text-3xl lg:text-4xl">
+      {words.map((w, i) => {
+        const start = i / words.length;
+        const end = start + 1 / words.length;
+        const color = useTransform(scrollYProgress, [start, end], ["rgba(64,58,50,0.25)", "rgba(24,22,20,1)"]);
+        return (
+          <motion.span key={i} style={{ color }} className="inline">
+            {w}{" "}
+          </motion.span>
+        );
+      })}
+    </div>
+  );
+}
+
+function StackCard({ i, total, children }: { i: number; total: number; children: React.ReactNode }) {
+  const top = 96 + i * 24;
+  const scale = 1 - (total - 1 - i) * 0.02;
+  return (
+    <div
+      className="sticky"
+      style={{ top: `${top}px`, zIndex: i + 1, transform: `scale(${scale})`, transformOrigin: "top center" }}
+    >
+      {children}
     </div>
   );
 }
@@ -102,109 +116,93 @@ function AboutPage() {
     <div className="relative min-h-screen w-full overflow-x-hidden bg-canvas text-ink">
       <TopBar />
 
-      {/* HERO */}
-      <section className="relative px-5 pt-28 pb-16 md:px-10 md:pt-32 md:pb-20 lg:px-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <SectionLabel n="01">About EcoSmart</SectionLabel>
+      {/* HERO — centered w/ video background */}
+      <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-5 pt-28 pb-16 text-center md:px-10 md:pt-32">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={heroFacade}
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source
+            src="https://videos.pexels.com/video-files/3773486/3773486-hd_1920_1080_25fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/55 to-ink/80" />
 
-              <h1 className="display-serifish mt-8 text-5xl leading-[1.02] tracking-tight md:text-6xl lg:text-7xl">
-                Façade systems.<br />
-                Architectural<br />
-                <em className="italic text-copper">materials.</em>
-              </h1>
-
-              <p className="mt-8 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
-                EcoSmart is a specialized provider of façade systems, architectural materials and design-driven surface solutions.
-              </p>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
-                We help architects, developers, and designers choose, visualize, and implement better surfaces — from concept through installation.
-              </p>
-
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                <a
-                  href="#expertise"
-                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
-                >
-                  <span className="font-medium tracking-wide">Explore our expertise</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
-                </a>
-                <a
-                  href="#contact"
-                  className="group inline-flex items-center gap-2 rounded-full border border-ink/20 px-6 py-3 text-sm text-ink transition-all hover:border-ink/40"
-                >
-                  Order a sample
-                </a>
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative aspect-square w-full overflow-hidden rounded-md"
-            >
-              <img
-                src={heroFacade}
-                alt="Modern architectural façade at dusk"
-                width={1280}
-                height={1280}
-                className="h-full w-full object-cover"
-              />
-            </motion.div>
+        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center">
+          <div className="text-canvas">
+            <SectionLabel n="01" tone="light">About EcoSmart</SectionLabel>
           </div>
 
-          <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-3 border-t border-line/60 pt-6 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-ink-soft">
+          <h1 className="display-serifish mt-8 text-5xl leading-[1.02] tracking-tight text-canvas md:text-6xl lg:text-7xl">
+            Façade systems.<br />
+            Architectural <em className="italic text-copper">materials.</em>
+          </h1>
+
+          <p className="mt-8 max-w-xl text-sm leading-relaxed text-canvas/80 md:text-base">
+            EcoSmart is a specialized provider of façade systems, architectural materials and design-driven surface solutions. We help architects, developers, and designers choose, visualize, and implement better surfaces — from concept through installation.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#expertise"
+              className="group inline-flex items-center gap-2 rounded-full bg-canvas px-6 py-3 text-sm text-ink transition-transform hover:-translate-y-0.5"
+            >
+              <span className="font-medium tracking-wide">Explore our expertise</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+            </a>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-2 rounded-full border border-canvas/40 px-6 py-3 text-sm text-canvas transition-all hover:border-canvas"
+            >
+              Order a sample
+            </a>
+          </div>
+
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-t border-canvas/20 pt-6 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-canvas/60">
             <span>Saudi Arabia &amp; GCC</span>
             <span>Façade &amp; Surface Solutions</span>
-            <span>Architecture · Design · Build</span>
-            <span className="ml-auto">Design-Driven Excellence.</span>
+            <span>Design-Driven Excellence</span>
           </div>
         </div>
       </section>
 
-      {/* EXPERTISE — list rows */}
+      {/* EXPERTISE — stacking cards */}
       <section id="expertise" className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-7xl">
           <SectionLabel n="02">What we do</SectionLabel>
-          <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
-            <div>
-              <h2 className="display-serifish text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
-                Our Areas of <em className="italic text-copper">Expertise.</em>
-              </h2>
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-soft">
-                From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge.
-              </p>
-            </div>
+          <h2 className="display-serifish mt-8 max-w-3xl text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+            Our Areas of <em className="italic text-copper">Expertise.</em>
+          </h2>
+          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink-soft">
+            From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge.
+          </p>
 
-            <ul className="divide-y divide-line/60 overflow-hidden rounded-xl border border-line/60">
-              {EXPERTISE.map((e, i) => {
-                const Icon = e.Icon;
-                return (
-                  <motion.li
-                    key={e.n}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="group relative grid grid-cols-[44px_56px_1fr_2fr] items-start gap-4 px-4 py-6 transition-all duration-300 ease-out hover:bg-canvas-2/60 md:gap-6 md:py-8"
-                  >
-                    <span className="pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">{e.n}</span>
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/30 bg-canvas text-copper transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:border-copper group-hover:bg-copper group-hover:text-canvas">
-                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+          <div className="mt-16 space-y-6">
+            {EXPERTISE.map((e, i) => {
+              const Icon = e.Icon;
+              return (
+                <StackCard key={e.n} i={i} total={EXPERTISE.length}>
+                  <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-[80px_64px_1fr_2fr] md:gap-8 md:p-10">
+                    <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
+                    <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                      <Icon className="h-6 w-6" strokeWidth={1.5} />
                     </span>
-                    <h3 className="pt-2 text-base font-medium transition-colors duration-300 group-hover:text-copper md:text-lg">{e.title}</h3>
-                    <p className="pt-2 text-sm leading-relaxed text-ink-soft transition-transform duration-300 group-hover:translate-x-1 md:text-base">{e.body}</p>
-                  </motion.li>
-                );
-              })}
-            </ul>
+                    <h3 className="display-serifish pt-1 text-2xl leading-tight md:text-3xl">{e.title}</h3>
+                    <p className="col-span-2 text-sm leading-relaxed text-ink-soft md:col-span-1 md:pt-2 md:text-base">{e.body}</p>
+                  </div>
+                </StackCard>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* APPROACH */}
+      {/* APPROACH — stacking cards */}
       <section className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-7xl">
           <SectionLabel n="03">How we work</SectionLabel>
@@ -215,37 +213,28 @@ function AboutPage() {
             We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
           </p>
 
-          <div className="mt-16 overflow-hidden rounded-2xl border border-line/40 bg-canvas shadow-[0_4px_24px_-8px_rgba(0,0,0,0.06)]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
-              {APPROACH.map((a, i) => {
-                const Icon = a.Icon;
-                const isLast = i === APPROACH.length - 1;
-                return (
-                  <motion.div
-                    key={a.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className={`group flex flex-col bg-canvas p-8 transition-all duration-500 ease-out hover:bg-canvas-2/50 md:p-10 ${
-                      isLast ? "" : "border-b border-line/40 md:border-b-0 md:border-r"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
-                        {String(i + 1).padStart(2, "0")} / 05
-                      </span>
-                      <span className="grid h-10 w-10 place-items-center rounded-full border border-copper/40 text-copper transition-all duration-300 group-hover:bg-copper group-hover:text-canvas">
-                        <Icon className="h-5 w-5" strokeWidth={1.5} />
-                      </span>
+          <div className="mt-16 space-y-6">
+            {APPROACH.map((a, i) => {
+              const Icon = a.Icon;
+              return (
+                <StackCard key={a.title} i={i} total={APPROACH.length}>
+                  <div className="grid grid-cols-1 items-start gap-6 rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-[1fr_2fr] md:gap-10 md:p-12">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                          {String(i + 1).padStart(2, "0")} / 05
+                        </span>
+                        <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
+                          <Icon className="h-5 w-5" strokeWidth={1.5} />
+                        </span>
+                      </div>
+                      <h3 className="display-serifish mt-8 text-2xl leading-tight md:text-3xl">{a.title}</h3>
                     </div>
-                    <h3 className="display-serifish mt-10 text-xl leading-tight md:text-2xl">{a.title}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
-                    <div className="mt-8 h-px w-0 bg-copper/40 transition-all duration-500 group-hover:w-1/2" />
-                  </motion.div>
-                );
-              })}
-            </div>
+                    <p className="text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+                  </div>
+                </StackCard>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -288,7 +277,6 @@ function AboutPage() {
                   />
                 </div>
                 <div className="relative mt-6 p-6 md:p-8">
-                  {/* partial frame */}
                   <span className="pointer-events-none absolute top-0 left-0 h-px w-full bg-copper/40" />
                   <span className="pointer-events-none absolute top-0 left-0 h-2/3 w-px bg-copper/40" />
 
@@ -310,22 +298,14 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* VISION */}
+      {/* VISION — scroll-linked word reveal */}
       <section className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-7xl">
           <SectionLabel n="05">Our Vision</SectionLabel>
 
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
             <div />
-            <motion.blockquote
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8 }}
-              className="display-serifish border-l-2 border-copper pl-8 text-2xl italic leading-[1.3] text-ink md:text-3xl lg:text-4xl"
-            >
-              "To become the leading platform for architectural surface and façade solutions in Saudi Arabia and the GCC, connecting innovative materials, design expertise and modern customer experiences."
-            </motion.blockquote>
+            <VisionReveal />
           </div>
 
           <div className="mt-16 grid grid-cols-1 gap-10 border-t border-line/60 pt-10 md:grid-cols-3 md:gap-16">
@@ -343,20 +323,21 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* IMAGE STRIP */}
-      <section className="relative">
-        <div className="grid grid-cols-2 gap-1 md:grid-cols-4">
-          {STRIP.map((src, i) => (
-            <div key={i} className="aspect-[4/3] overflow-hidden">
-              <img
-                src={src}
-                alt=""
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
+      {/* IMAGE STRIP — smooth infinite slider */}
+      <section className="relative overflow-hidden py-6">
+        <div className="flex gap-2 animate-[marquee_40s_linear_infinite] hover:[animation-play-state:paused]">
+          {[...STRIP, ...STRIP].map((src, i) => (
+            <div key={i} className="relative aspect-[4/3] w-[320px] flex-shrink-0 overflow-hidden md:w-[420px]">
+              <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
             </div>
           ))}
         </div>
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </section>
 
       {/* CONTACT */}

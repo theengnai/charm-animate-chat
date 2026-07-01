@@ -10,6 +10,7 @@ if (typeof window !== "undefined") {
 import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck, LayoutGrid, Triangle, Home, TreePine, Contrast } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import logoUrl from "@/assets/logo.png";
 
 import heroFacade from "@/assets/about/hero-facade.jpg";
 import solArchitect from "@/assets/about/sol-architect.jpg";
@@ -203,13 +204,17 @@ function ExpertiseSection() {
       renderItem={(e: any, i: number) => {
         const Icon = e.Icon;
         return (
-          <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-[80px_64px_1fr_2fr] md:gap-8 md:p-10">
-            <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
-            <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-              <Icon className="h-6 w-6" strokeWidth={1.5} />
-            </span>
-            <h3 className="display-serifish pt-1 text-2xl leading-tight md:text-3xl">{e.title}</h3>
-            <p className="col-span-2 text-sm leading-relaxed text-ink-soft md:col-span-1 md:pt-2 md:text-base">{e.body}</p>
+          <div className="flex flex-col justify-between w-full max-w-[24rem] md:max-w-md mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+            <div className="flex items-start justify-between">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-2">{e.n}</span>
+              <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                <Icon className="h-6 w-6" strokeWidth={1.5} />
+              </span>
+            </div>
+            <div>
+              <h3 className="display-serifish text-3xl leading-tight md:text-4xl">{e.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+            </div>
           </div>
         );
       }}
@@ -229,19 +234,19 @@ function ApproachSection() {
       renderItem={(a: any, i: number) => {
         const Icon = a.Icon;
         return (
-          <div className="grid grid-cols-1 items-start gap-6 rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-[1fr_2fr] md:gap-10 md:p-12">
-            <div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
-                  {String(i + 1).padStart(2, "0")} / 05
-                </span>
-                <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
-                  <Icon className="h-5 w-5" strokeWidth={1.5} />
-                </span>
-              </div>
-              <h3 className="display-serifish mt-8 text-2xl leading-tight md:text-3xl">{a.title}</h3>
+          <div className="flex flex-col justify-between w-full max-w-[24rem] md:max-w-md mx-auto aspect-square rounded-2xl border border-line/40 bg-canvas p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                {String(i + 1).padStart(2, "0")} / 05
+              </span>
+              <span className="grid h-12 w-12 place-items-center rounded-full border border-copper/40 text-copper">
+                <Icon className="h-5 w-5" strokeWidth={1.5} />
+              </span>
             </div>
-            <p className="text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+            <div>
+              <h3 className="display-serifish text-3xl leading-tight md:text-4xl">{a.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+            </div>
           </div>
         );
       }}
@@ -457,8 +462,8 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_3fr] lg:gap-16">
             <div>
-              <div className="display-serifish text-3xl tracking-tight text-white">ECOSMART</div>
-              <div className="mt-1 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-copper/80">Engineered Within</div>
+              <img src={logoUrl} alt="Ecosmart" className="h-10 w-auto md:h-12" />
+              <div className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-copper/80">Engineered Within</div>
               <p className="mt-8 max-w-xs text-sm leading-relaxed text-[#d9d4cb]/70">
                 Façade systems. Architectural materials. Design-driven solutions.
               </p>

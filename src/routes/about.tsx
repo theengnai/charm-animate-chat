@@ -98,18 +98,80 @@ function VisionReveal() {
   );
 }
 
-function StackCard({ i, total, children }: { i: number; total: number; children: React.ReactNode }) {
-  const top = 96 + i * 24;
-  const scale = 1 - (total - 1 - i) * 0.02;
+function StackedItem({
+  i,
+  total,
+  progress,
+  children,
+}: {
+  i: number;
+  total: number;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+  children: React.ReactNode;
+}) {
+  const appearStart = i / total;
+  const appearEnd = appearStart + 0.6 / total;
+  const stackOffset = (total - 1 - i) * 14;
+  const stackScale = 1 - (total - 1 - i) * 0.03;
+  const y = useTransform(progress, [0, appearStart, appearEnd, 1], [140, 140, 0, -stackOffset]);
+  const opacity = useTransform(progress, [0, appearStart, appearEnd], [0, 0, 1]);
+  const scale = useTransform(progress, [0, appearStart, appearEnd, 1], [0.94, 0.94, 1, stackScale]);
   return (
-    <div
-      className="sticky"
-      style={{ top: `${top}px`, zIndex: i + 1, transform: `scale(${scale})`, transformOrigin: "top center" }}
+    <motion.div
+      className="absolute inset-x-0 top-0"
+      style={{ y, opacity, scale, zIndex: i + 1 }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
+
+function PinnedStackSection({
+  id,
+  label,
+  kicker,
+  headingLead,
+  headingItalic,
+  body,
+  count,
+  children,
+}: {
+  id?: string;
+  label: string;
+  kicker: string;
+  headingLead: string;
+  headingItalic: string;
+  body: string;
+  count: number;
+  children: (progress: ReturnType<typeof useScroll>["scrollYProgress"]) => React.ReactNode;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  return (
+    <section
+      id={id}
+      ref={ref}
+      className="relative"
+      style={{ height: `${(count + 1) * 90}vh` }}
+    >
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 md:px-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16 lg:px-16">
+          <div>
+            <SectionLabel n={label}>{kicker}</SectionLabel>
+            <h2 className="display-serifish mt-8 text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+              {headingLead} <em className="italic text-copper">{headingItalic}</em>
+            </h2>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
+              {body}
+            </p>
+          </div>
+          <div className="relative h-[360px] md:h-[320px]">{children(scrollYProgress)}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 function AboutPage() {
   return (
@@ -171,73 +233,69 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* EXPERTISE — stacking cards */}
-      <section id="expertise" className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">
-        <div className="mx-auto max-w-7xl">
-          <SectionLabel n="02">What we do</SectionLabel>
-          <h2 className="display-serifish mt-8 max-w-3xl text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
-            Our Areas of <em className="italic text-copper">Expertise.</em>
-          </h2>
-          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink-soft">
-            From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge.
-          </p>
+      {/* EXPERTISE — pinned stacking cards */}
+      <PinnedStackSection
+        id="expertise"
+        label="02"
+        kicker="What we do"
+        headingLead="Our Areas of"
+        headingItalic="Expertise."
+        body="From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge."
+        count={EXPERTISE.length}
+      >
+        {(progress) =>
+          EXPERTISE.map((e, i) => {
+            const Icon = e.Icon;
+            return (
+              <StackedItem key={e.n} i={i} total={EXPERTISE.length} progress={progress}>
+                <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:grid-cols-[64px_56px_1fr] md:gap-6 md:p-8">
+                  <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
+                  <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                    <Icon className="h-6 w-6" strokeWidth={1.5} />
+                  </span>
+                  <div>
+                    <h3 className="display-serifish text-2xl leading-tight md:text-3xl">{e.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+                  </div>
+                </div>
+              </StackedItem>
+            );
+          })
+        }
+      </PinnedStackSection>
 
-          <div className="mt-16 space-y-6">
-            {EXPERTISE.map((e, i) => {
-              const Icon = e.Icon;
-              return (
-                <StackCard key={e.n} i={i} total={EXPERTISE.length}>
-                  <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-[80px_64px_1fr_2fr] md:gap-8 md:p-10">
-                    <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
-                    <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                      <Icon className="h-6 w-6" strokeWidth={1.5} />
+      {/* APPROACH — pinned stacking cards */}
+      <PinnedStackSection
+        label="03"
+        kicker="How we work"
+        headingLead="The EcoSmart"
+        headingItalic="Approach."
+        body="We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery."
+        count={APPROACH.length}
+      >
+        {(progress) =>
+          APPROACH.map((a, i) => {
+            const Icon = a.Icon;
+            return (
+              <StackedItem key={a.title} i={i} total={APPROACH.length} progress={progress}>
+                <div className="rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:p-10">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                      {String(i + 1).padStart(2, "0")} / 05
                     </span>
-                    <h3 className="display-serifish pt-1 text-2xl leading-tight md:text-3xl">{e.title}</h3>
-                    <p className="col-span-2 text-sm leading-relaxed text-ink-soft md:col-span-1 md:pt-2 md:text-base">{e.body}</p>
+                    <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </span>
                   </div>
-                </StackCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                  <h3 className="display-serifish mt-6 text-2xl leading-tight md:text-3xl">{a.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+                </div>
+              </StackedItem>
+            );
+          })
+        }
+      </PinnedStackSection>
 
-      {/* APPROACH — stacking cards */}
-      <section className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">
-        <div className="mx-auto max-w-7xl">
-          <SectionLabel n="03">How we work</SectionLabel>
-          <h2 className="display-serifish mt-8 text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
-            The EcoSmart <em className="italic text-copper">Approach.</em>
-          </h2>
-          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink-soft md:text-base">
-            We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery.
-          </p>
-
-          <div className="mt-16 space-y-6">
-            {APPROACH.map((a, i) => {
-              const Icon = a.Icon;
-              return (
-                <StackCard key={a.title} i={i} total={APPROACH.length}>
-                  <div className="grid grid-cols-1 items-start gap-6 rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] md:grid-cols-[1fr_2fr] md:gap-10 md:p-12">
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
-                          {String(i + 1).padStart(2, "0")} / 05
-                        </span>
-                        <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
-                          <Icon className="h-5 w-5" strokeWidth={1.5} />
-                        </span>
-                      </div>
-                      <h3 className="display-serifish mt-8 text-2xl leading-tight md:text-3xl">{a.title}</h3>
-                    </div>
-                    <p className="text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
-                  </div>
-                </StackCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* SOLUTIONS */}
       <section className="relative px-5 py-20 md:px-10 md:py-28 lg:px-16">

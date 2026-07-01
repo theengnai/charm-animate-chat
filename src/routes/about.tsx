@@ -99,14 +99,22 @@ function VisionReveal() {
 }
 
 function StackCard({ i, total, children }: { i: number; total: number; children: React.ReactNode }) {
-  const top = 96 + i * 24;
-  const scale = 1 - (total - 1 - i) * 0.02;
+  const ref = useRef<HTMLDivElement>(null);
+  const top = 96 + i * 10;
+  const isLast = i === total - 1;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 20%", "end 20%"],
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], [1, isLast ? 1 : 0.94]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, isLast ? 1 : 0.6]);
   return (
-    <div
-      className="sticky"
-      style={{ top: `${top}px`, zIndex: i + 1, transform: `scale(${scale})`, transformOrigin: "top center" }}
-    >
-      {children}
+    <div ref={ref} className={isLast ? "" : "mb-[40vh]"}>
+      <div className="sticky" style={{ top: `${top}px`, zIndex: i + 1 }}>
+        <motion.div style={{ scale, opacity, transformOrigin: "top center" }}>
+          {children}
+        </motion.div>
+      </div>
     </div>
   );
 }

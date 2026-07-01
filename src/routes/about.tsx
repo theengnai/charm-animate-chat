@@ -101,40 +101,42 @@ function VisionReveal() {
 function StackedItem({
   i,
   total,
-  progress,
   children,
 }: {
   i: number;
   total: number;
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
   children: React.ReactNode;
 }) {
-  const appearStart = i / total;
-  const appearEnd = appearStart + 0.6 / total;
-  const stackOffset = (total - 1 - i) * 14;
-  const stackScale = 1 - (total - 1 - i) * 0.03;
-  const y = useTransform(progress, [0, appearStart, appearEnd, 1], [140, 140, 0, -stackOffset]);
-  const opacity = useTransform(progress, [0, appearStart, appearEnd], [0, 0, 1]);
-  const scale = useTransform(progress, [0, appearStart, appearEnd, 1], [0.94, 0.94, 1, stackScale]);
+  const ref = useRef<HTMLDivElement>(null);
+  const isLast = i === total - 1;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const scale = useTransform(scrollYProgress, [0, 1], isLast ? [1, 1] : [1, 0.92]);
+  const opacity = useTransform(scrollYProgress, [0, 1], isLast ? [1, 1] : [1, 0.55]);
+  const topOffset = 96 + i * 14;
   return (
-    <motion.div
-      className="absolute inset-x-0 top-0"
-      style={{ y, opacity, scale, zIndex: i + 1 }}
-    >
-      {children}
-    </motion.div>
+    <div ref={ref} className="relative h-screen">
+      <motion.div
+        className="sticky origin-top"
+        style={{ top: `${topOffset}px`, scale, opacity }}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
-function PinnedStackSection({
+function PinnedStackSection<T>({
   id,
   label,
   kicker,
   headingLead,
   headingItalic,
   body,
-  count,
-  children,
+  items,
+  renderCard,
 }: {
   id?: string;
   label: string;
@@ -142,21 +144,14 @@ function PinnedStackSection({
   headingLead: string;
   headingItalic: string;
   body: string;
-  count: number;
-  children: (progress: ReturnType<typeof useScroll>["scrollYProgress"]) => React.ReactNode;
+  items: T[];
+  renderCard: (item: T, i: number) => React.ReactNode;
 }) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   return (
-    <section
-      id={id}
-      ref={ref}
-      className="relative"
-      style={{ height: `${(count + 1) * 90}vh` }}
-    >
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 md:px-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16 lg:px-16">
-          <div>
+    <section id={id} className="relative px-5 md:px-10 lg:px-16">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+        <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center">
+          <div className="py-10 lg:py-0">
             <SectionLabel n={label}>{kicker}</SectionLabel>
             <h2 className="display-serifish mt-8 text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
               {headingLead} <em className="italic text-copper">{headingItalic}</em>
@@ -165,12 +160,20 @@ function PinnedStackSection({
               {body}
             </p>
           </div>
-          <div className="relative h-[360px] md:h-[320px]">{children(scrollYProgress)}</div>
+        </div>
+        <div className="pb-[20vh]">
+          {items.map((item, i) => (
+            <StackedItem key={i} i={i} total={items.length}>
+              {renderCard(item, i)}
+            </StackedItem>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
+
 
 
 function AboutPage() {
@@ -241,28 +244,24 @@ function AboutPage() {
         headingLead="Our Areas of"
         headingItalic="Expertise."
         body="From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge."
-        count={EXPERTISE.length}
-      >
-        {(progress) =>
-          EXPERTISE.map((e, i) => {
-            const Icon = e.Icon;
-            return (
-              <StackedItem key={e.n} i={i} total={EXPERTISE.length} progress={progress}>
-                <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:grid-cols-[64px_56px_1fr] md:gap-6 md:p-8">
-                  <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
-                  <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                    <Icon className="h-6 w-6" strokeWidth={1.5} />
-                  </span>
-                  <div>
-                    <h3 className="display-serifish text-2xl leading-tight md:text-3xl">{e.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
-                  </div>
-                </div>
-              </StackedItem>
-            );
-          })
-        }
-      </PinnedStackSection>
+        items={EXPERTISE}
+        renderCard={(e: (typeof EXPERTISE)[number], i) => {
+          const Icon = e.Icon;
+          return (
+            <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:grid-cols-[64px_56px_1fr] md:gap-6 md:p-8">
+              <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
+              <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                <Icon className="h-6 w-6" strokeWidth={1.5} />
+              </span>
+              <div>
+                <h3 className="display-serifish text-2xl leading-tight md:text-3xl">{e.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+              </div>
+            </div>
+          );
+        }}
+      />
+
 
       {/* APPROACH — pinned stacking cards */}
       <PinnedStackSection
@@ -271,30 +270,26 @@ function AboutPage() {
         headingLead="The EcoSmart"
         headingItalic="Approach."
         body="We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery."
-        count={APPROACH.length}
-      >
-        {(progress) =>
-          APPROACH.map((a, i) => {
-            const Icon = a.Icon;
-            return (
-              <StackedItem key={a.title} i={i} total={APPROACH.length} progress={progress}>
-                <div className="rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:p-10">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
-                      {String(i + 1).padStart(2, "0")} / 05
-                    </span>
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
-                      <Icon className="h-5 w-5" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                  <h3 className="display-serifish mt-6 text-2xl leading-tight md:text-3xl">{a.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
-                </div>
-              </StackedItem>
-            );
-          })
-        }
-      </PinnedStackSection>
+        items={APPROACH}
+        renderCard={(a: (typeof APPROACH)[number], i) => {
+          const Icon = a.Icon;
+          return (
+            <div className="rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:p-10">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                  {String(i + 1).padStart(2, "0")} / 05
+                </span>
+                <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
+                  <Icon className="h-5 w-5" strokeWidth={1.5} />
+                </span>
+              </div>
+              <h3 className="display-serifish mt-6 text-2xl leading-tight md:text-3xl">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+            </div>
+          );
+        }}
+      />
+
 
 
       {/* SOLUTIONS */}

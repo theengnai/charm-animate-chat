@@ -269,30 +269,26 @@ function AboutPage() {
         headingLead="The EcoSmart"
         headingItalic="Approach."
         body="We combine material expertise with modern digital tools — guiding you from selection to specification, from visualization to delivery."
-        count={APPROACH.length}
-      >
-        {(progress) =>
-          APPROACH.map((a, i) => {
-            const Icon = a.Icon;
-            return (
-              <StackedItem key={a.title} i={i} total={APPROACH.length} progress={progress}>
-                <div className="rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:p-10">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
-                      {String(i + 1).padStart(2, "0")} / 05
-                    </span>
-                    <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
-                      <Icon className="h-5 w-5" strokeWidth={1.5} />
-                    </span>
-                  </div>
-                  <h3 className="display-serifish mt-6 text-2xl leading-tight md:text-3xl">{a.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
-                </div>
-              </StackedItem>
-            );
-          })
-        }
-      </PinnedStackSection>
+        items={APPROACH}
+        renderCard={(a: (typeof APPROACH)[number], i) => {
+          const Icon = a.Icon;
+          return (
+            <div className="rounded-2xl border border-line/40 bg-canvas p-8 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:p-10">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                  {String(i + 1).padStart(2, "0")} / 05
+                </span>
+                <span className="grid h-11 w-11 place-items-center rounded-full border border-copper/40 text-copper">
+                  <Icon className="h-5 w-5" strokeWidth={1.5} />
+                </span>
+              </div>
+              <h3 className="display-serifish mt-6 text-2xl leading-tight md:text-3xl">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+            </div>
+          );
+        }}
+      />
+
 
 
       {/* SOLUTIONS */}

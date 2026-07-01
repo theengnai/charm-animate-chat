@@ -243,28 +243,24 @@ function AboutPage() {
         headingLead="Our Areas of"
         headingItalic="Expertise."
         body="From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge."
-        count={EXPERTISE.length}
-      >
-        {(progress) =>
-          EXPERTISE.map((e, i) => {
-            const Icon = e.Icon;
-            return (
-              <StackedItem key={e.n} i={i} total={EXPERTISE.length} progress={progress}>
-                <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:grid-cols-[64px_56px_1fr] md:gap-6 md:p-8">
-                  <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
-                  <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                    <Icon className="h-6 w-6" strokeWidth={1.5} />
-                  </span>
-                  <div>
-                    <h3 className="display-serifish text-2xl leading-tight md:text-3xl">{e.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
-                  </div>
-                </div>
-              </StackedItem>
-            );
-          })
-        }
-      </PinnedStackSection>
+        items={EXPERTISE}
+        renderCard={(e: (typeof EXPERTISE)[number], i) => {
+          const Icon = e.Icon;
+          return (
+            <div className="grid grid-cols-[56px_1fr] items-start gap-4 rounded-2xl border border-line/60 bg-canvas p-6 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.45)] md:grid-cols-[64px_56px_1fr] md:gap-6 md:p-8">
+              <span className="hidden pt-2 font-mono text-xs uppercase tracking-[0.25em] text-ink-soft md:block">{e.n}</span>
+              <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                <Icon className="h-6 w-6" strokeWidth={1.5} />
+              </span>
+              <div>
+                <h3 className="display-serifish text-2xl leading-tight md:text-3xl">{e.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+              </div>
+            </div>
+          );
+        }}
+      />
+
 
       {/* APPROACH — pinned stacking cards */}
       <PinnedStackSection

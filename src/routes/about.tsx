@@ -190,7 +190,8 @@ function AboutPage() {
             From façade engineering to interior finishes, we deliver comprehensive architectural surface solutions backed by deep technical knowledge.
           </p>
 
-          <div className="mt-16 space-y-6">
+          <div className="mt-16">
+
             {EXPERTISE.map((e, i) => {
               const Icon = e.Icon;
               return (

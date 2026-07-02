@@ -234,18 +234,18 @@ function ApproachSection() {
       renderItem={(a: any, i: number) => {
         const Icon = a.Icon;
         return (
-          <div className="flex flex-col justify-between w-full max-w-[24rem] md:max-w-md mx-auto aspect-square rounded-2xl border border-line/40 bg-canvas p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+          <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/40 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
             <div className="flex items-center justify-between">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
                 {String(i + 1).padStart(2, "0")} / 05
               </span>
-              <span className="grid h-12 w-12 place-items-center rounded-full border border-copper/40 text-copper">
-                <Icon className="h-5 w-5" strokeWidth={1.5} />
+              <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/40 text-copper">
+                <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
               </span>
             </div>
             <div>
-              <h3 className="display-serifish text-3xl leading-tight md:text-4xl">{a.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+              <h3 className="display-serifish text-2xl leading-tight md:text-3xl lg:text-4xl">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
             </div>
           </div>
         );

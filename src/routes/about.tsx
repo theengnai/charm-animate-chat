@@ -158,8 +158,8 @@ function GsapStackingSection({ labelN, labelText, title, titleEm, description, i
   }, [items]);
 
   return (
-    <section ref={sectionRef} id={sectionId} className="relative w-full h-auto min-h-[86vh] lg:h-screen bg-canvas overflow-hidden">
-      <div className="mx-auto w-full max-w-7xl h-full px-5 pt-24 pb-8 md:px-10 lg:px-16 flex flex-col justify-center lg:justify-start lg:flex-row lg:items-center lg:gap-16 lg:pt-0 lg:pb-0">
+    <section ref={sectionRef} id={sectionId} className="relative w-full h-auto min-h-[84vh] lg:h-screen bg-canvas overflow-hidden">
+      <div className="mx-auto w-full max-w-7xl h-full px-5 pt-24 pb-4 md:px-10 lg:px-16 flex flex-col justify-center lg:justify-start lg:flex-row lg:items-center lg:gap-16 lg:pt-0 lg:pb-0">
         <div className="lg:w-1/3">
           <SectionLabel n={labelN}>{labelText}</SectionLabel>
           <h2 className="display-serifish mt-4 lg:mt-8 max-w-3xl text-3xl leading-[1.05] md:text-5xl lg:text-6xl">
@@ -170,7 +170,7 @@ function GsapStackingSection({ labelN, labelText, title, titleEm, description, i
           </p>
         </div>
 
-        <div className="relative mt-6 lg:mt-0 w-full lg:w-2/3 h-[42vh] lg:h-[60vh] flex items-center">
+        <div className="relative mt-4 lg:mt-0 w-full lg:w-2/3 h-[45vh] lg:h-[60vh] flex items-center">
           {items.map((item: any, i: number) => (
             <div
               key={i}

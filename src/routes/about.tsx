@@ -158,19 +158,19 @@ function GsapStackingSection({ labelN, labelText, title, titleEm, description, i
   }, [items]);
 
   return (
-    <section ref={sectionRef} id={sectionId} className="relative w-full h-screen bg-canvas overflow-hidden">
-      <div className="mx-auto w-full max-w-7xl h-full px-5 md:px-10 lg:px-16 lg:flex lg:items-center lg:gap-16">
+    <section ref={sectionRef} id={sectionId} className="relative w-full h-auto min-h-[84vh] lg:h-screen bg-canvas overflow-hidden">
+      <div className="mx-auto w-full max-w-7xl h-full px-5 pt-24 pb-4 md:px-10 lg:px-16 flex flex-col justify-center lg:justify-start lg:flex-row lg:items-center lg:gap-16 lg:pt-0 lg:pb-0">
         <div className="lg:w-1/3">
           <SectionLabel n={labelN}>{labelText}</SectionLabel>
-          <h2 className="display-serifish mt-8 max-w-3xl text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+          <h2 className="display-serifish mt-4 lg:mt-8 max-w-3xl text-3xl leading-[1.05] md:text-5xl lg:text-6xl">
             {title} <em className="italic text-copper">{titleEm}</em>
           </h2>
-          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink-soft">
+          <p className="mt-3 lg:mt-6 max-w-xl text-sm leading-relaxed text-ink-soft">
             {description}
           </p>
         </div>
 
-        <div className="relative mt-16 lg:mt-0 w-full lg:w-2/3 h-[50vh] lg:h-[60vh] flex items-center">
+        <div className="relative mt-4 lg:mt-0 w-full lg:w-2/3 h-[45vh] lg:h-[60vh] flex items-center">
           {items.map((item: any, i: number) => (
             <div
               key={i}
@@ -204,16 +204,16 @@ function ExpertiseSection() {
       renderItem={(e: any, i: number) => {
         const Icon = e.Icon;
         return (
-          <div className="flex flex-col justify-between w-full max-w-[24rem] md:max-w-md mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+          <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
             <div className="flex items-start justify-between">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-2">{e.n}</span>
-              <span className="grid h-14 w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                <Icon className="h-6 w-6" strokeWidth={1.5} />
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{e.n}</span>
+              <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
               </span>
             </div>
             <div>
-              <h3 className="display-serifish text-3xl leading-tight md:text-4xl">{e.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+              <h3 className="display-serifish text-2xl leading-tight md:text-3xl lg:text-4xl">{e.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
             </div>
           </div>
         );
@@ -234,18 +234,18 @@ function ApproachSection() {
       renderItem={(a: any, i: number) => {
         const Icon = a.Icon;
         return (
-          <div className="flex flex-col justify-between w-full max-w-[24rem] md:max-w-md mx-auto aspect-square rounded-2xl border border-line/40 bg-canvas p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+          <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/40 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
             <div className="flex items-center justify-between">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
                 {String(i + 1).padStart(2, "0")} / 05
               </span>
-              <span className="grid h-12 w-12 place-items-center rounded-full border border-copper/40 text-copper">
-                <Icon className="h-5 w-5" strokeWidth={1.5} />
+              <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/40 text-copper">
+                <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
               </span>
             </div>
             <div>
-              <h3 className="display-serifish text-3xl leading-tight md:text-4xl">{a.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+              <h3 className="display-serifish text-2xl leading-tight md:text-3xl lg:text-4xl">{a.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
             </div>
           </div>
         );

@@ -11,7 +11,6 @@ import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck, LayoutGr
 import { TopBar } from "@/components/nav/TopBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import logoUrl from "@/assets/logo.png";
-import aboutHeroBg from "@/assets/about/about-hero-bg.mp4.asset.json";
 
 import heroFacade from "@/assets/about/hero-facade.jpg";
 import solArchitect from "@/assets/about/sol-architect.jpg";
@@ -268,10 +267,10 @@ function AboutPage() {
           muted
           playsInline
           poster={heroFacade}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="animate-hero-kenburns absolute inset-0 h-full w-full object-cover"
         >
           <source
-            src={aboutHeroBg.url}
+            src="https://videos.pexels.com/video-files/3773486/3773486-hd_1920_1080_25fps.mp4"
             type="video/mp4"
           />
         </video>

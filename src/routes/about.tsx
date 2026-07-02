@@ -306,11 +306,6 @@ function AboutPage() {
             </a>
           </div>
 
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 border-t border-canvas/20 pt-6 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-canvas/60">
-            <span>Saudi Arabia &amp; GCC</span>
-            <span>Façade &amp; Surface Solutions</span>
-            <span>Design-Driven Excellence</span>
-          </div>
         </div>
       </section>
 

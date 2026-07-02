@@ -268,7 +268,7 @@ function AboutPage() {
           muted
           playsInline
           poster={heroFacade}
-          className="animate-hero-kenburns absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         >
           <source
             src={aboutHeroBg.url}

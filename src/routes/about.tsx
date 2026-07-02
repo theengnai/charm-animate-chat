@@ -11,6 +11,7 @@ import { ArrowRight, ArrowUpRight, Layers, Compass, Eye, Wrench, Truck, LayoutGr
 import { TopBar } from "@/components/nav/TopBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import logoUrl from "@/assets/logo.png";
+import aboutHeroBg from "@/assets/about/about-hero-bg.mp4.asset.json";
 
 import heroFacade from "@/assets/about/hero-facade.jpg";
 import solArchitect from "@/assets/about/sol-architect.jpg";

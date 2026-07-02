@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import darkLogo from "@/assets/dark-logo.png";
+import darkLogoAsset from "@/assets/dark-logo.svg.asset.json";
 import lightLogo from "@/assets/logo.png";
 import { LangSwitcher } from "@/components/nav/LangSwitcher";
 import { ThemeToggle } from "@/components/nav/ThemeToggle";
@@ -36,7 +36,7 @@ export function TopBar() {
         <a href="/" className="flex items-center">
           {scrolled ? (
             <>
-              <img src={darkLogo} alt="Ecosmart" className="h-8 w-auto md:h-9 block dark:hidden" />
+              <img src={darkLogoAsset.url} alt="Ecosmart" className="h-8 w-auto md:h-9 block dark:hidden" />
               <img src={lightLogo} alt="Ecosmart" className="h-8 w-auto md:h-9 hidden dark:block" />
             </>
           ) : (

@@ -36,7 +36,7 @@ export function TopBar() {
         <a href="/" className="flex items-center">
           {scrolled ? (
             <>
-              <img src={darkLogo} alt="Ecosmart" className="h-8 w-auto md:h-9 block dark:hidden" />
+              <img src={darkLogoAsset.url} alt="Ecosmart" className="h-8 w-auto md:h-9 block dark:hidden" />
               <img src={lightLogo} alt="Ecosmart" className="h-8 w-auto md:h-9 hidden dark:block" />
             </>
           ) : (

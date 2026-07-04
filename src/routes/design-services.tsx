@@ -1,41 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { Compass, Layers, Wrench, Hammer } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";
-import { SplitHeading } from "@/components/motion/SplitHeading";
-import { Reveal } from "@/components/motion/Reveal";
-import { RevealGroup } from "@/components/motion/RevealGroup";
-import { TEAM } from "@/data/team";
-import { PROJECTS } from "@/data/projects";
-import cover from "@/assets/about/hero-facade.jpg";
+import { StoryHero } from "@/components/common/StoryHero";
+import { InfoStrip } from "@/components/common/InfoStrip";
+import { StackingCards } from "@/components/motion/StackingCards";
+import { HorizontalPin } from "@/components/motion/HorizontalPin";
+import { WordReveal } from "@/components/motion/WordReveal";
+import { ParallaxSplit } from "@/components/motion/ParallaxSplit";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import hero from "@/assets/pages/hero-design.jpg";
+import parallax from "@/assets/about/sol-architect.jpg";
 
 export const Route = createFileRoute("/design-services")({
   head: () => ({
     meta: [
       { title: "Design Services — Ecosmart" },
-      { name: "description", content: "From concept to installation, engineered around your space. Consultation, curation, fabrication and installation supervision." },
+      { name: "description", content: "From brief to handover — material consultation, curation, custom fabrication and install supervision for architects and developers." },
       { property: "og:title", content: "Design Services — Ecosmart" },
-      { property: "og:description", content: "From concept to installation, engineered around your space." },
-      { property: "og:image", content: cover },
+      { property: "og:description", content: "A design partner, not a supplier." },
+      { property: "og:image", content: hero },
     ],
   }),
   component: DesignServicesPage,
 });
 
 const SERVICES = [
-  { n: "01", t: "Space Consultation", p: "We start with the room, not the catalogue.", b: ["Site walkthrough", "Brief interrogation", "Palette starter"] },
-  { n: "02", t: "Material Curation", p: "A shortlist that fits your budget, timeline and light.", b: ["Options with rationale", "Physical sample kit", "Spec-ready selection"] },
-  { n: "03", t: "Custom Fabrication", p: "When the catalogue doesn't fit, we build to fit.", b: ["Custom finishes", "Bespoke sizing", "Prototype approval"] },
-  { n: "04", t: "Installation Supervision", p: "We stay on site until the last panel clicks.", b: ["Method statements", "Toolbox talks", "Snag & sign-off"] },
+  { n: "01", Icon: Compass, tag: "Consultation", title: "Space Consultation", body: "We start with the room — light, flow, sound, budget, deadline — and only then reach for the catalogue. A site visit, an interrogation of the brief, a first shortlist." },
+  { n: "02", Icon: Layers, tag: "Curation", title: "Material Curation", body: "A shortlist that fits your palette, your programme and your fire strategy. Physical samples, written rationale, spec-ready selection." },
+  { n: "03", Icon: Hammer, tag: "Fabrication", title: "Custom Fabrication", body: "When the catalogue doesn't fit, we build to fit. Custom sizes, colours, perforations and finishes — with a full-scale prototype before production." },
+  { n: "04", Icon: Wrench, tag: "Install", title: "Install Supervision", body: "Method statements, toolbox talks, snagging and sign-off. We stay on site until the last panel clicks and the client walks the wall." },
 ];
 
-const PROCESS = ["Brief", "Site Study", "Palette", "Prototype", "Production", "Install", "Handover"];
-
-const TIERS = [
-  { name: "Consult", tag: "Half-day", inc: ["Site visit", "Verbal recommendations", "3-material shortlist"] },
-  { name: "Curate", tag: "2–4 weeks", inc: ["Full palette", "Sample kits", "Spec sheets", "Contractor briefing"] },
-  { name: "Turnkey", tag: "Project-length", inc: ["End-to-end delivery", "Fabrication", "Install supervision", "Warranty package"] },
+const PROCESS = [
+  { t: "Brief", d: "We interrogate the brief." },
+  { t: "Site", d: "We measure light, flow, sound." },
+  { t: "Palette", d: "We shortlist materials." },
+  { t: "Prototype", d: "We build a full-scale mock-up." },
+  { t: "Produce", d: "We batch and QC before shipping." },
+  { t: "Install", d: "We supervise every square metre." },
+  { t: "Handover", d: "We hand you a room, not a box." },
 ];
 
 function DesignServicesPage() {
@@ -43,189 +48,81 @@ function DesignServicesPage() {
     <div className="min-h-screen bg-canvas text-ink">
       <TopBar />
 
-      {/* Dark hero */}
-      <section className="relative flex min-h-[100vh] items-center justify-center overflow-hidden bg-ink px-6 pt-24 text-canvas md:px-10">
-        <img src={cover} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/80 to-ink" />
-        <div className="relative mx-auto max-w-5xl text-center">
-          <Reveal y={20}>
-            <span className="eyebrow text-copper-light">Design services</span>
-          </Reveal>
-          <SplitHeading
-            text="From concept to installation, engineered around your space."
-            className="display-serifish mt-8 text-4xl leading-[1.05] tracking-tight md:text-6xl lg:text-7xl"
-          />
-          <Reveal delay={0.3}>
-            <div className="mx-auto mt-12 h-px w-32 bg-copper" />
-            <p className="mx-auto mt-8 max-w-xl text-canvas/70">
-              We work as a design partner, not a supplier. We start with the room and stay through the install.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <StoryHero
+        eyebrow="Design services"
+        title="A design partner,"
+        emphasis="not a supplier."
+        subcopy="From concept through installation, engineered around your space. We start with the room and stay through the install."
+        image={hero}
+        primary={{ label: "Book a consultation", to: "/contact" }}
+        secondary={{ label: "See our work", to: "/projects" }}
+      />
 
-      {/* Services */}
-      <section className="px-6 py-32 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <span className="eyebrow text-copper">What we do</span>
-            <h2 className="display-serifish mt-4 max-w-3xl text-4xl leading-[1.05] md:text-5xl">
-              Four services. One team. One promise.
-            </h2>
-          </Reveal>
-          <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2" stagger={0.08}>
-            {SERVICES.map((s) => (
-              <article
-                key={s.n}
-                data-reveal-item
-                className="group rounded-3xl border border-line/60 bg-canvas p-8 transition-shadow hover:shadow-xl md:p-10"
-              >
-                <div className="flex items-baseline justify-between">
-                  <span className="display-serifish text-5xl text-copper">{s.n}</span>
-                  <ArrowRight className="h-4 w-4 text-ink-soft transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-copper" />
-                </div>
-                <h3 className="display-serifish mt-6 text-2xl md:text-3xl">{s.t}</h3>
-                <p className="mt-3 text-ink-soft">{s.p}</p>
-                <ul className="mt-6 space-y-2 border-t border-line/60 pt-6 text-sm">
-                  {s.b.map((x) => (
-                    <li key={x} className="flex items-center gap-2 text-ink-soft">
-                      <span className="h-1 w-1 rounded-full bg-copper" />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+      <InfoStrip
+        eyebrow="How we work"
+        lead="We work as an extension of your studio — bringing material knowledge to the drawing board, and drawing knowledge to the site."
+      />
 
-      {/* Process */}
-      <section className="border-y border-line/60 bg-canvas-2/40 px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <span className="eyebrow text-copper">The process</span>
-            <h2 className="display-serifish mt-4 text-4xl md:text-5xl">Seven steps, one line.</h2>
-          </Reveal>
-          <div className="relative mt-16 overflow-x-auto pb-4">
-            <div className="flex min-w-max items-start gap-12">
-              {PROCESS.map((step, i) => (
-                <div key={step} className="w-56 shrink-0">
-                  <div className="flex items-center gap-3">
-                    <span className="display-serifish text-3xl text-copper">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {i < PROCESS.length - 1 ? (
-                      <div className="h-px flex-1 bg-copper/40" />
-                    ) : null}
-                  </div>
-                  <h3 className="mt-4 text-xl font-medium">{step}</h3>
-                  <p className="mt-2 text-sm text-ink-soft">
-                    {["We interrogate the brief.", "We measure light, flow, sound.", "We shortlist materials.", "We prototype the surface.", "We produce with certainty.", "We supervise every square metre.", "We hand you a room, not a box."][i]}
-                  </p>
-                </div>
-              ))}
+      <StackingCards
+        labelN="02"
+        labelText="What we do"
+        title="Four services,"
+        titleEm="one team."
+        description="Every engagement combines two or three of these — sequenced to the phase of your project."
+        items={SERVICES}
+        renderItem={(e) => {
+          const Icon = e.Icon;
+          return (
+            <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{e.n}</span>
+                <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                  <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
+                </span>
+              </div>
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{e.tag}</div>
+                <h3 className="display-serifish mt-2 text-2xl leading-tight md:text-3xl lg:text-4xl">{e.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+              </div>
             </div>
+          );
+        }}
+      />
+
+      <HorizontalPin
+        eyebrow="The process"
+        title="Seven steps,"
+        titleEm="one line."
+        items={PROCESS}
+        renderItem={(s, i) => (
+          <article className="w-[75vw] max-w-[360px] rounded-3xl border border-line/60 bg-canvas p-8 md:p-10">
+            <div className="display-serifish text-6xl text-copper">
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <h3 className="display-serifish mt-6 text-3xl">{s.t}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{s.d}</p>
+          </article>
+        )}
+      />
+
+      <section className="relative px-5 py-24 md:px-10 md:py-32 lg:px-16">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+            Design philosophy
           </div>
+          <WordReveal text="Buildings aren't made in a Revit view. They're made in a paint shop, on a scaffold, at four in the afternoon. We design for that afternoon — for the crew who install the panel and the person who walks past it every day." />
         </div>
       </section>
 
-      {/* Case reel */}
-      <section className="px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <span className="eyebrow text-copper">See it in the wild</span>
-            <h2 className="display-serifish mt-4 text-4xl md:text-5xl">Recent work.</h2>
-          </Reveal>
-          <RevealGroup className="mt-12 grid gap-6 md:grid-cols-3" stagger={0.08}>
-            {PROJECTS.slice(0, 3).map((p) => (
-              <a
-                key={p.slug}
-                href="/projects"
-                data-reveal-item
-                className="group relative aspect-[4/5] overflow-hidden rounded-2xl"
-              >
-                <img
-                  src={p.cover}
-                  alt={p.name}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6 text-canvas">
-                  <div className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-canvas/70">
-                    {p.sector} · {p.location}
-                  </div>
-                  <div className="mt-2 display-serifish text-2xl">{p.name}</div>
-                </div>
-              </a>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="border-t border-line/60 px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <span className="eyebrow text-copper">The design team</span>
-            <h2 className="display-serifish mt-4 text-4xl md:text-5xl">People, not personas.</h2>
-          </Reveal>
-          <RevealGroup className="mt-12 grid gap-8 md:grid-cols-3" stagger={0.1}>
-            {TEAM.map((m) => (
-              <div key={m.name} data-reveal-item>
-                <div className="aspect-[4/5] overflow-hidden rounded-2xl">
-                  <img src={m.photo} alt={m.name} className="h-full w-full object-cover" />
-                </div>
-                <h3 className="mt-4 text-xl font-medium">{m.name}</h3>
-                <div className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-copper">
-                  {m.role}
-                </div>
-                <p className="mt-3 text-sm text-ink-soft">{m.bio}</p>
-              </div>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* Tiers */}
-      <section className="border-t border-line/60 bg-canvas-2/40 px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <span className="eyebrow text-copper">Engagements</span>
-            <h2 className="display-serifish mt-4 text-4xl md:text-5xl">How we work together.</h2>
-          </Reveal>
-          <RevealGroup className="mt-12 grid gap-6 md:grid-cols-3" stagger={0.08}>
-            {TIERS.map((t, i) => (
-              <div
-                key={t.name}
-                data-reveal-item
-                className={`relative rounded-3xl border p-8 transition-shadow hover:shadow-xl ${
-                  i === 1 ? "border-copper bg-copper/5" : "border-line/60 bg-canvas"
-                }`}
-              >
-                <div className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-copper">
-                  {t.tag}
-                </div>
-                <h3 className="display-serifish mt-3 text-3xl">{t.name}</h3>
-                <ul className="mt-6 space-y-3 border-t border-line/60 pt-6 text-sm">
-                  {t.inc.map((x) => (
-                    <li key={x} className="flex items-center gap-2 text-ink-soft">
-                      <span className="h-1 w-1 rounded-full bg-copper" />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="/contact"
-                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-ink px-6 py-3 text-sm font-medium hover:bg-ink hover:text-canvas"
-                >
-                  Request proposal
-                </a>
-              </div>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
+      <ParallaxSplit
+        eyebrow="The team"
+        title="Architects and"
+        titleEm="material specialists."
+        body="A design-led team of architects, spec writers and installers — the same people who wrote the detail are the ones who stand on site while it's built."
+        image={parallax}
+        reverse
+      />
 
       <CTABand
         eyebrow="Ready?"
@@ -236,6 +133,7 @@ function DesignServicesPage() {
       />
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 }

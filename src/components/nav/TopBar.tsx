@@ -12,7 +12,9 @@ const NAV: { label: string; href: string }[] = [
   { label: "Design Services", href: "/design-services" },
   { label: "Visualizer", href: "/visualizer" },
   { label: "Resources", href: "/resources" },
+  { label: "Samples", href: "/samples" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function TopBar() {
@@ -54,12 +56,12 @@ export function TopBar() {
             )}
           </a>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-5 xl:flex xl:gap-7">
             {NAV.map((n) => (
               <Link
                 key={n.label}
                 to={n.href}
-                className={`eyebrow text-[0.68rem] transition-colors hover:text-copper ${
+                className={`eyebrow whitespace-nowrap text-[0.65rem] transition-colors hover:text-copper ${
                   scrolled || open ? "text-ink dark:text-white" : "text-white"
                 }`}
                 activeProps={{ className: "text-copper" }}

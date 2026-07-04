@@ -159,7 +159,7 @@ function ProjectsPage() {
               <article key={p.n} className={i % 3 === 0 ? "md:col-span-2" : ""}>
                 <ClipReveal
                   direction={i % 2 === 0 ? "up" : "down"}
-                  className="relative aspect-[16/10] overflow-hidden rounded-2xl"
+                  className="relative aspect-[16/10] overflow-hidden"
                 >
                   <img src={p.img} alt={p.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]" />
                 </ClipReveal>

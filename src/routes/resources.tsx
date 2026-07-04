@@ -1,16 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FileText, HardDrive, ShieldCheck, BookOpen } from "lucide-react";
+import { FileText, HardDrive, ShieldCheck, BookOpen, Sparkles, HeadphonesIcon } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
-import { InfoStrip } from "@/components/common/InfoStrip";
-import { StackingCards } from "@/components/motion/StackingCards";
-import { ParallaxSplit } from "@/components/motion/ParallaxSplit";
-import { WordReveal } from "@/components/motion/WordReveal";
+import { StickyTOC } from "@/components/motion/StickyTOC";
+import { TextColorShift } from "@/components/motion/TextColorShift";
+import { AlternatingSlide } from "@/components/motion/AlternatingSlide";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import hero from "@/assets/pages/hero-resources.jpg";
-import parallax from "@/assets/about/detail-fabric.jpg";
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -26,10 +24,54 @@ export const Route = createFileRoute("/resources")({
 });
 
 const CATEGORIES = [
-  { n: "01", Icon: FileText, tag: "Datasheets", title: "Product datasheets", body: "One PDF per SKU — dimensions, fire class, wind loads, thermal properties, care and warranty. Versioned and dated so you know you're on the current sheet." },
-  { n: "02", Icon: BookOpen, tag: "Installation", title: "Installation guides", body: "Step-by-step method statements, fixing schedules and tolerance sheets — written by the crews who install this on site, not by marketing." },
-  { n: "03", Icon: HardDrive, tag: "CAD & BIM", title: "CAD & BIM files", body: "Revit families, DWG blocks, IFC exports and detail packs — organised by system so a specifier can drop a working detail straight into a set." },
-  { n: "04", Icon: ShieldCheck, tag: "Compliance", title: "Certifications & warranties", body: "Fire test reports, EPDs, ISO certificates and the master warranty template. Signed, stamped and updated as standards evolve." },
+  {
+    id: "datasheets",
+    label: "Datasheets",
+    Icon: FileText,
+    intro: "One PDF per SKU — dimensions, fire class, wind loads, thermal properties, care and warranty. Versioned and dated so you know you're on the current sheet.",
+    files: [
+      ["WPC-OD-140 — Deep Oak Deck", "PDF · 1.2 MB"],
+      ["SPC-NA-052 — Nordic Ash SPC", "PDF · 980 KB"],
+      ["ALU-BL-070 — Blade Louver 70", "PDF · 1.4 MB"],
+      ["PNL-LA-30 — Linen Acoustic Panel", "PDF · 1.1 MB"],
+    ],
+  },
+  {
+    id: "installation",
+    label: "Installation",
+    Icon: BookOpen,
+    intro: "Step-by-step method statements, fixing schedules and tolerance sheets — written by the crews who install this on site, not by marketing.",
+    files: [
+      ["WPC decking — hidden fixing method", "PDF · 3.2 MB"],
+      ["Ventilated rainscreen — assembly guide", "PDF · 4.1 MB"],
+      ["Louver substructure — fixing schedule", "PDF · 2.7 MB"],
+      ["Acoustic panel — wall build-up", "PDF · 1.9 MB"],
+    ],
+  },
+  {
+    id: "cad-bim",
+    label: "CAD & BIM",
+    Icon: HardDrive,
+    intro: "Revit families, DWG blocks, IFC exports and detail packs — organised by system so a specifier can drop a working detail straight into a set.",
+    files: [
+      ["Revit families — full library", "ZIP · 84 MB"],
+      ["DWG detail pack — façade", "ZIP · 22 MB"],
+      ["DWG detail pack — interior", "ZIP · 18 MB"],
+      ["IFC 4 exports", "ZIP · 46 MB"],
+    ],
+  },
+  {
+    id: "compliance",
+    label: "Compliance",
+    Icon: ShieldCheck,
+    intro: "Fire test reports, EPDs, ISO certificates and the master warranty template. Signed, stamped and updated as standards evolve.",
+    files: [
+      ["Master warranty — template", "PDF · 320 KB"],
+      ["Fire test — EN 13501-1 (WPC)", "PDF · 2.1 MB"],
+      ["EPD — WPC decking", "PDF · 1.8 MB"],
+      ["ISO 9001 · 14001 certificates", "PDF · 640 KB"],
+    ],
+  },
 ];
 
 const CERTS = ["FSC", "ISO 9001", "ISO 14001", "CE", "TÜV", "BREEAM", "LEED", "EPD", "SASO", "ASTM"];
@@ -43,91 +85,118 @@ function ResourcesPage() {
         eyebrow="Technical library"
         title="Specify with"
         emphasis="confidence."
-        subcopy="A quiet library for the people writing the specs — datasheets, CAD packs, certifications and warranty templates. Nothing you can't defend on site."
+        subcopy="A quiet library for the people writing the specs — datasheets, CAD packs, certifications and warranty templates."
         image={hero}
         primary={{ label: "Request the library", to: "/contact" }}
         secondary={{ label: "Book a lunch & learn", to: "/contact" }}
       />
 
-      <InfoStrip
-        eyebrow="What's inside"
-        lead="Everything we ship — from a single WPC batten to a full curtain wall — comes with the paperwork to back it up. Downloadable, dated, and current."
-      />
-
-      <StackingCards
-        labelN="02"
-        labelText="Four categories"
-        title="A library that"
-        titleEm="reads like a spec."
-        description="Grouped by how a project actually uses them — the datasheet before the tender, the CAD during production, the warranty after handover."
-        items={CATEGORIES}
-        renderItem={(e) => {
-          const Icon = e.Icon;
-          return (
-            <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
-              <div className="flex items-start justify-between">
-                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{e.n}</span>
-                <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                  <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
-                </span>
-              </div>
-              <div>
-                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{e.tag}</div>
-                <h3 className="display-serifish mt-2 text-2xl leading-tight md:text-3xl lg:text-4xl">{e.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
-              </div>
-            </div>
-          );
-        }}
-      />
-
-      <ParallaxSplit
-        eyebrow="Lunch & learn"
-        title="An hour with"
-        titleEm="our specification team."
-        body="We come to your studio with a case of samples, a stack of details, and a project on the table. CPD-accredited, RIBA-friendly, always over food."
-        image={parallax}
-      />
-
-      <section className="relative px-5 py-24 md:px-10 md:py-32 lg:px-16">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+      {/* Intro — TextColorShift */}
+      <section className="border-t border-line/60 px-5 py-24 md:px-10 md:py-32">
+        <div className="mx-auto max-w-4xl">
           <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-            Compliance
+            Ethos
           </div>
-          <WordReveal text="Every certificate below is renewed on the date it expires — never later. If it's on the wall, it's current. If it's on the datasheet, it's tested. If it's on the warranty, it's honoured." />
+          <TextColorShift
+            className="display-serifish mt-8 text-2xl leading-[1.35] text-ink-soft md:text-4xl"
+            text="Every certificate below is renewed on the date it expires — never later. If it's on the wall, it's current. If it's on the datasheet, it's tested. If it's on the warranty, it's honoured."
+          />
         </div>
       </section>
 
-      {/* Certifications marquee */}
-      <section className="relative overflow-hidden border-y border-line/60 bg-canvas-2/40 py-16">
-        <div className="mx-auto max-w-7xl px-5 md:px-10">
-          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
-            Independently tested · Documented · Renewed
+      {/* Sticky TOC with categories */}
+      <StickyTOC
+        eyebrow="Library"
+        items={CATEGORIES.map((c) => ({ id: c.id, label: c.label }))}
+      >
+        {CATEGORIES.map((c) => {
+          const Icon = c.Icon;
+          return (
+            <article
+              key={c.id}
+              id={c.id}
+              className="scroll-mt-28 border-b border-line/40 pb-24 last:border-b-0"
+            >
+              <div className="flex items-center gap-4">
+                <span className="grid h-12 w-12 place-items-center rounded-full border border-copper/30 text-copper">
+                  <Icon className="h-5 w-5" strokeWidth={1.5} />
+                </span>
+                <h3 className="display-serifish text-3xl md:text-5xl">{c.label}</h3>
+              </div>
+              <p className="mt-6 max-w-2xl text-base text-ink-soft">{c.intro}</p>
+              <div className="mt-10 divide-y divide-line/50">
+                {c.files.map((f, j) => (
+                  <AlternatingSlide key={f[0]} index={j}>
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="group flex items-center justify-between gap-6 py-4 transition-colors hover:text-copper"
+                    >
+                      <span className="text-base font-medium">{f[0]}</span>
+                      <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft group-hover:text-copper">
+                        {f[1]} ↓
+                      </span>
+                    </a>
+                  </AlternatingSlide>
+                ))}
+              </div>
+            </article>
+          );
+        })}
+      </StickyTOC>
+
+      {/* NEW — Standards & certifications wall (static grid, no BlurFocus to keep this page distinct) */}
+      <section className="border-y border-line/60 bg-canvas-2/40 px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+            Standards & certifications
+          </div>
+          <h2 className="display-serifish mt-4 max-w-3xl text-3xl md:text-5xl">
+            Independently tested. Documented. Renewed.
+          </h2>
+          <div className="mt-14 grid grid-cols-3 gap-4 md:grid-cols-5">
+            {CERTS.map((c, i) => (
+              <AlternatingSlide key={c} index={i}>
+                <div className="grid h-28 place-items-center rounded-xl border border-line bg-canvas font-mono text-xs uppercase tracking-[0.22em] text-ink transition-colors hover:border-copper">
+                  {c}
+                </div>
+              </AlternatingSlide>
+            ))}
           </div>
         </div>
-        <div className="mt-10 flex gap-4 animate-[marquee_35s_linear_infinite]">
-          {[...CERTS, ...CERTS].map((c, i) => (
-            <div
-              key={i}
-              className="grid h-24 w-40 shrink-0 place-items-center rounded-xl border border-line bg-canvas font-mono text-xs uppercase tracking-[0.22em] text-ink"
-            >
-              {c}
+      </section>
+
+      {/* NEW — Ask a technical rep */}
+      <section className="px-5 py-24 md:px-10 md:py-32">
+        <div className="mx-auto grid max-w-6xl gap-10 rounded-3xl border border-line/60 bg-canvas-2/40 p-8 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-16 md:p-14">
+          <div className="grid h-16 w-16 place-items-center rounded-2xl bg-copper/10 text-copper">
+            <HeadphonesIcon className="h-6 w-6" strokeWidth={1.5} />
+          </div>
+          <div>
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+              Direct line
             </div>
-          ))}
+            <h3 className="display-serifish mt-3 text-2xl md:text-3xl">
+              Speak to a technical rep before you write the spec.
+            </h3>
+            <p className="mt-3 max-w-2xl text-sm text-ink-soft">
+              CPD-accredited, RIBA-friendly, always over food. Bring a plan, a section, or a mood board — we'll bring the samples.
+            </p>
+          </div>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 self-start rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5 md:self-auto"
+          >
+            <Sparkles className="h-4 w-4" /> Book a session
+          </a>
         </div>
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}</style>
       </section>
 
       <CTABand
         eyebrow="Studios & practices"
-        title="Book a lunch-and-learn with our specification team."
+        title="Request the full technical library."
         href="/contact"
-        cta="Request a session"
+        cta="Request access"
       />
 
       <SiteFooter />

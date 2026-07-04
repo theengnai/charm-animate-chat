@@ -119,7 +119,7 @@ function ResourcesPage() {
               className="scroll-mt-28 border-b border-line/40 pb-24 last:border-b-0"
             >
               <div className="flex items-center gap-4">
-                <span className="grid h-12 w-12 place-items-center rounded-full border border-copper/30 text-copper">
+                <span className="grid h-14 w-14 place-items-center border border-copper/40 bg-copper/10 text-copper shadow-[10px_10px_0_color-mix(in_oklab,var(--copper)_12%,transparent)]">
                   <Icon className="h-5 w-5" strokeWidth={1.5} />
                 </span>
                 <h3 className="display-serifish text-3xl md:text-5xl">{c.label}</h3>
@@ -133,10 +133,11 @@ function ResourcesPage() {
                       <a
                         href="#"
                         onClick={(e) => e.preventDefault()}
-                        className="group flex items-start justify-between gap-5 rounded-lg border border-line/60 bg-canvas p-5 transition-all hover:-translate-y-1 hover:border-copper hover:shadow-[0_20px_40px_-25px_rgba(0,0,0,0.3)]"
+                        className="group relative flex min-h-28 items-start justify-between gap-5 overflow-hidden border border-line/70 bg-canvas p-5 transition-all hover:-translate-y-1 hover:border-copper hover:shadow-[0_20px_40px_-25px_rgba(0,0,0,0.3)]"
                       >
+                        <span className="absolute inset-y-0 left-0 w-1 bg-copper/60 transition-all group-hover:w-2" />
                         <div className="flex items-start gap-4">
-                          <span className="mt-0.5 inline-flex items-center justify-center rounded-full bg-copper/10 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-copper">
+                          <span className="mt-0.5 inline-flex items-center justify-center border border-copper/20 bg-copper/10 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-copper">
                             {type}
                           </span>
                           <div>

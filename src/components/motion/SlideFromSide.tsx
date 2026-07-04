@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion } from "framer-motion";
 
 export function SlideFromSide({
@@ -18,12 +18,20 @@ export function SlideFromSide({
   reverse?: boolean;
   children?: ReactNode;
 }) {
+  const ref = useRef<HTMLElement | null>(null);
   const ease = [0.16, 1, 0.3, 1] as const;
   const imgX = reverse ? 140 : -140;
   const textX = reverse ? -140 : 140;
 
   return (
-    <section className="border-t border-line/60 px-5 py-24 md:px-10 md:py-32 lg:px-16">
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, x: reverse ? 90 : -90 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: false, amount: 0.22 }}
+      transition={{ duration: 0.85, ease }}
+      className="border-t border-line/60 px-5 py-24 md:px-10 md:py-32 lg:px-16"
+    >
       <div
         className={`mx-auto grid max-w-7xl items-center gap-10 lg:gap-20 ${
           reverse ? "lg:grid-cols-[1fr_1fr]" : "lg:grid-cols-[1fr_1fr]"
@@ -32,7 +40,7 @@ export function SlideFromSide({
         <motion.div
           initial={{ opacity: 0, x: imgX }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
+          viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.9, ease }}
           className={`relative aspect-[4/3] overflow-hidden ${reverse ? "lg:order-2" : ""}`}
         >
@@ -41,7 +49,7 @@ export function SlideFromSide({
         <motion.div
           initial={{ opacity: 0, x: textX }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
+          viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.9, ease, delay: 0.12 }}
           className={reverse ? "lg:order-1" : ""}
         >
@@ -58,6 +66,6 @@ export function SlideFromSide({
           {children}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -60,7 +60,9 @@ export function TopBar() {
                 key={n.label}
                 to={n.href}
                 className={`eyebrow whitespace-nowrap text-[0.75rem] transition-colors hover:text-copper ${
-                  scrolled || open ? "text-ink dark:text-white" : "text-ink dark:text-white"
+                  scrolled || open || isHome
+                    ? "text-ink dark:text-white"
+                    : "text-white dark:text-white"
                 }`}
                 activeProps={{ className: "text-copper" }}
               >

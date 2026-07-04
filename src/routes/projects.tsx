@@ -8,7 +8,7 @@ import { ParallaxLayers } from "@/components/motion/ParallaxLayers";
 import { Counter } from "@/components/motion/Counter";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import hero from "@/assets/pages/hero-projects.jpg";
-import featured from "@/assets/pages/projects-featured.jpg";
+import featured from "@/assets/pages/projects-featured-new.jpg";
 import band1 from "@/assets/pages/projects-band-1.jpg";
 import band2 from "@/assets/pages/projects-band-2.jpg";
 import band3 from "@/assets/pages/projects-band-3.jpg";
@@ -67,20 +67,20 @@ function ProjectsPage() {
 
       {/* Featured — fixed-background hero band */}
       <section
-        className="relative min-h-[95vh] w-full bg-cover bg-fixed bg-center"
+        className="relative min-h-[92vh] w-full bg-cover bg-fixed bg-center"
         style={{ backgroundImage: `url(${FEATURED.image})` }}
         aria-label={FEATURED.title}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/40 to-ink/80" />
-        <div className="relative z-10 flex min-h-[95vh] items-end px-5 pb-20 md:px-10 md:pb-28">
-          <div className="mx-auto max-w-4xl text-center text-canvas">
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/35 to-transparent" />
+        <div className="relative z-10 flex min-h-[92vh] items-end px-5 pb-20 md:px-10 md:pb-28 lg:px-16">
+          <div className="max-w-3xl text-canvas">
             <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper-light">
               {FEATURED.tag}
             </div>
             <h2 className="display-serifish mt-6 text-4xl leading-tight md:text-7xl">
               {FEATURED.title}
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-canvas/80">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-canvas/80">
               {FEATURED.body}
             </p>
             <div className="mt-6 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
@@ -95,15 +95,15 @@ function ProjectsPage() {
         { img: band1, tag: "Hospitality · Lobby", title: "A quiet lobby, five storeys tall.", body: "Slatted oak, warm lighting and a floor that returns silence to the room." },
         { img: band2, tag: "Residential · Villa", title: "A deck that watches the sunset.", body: "WPC boards laid to the sea line, no cupping after four summers." },
         { img: band3, tag: "Cultural · Pavilion", title: "A screen the desert draws on.", body: "Perforated aluminium, hidden fixings, sand-adjustable panels." },
-      ].map((b) => (
+      ].map((b, i) => (
         <section
           key={b.title}
           className="relative min-h-[90vh] w-full bg-cover bg-fixed bg-center"
           style={{ backgroundImage: `url(${b.img})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/30 to-ink/70" />
+          <div className={`absolute inset-0 ${i % 2 === 0 ? "bg-gradient-to-r" : "bg-gradient-to-l"} from-ink/75 via-ink/35 to-transparent`} />
           <div className="relative z-10 flex min-h-[90vh] items-end px-5 pb-20 md:px-10 md:pb-28">
-            <div className="mx-auto max-w-4xl text-canvas">
+            <div className={`max-w-4xl text-canvas ${i % 2 === 1 ? "ml-auto" : ""}`}>
               <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper-light">
                 {b.tag}
               </div>

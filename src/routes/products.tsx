@@ -157,6 +157,7 @@ function ProductsPage() {
       {/* Sticky TOC of families with BlurFocus imagery + AlternatingSlide spec rows */}
       <StickyTOC
         eyebrow="Families"
+        stickyUntilEnd
         items={FAMILIES.map((f) => ({ id: f.id, label: f.label }))}
       >
         {FAMILIES.map((f, i) => (

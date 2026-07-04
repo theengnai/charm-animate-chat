@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import darkLogoAsset from "@/assets/dark-logo.svg.asset.json";
+import { Link, useRouter } from "@tanstack/react-router";
 import lightLogo from "@/assets/logo.png";
 import { LangSwitcher } from "@/components/nav/LangSwitcher";
 import { ThemeToggle } from "@/components/nav/ThemeToggle";
@@ -20,6 +19,8 @@ const NAV: { label: string; href: string }[] = [
 export function TopBar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const isHome = router.state.location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -46,14 +47,11 @@ export function TopBar() {
       >
         <div className="flex items-center justify-between gap-6">
           <a href="/" className="flex items-center">
-            {scrolled || open ? (
-              <>
-                <img src={darkLogoAsset.url} alt="Ecosmart" className="block h-8 w-auto dark:hidden md:h-9" />
-                <img src={lightLogo} alt="Ecosmart" className="hidden h-8 w-auto dark:block md:h-9" />
-              </>
-            ) : (
-              <img src={lightLogo} alt="Ecosmart" className="h-8 w-auto md:h-9" />
-            )}
+            <img
+              src={lightLogo}
+              alt="Ecosmart"
+              className={`h-8 w-auto md:h-9 ${isHome ? "brightness-0 dark:brightness-100" : "brightness-100 dark:brightness-100"}`}
+            />
           </a>
 
           <nav className="hidden items-center gap-5 xl:flex xl:gap-7">
@@ -61,8 +59,10 @@ export function TopBar() {
               <Link
                 key={n.label}
                 to={n.href}
-                className={`eyebrow whitespace-nowrap text-[0.65rem] transition-colors hover:text-copper ${
-                  scrolled || open ? "text-ink dark:text-white" : "text-white"
+                className={`eyebrow whitespace-nowrap text-[0.75rem] transition-colors hover:text-copper ${
+                  scrolled || open || isHome
+                    ? "text-ink dark:text-white"
+                    : "text-white dark:text-white"
                 }`}
                 activeProps={{ className: "text-copper" }}
               >
@@ -74,7 +74,7 @@ export function TopBar() {
           <div className="flex items-center gap-2 md:gap-3">
             <Link
               to="/samples"
-              className="hidden rounded-full bg-copper px-4 py-2 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-copper-deep md:inline-block"
+              className="hidden rounded-full bg-copper px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-canvas transition-colors hover:bg-copper-deep md:inline-block"
             >
               Order Samples
             </Link>
@@ -86,7 +86,9 @@ export function TopBar() {
               className={`grid h-10 w-10 place-items-center rounded-full border backdrop-blur transition-colors ${
                 scrolled || open
                   ? "border-line bg-canvas/80 text-ink dark:text-white"
-                  : "border-white/20 bg-black/20 text-white"
+                  : isHome
+                    ? "border-ink/20 bg-white/20 text-ink dark:border-white/20 dark:bg-black/20 dark:text-white"
+                    : "border-white/20 bg-black/20 text-white"
               }`}
               aria-label={open ? "Close menu" : "Open menu"}
             >

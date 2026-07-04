@@ -5,15 +5,18 @@ import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
 import { ClipReveal } from "@/components/motion/ClipReveal";
 import { ParallaxLayers } from "@/components/motion/ParallaxLayers";
-import { SplitPanels } from "@/components/motion/SplitPanels";
 import { Counter } from "@/components/motion/Counter";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import hero from "@/assets/pages/hero-projects.jpg";
-import p1 from "@/assets/about/sol-facade.jpg";
+import featured from "@/assets/pages/projects-featured.jpg";
+import band1 from "@/assets/pages/projects-band-1.jpg";
+import band2 from "@/assets/pages/projects-band-2.jpg";
+import band3 from "@/assets/pages/projects-band-3.jpg";
 import p2 from "@/assets/about/sol-architect.jpg";
 import p3 from "@/assets/about/sol-interior.jpg";
 import p4 from "@/assets/about/detail-fabric.jpg";
 import p5 from "@/assets/about/hero-facade.jpg";
+import p1 from "@/assets/about/sol-facade.jpg";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({

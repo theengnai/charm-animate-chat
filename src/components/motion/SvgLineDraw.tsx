@@ -25,23 +25,23 @@ export function SvgLineDraw({
 
   return (
     <div ref={ref} className={className}>
-    <svg
-      ref={ref}
-      className={className}
-      viewBox="0 0 4 1000"
-      preserveAspectRatio="none"
-      fill="none"
-    >
-      <motion.line
-        x1="2"
-        y1="0"
-        x2="2"
-        y2="1000"
-        stroke={color}
-        strokeWidth={strokeWidth}
-        strokeDasharray={dashed ? "6 8" : undefined}
-        style={{ pathLength }}
-      />
-    </svg>
+      <svg
+        viewBox="0 0 4 1000"
+        preserveAspectRatio="none"
+        fill="none"
+        className="h-full w-full"
+      >
+        <motion.line
+          x1="2"
+          y1="0"
+          x2="2"
+          y2="1000"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeDasharray={dashed ? "6 8" : undefined}
+          style={{ pathLength }}
+        />
+      </svg>
+    </div>
   );
 }

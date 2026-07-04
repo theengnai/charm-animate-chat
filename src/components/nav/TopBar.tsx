@@ -50,7 +50,7 @@ export function TopBar() {
             <img
               src={lightLogo}
               alt="Ecosmart"
-              className="h-8 w-auto brightness-0 dark:brightness-100 md:h-9"
+              className={`h-8 w-auto md:h-9 ${isHome ? "brightness-0 dark:brightness-100" : "brightness-100 dark:brightness-100"}`}
             />
           </a>
 

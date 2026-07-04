@@ -16,7 +16,7 @@ export function SvgLineDraw({
   strokeWidth?: number;
   dashed?: boolean;
 }) {
-  const ref = useRef<SVGSVGElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 80%", "end 30%"],
@@ -24,6 +24,7 @@ export function SvgLineDraw({
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
+    <div ref={ref} className={className}>
     <svg
       ref={ref}
       className={className}

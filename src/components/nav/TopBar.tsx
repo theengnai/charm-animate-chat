@@ -86,7 +86,9 @@ export function TopBar() {
               className={`grid h-10 w-10 place-items-center rounded-full border backdrop-blur transition-colors ${
                 scrolled || open
                   ? "border-line bg-canvas/80 text-ink dark:text-white"
-                  : "border-ink/20 bg-white/20 text-ink dark:border-white/20 dark:bg-black/20 dark:text-white"
+                  : isHome
+                    ? "border-ink/20 bg-white/20 text-ink dark:border-white/20 dark:bg-black/20 dark:text-white"
+                    : "border-white/20 bg-black/20 text-white"
               }`}
               aria-label={open ? "Close menu" : "Open menu"}
             >

@@ -1,166 +1,155 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { ArrowRight, Filter, Layers } from "lucide-react";
+import { LayoutGrid, Layers, Home, TreePine, Compass } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
-import { PageHero } from "@/components/common/PageHero";
 import { CTABand } from "@/components/common/CTABand";
-import { Reveal } from "@/components/motion/Reveal";
-import { RevealGroup } from "@/components/motion/RevealGroup";
+import { StoryHero } from "@/components/common/StoryHero";
+import { InfoStrip } from "@/components/common/InfoStrip";
+import { StackingCards } from "@/components/motion/StackingCards";
+import { ParallaxSplit } from "@/components/motion/ParallaxSplit";
+import { HorizontalPin } from "@/components/motion/HorizontalPin";
 import { Counter } from "@/components/motion/Counter";
-import { FAMILIES, PRODUCTS, type Product } from "@/data/products";
-import cover from "@/assets/section-materials.jpg";
+import { Reveal } from "@/components/motion/Reveal";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import hero from "@/assets/pages/hero-products.jpg";
+import parallax from "@/assets/about/sol-facade.jpg";
+import strip1 from "@/assets/about/detail-fabric.jpg";
+import strip2 from "@/assets/about/sol-architect.jpg";
+import strip3 from "@/assets/about/sol-interior.jpg";
+import strip4 from "@/assets/about/sol-facade.jpg";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products Library — Ecosmart" },
-      { name: "description", content: "Materials engineered for the way buildings actually live. Explore WPC, SPC, aluminium and panel systems." },
-      { property: "og:title", content: "Products Library — Ecosmart" },
+      { title: "Products — Ecosmart Architectural Materials" },
+      { name: "description", content: "Façade, cladding, interior panels, decking and custom systems — materials chosen for how they age, install, and hold up in the GCC climate." },
+      { property: "og:title", content: "Products — Ecosmart" },
       { property: "og:description", content: "Materials engineered for the way buildings actually live." },
-      { property: "og:image", content: cover },
+      { property: "og:image", content: hero },
     ],
   }),
   component: ProductsPage,
 });
 
-const APPLICATIONS = ["All", "Interior", "Exterior", "Both"] as const;
+const FAMILIES = [
+  { n: "01", Icon: LayoutGrid, title: "Façade Systems", body: "Rain-screen, ventilated and open-joint cladding assemblies engineered for wind, fire and thermal performance across the GCC.", tag: "Exterior" },
+  { n: "02", Icon: Layers, title: "Cladding & Panels", body: "Composite, mineral and metal panel systems that carry a building's identity — colour-stable, honest at the joint, easy on the trades.", tag: "Exterior · Interior" },
+  { n: "03", Icon: Home, title: "Interior Surfaces", body: "Wall panels, feature ribs and screens designed for hospitality, workplace and residential interiors — quiet, tactile, acoustic-aware.", tag: "Interior" },
+  { n: "04", Icon: TreePine, title: "Outdoor Decking", body: "WPC decking, pergolas and pool-edge systems built for direct sun and salt exposure — with hidden fixing detailing throughout.", tag: "Exterior" },
+  { n: "05", Icon: Compass, title: "Custom Fabrication", body: "When the catalogue doesn't fit, we build to fit. Bespoke sizes, colours, perforations and finishes with prototype approval.", tag: "Bespoke" },
+];
+
+const PROCESS = [
+  { n: "01", t: "Brief", d: "You send the project — drawings, mood, budget, deadline." },
+  { n: "02", t: "Specification", d: "We propose a material shortlist with fire, wind and thermal notes." },
+  { n: "03", t: "Samples", d: "Physical chips arrive within a week." },
+  { n: "04", t: "Prototype", d: "A full-scale mock-up on request — glued, screwed, tested." },
+  { n: "05", t: "Production", d: "Batch-controlled and photo-documented before it leaves." },
+  { n: "06", t: "Site", d: "Method statements, toolbox talks, and a supervisor on the wall." },
+];
 
 function ProductsPage() {
-  const [family, setFamily] = useState<string>("All");
-  const [app, setApp] = useState<(typeof APPLICATIONS)[number]>("All");
-
-  const filtered = useMemo(
-    () =>
-      PRODUCTS.filter(
-        (p) =>
-          (family === "All" || p.family === family) &&
-          (app === "All" || p.application === app),
-      ),
-    [family, app],
-  );
-
   return (
     <div className="min-h-screen bg-canvas text-ink">
       <TopBar />
 
-      <PageHero
-        eyebrow="The Library · 06 Families · 148 SKUs"
-        title="Materials engineered for the way buildings actually live."
-        subcopy="A curated catalogue of façade, floor, wall and screen systems — chosen for how they age, install, and hold up in the GCC climate."
-        right={
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
-            <img src={cover} alt="" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
-          </div>
-        }
+      <StoryHero
+        eyebrow="Products library"
+        title="Materials that"
+        emphasis="shape architecture."
+        subcopy="Five families of façade, cladding, interior and outdoor systems — curated for how they age in the GCC climate and how they land on site."
+        image={hero}
+        primary={{ label: "Talk to a specialist", to: "/contact" }}
+        secondary={{ label: "Order sample kit", to: "/samples" }}
       />
 
-      {/* Stat strip */}
-      <section className="border-y border-line/60 bg-canvas-2/40 px-6 py-16 md:px-10">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 md:grid-cols-4">
+      <InfoStrip
+        eyebrow="The library"
+        lead="Not a catalogue of everything — a considered set of systems we know how to draw, deliver and defend on site."
+      >
+        <div className="grid grid-cols-3 gap-6 border-t border-line/40 pt-10 md:gap-16">
           {[
-            { l: "Families", v: 6 },
-            { l: "SKUs", v: 148 },
+            { l: "Families", v: 5 },
             { l: "Finishes", v: 42 },
-            { l: "Certifications", v: 9 },
+            { l: "Projects", v: 180 },
           ].map((s) => (
-            <Reveal key={s.l} className="text-center md:text-left">
-              <div className="display-serifish text-5xl text-copper md:text-6xl">
-                <Counter value={s.v} format="pad2" />
+            <Reveal key={s.l}>
+              <div className="display-serifish text-4xl text-copper md:text-6xl">
+                <Counter value={s.v} />
               </div>
-              <div className="mt-2 eyebrow text-ink-soft">{s.l}</div>
+              <div className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+                {s.l}
+              </div>
             </Reveal>
           ))}
         </div>
-      </section>
+      </InfoStrip>
 
-      {/* Family index */}
-      <section className="px-6 py-24 md:px-10 md:py-32">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <span className="eyebrow text-copper">The families</span>
-            <h2 className="display-serifish mt-4 max-w-3xl text-4xl leading-[1.05] tracking-tight md:text-5xl">
-              Six ways to specify a room.
-            </h2>
-          </Reveal>
-          <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2" stagger={0.1}>
-            {FAMILIES.map((f, i) => (
-              <button
-                key={f.key}
-                data-reveal-item
-                onClick={() => setFamily(f.key)}
-                className="group relative aspect-[5/4] overflow-hidden rounded-3xl border border-line/60 text-left"
-              >
-                <img
-                  src={f.cover}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-between p-8 text-canvas">
-                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-canvas/80">
-                    0{i + 1} — {f.key}
-                  </div>
-                  <div>
-                    <h3 className="display-serifish text-3xl md:text-4xl">{f.name}</h3>
-                    <p className="mt-2 max-w-md text-sm text-canvas/80">{f.poem}</p>
-                    <div className="mt-6 inline-flex items-center gap-2 text-sm">
-                      Enter family <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </RevealGroup>
+      <StackingCards
+        sectionId="families"
+        labelN="02"
+        labelText="Families"
+        title="Five ways to"
+        titleEm="specify a surface."
+        description="Each family below is a standalone system with its own drawings, fixings, fire path and warranty. Mix them freely."
+        items={FAMILIES}
+        renderItem={(e) => {
+          const Icon = e.Icon;
+          return (
+            <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{e.n}</span>
+                <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                  <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
+                </span>
+              </div>
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{e.tag}</div>
+                <h3 className="display-serifish mt-2 text-2xl leading-tight md:text-3xl lg:text-4xl">{e.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+              </div>
+            </div>
+          );
+        }}
+      />
+
+      <ParallaxSplit
+        eyebrow="How we source"
+        title="From mill to"
+        titleEm="mock-up."
+        body="Every material we list has a mill we've visited, a lead time we've measured, and a QC file we can share. We don't drop-ship trends — we stock what we can stand behind ten years from now."
+        image={parallax}
+      />
+
+      <HorizontalPin
+        eyebrow="From spec to site"
+        title="Six steps, one"
+        titleEm="line of accountability."
+        items={PROCESS}
+        renderItem={(step) => (
+          <article className="w-[80vw] max-w-[420px] rounded-3xl border border-line/60 bg-canvas p-8 md:p-10">
+            <div className="display-serifish text-6xl text-copper">{step.n}</div>
+            <h3 className="display-serifish mt-6 text-3xl">{step.t}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{step.d}</p>
+          </article>
+        )}
+      />
+
+      {/* Marquee finish strip */}
+      <section className="relative overflow-hidden py-6">
+        <div className="flex gap-2 animate-[marquee_40s_linear_infinite] hover:[animation-play-state:paused]">
+          {[strip1, strip2, strip3, strip4, strip1, strip2, strip3, strip4].map((src, i) => (
+            <div key={i} className="relative aspect-[4/3] w-[320px] flex-shrink-0 overflow-hidden md:w-[420px]">
+              <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
+            </div>
+          ))}
         </div>
-      </section>
-
-      {/* Filter + grid */}
-      <section className="border-t border-line/60 px-6 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="sticky top-24 z-10 -mx-6 mb-10 flex flex-wrap items-center gap-3 border-y border-line/60 bg-canvas/90 px-6 py-5 backdrop-blur md:mx-0 md:rounded-2xl md:border md:px-6">
-            <Filter className="h-4 w-4 text-ink-soft" />
-            <span className="mr-2 eyebrow text-ink-soft">Family</span>
-            {["All", ...FAMILIES.map((f) => f.key)].map((k) => (
-              <button
-                key={k}
-                onClick={() => setFamily(k)}
-                className={`rounded-full border px-4 py-1.5 text-xs transition-colors ${
-                  family === k
-                    ? "border-copper bg-copper text-canvas"
-                    : "border-line hover:border-ink"
-                }`}
-              >
-                {k}
-              </button>
-            ))}
-            <span className="mx-2 h-4 w-px bg-line" />
-            <span className="mr-2 eyebrow text-ink-soft">Use</span>
-            {APPLICATIONS.map((k) => (
-              <button
-                key={k}
-                onClick={() => setApp(k)}
-                className={`rounded-full border px-4 py-1.5 text-xs transition-colors ${
-                  app === k
-                    ? "border-ink bg-ink text-canvas"
-                    : "border-line hover:border-ink"
-                }`}
-              >
-                {k}
-              </button>
-            ))}
-            <span className="ml-auto font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink-soft">
-              {filtered.length} results
-            </span>
-          </div>
-
-          <RevealGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-            {filtered.map((p) => (
-              <ProductCard key={p.slug} p={p} />
-            ))}
-          </RevealGroup>
-        </div>
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </section>
 
       <CTABand
@@ -171,54 +160,7 @@ function ProductsPage() {
       />
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
-  );
-}
-
-function ProductCard({ p }: { p: Product }) {
-  return (
-    <article
-      data-reveal-item
-      className="group relative overflow-hidden rounded-3xl border border-line/60 bg-canvas transition-shadow hover:shadow-xl"
-    >
-      <div className="relative aspect-[4/5] overflow-hidden">
-        <img
-          src={p.cover}
-          alt={p.name}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-        <div className="absolute left-4 top-4 rounded-full bg-canvas/90 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-ink backdrop-blur">
-          {p.family}
-        </div>
-      </div>
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="display-serifish text-xl">{p.name}</h3>
-            <div className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink-soft">
-              {p.code} · {p.finish} · {p.fireRating}
-            </div>
-          </div>
-          <div className="flex gap-1">
-            {p.colors.map((c) => (
-              <span
-                key={c}
-                className="h-4 w-4 rounded-full border border-ink/10"
-                style={{ background: c }}
-              />
-            ))}
-          </div>
-        </div>
-        <p className="mt-4 text-sm text-ink-soft">{p.poem}</p>
-        <div className="mt-6 flex items-center justify-between">
-          <button className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-copper">
-            View <ArrowRight className="h-3.5 w-3.5" />
-          </button>
-          <button className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-xs hover:border-copper hover:text-copper">
-            <Layers className="h-3 w-3" /> Add to kit
-          </button>
-        </div>
-      </div>
-    </article>
   );
 }

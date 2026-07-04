@@ -1,229 +1,110 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Layers, RotateCcw, Save, Share2, Sparkles } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { Layers, RefreshCcw, Share2, LayoutGrid } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
-import { PageHero } from "@/components/common/PageHero";
 import { CTABand } from "@/components/common/CTABand";
-import { ROOMS, SURFACES, materialsForSurface } from "@/data/visualizer";
-import { PRODUCTS } from "@/data/products";
+import { StoryHero } from "@/components/common/StoryHero";
+import { InfoStrip } from "@/components/common/InfoStrip";
+import { StackingCards } from "@/components/motion/StackingCards";
+import { ParallaxSplit } from "@/components/motion/ParallaxSplit";
+import { WordReveal } from "@/components/motion/WordReveal";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import hero from "@/assets/pages/hero-visualizer.jpg";
+import parallax from "@/assets/about/sol-interior.jpg";
 
 export const Route = createFileRoute("/visualizer")({
   head: () => ({
     meta: [
       { title: "The Visualizer — Ecosmart" },
-      { name: "description", content: "See Ecosmart finishes in your space before you specify. Live material preview across rooms and surfaces." },
+      { name: "description", content: "Ecosmart's forthcoming room visualizer — swap materials on floor, wall and ceiling and share the look with your team. Coming soon." },
       { property: "og:title", content: "The Visualizer — Ecosmart" },
-      { property: "og:description", content: "See it before you spec it." },
+      { property: "og:description", content: "See it before you specify it. Coming soon." },
+      { property: "og:image", content: hero },
     ],
   }),
   component: VisualizerPage,
 });
 
-type Surface = "floor" | "wall" | "ceiling" | "accent";
+const CAPABILITIES = [
+  { n: "01", Icon: LayoutGrid, tag: "Rooms", title: "Room presets", body: "A lobby, a suite, a villa deck, a workplace bay — four canonical rooms tuned to real Ecosmart projects, so the light and scale match the material." },
+  { n: "02", Icon: Layers, tag: "Materials", title: "Live material swap", body: "Change floor, wall, ceiling and accent independently, from the full Ecosmart library — the render updates in the same frame." },
+  { n: "03", Icon: RefreshCcw, tag: "Compare", title: "A/B compare", body: "Split-screen two versions of the same room — copper against oak, linen against basalt — to test how a palette holds up side by side." },
+  { n: "04", Icon: Share2, tag: "Share", title: "Shareable links", body: "Every look gets a URL you can send to a client or a colleague. Open it, edit it, sample it — no login required." },
+];
 
 function VisualizerPage() {
-  const [room, setRoom] = useState<string>(ROOMS[0].key);
-  const [surface, setSurface] = useState<Surface>("floor");
-  const [choices, setChoices] = useState<Record<Surface, string | null>>({
-    floor: "spc-nordic",
-    wall: "pnl-slat-oak",
-    ceiling: null,
-    accent: "alu-blade-70",
-  });
-  const [opacity, setOpacity] = useState(0.75);
-
-  const roomImg = useMemo(() => ROOMS.find((r) => r.key === room)?.image ?? ROOMS[0].image, [room]);
-  const materials = useMemo(() => materialsForSurface(surface), [surface]);
-  const active = choices[surface];
-  const activeMaterial = PRODUCTS.find((p) => p.slug === active);
-
-  const reset = () =>
-    setChoices({ floor: null, wall: null, ceiling: null, accent: null });
-
   return (
     <div className="min-h-screen bg-canvas text-ink">
       <TopBar />
 
-      <PageHero
-        eyebrow="Interactive · Beta"
-        title="See it before you spec it."
-        subcopy="Choose a room, swap materials across floor, wall, ceiling and accent surfaces. Save your look or share it with your team."
-      >
-        <a
-          href="#app"
-          className="inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3.5 text-sm font-medium text-canvas hover:bg-copper-deep"
-        >
-          <Sparkles className="h-4 w-4" />
-          Launch visualizer
-        </a>
-      </PageHero>
+      <StoryHero
+        eyebrow="The Visualizer · Coming soon"
+        title="See your surfaces"
+        emphasis="in situ."
+        subcopy="A live room preview for the moment before you specify. Swap materials, compare palettes, and share the link with the room still open."
+        image={hero}
+        primary={{ label: "Join the waitlist", to: "/contact" }}
+        secondary={{ label: "Order samples instead", to: "/samples" }}
+      />
 
-      {/* App */}
-      <section id="app" className="border-y border-line/60 bg-canvas-2/40 px-6 py-12 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.65fr_1fr]">
-          {/* Preview */}
-          <div className="relative overflow-hidden rounded-3xl border border-line/60 bg-ink">
-            <div className="relative aspect-[4/3] w-full">
-              <img src={roomImg} alt={room} className="absolute inset-0 h-full w-full object-cover" />
-              {(Object.keys(choices) as Surface[]).map((s) => {
-                const p = PRODUCTS.find((x) => x.slug === choices[s]);
-                if (!p) return null;
-                const blend =
-                  s === "floor"
-                    ? "0 60% 0 0"
-                    : s === "wall"
-                      ? "0 0 40% 0"
-                      : s === "ceiling"
-                        ? "80% 0 0 0"
-                        : "40% 0 40% 60%";
-                return (
-                  <div
-                    key={s}
-                    className="pointer-events-none absolute inset-0 transition-opacity duration-300"
-                    style={{
-                      backgroundImage: `url(${p.cover})`,
-                      backgroundSize: s === "floor" ? "80% auto" : "60% auto",
-                      backgroundRepeat: "repeat",
-                      mixBlendMode: "multiply",
-                      opacity: s === surface ? opacity : 0.55,
-                      clipPath: `inset(${blend})`,
-                    }}
-                  />
-                );
-              })}
-              <div className="absolute left-4 top-4 flex gap-2">
-                {ROOMS.map((r) => (
-                  <button
-                    key={r.key}
-                    onClick={() => setRoom(r.key)}
-                    className={`rounded-full border px-3 py-1.5 text-xs backdrop-blur transition-colors ${
-                      room === r.key
-                        ? "border-copper bg-copper text-canvas"
-                        : "border-canvas/40 bg-ink/50 text-canvas hover:bg-ink/80"
-                    }`}
-                  >
-                    {r.name}
-                  </button>
-                ))}
+      <InfoStrip
+        eyebrow="What it will do"
+        lead="A quiet tool for the moment between the mood board and the tender — designed with architects, tested against real project rooms."
+      />
+
+      <StackingCards
+        labelN="02"
+        labelText="Capabilities"
+        title="Four things it does,"
+        titleEm="nothing it doesn't."
+        description="We're building the visualizer around a small set of decisions that actually change the specification — not a photoreal render engine."
+        items={CAPABILITIES}
+        renderItem={(e) => {
+          const Icon = e.Icon;
+          return (
+            <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{e.n}</span>
+                <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
+                  <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
+                </span>
               </div>
-              {activeMaterial ? (
-                <div className="absolute bottom-4 left-4 rounded-full bg-canvas/95 px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink backdrop-blur">
-                  {surface} · {activeMaterial.name} — {activeMaterial.code}
-                </div>
-              ) : null}
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{e.tag}</div>
+                <h3 className="display-serifish mt-2 text-2xl leading-tight md:text-3xl lg:text-4xl">{e.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
+              </div>
             </div>
+          );
+        }}
+      />
+
+      <ParallaxSplit
+        eyebrow="Built for architects"
+        title="A tool that fits the"
+        titleEm="way you already work."
+        body="Not another marketplace, not another render engine. A short walk between mood board and spec — designed with three studios who agreed to break it before we ship."
+        image={parallax}
+      />
+
+      <section className="relative px-5 py-24 md:px-10 md:py-32 lg:px-16">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+            When
           </div>
-
-          {/* Controls */}
-          <div className="flex flex-col gap-5 rounded-3xl border border-line/60 bg-canvas p-6">
-            <div>
-              <div className="eyebrow text-ink-soft">Surface</div>
-              <div className="mt-3 grid grid-cols-4 gap-2">
-                {SURFACES.map((s) => (
-                  <button
-                    key={s.key}
-                    onClick={() => setSurface(s.key as Surface)}
-                    className={`relative rounded-lg border py-3 text-xs transition-colors ${
-                      surface === s.key
-                        ? "border-copper bg-copper/10 text-copper"
-                        : "border-line hover:border-ink"
-                    }`}
-                  >
-                    {s.label}
-                    {surface === s.key ? (
-                      <span className="absolute inset-x-2 -bottom-0.5 h-0.5 bg-copper" />
-                    ) : null}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-baseline justify-between">
-                <div className="eyebrow text-ink-soft">Materials for {surface}</div>
-                <div className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-ink-soft">
-                  {materials.length}
-                </div>
-              </div>
-              <div className="mt-3 grid max-h-64 grid-cols-3 gap-2 overflow-y-auto pr-1">
-                {materials.map((m) => {
-                  const isActive = choices[surface] === m.slug;
-                  return (
-                    <button
-                      key={m.slug}
-                      onClick={() =>
-                        setChoices((c) => ({ ...c, [surface]: isActive ? null : m.slug }))
-                      }
-                      className={`group relative overflow-hidden rounded-lg border transition-all ${
-                        isActive ? "border-copper ring-2 ring-copper/40" : "border-line hover:border-ink"
-                      }`}
-                    >
-                      <div className="aspect-square">
-                        <img src={m.cover} alt={m.name} className="h-full w-full object-cover" />
-                      </div>
-                      <div className="truncate px-1.5 py-1 text-[0.6rem] text-ink-soft">
-                        {m.code}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-baseline justify-between">
-                <div className="eyebrow text-ink-soft">Overlay opacity</div>
-                <div className="font-mono text-[0.65rem] text-ink-soft">{Math.round(opacity * 100)}%</div>
-              </div>
-              <input
-                type="range"
-                min={0.3}
-                max={1}
-                step={0.05}
-                value={opacity}
-                onChange={(e) => setOpacity(parseFloat(e.target.value))}
-                className="mt-3 w-full accent-copper"
-              />
-            </div>
-
-            <div className="flex flex-wrap gap-2 border-t border-line pt-4">
-              <button
-                onClick={reset}
-                className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 text-xs hover:border-ink"
-              >
-                <RotateCcw className="h-3 w-3" /> Reset
-              </button>
-              <button className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 text-xs hover:border-ink">
-                <Save className="h-3 w-3" /> Save
-              </button>
-              <button className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 text-xs hover:border-ink">
-                <Share2 className="h-3 w-3" /> Share
-              </button>
-              <Link
-                to="/samples"
-                className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-copper px-4 py-2 text-xs text-canvas hover:bg-copper-deep"
-              >
-                <Layers className="h-3 w-3" /> Request these samples
-              </Link>
-            </div>
-          </div>
+          <WordReveal text="We're shipping the first version to invited studios this quarter. Public beta follows. If you'd like an early login, put yourself on the list — we'll open the door as soon as the paint is dry." />
         </div>
-
-        <p className="mx-auto mt-8 max-w-3xl text-center text-xs text-ink-soft">
-          Renderings are indicative — order physical samples for accurate colour, texture and finish.
-        </p>
       </section>
 
       <CTABand
-        eyebrow="Ready for the real thing?"
-        title="Order the physical kit and specify with certainty."
-        href="/samples"
-        cta="Order sample kit"
+        eyebrow="Early access"
+        title="Join the waitlist and we'll open the door as soon as it's ready."
+        href="/contact"
+        cta="Get early access"
       />
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 }

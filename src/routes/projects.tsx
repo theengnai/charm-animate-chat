@@ -65,56 +65,58 @@ function ProjectsPage() {
         secondary={{ label: "See our services", to: "/design-services" }}
       />
 
-      {/* Featured — SplitPanels */}
-      <SplitPanels
-        height="min-h-[130vh]"
-        behind={
-          <div className="relative h-full w-full">
-            <img
-              src={FEATURED.image}
-              alt={FEATURED.title}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-6 pb-16 text-center text-canvas">
+      {/* Featured — fixed-background hero band */}
+      <section
+        className="relative min-h-[95vh] w-full bg-cover bg-fixed bg-center"
+        style={{ backgroundImage: `url(${FEATURED.image})` }}
+        aria-label={FEATURED.title}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/40 to-ink/80" />
+        <div className="relative z-10 flex min-h-[95vh] items-end px-5 pb-20 md:px-10 md:pb-28">
+          <div className="mx-auto max-w-4xl text-center text-canvas">
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper-light">
+              {FEATURED.tag}
+            </div>
+            <h2 className="display-serifish mt-6 text-4xl leading-tight md:text-7xl">
+              {FEATURED.title}
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-canvas/80">
+              {FEATURED.body}
+            </p>
+            <div className="mt-6 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
+              {FEATURED.scope}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Signature series — three fixed-bg bands */}
+      {[
+        { img: band1, tag: "Hospitality · Lobby", title: "A quiet lobby, five storeys tall.", body: "Slatted oak, warm lighting and a floor that returns silence to the room." },
+        { img: band2, tag: "Residential · Villa", title: "A deck that watches the sunset.", body: "WPC boards laid to the sea line, no cupping after four summers." },
+        { img: band3, tag: "Cultural · Pavilion", title: "A screen the desert draws on.", body: "Perforated aluminium, hidden fixings, sand-adjustable panels." },
+      ].map((b) => (
+        <section
+          key={b.title}
+          className="relative min-h-[90vh] w-full bg-cover bg-fixed bg-center"
+          style={{ backgroundImage: `url(${b.img})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/30 to-ink/70" />
+          <div className="relative z-10 flex min-h-[90vh] items-end px-5 pb-20 md:px-10 md:pb-28">
+            <div className="mx-auto max-w-4xl text-canvas">
               <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper-light">
-                {FEATURED.tag}
+                {b.tag}
               </div>
-              <h2 className="display-serifish mt-4 text-4xl leading-tight md:text-6xl">
-                {FEATURED.title}
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-canvas/80">
-                {FEATURED.body}
+              <h3 className="display-serifish mt-5 text-3xl leading-tight md:text-6xl">
+                {b.title}
+              </h3>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-canvas/80">
+                {b.body}
               </p>
-              <div className="mt-4 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
-                {FEATURED.scope}
-              </div>
             </div>
           </div>
-        }
-        leftPanel={
-          <div className="flex h-full items-center justify-end pr-10">
-            <div className="text-right">
-              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper-light">
-                Featured
-              </div>
-              <div className="display-serifish mt-4 text-6xl leading-none md:text-8xl">01</div>
-            </div>
-          </div>
-        }
-        rightPanel={
-          <div className="flex h-full items-center justify-start pl-10 text-ink">
-            <div>
-              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-                Scroll to reveal
-              </div>
-              <div className="display-serifish mt-4 text-4xl md:text-5xl">
-                A place, not <em className="italic text-copper">a render.</em>
-              </div>
-            </div>
-          </div>
-        }
-      />
+        </section>
+      ))}
 
       {/* ParallaxLayers sector intro */}
       <ParallaxLayers bg={p3} height="min-h-[70vh]">

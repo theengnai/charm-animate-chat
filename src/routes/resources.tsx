@@ -107,7 +107,6 @@ function ResourcesPage() {
       {/* Sticky TOC with categories */}
       <StickyTOC
         eyebrow="Library"
-        stickyUntilEnd
         items={CATEGORIES.map((c) => ({ id: c.id, label: c.label }))}
       >
         {CATEGORIES.map((c) => {

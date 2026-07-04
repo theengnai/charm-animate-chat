@@ -166,7 +166,7 @@ function DesignServicesPage() {
               <div key={t.name} className="group">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-ink">
                   <img
-                    src={t.avatar}
+                    src={t.photo}
                     alt={t.name}
                     className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
                   />

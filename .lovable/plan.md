@@ -1,189 +1,120 @@
-# Ecosmart — 7 New Pages: Creative, Motion & Content Blueprint
+# Rebuild subpages — About-style heroes, scroll storytelling, info-first content
 
-Editorial-industrial world. Warm canvas `#faf7f1`, ink `#141210`, copper `#B8623A`, muted sage `#7B8A6A`, bone `#EDE6D6`. Jost for display (tight tracking, uppercase eyebrows), Hanken Grotesk for body. Every page is a scroll story, not a document. GSAP + ScrollTrigger drives motion; Lenis smooth-scroll globally.
+## Goals
+- Every subpage opens with a hero that matches the About page (full-bleed image/video with Ken Burns motion, dark gradient, eyebrow label, oversized serif headline with copper italic accent, subcopy, dual CTA row).
+- Replace thin/spacing-heavy layouts with dense, editorial info sections — stacking-card scroll, pinned horizontal scroll, scroll-linked word reveal, marquee strip, sticky number lists, parallax split-image blocks.
+- Kill the empty-space bug under the Products hero and similar gaps everywhere.
+- Every page ends with the same footer + CTA band used on About (visual consistency).
+- Visualizer becomes an **info page** describing what the tool will do — no live canvas, no material picker.
+- Menu exposes every route.
 
-## Global Motion System (built once, reused everywhere)
+## Global changes
 
-- **Lenis smooth scroll** wired at root, `lerp: 0.09`. Respects `prefers-reduced-motion` (falls back to native scroll, disables reveals).
-- **Reveal primitive** `<Reveal y=40 delay=0>` — GSAP `from` on enter, `once: true`, staggered when parent uses `<RevealGroup stagger=0.08>`.
-- **Split text** headings animate word-by-word with mask reveal (`clip-path: inset(0 0 100% 0)` → `0`). Duration 0.9s, ease `expo.out`.
-- **Sticky stacking cards** (already used on `/about`): shared `GsapStackingSection`, extended to support horizontal-pin variant.
-- **Horizontal pin scroll** for wide galleries (Products family strip, Projects sector strip): section pinned, inner track translates X = scroll delta.
-- **Marquee** infinite loop (client logos, certifications).
-- **Cursor:** custom copper dot follows pointer on desktop, scales to a ring with label on interactive elements ("View", "Drag", "Sample").
-- **Image reveals:** every hero image loads with a copper wipe overlay that retreats left-to-right.
-- **Number counters** count up when in view (stats strips).
-- **Page transition:** copper curtain sweeps up (0.5s) between routes, cross-fading content underneath.
-- **Micro:** buttons have magnetic hover (translate toward cursor ~6px), copper underline grows from left on links, image tiles zoom 1.04 on hover with grain overlay fading in.
+### 1. Menu (`src/components/nav/TopBar.tsx`)
+Add the missing items so the desktop nav and mobile overlay both list all 8:
+`Products · Projects · Design Services · Visualizer · Resources · Samples · About · Contact`.
+Keep the copper "Order Samples" pill for quick action.
 
-Design tokens to add in `src/styles.css`: `--color-sage`, `--color-bone`, `--shadow-editorial`, `--grain` (data-uri noise), `--ease-editorial: cubic-bezier(0.22, 1, 0.36, 1)`.
+### 2. Reusable About-style hero (new `src/components/common/StoryHero.tsx`)
+Extract the About hero pattern into one component so every subpage uses it:
+- Full-bleed background: image (Ken Burns via `animate-hero-kenburns`) OR looping muted video, with dark gradient overlay `from-ink/70 via-ink/55 to-ink/80`.
+- Eyebrow: `SectionLabel n="01"` light tone.
+- H1: `display-serifish text-5xl md:text-6xl lg:text-7xl` with copper `<em>` accent word.
+- Subcopy `max-w-xl`, dual CTA row (primary canvas pill + ghost outline).
+- Min height `min-h-[88vh]`, centered.
+- Props: `eyebrow, title, emphasis, subcopy, image, video?, primaryCta, secondaryCta`.
 
----
+### 3. Shared page shell
+Extract the About footer + a lightweight `PageCTA` band (dark ink block, "Let's build together" pattern) into `src/components/common/SiteFooter.tsx` (already exists — reuse) and update to match the About footer exactly so every page ends identically.
 
-## 1. `/products` — Products Library
+### 4. Scroll-animation primitives (reuse from About)
+- **StackingCards** — copy `GsapStackingSection` out of `about.tsx` into `src/components/motion/StackingCards.tsx` so every page can use it.
+- **HorizontalPin** — new. Pinned section, cards translate horizontally with scroll (used for process/timeline).
+- **WordReveal** — copy `VisionReveal` into `src/components/motion/WordReveal.tsx`.
+- **ParallaxSplit** — new. Two-column image + text block; image translates on scroll (framer `useScroll` + `useTransform`).
+- **Marquee** — reuse existing marquee style from About image strip.
 
-**Concept:** "A catalogue that behaves like a showroom." Vertical scroll opens into a horizontal pinned aisle per category.
+## Page-by-page rebuild
 
-**Sections & content:**
-1. **Hero** — Split. Left: eyebrow "The Library · 06 Families · 148 SKUs", H1 (mask-reveal, 3 lines) "Materials engineered for the way buildings actually live." Right: stacked, offset product chips (WPC, SPC, Aluminium, Panels) that parallax at different speeds.
-2. **Stat strip** — 4 counters: Families 06 · SKUs 148 · Finishes 42 · Certifications 09.
-3. **Family index (pinned horizontal)** — Each category is a full-viewport panel with cover image + name + one-line poem + "Enter family →". Scroll = horizontal track. On mobile becomes vertical stacked cards.
-4. **Filter bar** (sticky when grid enters view) — chips for application, finish, colour, fire rating.
-5. **Product grid** — 3 col, cards fade-up in staggered waves. Hover: image swaps to installed shot, code slides down, finish swatches expand.
-6. **Comparison drawer** — user can pin up to 3 products; bottom sheet slides up with side-by-side spec table.
-7. **CTA band** — "Not sure which family fits? Book a 20-min material consult." → `/design-services`.
+Each page: StoryHero → intro paragraph strip → 2–3 scroll-animated info sections → marquee/parallax visual break → CTA band → footer.
 
-**Detail page `/products/$slug`:**
-- Split-view hero: 60% image (drag to rotate through 6 shots), 40% sticky spec column.
-- Finish selector: clicking a swatch morphs the hero image (crossfade 300ms).
-- Scroll: Applications strip (icons + rooms) → Technical spec table (accordion by category) → Installation snippet (looping micro-video) → Certifications row → "Specified in these projects" (3 cards, live from projects data) → Downloads (datasheet, CAD, BIM) → Sample kit CTA.
+### `/products`
+- **Fix:** remove the huge padding under the current hero (was `pt-24` on section + extra hero spacing → collapse into single `min-h-[88vh]` hero).
+- **New sections:**
+  1. StoryHero — "Materials that **shape** architecture." Image: architectural facade close-up.
+  2. Intro strip — 3 stats (families, finishes, projects) with `Counter`.
+  3. **StackingCards** — 5 material families (Façade, Cladding, Interior Panels, Outdoor Decking, Custom). Each card: material photo left, copy right, spec row.
+  4. **ParallaxSplit** — "How we source" info block, image parallaxes.
+  5. **HorizontalPin** — "From spec to site" 6-step process.
+  6. Marquee — finish thumbnails, infinite scroll.
+  7. CTA band + Footer.
 
----
+### `/projects`
+1. StoryHero — "Every façade tells a **story**." Video hero.
+2. **StackingCards** — 5 signature project stories (image + narrative, no filter chips).
+3. **WordReveal** — a paragraph about the portfolio ethos.
+4. **HorizontalPin** — sectors (Residential, Hospitality, Commercial, Cultural, Public) as scrolling panels with hero image + copy.
+5. Numbers band (dark ink, copper accents).
+6. Marquee of project shots.
+7. CTA + Footer.
 
-## 2. `/projects` — Project Gallery
+### `/resources`
+1. StoryHero — "Specify with **confidence**." Blueprint/drawing image.
+2. Intro — what the library contains, editorial paragraph.
+3. **StackingCards** — 4 resource categories (Datasheets, Installation guides, CAD/BIM, Certifications) with descriptive copy.
+4. **ParallaxSplit** — "Lunch & learn" info block with image.
+5. Certifications strip (logos marquee).
+6. CTA + Footer.
+*(Static, no search/table — pure info.)*
 
-**Concept:** "Scroll a portfolio, not a folder." A single long editorial spread.
+### `/samples`
+1. StoryHero — "Touch it before you **specify**." Macro material shot.
+2. Intro — why physical samples matter.
+3. **HorizontalPin** — 3-step "How it works" (Curate → Confirm → Delivered), giant numerals.
+4. **StackingCards** — 4 curated kits described as stories, not a shop.
+5. **ParallaxSplit** — sustainability note (returned samples reused).
+6. FAQ (5 items, accordion).
+7. CTA + Footer.
+*(Drop the cart/localStorage tray; keep "Request kit" button linking to `/contact`.)*
 
-**Sections & content:**
-1. **Hero** — Full-bleed silent auto-play video (loop, 8s) of a finished space. Overlay: eyebrow "Selected Work · 2019–2026", H1 "Places that outlast their trends." Scroll cue: copper vertical line growing.
-2. **Featured project (stacking parallax)** — 3-image collage; images translate at different Y speeds as user scrolls. Text column fades in beside them: client, location, year, scope.
-3. **Sector filter bar** — Hospitality · Residential · Retail · F&B · Corporate · Public. Clicking = animated grid re-layout (FLIP).
-4. **Asymmetric bento grid** — mixed 1×1, 2×1, 2×2 tiles. On hover: image scales, ink overlay fades to 40%, title + location slide up, small copper arrow. Cards enter with staggered mask reveal.
-5. **Numbers band** — "180+ projects · 14 countries · 2.4M sqm delivered". Counters + thin sage divider.
-6. **Sector spotlight (pinned horizontal)** — one pinned section per sector with 3–4 marquee-scrolling images and a pull-quote from the client.
-7. **Map moment** — stylised world map, dots pulse for each project location; hover shows project card.
-8. **CTA band** — "Have a project in mind?" → `/contact`.
+### `/design-services`
+1. StoryHero — dark, "Design partners for **considered** buildings." Studio image.
+2. Intro paragraph strip.
+3. **StackingCards** — 4 services (Material consultation, Spec writing, Custom fabrication, On-site support).
+4. **HorizontalPin** — 7-step engagement timeline.
+5. **WordReveal** — design philosophy paragraph.
+6. **ParallaxSplit** — team snippet with photo.
+7. CTA + Footer.
 
-**Detail `/projects/$slug`:**
-- Hero: full-bleed image with title/meta bottom-anchored, parallax down.
-- Meta strip pinned as you scroll narrative (Client · Location · Year · Scope · Materials).
-- Long-form: 3 paragraphs interleaved with 2:3 and 3:2 images (Zellige-inspired asymmetric grid).
-- "Materials used" — inline product chips, click opens product side-drawer.
-- Full-width photo → 2-up gallery → wide photo rhythm.
-- Client quote (large serif-italic, copper quotation marks).
-- Next project peek (bottom 30vh reveals next case as you scroll → auto-navigates when fully in view).
+### `/visualizer` (info page only — no interactive canvas)
+1. StoryHero — "See your **surfaces** in situ." Rendered room hero image.
+2. Intro — what the visualizer is, coming-soon note.
+3. **StackingCards** — 4 capabilities described (Room presets, Material swap, A/B compare, Shareable links).
+4. **ParallaxSplit** — "Built for architects" info block.
+5. Waitlist CTA linking to `/contact` — "Get early access."
+6. Footer.
+*(Delete all current interactive state, room picker, opacity slider, `visualizer.ts` data usage — keep file as image references only.)*
 
----
+### `/contact`
+1. StoryHero — "Let's **talk** surfaces." Showroom photo.
+2. Intro — response commitments.
+3. Direct-channel rows (WhatsApp, Email, Phone, Calendly) — kept from current.
+4. **StackingCards** — 3 showroom cards (Riyadh, Dubai, Doha) with photo, address, hours.
+5. Form (kept, tightened spacing).
+6. Map (kept).
+7. Footer.
 
-## 3. `/resources` — Technical Resources
+## Technical notes
 
-**Concept:** "A quiet library, not a downloads dump." Feels like a specifier's desk.
+- New files: `src/components/common/StoryHero.tsx`, `src/components/motion/StackingCards.tsx`, `src/components/motion/HorizontalPin.tsx`, `src/components/motion/WordReveal.tsx`, `src/components/motion/ParallaxSplit.tsx`.
+- Refactor `about.tsx` to import `StackingCards` and `WordReveal` from the new shared modules (no visual change).
+- Update all subpage route files to import `StoryHero` + shared motion sections and drop bespoke hero markup.
+- Reuse existing hero images in `src/assets/about/`; generate 4 new hero images (1 each for Products, Projects, Resources, Samples/Visualizer shared, Design Services, Contact) via imagegen at 1920×1200.
+- Tailwind classes only; no new deps.
+- Every page: `min-h-[88vh]` hero, `py-20 md:py-28` section rhythm — no `py-40+` gaps.
+- `TopBar` NAV array expanded to include Samples + Contact.
 
-**Sections & content:**
-1. **Hero** — Left: eyebrow "For architects, specifiers & installers", H1 "Everything you need to specify with confidence.", search field (command-k style, autofocus on desktop). Right: animated stack of paper sheets fanning open on scroll.
-2. **Quick access rail** — 6 pill cards: Datasheets · Installation · CAD/BIM · Certifications · Care · Warranty. Icons hand-drawn line style. Hover fills copper.
-3. **Featured downloads** — 3 cards: "Latest WPC decking installation guide", "SPC 2026 catalogue", "Fire compliance dossier". Card = large icon, title, meta, download button.
-4. **Full library (tabs)** — shadcn Tabs. Each tab = table with icon, title, product family, version, updated, size, download. Row hover: copper underline animates across.
-5. **Sticky sidebar (desktop)** — "Most requested this month" + "Can't find what you need? Request custom docs." card with mini-form.
-6. **Certifications wall** — grid of logos (FSC, ISO, CE, TÜV…) with hover tooltip explaining what each certifies.
-7. **Learning strip** — 3 short-form articles: "Choosing WPC vs SPC", "Reading a fire rating", "Coastal installation checklist". Card enters with slide + copper corner accent.
-8. **CTA band** — "Need a lunch-and-learn for your studio?" → `/contact?type=lunch-learn`.
-
----
-
-## 4. `/samples` — Samples Request
-
-**Concept:** "Building a physical kit, live." The page IS the kit builder.
-
-**Sections & content:**
-1. **Hero** — Full-bleed close-up macro shot of material chips lit dramatically. Eyebrow "Touch before you specify", H1 "Order your Ecosmart kit." Subcopy: "Up to 8 chips, shipped in a linen envelope." CTA "Start building →" smooth-scrolls to grid.
-2. **How it works (3 steps, sticky-numbered)** — big "01 / 02 / 03" numerals pin left while text panels scroll past on right. 01 Pick chips · 02 Tell us about your project · 03 We ship in 3 days.
-3. **Kit tray (sticky right on desktop, bottom sheet on mobile)** — visible from step 4 onward. Shows selected chips as tiny cards with X to remove, "3 of 8" counter, "Continue →" button. When a chip is added: chip animates from grid position into the tray (GSAP FLIP), tray shakes gently.
-4. **Sample grid** — filter chips (category, finish, colour). Cards: square material image, name, code. "Add" button flips to "In your kit ✓" with copper fill. Empty kit state has a dashed outline that pulses subtly.
-5. **Recommended combinations** — 3 curated kits ("Coastal residence", "Boutique hospitality", "Corporate lobby") — clicking adds all chips at once with cascading animation.
-6. **Details form (unlocks when kit ≥ 1)** — smooth reveal. Fields: name, company, role (dropdown: Architect / Interior Designer / Contractor / Developer / Other), email, phone, shipping address (with country select), project stage, timeline, notes.
-7. **Trust strip** — icons: Ships in 3 days · Free in UAE · Nominal fee international · Recyclable packaging.
-8. **FAQ** — 5 items, accordion with copper "+/−" animation.
-9. **Submission** — button spans full width, on click: kit chips animate into an envelope illustration that seals + flies off screen; success screen with order ref + "Explore projects while you wait" secondary CTA.
-
-Persist kit in `localStorage`. Backend wiring flagged as TODO comment.
-
----
-
-## 5. `/visualizer` — The Visualizer
-
-**Concept:** "A material scanner for your room." Tactile, immediate, playful but professional.
-
-**Sections & content:**
-1. **Intro (short, 60vh)** — Eyebrow "Interactive · Beta", H1 "See it before you spec it.", one-line subcopy, "Launch visualizer ↓" button. Behind: a room preview slowly cycling through 4 material overlays (auto A/B every 3s).
-2. **Main app (100vh, no scroll while active)** — Two-column desktop:
-   - **Left 65%: room canvas.** Base room image (Living / Lobby / Restaurant / Outdoor Deck presets, top-left dropdown). Overlaid masked layers for Floor / Wall / Ceiling / Accent. Currently-selected surface has a subtle copper stroke. Compare mode = draggable vertical split slider (before/after).
-   - **Right 35%: control panel.** Surface tabs at top. Below: material picker grid (filtered by surface) with drag-to-reorder favourites row. Bottom: opacity slider, "Reset", "Save look", "Share" (copies URL with encoded state), "Request these samples" (deep-links to `/samples` with kit prefilled).
-3. **Mobile:** canvas full-width, controls as swipeable bottom sheet (3 snap points: peek 12%, half 55%, full 92%).
-4. **Motion:** material swap = 250ms crossfade with slight scale (1.02→1). Surface tab change = copper underline slides. Opacity slider has haptic-style tick sounds (optional, off by default).
-5. **Saved looks strip** (below fold) — thumbnails of localStorage-saved compositions. Click restores. Long-press to delete.
-6. **Disclaimer strip** — small print: "Renderings indicative — order samples for accurate colour."
-7. **CTA band** — "Ready for the real thing?" → `/samples`.
-
-**Tech:** URL search params via TanStack `useSearch` for shareable state (`?room=lobby&floor=wpc-oak&wall=panel-linen&opacity=0.85`). Pure CSS overlay approach: overlay div uses `background-image` + `mix-blend-mode: multiply` and `mask-image` (per-surface PNG mask baked with each room).
-
----
-
-## 6. `/design-services` — Design Services
-
-**Concept:** "A cinematic reel of how we work." Feels editorial-slow, high-craft.
-
-**Sections & content:**
-1. **Hero (dark section, first dark break in the site)** — Ink background. Single centred line, split-word reveal: "From concept to installation, engineered around your space." Below: copper hairline growing to 120px, then scroll cue.
-2. **Manifesto strip** — 3 short paragraphs pinned as user scrolls, each fades in and out like slides. "We start with the room." → "We choose materials that age well." → "We stay through installation."
-3. **Services (sticky stacking cards, reuse `/about` pattern)** — 4 cards: Space Consultation · Material Curation · Custom Fabrication · Installation Supervision. Each card: eyebrow number, title, promise sentence, 3 bullet deliverables, small hand-drawn line illustration.
-4. **Process timeline** — Horizontal pinned scroll: 7 steps (Brief · Site Study · Palette · Prototype · Production · Install · Handover). Each step: big roman numeral, one-sentence description, thumbnail photo. A copper progress line draws across as user scrolls the pin.
-5. **Case study reel** — 3 mini project cards with hover video preview. Copy: "See it in the wild →".
-6. **Team snippet** — 3 senior designers. Portraits in warm grade, name in Jost, role, 1-line bio. Photos have subtle Ken Burns loop.
-7. **Engagement tiers** — 3 cards (Consult · Curate · Turnkey). Each: what's included, typical timeline, ideal for. No prices — "Request proposal" button. On hover: card lifts, copper corner-bracket animates in.
-8. **Testimonial quote** — one large-format quote, sage background, serif italic.
-9. **CTA band** — "Book a design consultation" → `/contact?type=design`.
-
----
-
-## 7. `/contact` — Contact
-
-**Concept:** "A concierge, not a form." Warm, personal, obvious channels first.
-
-**Sections & content:**
-1. **Hero (split, no scroll needed to see form)** — Left 55%: eyebrow "We reply within one business day.", H1 "Let's build something enduring.", subcopy. Then large tappable direct-channel rows (icon + label + value + copper arrow): WhatsApp · Email · Phone · Book a call (Calendly link). Right 45%: photograph of the Dubai showroom, copper frame that draws-in on load, small caption "Al Quoz · Open Sun–Thu, 9–6".
-2. **Contact form (below, generous)** — Card on bone background. Fields grouped: About you (name, company, role), How to reach you (email, phone, preferred channel radio), What's it about (inquiry type dropdown: Sample / Quote / Project consult / Design services / Press / Careers / Other), Your message (textarea), optional "I'd like a callback" checkbox with time-window selector. Inline validation. Submit button spans width; on submit → success state slides in from below with "We've got it — reference #ES-2607-XXXX".
-3. **Showrooms grid** — 3 cards (Dubai HQ · Riyadh · Doha). Each: photo, address, hours, phone, "Get directions" (opens maps), "Book showroom visit". Cards enter with staggered slide-up.
-4. **Map** — Full-width embedded Mapbox/Google map of Dubai HQ, custom copper pin, muted map style.
-5. **FAQ mini** — 4 items: lead times, minimum order, international shipping, warranty.
-6. **Footer band** — Social links (Instagram, LinkedIn, Pinterest, YouTube) as oversized icons with copper hover fill. Response-time promise reiterated.
-
----
-
-## Nav & Global Updates
-
-- `TopBar` NAV becomes: Products (`/products`), Projects (`/projects`), Design Services (`/design-services`), Resources (`/resources`), Visualizer (`/visualizer`), About (`/about`).
-- Secondary actions in top-right: Samples pill button (copper, always visible), Contact link.
-- Mobile: full-screen overlay menu (fades in, links stagger-reveal), includes Samples + Contact + language + theme toggle.
-- Footer: add columns for the new pages, newsletter capture, address, socials.
-
-## Content Voice
-
-Editorial, calm, confident. Short sentences. Concrete nouns over adjectives. Never "solutions", "innovative", "cutting-edge". Prefer verbs: shaped, specified, installed, ages, weathers. Eyebrows are always uppercase, mono-tracked. Body copy under 65 characters per line.
-
-## Data Seeds
-
-- `src/data/products.ts` — 12 products across 4 families with finishes, specs, applications, downloads.
-- `src/data/projects.ts` — 8 projects with meta, narrative, gallery placeholders, materials used.
-- `src/data/resources.ts` — 24 documents across 6 tabs.
-- `src/data/visualizer.ts` — 4 rooms with surface masks + material library mapped to product IDs.
-- `src/data/team.ts` — 3 senior designers.
-
-## Tech Stack Additions
-
-- `bun add gsap @studio-freight/lenis`
-- Wrap app with a `LenisProvider` in `__root.tsx`.
-- Shared components: `PageHero`, `RevealGroup`, `Reveal`, `SplitHeading`, `Marquee`, `Counter`, `MagneticButton`, `PinnedHorizontal`, `StackingCards` (extract from about), `CTABand`, `FilterChips`, `SampleKitTray`, `ProductCard`, `ProjectTile`, `CommandSearch`, `RoomPreview`, `MaterialPicker`, `CompareSlider`, `PageTransitionCurtain`.
-
-## Build Order (one page per turn)
-
-1. Global motion primitives + nav/footer update.
-2. `/products` + `/products/$slug` + data seed.
-3. `/projects` + `/projects/$slug` + data seed.
-4. `/visualizer` (relies on product data).
-5. `/samples` (deep-links from visualizer & product detail).
-6. `/design-services`.
-7. `/resources`.
-8. `/contact`.
-
-Backend (form submits, sample orders) flagged as TODO; wire to Lovable Cloud in a follow-up pass.
+## Out of scope
+- Backend wiring for forms (still TODO).
+- Interactive visualizer canvas (deferred — page becomes info + waitlist).
+- Product/project detail routes.

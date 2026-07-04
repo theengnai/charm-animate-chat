@@ -48,11 +48,14 @@ export function TopBar() {
       >
         <div className="flex items-center justify-between gap-6">
           <a href="/" className="flex items-center">
-            <img
-              src={lightLogo}
-              alt="Ecosmart"
-              className={`h-8 w-auto md:h-9 ${isHome ? "brightness-0 dark:brightness-100" : "brightness-100 dark:brightness-100"}`}
-            />
+            {scrolled || open || isHome ? (
+              <>
+                <img src={darkLogoAsset.url} alt="Ecosmart" className="block h-8 w-auto dark:hidden md:h-9" />
+                <img src={lightLogo} alt="Ecosmart" className="hidden h-8 w-auto dark:block md:h-9" />
+              </>
+            ) : (
+              <img src={lightLogo} alt="Ecosmart" className="h-8 w-auto md:h-9" />
+            )}
           </a>
 
           <nav className="hidden items-center gap-5 xl:flex xl:gap-7">

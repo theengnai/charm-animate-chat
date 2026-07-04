@@ -1,147 +1,53 @@
-# Animation Diversification + Extra Sections Plan
+## Fixes across five pages
 
-Goal: give each subpage a distinct scroll personality. No animation technique is reused across pages. Add 1–2 new info sections per page. Keep the shared `StoryHero` (visual consistency at the top only).
+### 1. `/products` — pin the "Families" nav
+`StickyTOC.tsx` already uses `lg:sticky lg:top-28`, but the parent `<section>` has `py-24 md:py-32` which caps the sticky column height and lets it scroll off. Fix by:
+- Removing `lg:h-fit` from the aside (was collapsing sticky bounds) and giving it an explicit `lg:max-h-[calc(100vh-8rem)] lg:overflow-auto`.
+- Ensuring the outer `<section>` isn't creating a new `overflow` context (leave `relative` only).
+- Result: on `/products` and `/resources` the left column (Families / Library) stays pinned the whole time you scroll through the family/category stack.
 
-## Animation library to build (each used on ONE page only)
+### 2. `/projects` — fix the "Featured" section + hard edges + new fixed-bg strip
 
-New reusable motion primitives under `src/components/motion/`:
+- **Replace the featured image** (`p1 = sol-facade.jpg`) with a newly generated cinematic hero for the Sunbeam Boutique Hotel featured card (`src/assets/pages/projects-featured.jpg`).
+- **Fix background on scroll**: convert the featured section from `SplitPanels` (which is doing a weird pinned scrub the user dislikes) to a full-width **parallax-fixed hero band** — image uses `bg-fixed bg-cover bg-center`, dark gradient, centered copy. Same visual language as the About page.
+- **Add a new "Signature series" section** below featured: **three stacked full-width bands**, each 90vh, same style, each with its own `bg-fixed` image and a short caption (hospitality lobby / villa deck / cultural pavilion). Generates 3 new images: `projects-band-1/2/3.jpg`.
+- **Hard corners in "A slower browse"**: remove `rounded-2xl` from the `ClipReveal` card wrappers (and any inner image rounding) so the project index cards have sharp edges. Keep hover scale.
 
-1. `BlurFocus.tsx` — element enters blurred (`filter: blur(14px)`) and sharpens to 0 as it crosses viewport. Framer `useScroll` + `useTransform`.
-2. `ClipReveal.tsx` — `clip-path: inset(...)` curtain unmask for images and section headers.
-3. `AlternatingSlide.tsx` — list items alternate slide-in from left / right with stagger.
-4. `ScaleIn.tsx` — 0.9 → 1.0 with soft opacity pop, IntersectionObserver-triggered.
-5. `ParallaxLayers.tsx` — 3-layer bg/mid/fg with different `y` transforms.
-6. `ZoomOutHero.tsx` — hero image starts at scale 1.25 and eases to 1.0 on load+scroll (variant of StoryHero, opt-in).
-7. `SvgLineDraw.tsx` — SVG path with `pathLength` animated by scroll progress (for timelines / connectors).
-8. `CountUp.tsx` — number animates 0 → target when in view (replaces old `Counter` where needed).
-9. `ScrollProgressBar.tsx` — 2px top bar filling with `scrollYProgress`.
-10. `PinnedSwap.tsx` — section pins; inner text/image swaps by scroll segments (GSAP ScrollTrigger).
-11. `SplitPanels.tsx` — two panels slide apart on scroll to reveal content behind.
-12. `StickyTOC.tsx` — sticky sidebar nav that highlights active section via IntersectionObserver.
-13. `LetterReveal.tsx` — heading animates letter-by-letter (extends existing `SplitHeading`).
-14. `TextColorShift.tsx` — paragraph words shift from muted → foreground as they cross center.
-15. `HighlightSweep.tsx` — copper background sweeps behind a phrase on scroll.
+Net: `/projects` becomes hero → fixed-bg featured → parallax sectors → **3 new fixed-bg bands** → hard-edged project index → numbers → logos → CTA.
 
-Existing `StackingCards`, `HorizontalPin`, `WordReveal`, `ParallaxSplit`, `Reveal` stay — but each is now assigned to exactly ONE page (see matrix below) and removed from the others.
+### 3. `/design-services` — 4th team member
 
-## Per-page assignment (no overlap)
+`src/data/team.ts` currently exports 3 people; the page already slices to 4 but only 3 render. Add a 4th entry (e.g. "Yara Suleiman — Project Manager") reusing an existing about-image asset so the grid fills to four across on desktop.
 
-Each page keeps `StoryHero` at top and `CTABand` + `SiteFooter` at bottom. Between them, the sections and animations are unique.
+### 4. `/visualizer` — actually animate the capability blocks
 
-### `/products` — "Catalog / precision"
-Signature: **Blur-to-focus + Sticky TOC + Highlight sweep**
-Sections:
-1. StoryHero
-2. Intro paragraph with `HighlightSweep` on the key phrase
-3. `StickyTOC` layout: left sticky index of material families, right long-scroll content blocks (one per family) with `BlurFocus` on hero image + `AlternatingSlide` for spec rows
-4. **NEW** "Performance ratings" strip — 4 KPI tiles with `CountUp` (slip resistance, PEI, water absorption, recycled content)
-5. **NEW** "Finish library" swatch wall — grid of finish thumbnails with `ScaleIn` stagger
-6. CTA band → Samples
+`ParallaxSplit` currently isn't producing visible motion for the user. Replace the four capability calls with a new lightweight component `SlideFromSide.tsx` that:
+- On enter, image slides in from left (or right, alternating) with `x: -120 → 0`, opacity `0 → 1`.
+- Text column slides in from the opposite side with a slight delay.
+- Framer Motion `whileInView`, `viewport={{ once: true, margin: "-15%" }}`, easing `[0.16,1,0.3,1]`, 0.9s.
 
-### `/projects` — "Editorial / cinematic"
-Signature: **Clip-path reveal + Parallax layers + Split panels**
-Sections:
-1. StoryHero
-2. Featured project: `SplitPanels` — two panels slide apart to reveal the hero project image + copy
-3. `ParallaxLayers` sector intro (sky / building silhouette / foreground text)
-4. Project index grid — each card uses `ClipReveal` on the image
-5. **NEW** "By the numbers" band — `CountUp` on m², countries, sectors, years
-6. **NEW** Client logo marquee (infinite CSS marquee, no scroll-tie)
-7. CTA band
+Applied to all 4 capability sections so each one has clear directional entry motion as you scroll.
 
-### `/resources` — "Reference / library"
-Signature: **Sticky sidebar TOC + Text color shift**
-Sections:
-1. StoryHero
-2. `StickyTOC` (owned here) — left rail with categories (BIM, CAD, specs, care, certifications), right long content with `TextColorShift` on section intros
-3. Featured downloads: `AlternatingSlide` list
-4. **NEW** "Standards & certifications" logo wall with `BlurFocus`
-5. **NEW** "Ask a technical rep" inline card (info only, links to /contact)
-6. CTA band
+### 5. `/resources` — pin the "Library" nav + design the category cards
 
-### `/samples` — "Guided flow / step-by-step"
-Signature: **SVG line draw + Pinned swap**
-Sections:
-1. StoryHero
-2. `SvgLineDraw` 3-step process (connector line draws as you scroll between steps)
-3. `PinnedSwap` — pinned frame, inner content swaps through 4 curated kits as you scroll
-4. **NEW** "What's in a sample kit" exploded diagram with `ClipReveal` (assigned only here for the diagram; ClipReveal is Projects' hero — replace with `ScaleIn` reveal instead to keep uniqueness). Correction: use `ScaleIn` here.
-5. **NEW** Shipping & lead-time info strip
-6. FAQ (native `<details>`, no motion)
-7. CTA band
+- **Pin Library**: same `StickyTOC` fix as products (shared component, one change fixes both).
+- **Design the category items**: currently the file rows under each category (Datasheets / Installation / CAD & BIM / Compliance) are plain underlined text links. Redesign each row as a **card tile**:
+  - Small file-type badge (PDF / ZIP / DWG) in a copper pill on the left
+  - Title in medium weight
+  - Size + download arrow on the right
+  - Bordered rounded-lg card, hover lifts and border turns copper
+  - Grid of 2 columns on desktop instead of a divided list
+- Keep the `AlternatingSlide` reveal.
 
-### `/design-services` — "Cinematic dark / narrative"
-Signature: **Letter reveal + Horizontal pin + Zoom-out hero**
-Sections:
-1. StoryHero using `ZoomOutHero` variant
-2. `LetterReveal` manifesto headline
-3. Services grid with `AlternatingSlide` — wait, assigned to Products. Replace with plain `Reveal` stagger (Reveal is generic, allowed anywhere as the baseline). Use `Reveal` here.
-4. `HorizontalPin` 7-step engagement timeline (owned here)
-5. **NEW** Team portrait strip with hover lift only (no scroll anim, for contrast)
-6. **NEW** Engagement tiers comparison table
-7. CTA band
+## Files touched
+- `src/components/motion/StickyTOC.tsx` — sticky fix
+- `src/components/motion/SlideFromSide.tsx` — new
+- `src/data/team.ts` — 4th teammate
+- `src/routes/projects.tsx` — featured redo, 3 fixed-bg bands, hard corners
+- `src/routes/visualizer.tsx` — swap ParallaxSplit → SlideFromSide
+- `src/routes/resources.tsx` — redesigned file cards
+- 4 new images: `projects-featured.jpg`, `projects-band-1.jpg`, `projects-band-2.jpg`, `projects-band-3.jpg`
 
-### `/visualizer` — "Product tease / progressive disclosure"
-Signature: **Parallax split + Word reveal + Scroll progress bar**
-Sections:
-1. StoryHero
-2. `ScrollProgressBar` at top of page (owned here — its narrative is progressive)
-3. `WordReveal` manifesto (owned here)
-4. `ParallaxSplit` capability blocks (owned here) — 4 alternating image/text
-5. **NEW** "Roadmap" vertical timeline with dotted connector (static SVG, no draw — SvgLineDraw belongs to Samples)
-6. **NEW** Waitlist card (info only, links to /contact)
-7. CTA band
-
-### `/contact` — "Direct / human"
-Signature: **Stacking cards + Text color shift on intro**
-Sections:
-1. StoryHero
-2. Intro line with `TextColorShift` — wait, assigned to Resources. Use `HighlightSweep` — assigned to Products. Resolution: give Contact its own signature = **`StackingCards` (owned here) + simple `Reveal`**. Move `StackingCards` off Products/Projects/etc. entirely.
-3. Direct channel rows (phone / email / WhatsApp) with `Reveal` stagger
-4. `StackingCards` — 3 showroom cards pin and stack
-5. Contact form (no scroll animation, focus states only)
-6. **NEW** Embedded map full-bleed
-7. **NEW** "Response times & office hours" info strip
-8. CTA band → back to /samples
-
-## Final ownership matrix (one page per technique)
-
-| Technique | Page |
-|---|---|
-| BlurFocus | Products (+ Resources logo wall — allowed since it's a secondary use of a different kind; if strict, drop from Resources) |
-| StickyTOC | Products + Resources (both need a TOC pattern — acceptable as it's a layout, not a motion signature) |
-| HighlightSweep | Products |
-| CountUp | Products (KPIs) + Projects (numbers band) — different contexts |
-| ScaleIn | Products (swatches) + Samples (diagram) |
-| SplitPanels | Projects |
-| ParallaxLayers | Projects |
-| ClipReveal | Projects |
-| TextColorShift | Resources |
-| AlternatingSlide | Products spec rows + Resources downloads |
-| SvgLineDraw | Samples |
-| PinnedSwap | Samples |
-| LetterReveal | Design services |
-| ZoomOutHero | Design services |
-| HorizontalPin | Design services |
-| ScrollProgressBar | Visualizer |
-| WordReveal | Visualizer |
-| ParallaxSplit | Visualizer |
-| StackingCards | Contact |
-
-Strict "one per page" isn't possible for every primitive without hurting UX (CountUp, ScaleIn, StickyTOC are layout tools, not signatures). Each page still has a **unique signature combo** no other page shares, which is what makes them feel different.
-
-## Cleanup
-
-- Remove `StackingCards`, `HorizontalPin`, `WordReveal`, `ParallaxSplit` calls from every page except their owner in the matrix above.
-- Delete `InfoStrip` if unused after rewrite, or keep as generic building block.
-- `TopBar` unchanged (already has all pages).
-- `about.tsx` unchanged.
-
-## Deliverables
-
-- 15 new motion components listed above.
-- Rewrite of all 7 subpage route files using the matrix.
-- Each page gains 1–2 NEW info sections (marked **NEW** above).
-- Typecheck + curl smoke test all routes.
-
-Out of scope: backend form wiring, real visualizer interactivity, new hero images (reuse existing).
+## Out of scope
+- Home / About / Products library items / Samples / Contact — untouched.
+- No backend, no new routes.

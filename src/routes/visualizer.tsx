@@ -6,7 +6,7 @@ import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
 import { ScrollProgressBar } from "@/components/motion/ScrollProgressBar";
 import { WordReveal } from "@/components/motion/WordReveal";
-import { ParallaxSplit } from "@/components/motion/ParallaxSplit";
+import { SlideFromSide } from "@/components/motion/SlideFromSide";
 import { Reveal } from "@/components/motion/Reveal";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import hero from "@/assets/pages/hero-visualizer.jpg";
@@ -67,9 +67,9 @@ function VisualizerPage() {
         </div>
       </section>
 
-      {/* ParallaxSplit capability blocks — alternating */}
+      {/* SlideFromSide capability blocks — alternating direction */}
       {CAPABILITIES.map((c, i) => (
-        <ParallaxSplit
+        <SlideFromSide
           key={c.title}
           eyebrow={c.tag}
           title={c.title.split(" ").slice(0, -1).join(" ")}

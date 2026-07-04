@@ -124,21 +124,36 @@ function ResourcesPage() {
                 <h3 className="display-serifish text-3xl md:text-5xl">{c.label}</h3>
               </div>
               <p className="mt-6 max-w-2xl text-base text-ink-soft">{c.intro}</p>
-              <div className="mt-10 divide-y divide-line/50">
-                {c.files.map((f, j) => (
-                  <AlternatingSlide key={f[0]} index={j}>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className="group flex items-center justify-between gap-6 py-4 transition-colors hover:text-copper"
-                    >
-                      <span className="text-base font-medium">{f[0]}</span>
-                      <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft group-hover:text-copper">
-                        {f[1]} ↓
-                      </span>
-                    </a>
-                  </AlternatingSlide>
-                ))}
+              <div className="mt-10 grid gap-4 md:grid-cols-2">
+                {c.files.map((f, j) => {
+                  const type = f[1].split(" ")[0]; // "PDF" / "ZIP"
+                  return (
+                    <AlternatingSlide key={f[0]} index={j}>
+                      <a
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        className="group flex items-start justify-between gap-5 rounded-lg border border-line/60 bg-canvas p-5 transition-all hover:-translate-y-1 hover:border-copper hover:shadow-[0_20px_40px_-25px_rgba(0,0,0,0.3)]"
+                      >
+                        <div className="flex items-start gap-4">
+                          <span className="mt-0.5 inline-flex items-center justify-center rounded-full bg-copper/10 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-copper">
+                            {type}
+                          </span>
+                          <div>
+                            <div className="text-sm font-medium leading-snug text-ink group-hover:text-copper md:text-base">
+                              {f[0]}
+                            </div>
+                            <div className="mt-1 font-mono text-[0.6rem] uppercase tracking-[0.22em] text-ink-soft">
+                              {f[1]}
+                            </div>
+                          </div>
+                        </div>
+                        <span className="shrink-0 font-mono text-lg text-ink-soft transition-transform group-hover:translate-y-0.5 group-hover:text-copper">
+                          ↓
+                        </span>
+                      </a>
+                    </AlternatingSlide>
+                  );
+                })}
               </div>
             </article>
           );

@@ -35,7 +35,7 @@ export function StickyTOC({
   return (
     <section className="relative px-5 py-24 md:px-10 md:py-32 lg:px-16">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(220px,260px)_1fr] lg:gap-20">
-        <aside className="lg:sticky lg:top-28 lg:h-fit">
+        <aside className="lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-8rem)] lg:overflow-auto">
           {eyebrow ? (
             <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
               {eyebrow}

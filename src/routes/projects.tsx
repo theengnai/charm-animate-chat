@@ -36,7 +36,7 @@ const FEATURED = {
   title: "Sunbeam Boutique Hotel",
   body: "A copper-veined façade wrapping a five-storey lobby — mocked up three times before we found the right shadow at 4 pm.",
   scope: "Ventilated rainscreen · Interior lobby · Signage backing",
-  image: p1,
+  image: featured,
 };
 
 const PROJECTS = [

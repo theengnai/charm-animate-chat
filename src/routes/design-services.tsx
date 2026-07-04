@@ -1,17 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Compass, Layers, Wrench, Hammer } from "lucide-react";
+import { Compass, Layers, Wrench, Hammer, Check } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
-import { InfoStrip } from "@/components/common/InfoStrip";
-import { StackingCards } from "@/components/motion/StackingCards";
 import { HorizontalPin } from "@/components/motion/HorizontalPin";
-import { WordReveal } from "@/components/motion/WordReveal";
-import { ParallaxSplit } from "@/components/motion/ParallaxSplit";
+import { LetterReveal } from "@/components/motion/LetterReveal";
+import { Reveal } from "@/components/motion/Reveal";
+import { RevealGroup } from "@/components/motion/RevealGroup";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { TEAM } from "@/data/team";
 import hero from "@/assets/pages/hero-design.jpg";
-import parallax from "@/assets/about/sol-architect.jpg";
 
 export const Route = createFileRoute("/design-services")({
   head: () => ({
@@ -27,10 +26,10 @@ export const Route = createFileRoute("/design-services")({
 });
 
 const SERVICES = [
-  { n: "01", Icon: Compass, tag: "Consultation", title: "Space Consultation", body: "We start with the room — light, flow, sound, budget, deadline — and only then reach for the catalogue. A site visit, an interrogation of the brief, a first shortlist." },
-  { n: "02", Icon: Layers, tag: "Curation", title: "Material Curation", body: "A shortlist that fits your palette, your programme and your fire strategy. Physical samples, written rationale, spec-ready selection." },
-  { n: "03", Icon: Hammer, tag: "Fabrication", title: "Custom Fabrication", body: "When the catalogue doesn't fit, we build to fit. Custom sizes, colours, perforations and finishes — with a full-scale prototype before production." },
-  { n: "04", Icon: Wrench, tag: "Install", title: "Install Supervision", body: "Method statements, toolbox talks, snagging and sign-off. We stay on site until the last panel clicks and the client walks the wall." },
+  { Icon: Compass, tag: "Consultation", title: "Space Consultation", body: "We start with the room — light, flow, sound, budget, deadline — and only then reach for the catalogue." },
+  { Icon: Layers, tag: "Curation", title: "Material Curation", body: "A shortlist that fits your palette, your programme and your fire strategy. Physical samples, written rationale, spec-ready selection." },
+  { Icon: Hammer, tag: "Fabrication", title: "Custom Fabrication", body: "When the catalogue doesn't fit, we build to fit — custom sizes, colours, perforations and finishes with a full-scale prototype." },
+  { Icon: Wrench, tag: "Install", title: "Install Supervision", body: "Method statements, toolbox talks, snagging and sign-off. We stay on site until the last panel clicks." },
 ];
 
 const PROCESS = [
@@ -41,6 +40,28 @@ const PROCESS = [
   { t: "Produce", d: "We batch and QC before shipping." },
   { t: "Install", d: "We supervise every square metre." },
   { t: "Handover", d: "We hand you a room, not a box." },
+];
+
+const TIERS = [
+  {
+    name: "Consult",
+    price: "From AED 3,500",
+    for: "A single room / façade element",
+    features: ["Site visit", "Material shortlist", "Written rationale", "Sample kit", "One revision"],
+  },
+  {
+    name: "Curate",
+    price: "From AED 12,000",
+    for: "A full project palette",
+    features: ["Everything in Consult", "Full palette across surfaces", "Spec-ready selection", "Fire & warranty notes", "Two revisions", "Mock-up review"],
+    featured: true,
+  },
+  {
+    name: "Deliver",
+    price: "Bespoke",
+    for: "End-to-end supply + install",
+    features: ["Everything in Curate", "Custom fabrication", "Batch QC", "On-site supervision", "Snagging + sign-off", "10-year warranty"],
+  },
 ];
 
 function DesignServicesPage() {
@@ -58,38 +79,63 @@ function DesignServicesPage() {
         secondary={{ label: "See our work", to: "/projects" }}
       />
 
-      <InfoStrip
-        eyebrow="How we work"
-        lead="We work as an extension of your studio — bringing material knowledge to the drawing board, and drawing knowledge to the site."
-      />
+      {/* LetterReveal manifesto */}
+      <section className="border-t border-line/60 bg-ink px-5 py-32 text-canvas md:px-10 md:py-40">
+        <div className="mx-auto max-w-5xl">
+          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper-light">
+            Manifesto
+          </div>
+          <LetterReveal
+            className="display-serifish mt-8 text-4xl leading-[1.05] md:text-7xl"
+            text="We design for the crew on the scaffold, not the render."
+            em="not the render."
+            emClassName="italic text-copper"
+          />
+          <p className="mt-8 max-w-2xl text-canvas/70">
+            Buildings aren't made in a Revit view. They're made in a paint shop, on a scaffold, at four in the afternoon.
+          </p>
+        </div>
+      </section>
 
-      <StackingCards
-        labelN="02"
-        labelText="What we do"
-        title="Four services,"
-        titleEm="one team."
-        description="Every engagement combines two or three of these — sequenced to the phase of your project."
-        items={SERVICES}
-        renderItem={(e) => {
-          const Icon = e.Icon;
-          return (
-            <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
-              <div className="flex items-start justify-between">
-                <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{e.n}</span>
-                <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                  <Icon className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
-                </span>
-              </div>
-              <div>
-                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{e.tag}</div>
-                <h3 className="display-serifish mt-2 text-2xl leading-tight md:text-3xl lg:text-4xl">{e.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-base">{e.body}</p>
-              </div>
-            </div>
-          );
-        }}
-      />
+      {/* Services grid — plain Reveal stagger */}
+      <section className="px-5 py-24 md:px-10 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+            What we do
+          </div>
+          <h2 className="display-serifish mt-4 max-w-3xl text-3xl md:text-5xl">
+            Four services, one team.
+          </h2>
+          <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2" stagger={0.08}>
+            {SERVICES.map((s, i) => {
+              const Icon = s.Icon;
+              return (
+                <div
+                  key={s.title}
+                  data-reveal-item
+                  className="group rounded-2xl border border-line/60 bg-canvas p-8 transition-colors hover:border-copper md:p-10"
+                >
+                  <div className="flex items-start justify-between">
+                    <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft">
+                      0{i + 1}
+                    </span>
+                    <span className="grid h-12 w-12 place-items-center rounded-full border border-copper/30 text-copper transition-transform group-hover:-rotate-6">
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </span>
+                  </div>
+                  <div className="mt-8 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                    {s.tag}
+                  </div>
+                  <h3 className="display-serifish mt-2 text-3xl md:text-4xl">{s.title}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-soft md:text-base">{s.body}</p>
+                </div>
+              );
+            })}
+          </RevealGroup>
+        </div>
+      </section>
 
+      {/* HorizontalPin 7-step process */}
       <HorizontalPin
         eyebrow="The process"
         title="Seven steps,"
@@ -106,29 +152,83 @@ function DesignServicesPage() {
         )}
       />
 
-      <section className="relative px-5 py-24 md:px-10 md:py-32 lg:px-16">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+      {/* NEW — Team portrait strip (no scroll anim, hover only) */}
+      <section className="border-y border-line/60 bg-canvas-2/40 px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
           <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-            Design philosophy
+            The people
           </div>
-          <WordReveal text="Buildings aren't made in a Revit view. They're made in a paint shop, on a scaffold, at four in the afternoon. We design for that afternoon — for the crew who install the panel and the person who walks past it every day." />
+          <h2 className="display-serifish mt-4 max-w-3xl text-3xl md:text-5xl">
+            Architects, spec writers, installers.
+          </h2>
+          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {TEAM.slice(0, 4).map((t) => (
+              <div key={t.name} className="group">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-ink">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                  />
+                </div>
+                <div className="mt-4">
+                  <div className="text-base font-medium">{t.name}</div>
+                  <div className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft">
+                    {t.role}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <ParallaxSplit
-        eyebrow="The team"
-        title="Architects and"
-        titleEm="material specialists."
-        body="A design-led team of architects, spec writers and installers — the same people who wrote the detail are the ones who stand on site while it's built."
-        image={parallax}
-        reverse
-      />
+      {/* NEW — Engagement tiers */}
+      <section className="px-5 py-24 md:px-10 md:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+            Engagement
+          </div>
+          <h2 className="display-serifish mt-4 max-w-3xl text-3xl md:text-5xl">
+            Three ways to work with us.
+          </h2>
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {TIERS.map((t) => (
+              <Reveal key={t.name}>
+                <div
+                  className={`h-full rounded-2xl border p-8 md:p-10 ${
+                    t.featured
+                      ? "border-copper bg-ink text-canvas"
+                      : "border-line/60 bg-canvas"
+                  }`}
+                >
+                  <div className={`font-mono text-[0.62rem] uppercase tracking-[0.28em] ${t.featured ? "text-copper-light" : "text-copper"}`}>
+                    {t.name}
+                  </div>
+                  <div className="display-serifish mt-6 text-3xl md:text-4xl">{t.price}</div>
+                  <div className={`mt-2 text-sm ${t.featured ? "text-canvas/70" : "text-ink-soft"}`}>
+                    {t.for}
+                  </div>
+                  <ul className={`mt-8 space-y-3 border-t pt-6 ${t.featured ? "border-canvas/20" : "border-line/60"}`}>
+                    {t.features.map((f) => (
+                      <li key={f} className="flex items-start gap-3 text-sm">
+                        <Check className={`mt-0.5 h-4 w-4 shrink-0 ${t.featured ? "text-copper-light" : "text-copper"}`} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <CTABand
         eyebrow="Ready?"
-        title="Book a design consultation."
+        title="Book a 20-minute design consultation."
         href="/contact"
-        cta="Start with a 20-minute call"
+        cta="Start the call"
         tone="dark"
       />
 

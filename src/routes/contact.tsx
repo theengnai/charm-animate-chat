@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
+import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
-import { InfoStrip } from "@/components/common/InfoStrip";
 import { StackingCards } from "@/components/motion/StackingCards";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
@@ -54,21 +54,24 @@ function ContactPage() {
         eyebrow="Get in touch"
         title="Let's talk"
         emphasis="surfaces."
-        subcopy="Whatsapp, email, phone, or a walk through one of three showrooms. We reply within one business day, every day."
+        subcopy="WhatsApp, email, phone, or a walk through one of three showrooms. We reply within one business day, every day."
         image={hero}
         primary={{ label: "Message us on WhatsApp", to: "/contact" }}
         secondary={{ label: "Visit a showroom", to: "/contact" }}
       />
 
-      <InfoStrip
-        eyebrow="How we reply"
-        lead="One inbox, one team. No routing menus, no bots — a real person reads every message and replies within one business day."
-      />
-
-      {/* Channels */}
-      <section className="px-5 py-16 md:px-10 md:py-24">
+      {/* Channels — Reveal stagger */}
+      <section className="border-t border-line/60 px-5 py-24 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <RevealGroup className="grid gap-4 md:grid-cols-3" stagger={0.06}>
+          <Reveal>
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+              Direct channels
+            </div>
+            <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
+              One inbox, one team.
+            </h2>
+          </Reveal>
+          <RevealGroup className="mt-12 grid gap-4 md:grid-cols-3" stagger={0.06}>
             {CHANNELS.map((c) => (
               <a
                 key={c.label}
@@ -80,7 +83,9 @@ function ContactPage() {
                   <c.Icon className="h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">{c.label}</div>
+                  <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+                    {c.label}
+                  </div>
                   <div className="mt-1 truncate text-base font-medium">{c.value}</div>
                 </div>
                 <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-soft transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-copper" />
@@ -90,8 +95,9 @@ function ContactPage() {
         </div>
       </section>
 
+      {/* StackingCards showrooms */}
       <StackingCards
-        labelN="03"
+        labelN="02"
         labelText="Showrooms"
         title="Three cities,"
         titleEm="one team."
@@ -100,14 +106,20 @@ function ContactPage() {
         renderItem={(s) => (
           <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
             <div className="flex items-start justify-between">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">{s.n}</span>
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">
+                {s.n}
+              </span>
               <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
                 <MapPin className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
               </span>
             </div>
             <div>
-              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{s.tag}</div>
-              <h3 className="display-serifish mt-2 text-3xl leading-tight md:text-4xl lg:text-5xl">{s.city}</h3>
+              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                {s.tag}
+              </div>
+              <h3 className="display-serifish mt-2 text-3xl leading-tight md:text-4xl lg:text-5xl">
+                {s.city}
+              </h3>
               <div className="mt-4 space-y-1 text-sm text-ink-soft">
                 <div>{s.addr}</div>
                 <div>{s.hours}</div>
@@ -122,8 +134,12 @@ function ContactPage() {
       <section className="border-t border-line/60 bg-canvas-2/40 px-5 py-24 md:px-10">
         <div className="mx-auto max-w-3xl">
           <Reveal>
-            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">Or write to us</div>
-            <h2 className="display-serifish mt-3 text-3xl md:text-5xl">Tell us what you're building.</h2>
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+              Or write to us
+            </div>
+            <h2 className="display-serifish mt-3 text-3xl md:text-5xl">
+              Tell us what you're building.
+            </h2>
           </Reveal>
           <form
             onSubmit={(e) => {
@@ -152,8 +168,13 @@ function ContactPage() {
                 </label>
               ))}
               <label className="block md:col-span-2">
-                <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">What's it about?</span>
-                <select name="type" className="mt-2 w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm outline-none focus:border-copper">
+                <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+                  What's it about?
+                </span>
+                <select
+                  name="type"
+                  className="mt-2 w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm outline-none focus:border-copper"
+                >
                   <option>Sample request</option>
                   <option>Quote / pricing</option>
                   <option>Project consultation</option>
@@ -164,8 +185,14 @@ function ContactPage() {
                 </select>
               </label>
               <label className="block md:col-span-2">
-                <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">Your message</span>
-                <textarea name="message" rows={5} className="mt-2 w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm outline-none focus:border-copper" />
+                <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+                  Your message
+                </span>
+                <textarea
+                  name="message"
+                  rows={5}
+                  className="mt-2 w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm outline-none focus:border-copper"
+                />
               </label>
             </div>
             <button
@@ -176,7 +203,9 @@ function ContactPage() {
             </button>
             {submitted ? (
               <div className="mt-6 rounded-2xl border border-copper bg-copper/10 p-6 text-center">
-                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">We've got it</div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                  We've got it
+                </div>
                 <div className="mt-2">
                   Reference #ES-2607-{Math.floor(Math.random() * 9000 + 1000)} — we'll reply within one business day.
                 </div>
@@ -196,19 +225,48 @@ function ContactPage() {
         />
       </section>
 
+      {/* NEW — Response times & office hours */}
+      <section className="border-t border-line/60 bg-ink px-5 py-20 text-canvas md:px-10">
+        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
+          {[
+            { Icon: Clock, l: "First reply", v: "Within 1 business day" },
+            { Icon: Clock, l: "Office hours", v: "Sun–Thu · 9:00–18:00 GST" },
+            { Icon: Clock, l: "After hours", v: "WhatsApp is monitored until 22:00" },
+          ].map((s) => (
+            <div key={s.l} className="flex items-start gap-4">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-copper/20 text-copper-light">
+                <s.Icon className="h-4 w-4" />
+              </span>
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
+                  {s.l}
+                </div>
+                <div className="mt-1 text-base">{s.v}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="border-t border-line/60 bg-canvas-2/40 px-5 py-24 md:px-10">
         <div className="mx-auto max-w-3xl">
           <Reveal>
-            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">Common questions</div>
-            <h2 className="display-serifish mt-3 text-3xl md:text-4xl">Before you write.</h2>
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+              Common questions
+            </div>
+            <h2 className="display-serifish mt-3 text-3xl md:text-4xl">
+              Before you write.
+            </h2>
           </Reveal>
           <RevealGroup className="mt-10 divide-y divide-line/60" stagger={0.05}>
             {FAQ.map((f) => (
               <details key={f.q} data-reveal-item className="group py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
                   <span className="text-lg font-medium">{f.q}</span>
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-copper transition-transform group-open:rotate-45">+</span>
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-copper transition-transform group-open:rotate-45">
+                    +
+                  </span>
                 </summary>
                 <p className="mt-3 text-ink-soft">{f.a}</p>
               </details>
@@ -216,6 +274,13 @@ function ContactPage() {
           </RevealGroup>
         </div>
       </section>
+
+      <CTABand
+        eyebrow="Not ready to write?"
+        title="Order a sample kit and we'll be in touch when it ships."
+        href="/samples"
+        cta="Request a kit"
+      />
 
       <SiteFooter />
       <WhatsAppButton />

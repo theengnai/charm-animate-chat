@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { VoiceOrb } from "@/components/hero/VoiceOrb";
 import {
@@ -10,6 +11,9 @@ import {
   Waves,
   Square,
   Package,
+  Mail,
+  Compass,
+  FileText,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -28,6 +32,13 @@ const TOPICS: { label: string; Icon: typeof Mountain }[] = [
   { label: "Flexible Stone", Icon: Waves },
   { label: "SPC Flooring", Icon: Square },
   { label: "EPS Systems", Icon: Package },
+];
+
+const ACTIONS: { label: string; Icon: typeof Mountain; to: string }[] = [
+  { label: "Contact us", Icon: Mail, to: "/contact" },
+  { label: "Request samples", Icon: Package, to: "/samples" },
+  { label: "Design support", Icon: Compass, to: "/design-services" },
+  { label: "Get a quote", Icon: FileText, to: "/contact" },
 ];
 
 export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
@@ -155,6 +166,31 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                 <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
                 {label}
               </motion.button>
+            ))}
+          </div>
+
+          <div className="my-4 h-px w-full bg-ink/5" />
+
+          <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
+            Quick actions
+          </div>
+          <div className="flex flex-wrap gap-1.5 md:gap-2.5">
+            {ACTIONS.map(({ label, Icon, to }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.7 + i * 0.05, duration: 0.4 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link
+                  to={to}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-canvas px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
+                >
+                  <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
+                  {label}
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>

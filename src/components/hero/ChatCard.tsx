@@ -34,6 +34,13 @@ const TOPICS: { label: string; Icon: typeof Mountain }[] = [
   { label: "EPS Systems", Icon: Package },
 ];
 
+const ACTIONS: { label: string; Icon: typeof Mountain; to: string }[] = [
+  { label: "Contact us", Icon: Mail, to: "/contact" },
+  { label: "Request samples", Icon: Package, to: "/samples" },
+  { label: "Design support", Icon: Compass, to: "/design-services" },
+  { label: "Get a quote", Icon: FileText, to: "/contact" },
+];
+
 export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
   const [value, setValue] = useState("");
   const [phIdx, setPhIdx] = useState(0);

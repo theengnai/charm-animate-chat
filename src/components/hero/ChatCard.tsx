@@ -168,6 +168,31 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
               </motion.button>
             ))}
           </div>
+
+          <div className="my-4 h-px w-full bg-ink/5" />
+
+          <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
+            Quick actions
+          </div>
+          <div className="flex flex-wrap gap-1.5 md:gap-2.5">
+            {ACTIONS.map(({ label, Icon, to }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.7 + i * 0.05, duration: 0.4 }}
+                whileHover={{ y: -2 }}
+              >
+                <Link
+                  to={to}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-canvas px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
+                >
+                  <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
+                  {label}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 

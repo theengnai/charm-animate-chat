@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { VoiceOrb } from "@/components/hero/VoiceOrb";
 import {
@@ -10,6 +11,9 @@ import {
   Waves,
   Square,
   Package,
+  Mail,
+  Compass,
+  FileText,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 

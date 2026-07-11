@@ -21,7 +21,11 @@ export function TopBar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const isHome = router.state.location.pathname === "/";
+  const pathname = router.state.location.pathname;
+  const isHome = pathname === "/";
+  // Product detail pages have a light hero, so force dark nav text
+  const isLightPage = /^\/products\/[^/]+\/[^/]+/.test(pathname);
+  const useDarkNav = scrolled || open || (isHome ? false : isLightPage);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -48,7 +52,7 @@ export function TopBar() {
       >
         <div className="flex items-center justify-between gap-6">
           <a href="/" className="flex items-center">
-            {scrolled || open || !isHome ? (
+            {scrolled || open || isHome || isLightPage ? (
               <>
                 <img src={darkLogoAsset.url} alt="Ecosmart" className="block h-8 w-auto min-w-[156px] dark:hidden md:h-9 md:min-w-[176px]" />
                 <img src={lightLogo} alt="Ecosmart" className="hidden h-8 w-auto dark:block md:h-9" />
@@ -64,7 +68,7 @@ export function TopBar() {
                 key={n.label}
                 to={n.href}
                 className={`eyebrow whitespace-nowrap text-[0.75rem] transition-colors hover:text-copper ${
-                  scrolled || open || !isHome
+                  scrolled || open || isHome || isLightPage
                     ? "text-ink dark:text-white"
                     : "text-white dark:text-white"
                 }`}

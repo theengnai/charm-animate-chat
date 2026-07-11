@@ -87,7 +87,7 @@ export function TopBar() {
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className={`grid h-10 w-10 place-items-center rounded-full border backdrop-blur transition-colors ${
+              className={`grid h-10 w-10 place-items-center rounded-full border backdrop-blur transition-colors lg:hidden ${
                 scrolled || open
                   ? "border-line bg-canvas/80 text-ink dark:text-white"
                   : isHome

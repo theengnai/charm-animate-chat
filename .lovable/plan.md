@@ -1,47 +1,38 @@
-## Goal
+## What's wrong today
 
-Turn the five family blocks on `/products` into clickable category pages, and give every individual product its own detail page.
+The `/products/wpc` and `/products/spc` pages already exist, but they feel like a repeat of `/products` because each family only holds **3 sample products** and the detail pages are thin. You want a real category page with a proper product grid (~12 tiles) and at least the first two products opening a richer, dedicated detail page.
 
-## New routes
+## Plan
 
-Use TanStack file-based routing with dynamic params. The existing `Products` type + `PRODUCTS`/`FAMILIES` arrays in `src/data/products.ts` already have everything we need (slug, family, code, colors, cover, poem, finish, application, fireRating).
+### 1. Expand the product catalog (`src/data/products.ts`)
+- Grow `PRODUCTS` to **12 samples per family** (48 total): WPC, SPC, Aluminium, Panels.
+- Each item keeps `slug / name / code / family / application / finish / colors / fireRating / cover / poem`.
+- Reuse existing `@/assets/section-*.jpg` covers cycled across items so we don't need new images.
+- Add an optional `details?` field (long description, spec bullets, use-cases, gallery images) — populated ONLY for the first two products of each family so their detail pages feel fully authored. Others fall back to the current lightweight layout.
 
-1. `src/routes/products.$family.tsx` → `/products/wpc`, `/products/spc`, `/products/aluminium`, `/products/panels`
-   - Category listing page.
-   - Hero with family name + poem + cover image (from `FAMILIES`).
-   - Grid of all products in that family (from `productsByFamily`), each card showing cover, name, code, colour chips, and a link to the product detail page.
-   - Uses the same `TopBar`, `SiteFooter`, `CTABand`, `WhatsAppButton` shell as `/products`.
-   - `head()` sets category-specific title / description / og:image (the family cover).
-   - Throws `notFound()` if the `$family` param doesn't match a known family key (case-insensitive).
+### 2. Category page — proper product grid (`src/routes/products.$family.tsx`)
+- Shorten hero to ~45vh so the grid is the main event.
+- Replace the current 3-col cards with a denser **grid: 2 cols mobile / 3 tablet / 4 desktop**, tighter cards (`aspect-[4/5]`, code + name + tiny finish/application tags, colour dots, arrow).
+- Add a lightweight filter row (Application: All / Interior / Exterior / Both) — client-side filter over the loaded items.
+- Keep breadcrumb, CTABand, footer.
 
-2. `src/routes/products.$family.$slug.tsx` → `/products/wpc/wpc-oak-deep`, etc.
-   - Product detail page.
-   - Hero: large cover, name, code, family, poem.
-   - Spec block: finish, application, fire rating, colour swatches (rendered from `product.colors`).
-   - "Request a sample" CTA → `/samples`, "Talk to a specialist" CTA → `/contact`, plus a "Back to {family}" link.
-   - Related products row: other products in the same family (excluding the current one).
-   - `head()` sets product-specific title / description / og:image (product cover).
-   - Throws `notFound()` if slug isn't found, or if the slug's family doesn't match the URL family (prevents `/products/spc/wpc-oak-deep`).
+### 3. Detail page — richer for authored items (`src/routes/products.$family.$slug.tsx`)
+When `product.details` exists, render an enhanced layout:
+- Two-column hero: large cover on left, product meta (code, family, application, finish, fire rating) + long description + primary CTAs on right.
+- Spec table (all key/value pairs).
+- Small gallery strip (3 thumbnails from `details.gallery`).
+- "Use cases" bullet list.
+- Related products (same family, exclude self, up to 4).
 
-## Changes to existing `/products` page
+When `details` is absent, keep the current concise detail layout so all 48 products still open a valid page — just the first two per family are the "fully authored" ones the user asked for.
 
-In `src/routes/products.tsx`, inside the `StickyTOC` family loop:
+### 4. Verification
+- Typecheck.
+- Manually click `/products` → WPC card → grid → first product → detail page, confirm content differs from the category page.
 
-- Add a primary CTA button under each family's description: **"View all {family}"** linking to `/products/{familyKey.toLowerCase()}` via `<Link to="/products/$family" params={{ family: familyKey.toLowerCase() }}>`.
-- Keep the existing layout, imagery, and spec rows untouched.
-- The "Custom / Bespoke" family stays link-less (no product list for it) and keeps its current look.
+## Files touched
+- `src/data/products.ts` — expand catalog, add optional `details`.
+- `src/routes/products.$family.tsx` — grid layout + filter.
+- `src/routes/products.$family.$slug.tsx` — conditional rich detail layout.
 
-No changes to `products.ts`, no new dependencies, no schema/backend changes.
-
-## Styling
-
-Reuse existing tokens and components:
-- Copper accents, `display-serifish`, `font-mono` eyebrows — matches the rest of the site.
-- Product cards use the same rounded-2xl / border-line / hover-lift pattern already used in `StoryHero` and the swatch wall.
-- Motion: `BlurFocus` for hero image, `ScaleIn` staggered for the product grid, `AlternatingSlide` for spec rows on detail page.
-
-## Out of scope
-
-- No filtering/search on the category page (all family products fit in one grid).
-- No shopping cart or quantity — CTAs point at existing `/samples` and `/contact`.
-- No CMS/database — content stays in `src/data/products.ts`.
+No new routes, no new assets, no backend changes.

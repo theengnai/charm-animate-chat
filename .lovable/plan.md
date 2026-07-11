@@ -1,38 +1,39 @@
-## What's wrong today
+## Problem
 
-The `/products/wpc` and `/products/spc` pages already exist, but they feel like a repeat of `/products` because each family only holds **3 sample products** and the detail pages are thin. You want a real category page with a proper product grid (~12 tiles) and at least the first two products opening a richer, dedicated detail page.
+On mobile, scrolling the homepage sometimes jumps straight to the last section. The cause is the mobile section rail (`src/components/nav/SectionRail.tsx` → `MobileRail`), not the snap-scroll hook itself.
 
-## Plan
+The mobile rail is a fixed vertical strip pinned to the right edge of the screen (`fixed right-2 top-1/2`) with `touch-action: none` and window-style touch listeners. It attaches `touchstart` / `touchmove` / `touchend` to the whole `<nav>` and:
 
-### 1. Expand the product catalog (`src/data/products.ts`)
-- Grow `PRODUCTS` to **12 samples per family** (48 total): WPC, SPC, Aluminium, Panels.
-- Each item keeps `slug / name / code / family / application / finish / colors / fireRating / cover / poem`.
-- Reuse existing `@/assets/section-*.jpg` covers cycled across items so we don't need new images.
-- Add an optional `details?` field (long description, spec bullets, use-cases, gallery images) — populated ONLY for the first two products of each family so their detail pages feel fully authored. Others fall back to the current lightweight layout.
+1. On any touch that lands inside the nav's bounding box, it picks the "nearest dot" by Y coordinate.
+2. On `touchmove` it calls `e.preventDefault()` and updates the hovered index.
+3. On `touchend` it calls `onPick(hover)` — jumping to that section.
 
-### 2. Category page — proper product grid (`src/routes/products.$family.tsx`)
-- Shorten hero to ~45vh so the grid is the main event.
-- Replace the current 3-col cards with a denser **grid: 2 cols mobile / 3 tablet / 4 desktop**, tighter cards (`aspect-[4/5]`, code + name + tiny finish/application tags, colour dots, arrow).
-- Add a lightweight filter row (Application: All / Interior / Exterior / Both) — client-side filter over the loaded items.
-- Keep breadcrumb, CTABand, footer.
+Because the rail spans nearly the full height of the viewport on the right side, a normal vertical swipe that starts anywhere near the right edge is captured by the rail instead of scrolling the page. If the finger lifts near the bottom of the strip, the nearest dot is the last one → the page jumps to the final section (Partner). This matches the reported symptom exactly.
 
-### 3. Detail page — richer for authored items (`src/routes/products.$family.$slug.tsx`)
-When `product.details` exists, render an enhanced layout:
-- Two-column hero: large cover on left, product meta (code, family, application, finish, fire rating) + long description + primary CTAs on right.
-- Spec table (all key/value pairs).
-- Small gallery strip (3 thumbnails from `details.gallery`).
-- "Use cases" bullet list.
-- Related products (same family, exclude self, up to 4).
+A secondary issue: `useSnapSections`' global `touchstart`/`touchend` also fires for these same events, so both handlers can race.
 
-When `details` is absent, keep the current concise detail layout so all 48 products still open a valid page — just the first two per family are the "fully authored" ones the user asked for.
+## Fix
 
-### 4. Verification
-- Typecheck.
-- Manually click `/products` → WPC card → grid → first product → detail page, confirm content differs from the category page.
+Rework `MobileRail` so it behaves like a passive indicator with tap targets, not a drag-scrubber:
 
-## Files touched
-- `src/data/products.ts` — expand catalog, add optional `details`.
-- `src/routes/products.$family.tsx` — grid layout + filter.
-- `src/routes/products.$family.$slug.tsx` — conditional rich detail layout.
+- Remove the `touchstart` / `touchmove` / `touchend` listeners on the whole nav.
+- Remove `touch-none` / `touchAction: none` from the nav container so touches that start on it fall through to the page scroll handler.
+- Give each dot an accessible `<button>` with an enlarged invisible hit area (e.g. `p-2 -m-2`) that calls `onPick(i)` on click. Only taps on an actual dot change the section.
+- Keep the current visual (active dot, copper color) but drop the "hover preview label on drag" behavior, since it depended on the drag gesture.
 
-No new routes, no new assets, no backend changes.
+Also harden `useSnapSections` so it ignores touches that originated inside the rail, as a belt-and-suspenders guard:
+
+- In `onTouchStart`, walk up from `e.target` and bail out if any ancestor has `[aria-label="Sections"]` (the rail nav). Store `null` so `onTouchEnd` becomes a no-op for those gestures.
+
+No other scroll logic changes — `useSnapSections`' wheel/keyboard/touch swipe behavior for the rest of the page is left intact.
+
+## Files to change
+
+- `src/components/nav/SectionRail.tsx` — rewrite `MobileRail` to use tap buttons instead of drag gestures; remove touch listeners and `touch-none`.
+- `src/hooks/useSnapSections.ts` — in `onTouchStart`, ignore touches whose target is inside a `[aria-label="Sections"]` element.
+
+## Verification
+
+- On mobile viewport, swipe up/down in the middle and near the right edge of the homepage — should advance one section at a time, never jump to the last.
+- Tapping a dot on the mobile rail should still navigate to that section.
+- Desktop rail behavior is unchanged.

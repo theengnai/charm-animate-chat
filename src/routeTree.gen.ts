@@ -67,9 +67,9 @@ const ProductsIndexRoute = ProductsIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsFamilyRoute = ProductsFamilyRouteImport.update({
-  id: '/products/$family',
-  path: '/products/$family',
-  getParentRoute: () => rootRouteImport,
+  id: '/$family',
+  path: '/$family',
+  getParentRoute: () => ProductsRoute,
 } as any)
 const ProductsFamilySlugRoute = ProductsFamilySlugRouteImport.update({
   id: '/$slug',
@@ -168,7 +168,6 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   SamplesRoute: typeof SamplesRoute
   VisualizerRoute: typeof VisualizerRoute
-  ProductsFamilyRoute: typeof ProductsFamilyRouteWithChildren
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
@@ -239,10 +238,10 @@ declare module '@tanstack/react-router' {
     }
     '/products/$family': {
       id: '/products/$family'
-      path: '/products/$family'
+      path: '/$family'
       fullPath: '/products/$family'
       preLoaderRoute: typeof ProductsFamilyRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ProductsRoute
     }
     '/products/$family/$slug': {
       id: '/products/$family/$slug'
@@ -254,18 +253,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ProductsFamilyRouteChildren {
-  ProductsFamilySlugRoute: typeof ProductsFamilySlugRoute
-}
-
-const ProductsFamilyRouteChildren: ProductsFamilyRouteChildren = {
-  ProductsFamilySlugRoute: ProductsFamilySlugRoute,
-}
-
-const ProductsFamilyRouteWithChildren = ProductsFamilyRoute._addFileChildren(
-  ProductsFamilyRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -275,9 +262,18 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   SamplesRoute: SamplesRoute,
   VisualizerRoute: VisualizerRoute,
-  ProductsFamilyRoute: ProductsFamilyRouteWithChildren,
   ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

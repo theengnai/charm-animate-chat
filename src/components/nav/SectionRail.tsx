@@ -65,108 +65,33 @@ function DesktopRail({ labels, active, onPick }: SectionRailProps) {
 }
 
 function MobileRail({ labels, active, onPick }: SectionRailProps) {
-  const navRef = useRef<HTMLElement | null>(null);
-  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const [hover, setHover] = useState<number | null>(null);
-
-  const indexFromY = (clientY: number) => {
-    let nearest = -1;
-    let best = Infinity;
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      const center = r.top + r.height / 2;
-      const d = Math.abs(clientY - center);
-      if (d < best) {
-        best = d;
-        nearest = i;
-      }
-    });
-    return nearest;
-  };
-
-  useEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
-
-    const onMove = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (!t) return;
-      e.preventDefault();
-      const i = indexFromY(t.clientY);
-      if (i >= 0) setHover(i);
-    };
-    const onEnd = () => {
-      setHover((h) => {
-        if (h != null && h !== active) onPick(h);
-        return null;
-      });
-    };
-    const onStart = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (!t) return;
-      const i = indexFromY(t.clientY);
-      if (i >= 0) setHover(i);
-    };
-
-    nav.addEventListener("touchstart", onStart, { passive: true });
-    nav.addEventListener("touchmove", onMove, { passive: false });
-    nav.addEventListener("touchend", onEnd, { passive: true });
-    nav.addEventListener("touchcancel", onEnd, { passive: true });
-    return () => {
-      nav.removeEventListener("touchstart", onStart);
-      nav.removeEventListener("touchmove", onMove);
-      nav.removeEventListener("touchend", onEnd);
-      nav.removeEventListener("touchcancel", onEnd);
-    };
-  }, [active, onPick]);
-
   return (
     <nav
-      ref={navRef}
       aria-label="Sections"
-      className="fixed right-2 top-1/2 z-40 -translate-y-1/2 touch-none md:hidden"
-      style={{ touchAction: "none" }}
+      className="fixed right-2 top-1/2 z-40 -translate-y-1/2 md:hidden"
     >
-      <ul className="flex flex-col items-end gap-1 py-2 pr-2 pl-4">
+      <ul className="flex flex-col items-end gap-1">
         {labels.map((label, i) => {
           const isActive = i === active;
-          const isHover = hover === i;
           return (
-            <li
-              key={label}
-              ref={(el) => {
-                itemRefs.current[i] = el;
-              }}
-              className="relative flex items-center gap-2"
-            >
-              <motion.span
-                initial={false}
-                animate={{
-                  opacity: isHover ? 1 : 0,
-                  x: isHover ? 0 : 8,
-                }}
-                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="pointer-events-none rounded-full bg-ink/90 px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-canvas"
+            <li key={label} className="flex items-center">
+              <button
+                type="button"
+                onClick={() => onPick(i)}
+                aria-label={`Go to section ${i + 1}: ${label}`}
+                aria-current={isActive ? "true" : undefined}
+                className="grid h-8 w-8 place-items-center"
               >
-                <span className="mr-1.5 text-copper">{String(i + 1).padStart(2, "0")}</span>
-                {label}
-              </motion.span>
-              <span className="relative grid h-5 w-5 place-items-center">
                 <motion.span
                   initial={false}
                   animate={{
-                    scale: isHover ? 1.8 : isActive ? 1.2 : 1,
-                    backgroundColor: isActive
-                      ? "var(--copper)"
-                      : isHover
-                        ? "var(--copper)"
-                        : "rgba(60,40,25,0.35)",
+                    scale: isActive ? 1.2 : 1,
+                    backgroundColor: isActive ? "var(--copper)" : "rgba(60,40,25,0.35)",
                   }}
                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   className="h-1.5 w-1.5 rounded-full"
                 />
-              </span>
+              </button>
             </li>
           );
         })}

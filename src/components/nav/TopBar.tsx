@@ -48,7 +48,7 @@ export function TopBar() {
       >
         <div className="flex items-center justify-between gap-6">
           <a href="/" className="flex items-center">
-            {scrolled || open || isHome ? (
+            {scrolled || open || !isHome ? (
               <>
                 <img src={darkLogoAsset.url} alt="Ecosmart" className="block h-8 w-auto min-w-[156px] dark:hidden md:h-9 md:min-w-[176px]" />
                 <img src={lightLogo} alt="Ecosmart" className="hidden h-8 w-auto dark:block md:h-9" />
@@ -64,7 +64,7 @@ export function TopBar() {
                 key={n.label}
                 to={n.href}
                 className={`eyebrow whitespace-nowrap text-[0.75rem] transition-colors hover:text-copper ${
-                  scrolled || open || isHome
+                  scrolled || open || !isHome
                     ? "text-ink dark:text-white"
                     : "text-white dark:text-white"
                 }`}

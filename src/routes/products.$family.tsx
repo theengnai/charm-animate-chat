@@ -74,7 +74,7 @@ function FamilyError({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 function FamilyPage() {
-  const { family, items, slug } = Route.useLoaderData();
+  const { family, items, slug } = Route.useLoaderData() as { family: typeof FAMILIES[number]; items: Product[]; slug: string };
 
   return (
     <div className="min-h-screen bg-canvas text-ink">

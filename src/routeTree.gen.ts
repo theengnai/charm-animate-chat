@@ -18,6 +18,7 @@ import { Route as DesignServicesRouteImport } from './routes/design-services'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsFamilyRouteImport } from './routes/products.$family'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -64,28 +65,35 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsFamilyRoute = ProductsFamilyRouteImport.update({
+  id: '/$family',
+  path: '/$family',
+  getParentRoute: () => ProductsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-services': typeof DesignServicesRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
+  '/products/$family': typeof ProductsFamilyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-services': typeof DesignServicesRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
+  '/products/$family': typeof ProductsFamilyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,11 +101,12 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-services': typeof DesignServicesRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
+  '/products/$family': typeof ProductsFamilyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
+    | '/products/$family'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
+    | '/products/$family'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
+    | '/products/$family'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,7 +152,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   DesignServicesRoute: typeof DesignServicesRoute
-  ProductsRoute: typeof ProductsRoute
+  ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
   ResourcesRoute: typeof ResourcesRoute
   SamplesRoute: typeof SamplesRoute
@@ -212,15 +224,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$family': {
+      id: '/products/$family'
+      path: '/$family'
+      fullPath: '/products/$family'
+      preLoaderRoute: typeof ProductsFamilyRouteImport
+      parentRoute: typeof ProductsRoute
+    }
   }
 }
+
+interface ProductsRouteChildren {
+  ProductsFamilyRoute: typeof ProductsFamilyRoute
+}
+
+const ProductsRouteChildren: ProductsRouteChildren = {
+  ProductsFamilyRoute: ProductsFamilyRoute,
+}
+
+const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
+  ProductsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   DesignServicesRoute: DesignServicesRoute,
-  ProductsRoute: ProductsRoute,
+  ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
   ResourcesRoute: ResourcesRoute,
   SamplesRoute: SamplesRoute,

@@ -84,13 +84,16 @@ export const Route = createFileRoute("/products/$family/$slug")({
 function ProductPage() {
   const { product, family, related, familySlug } = Route.useLoaderData() as LoaderData;
 
-  const specs: [string, string][] = [
+  const baseSpecs: [string, string][] = [
     ["Code", product.code],
     ["Family", family.name],
     ["Application", product.application],
     ["Finish", product.finish],
     ["Fire rating", product.fireRating],
   ];
+  const specs: [string, string][] = product.details
+    ? [...baseSpecs, ...product.details.specs]
+    : baseSpecs;
 
   return (
     <div className="min-h-screen bg-canvas text-ink">
@@ -107,9 +110,14 @@ function ProductPage() {
             <ArrowLeft className="h-3 w-3" /> Back to {family.name}
           </Link>
 
-          <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
               <img src={product.cover} alt={product.name} className="h-full w-full object-cover" />
+              {product.details ? (
+                <span className="absolute left-4 top-4 rounded-full bg-copper/95 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.24em] text-canvas">
+                  Featured product
+                </span>
+              ) : null}
             </BlurFocus>
 
             <div>
@@ -120,6 +128,12 @@ function ProductPage() {
                 {product.name}
               </h1>
               <p className="mt-6 text-lg italic text-ink-soft">{product.poem}</p>
+
+              {product.details ? (
+                <p className="mt-6 text-base leading-relaxed text-ink/85">
+                  {product.details.description}
+                </p>
+              ) : null}
 
               <div className="mt-10 space-y-2">
                 {specs.map((row, j) => (
@@ -167,6 +181,54 @@ function ProductPage() {
         </div>
       </section>
 
+      {/* Rich sections — only for authored products */}
+      {product.details ? (
+        <>
+          {/* Use cases */}
+          <section className="border-t border-line/60 bg-canvas-2/40 px-5 py-20 md:px-10 md:py-28">
+            <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1.4fr]">
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                  Where it fits
+                </div>
+                <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
+                  Designed for use, not just for spec.
+                </h2>
+              </div>
+              <ul className="space-y-4">
+                {product.details.useCases.map((u) => (
+                  <li key={u} className="flex items-start gap-4 border-b border-line/60 pb-4">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
+                    <span className="text-lg text-ink/90">{u}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {/* Gallery */}
+          <section className="px-5 py-20 md:px-10 md:py-24">
+            <div className="mx-auto max-w-7xl">
+              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                In context
+              </div>
+              <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
+                How it looks, once installed.
+              </h2>
+              <div className="mt-12 grid gap-4 sm:grid-cols-3">
+                {product.details.gallery.map((src, i) => (
+                  <ScaleIn key={i} delay={i * 0.05}>
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line/60">
+                      <img src={src} alt="" className="h-full w-full object-cover" />
+                    </div>
+                  </ScaleIn>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      ) : null}
+
       {/* Related */}
       {related.length > 0 ? (
         <section className="border-t border-line/60 px-5 py-24 md:px-10">
@@ -176,20 +238,20 @@ function ProductPage() {
             </div>
             <h2 className="display-serifish mt-4 text-3xl md:text-5xl">Also worth a look.</h2>
 
-            <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
               {related.map((p, i) => (
                 <ScaleIn key={p.slug} delay={i * 0.05}>
                   <Link
                     to="/products/$family/$slug"
                     params={{ family: familySlug, slug: p.slug }}
-                    className="group block overflow-hidden rounded-2xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/50"
+                    className="group block overflow-hidden rounded-xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/50"
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
                       <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
                     </div>
-                    <div className="p-6">
-                      <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{p.code}</div>
-                      <h3 className="display-serifish mt-3 text-2xl leading-tight">{p.name}</h3>
+                    <div className="p-4">
+                      <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">{p.code}</div>
+                      <h3 className="display-serifish mt-2 text-lg leading-tight">{p.name}</h3>
                     </div>
                   </Link>
                 </ScaleIn>

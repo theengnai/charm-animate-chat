@@ -14,8 +14,15 @@ import {
   Mail,
   Compass,
   FileText,
+  Layers,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import matMaterials from "@/assets/section-materials.jpg";
+import matDesign from "@/assets/section-design.jpg";
+import matSamples from "@/assets/section-samples.jpg";
+import matGallery from "@/assets/section-gallery.jpg";
+import matTechnical from "@/assets/section-technical.jpg";
+import matVisualizer from "@/assets/section-visualizer.jpg";
 
 const PLACEHOLDERS = [
   "Find material data for terracotta façades…",
@@ -32,6 +39,29 @@ const TOPICS: { label: string; Icon: typeof Mountain }[] = [
   { label: "Flexible Stone", Icon: Waves },
   { label: "SPC Flooring", Icon: Square },
   { label: "EPS Systems", Icon: Package },
+];
+
+type MaterialTo =
+  | "/products"
+  | "/products/$family"
+  | "/products/wpc"
+  | "/products/spc"
+  | "/products/panels";
+
+const MATERIALS: {
+  label: string;
+  sub: string;
+  Icon: typeof Mountain;
+  image: string;
+  to: "/products" | "/products/$family";
+  familyParam?: string;
+}[] = [
+  { label: "MCM Panels", sub: "Flexible Stone", Icon: Waves, image: matMaterials, to: "/products" },
+  { label: "Travertine", sub: "& Stone", Icon: Mountain, image: matGallery, to: "/products" },
+  { label: "WPC Decking", sub: "Outdoor", Icon: TreePine, image: matDesign, to: "/products/$family", familyParam: "wpc" },
+  { label: "WPC Wall Panels", sub: "Interior", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
+  { label: "EPS Systems", sub: "Insulation", Icon: Layers, image: matVisualizer, to: "/products" },
+  { label: "SPC Flooring", sub: "Interior", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
 ];
 
 const ACTIONS: { label: string; Icon: typeof Mountain; to: string }[] = [

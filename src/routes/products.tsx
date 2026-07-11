@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";

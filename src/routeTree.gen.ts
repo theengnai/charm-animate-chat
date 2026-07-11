@@ -18,7 +18,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
-import { Route as ProductsFamilyRouteImport } from './routes/products.$family'
+import { Route as ProductsFamilyIndexRouteImport } from './routes/products.$family.index'
 import { Route as ProductsFamilySlugRouteImport } from './routes/products.$family.$slug'
 
 const VisualizerRoute = VisualizerRouteImport.update({
@@ -66,15 +66,15 @@ const ProductsIndexRoute = ProductsIndexRouteImport.update({
   path: '/products/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsFamilyRoute = ProductsFamilyRouteImport.update({
-  id: '/products/$family',
-  path: '/products/$family',
+const ProductsFamilyIndexRoute = ProductsFamilyIndexRouteImport.update({
+  id: '/products/$family/',
+  path: '/products/$family/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsFamilySlugRoute = ProductsFamilySlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ProductsFamilyRoute,
+  id: '/products/$family/$slug',
+  path: '/products/$family/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -86,9 +86,9 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
-  '/products/$family': typeof ProductsFamilyRouteWithChildren
   '/products/': typeof ProductsIndexRoute
   '/products/$family/$slug': typeof ProductsFamilySlugRoute
+  '/products/$family/': typeof ProductsFamilyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,9 +99,9 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
-  '/products/$family': typeof ProductsFamilyRouteWithChildren
   '/products': typeof ProductsIndexRoute
   '/products/$family/$slug': typeof ProductsFamilySlugRoute
+  '/products/$family': typeof ProductsFamilyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,9 +113,9 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
-  '/products/$family': typeof ProductsFamilyRouteWithChildren
   '/products/': typeof ProductsIndexRoute
   '/products/$family/$slug': typeof ProductsFamilySlugRoute
+  '/products/$family/': typeof ProductsFamilyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -128,9 +128,9 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
-    | '/products/$family'
     | '/products/'
     | '/products/$family/$slug'
+    | '/products/$family/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -141,9 +141,9 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
-    | '/products/$family'
     | '/products'
     | '/products/$family/$slug'
+    | '/products/$family'
   id:
     | '__root__'
     | '/'
@@ -154,9 +154,9 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
-    | '/products/$family'
     | '/products/'
     | '/products/$family/$slug'
+    | '/products/$family/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -168,8 +168,9 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   SamplesRoute: typeof SamplesRoute
   VisualizerRoute: typeof VisualizerRoute
-  ProductsFamilyRoute: typeof ProductsFamilyRouteWithChildren
   ProductsIndexRoute: typeof ProductsIndexRoute
+  ProductsFamilySlugRoute: typeof ProductsFamilySlugRoute
+  ProductsFamilyIndexRoute: typeof ProductsFamilyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -237,34 +238,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/$family': {
-      id: '/products/$family'
+    '/products/$family/': {
+      id: '/products/$family/'
       path: '/products/$family'
-      fullPath: '/products/$family'
-      preLoaderRoute: typeof ProductsFamilyRouteImport
+      fullPath: '/products/$family/'
+      preLoaderRoute: typeof ProductsFamilyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/$family/$slug': {
       id: '/products/$family/$slug'
-      path: '/$slug'
+      path: '/products/$family/$slug'
       fullPath: '/products/$family/$slug'
       preLoaderRoute: typeof ProductsFamilySlugRouteImport
-      parentRoute: typeof ProductsFamilyRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface ProductsFamilyRouteChildren {
-  ProductsFamilySlugRoute: typeof ProductsFamilySlugRoute
-}
-
-const ProductsFamilyRouteChildren: ProductsFamilyRouteChildren = {
-  ProductsFamilySlugRoute: ProductsFamilySlugRoute,
-}
-
-const ProductsFamilyRouteWithChildren = ProductsFamilyRoute._addFileChildren(
-  ProductsFamilyRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -275,19 +264,10 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   SamplesRoute: SamplesRoute,
   VisualizerRoute: VisualizerRoute,
-  ProductsFamilyRoute: ProductsFamilyRouteWithChildren,
   ProductsIndexRoute: ProductsIndexRoute,
+  ProductsFamilySlugRoute: ProductsFamilySlugRoute,
+  ProductsFamilyIndexRoute: ProductsFamilyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

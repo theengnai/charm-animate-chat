@@ -18,6 +18,8 @@ import { Route as DesignServicesRouteImport } from './routes/design-services'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsFamilyRouteImport } from './routes/products.$family'
+import { Route as ProductsFamilySlugRouteImport } from './routes/products.$family.$slug'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -64,28 +66,42 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsFamilyRoute = ProductsFamilyRouteImport.update({
+  id: '/$family',
+  path: '/$family',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const ProductsFamilySlugRoute = ProductsFamilySlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProductsFamilyRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-services': typeof DesignServicesRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
+  '/products/$family': typeof ProductsFamilyRouteWithChildren
+  '/products/$family/$slug': typeof ProductsFamilySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-services': typeof DesignServicesRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
+  '/products/$family': typeof ProductsFamilyRouteWithChildren
+  '/products/$family/$slug': typeof ProductsFamilySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,11 +109,13 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-services': typeof DesignServicesRoute
-  '/products': typeof ProductsRoute
+  '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
   '/visualizer': typeof VisualizerRoute
+  '/products/$family': typeof ProductsFamilyRouteWithChildren
+  '/products/$family/$slug': typeof ProductsFamilySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +129,8 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
+    | '/products/$family'
+    | '/products/$family/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +142,8 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
+    | '/products/$family'
+    | '/products/$family/$slug'
   id:
     | '__root__'
     | '/'
@@ -133,6 +155,8 @@ export interface FileRouteTypes {
     | '/resources'
     | '/samples'
     | '/visualizer'
+    | '/products/$family'
+    | '/products/$family/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,7 +164,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   DesignServicesRoute: typeof DesignServicesRoute
-  ProductsRoute: typeof ProductsRoute
+  ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
   ResourcesRoute: typeof ResourcesRoute
   SamplesRoute: typeof SamplesRoute
@@ -212,15 +236,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$family': {
+      id: '/products/$family'
+      path: '/$family'
+      fullPath: '/products/$family'
+      preLoaderRoute: typeof ProductsFamilyRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/products/$family/$slug': {
+      id: '/products/$family/$slug'
+      path: '/$slug'
+      fullPath: '/products/$family/$slug'
+      preLoaderRoute: typeof ProductsFamilySlugRouteImport
+      parentRoute: typeof ProductsFamilyRoute
+    }
   }
 }
+
+interface ProductsFamilyRouteChildren {
+  ProductsFamilySlugRoute: typeof ProductsFamilySlugRoute
+}
+
+const ProductsFamilyRouteChildren: ProductsFamilyRouteChildren = {
+  ProductsFamilySlugRoute: ProductsFamilySlugRoute,
+}
+
+const ProductsFamilyRouteWithChildren = ProductsFamilyRoute._addFileChildren(
+  ProductsFamilyRouteChildren,
+)
+
+interface ProductsRouteChildren {
+  ProductsFamilyRoute: typeof ProductsFamilyRouteWithChildren
+}
+
+const ProductsRouteChildren: ProductsRouteChildren = {
+  ProductsFamilyRoute: ProductsFamilyRouteWithChildren,
+}
+
+const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
+  ProductsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   DesignServicesRoute: DesignServicesRoute,
-  ProductsRoute: ProductsRoute,
+  ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
   ResourcesRoute: ResourcesRoute,
   SamplesRoute: SamplesRoute,
@@ -229,13 +291,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

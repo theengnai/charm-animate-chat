@@ -18,7 +18,7 @@ import imgC from "@/assets/section-samples.jpg";
 import imgD from "@/assets/section-gallery.jpg";
 import imgE from "@/assets/section-technical.jpg";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Products — Ecosmart Architectural Materials" },

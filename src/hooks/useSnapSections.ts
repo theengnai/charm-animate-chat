@@ -62,6 +62,12 @@ export function useSnapSections(count: number) {
         touchStart.current = null;
         return;
       }
+      // Ignore touches originating inside the section rail (it has its own tap handlers).
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest?.('[aria-label="Sections"]')) {
+        touchStart.current = null;
+        return;
+      }
       touchStart.current = { y, el: findScrollableAncestor(e.target) };
     };
     const onTouchEnd = (e: TouchEvent) => {

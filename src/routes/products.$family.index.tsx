@@ -16,7 +16,7 @@ const FAMILY_SLUGS: Record<string, Product["family"]> = {
   panels: "Panels",
 };
 
-export const Route = createFileRoute("/products/$family")({
+export const Route = createFileRoute("/products/$family/")({
   loader: ({ params }) => {
     const key = FAMILY_SLUGS[params.family.toLowerCase()];
     if (!key) throw notFound();

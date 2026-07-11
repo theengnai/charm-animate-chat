@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
@@ -6,7 +7,7 @@ import { CTABand } from "@/components/common/CTABand";
 
 import { ScaleIn } from "@/components/motion/ScaleIn";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { FAMILIES, PRODUCTS, productsByFamily, type Product } from "@/data/products";
+import { FAMILIES, productsByFamily, type Product } from "@/data/products";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
   wpc: "WPC",

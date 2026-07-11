@@ -266,39 +266,3 @@ function ProductPage() {
     </div>
   );
 }
-      {related.length > 0 ? (
-        <section className="border-t border-line/60 px-5 py-24 md:px-10">
-          <div className="mx-auto max-w-7xl">
-            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-              More from {family.name}
-            </div>
-            <h2 className="display-serifish mt-4 text-3xl md:text-5xl">Also worth a look.</h2>
-
-            <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p, i) => (
-                <ScaleIn key={p.slug} delay={i * 0.05}>
-                  <Link
-                    to="/products/$family/$slug"
-                    params={{ family: familySlug, slug: p.slug }}
-                    className="group block overflow-hidden rounded-2xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/50"
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
-                    </div>
-                    <div className="p-6">
-                      <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{p.code}</div>
-                      <h3 className="display-serifish mt-3 text-2xl leading-tight">{p.name}</h3>
-                    </div>
-                  </Link>
-                </ScaleIn>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <SiteFooter />
-      <WhatsAppButton />
-    </div>
-  );
-}

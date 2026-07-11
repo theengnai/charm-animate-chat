@@ -3,7 +3,7 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";
-import { BlurFocus } from "@/components/motion/BlurFocus";
+
 import { ScaleIn } from "@/components/motion/ScaleIn";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { FAMILIES, PRODUCTS, productsByFamily, type Product } from "@/data/products";

@@ -21,7 +21,11 @@ export function TopBar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const isHome = router.state.location.pathname === "/";
+  const pathname = router.state.location.pathname;
+  const isHome = pathname === "/";
+  // Product detail pages have a light hero, so force dark nav text
+  const isLightPage = /^\/products\/[^/]+\/[^/]+/.test(pathname);
+  const useDarkNav = scrolled || open || (isHome ? false : isLightPage);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

@@ -41,12 +41,8 @@ const TOPICS: { label: string; Icon: typeof Mountain }[] = [
   { label: "EPS Systems", Icon: Package },
 ];
 
-type MaterialTo =
-  | "/products"
-  | "/products/$family"
-  | "/products/wpc"
-  | "/products/spc"
-  | "/products/panels";
+
+
 
 const MATERIALS: {
   label: string;

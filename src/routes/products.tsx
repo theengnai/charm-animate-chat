@@ -194,6 +194,16 @@ function ProductsPage() {
                     </AlternatingSlide>
                   ))}
                 </div>
+                {f.id !== "custom" ? (
+                  <Link
+                    to="/products/$family"
+                    params={{ family: f.id }}
+                    className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
+                  >
+                    <span className="font-medium tracking-wide">View all {f.title.split(" ")[0]}</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
+                  </Link>
+                ) : null}
               </div>
             </div>
           </article>

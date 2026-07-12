@@ -9,6 +9,7 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { FAMILIES, PRODUCTS, productsByFamily, type Product } from "@/data/products";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
+  mcm: "MCM",
   wpc: "WPC",
   spc: "SPC",
   aluminium: "Aluminium",
@@ -128,6 +129,12 @@ function ProductPage() {
                 {product.name}
               </h1>
               <p className="mt-6 text-lg italic text-ink-soft">{product.poem}</p>
+              {product.price !== undefined ? (
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="display-serifish text-3xl text-copper md:text-4xl">SAR {product.price}</span>
+                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">per m²</span>
+                </div>
+              ) : null}
 
               {product.details ? (
                 <p className="mt-6 text-base leading-relaxed text-ink/85">

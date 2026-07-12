@@ -10,6 +10,7 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { FAMILIES, productsByFamily, type Product } from "@/data/products";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
+  mcm: "MCM",
   wpc: "WPC",
   spc: "SPC",
   aluminium: "Aluminium",
@@ -165,6 +166,11 @@ function FamilyPage() {
                       </div>
                       <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
                     </div>
+                    {p.price !== undefined ? (
+                      <div className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink">
+                        SAR {p.price}
+                      </div>
+                    ) : null}
                   </div>
                 </Link>
               </ScaleIn>

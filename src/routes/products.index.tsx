@@ -45,7 +45,7 @@ const FAMILIES = [
       ["Weight", "≈ 4 kg/m²"],
       ["Lead time", "2 weeks"],
     ],
-    image: imgB,
+    image: mcmCover.url,
   },
   {
     id: "wpc",

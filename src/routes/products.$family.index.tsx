@@ -10,6 +10,7 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { FAMILIES, productsByFamily, type Product } from "@/data/products";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
+  mcm: "MCM",
   wpc: "WPC",
   spc: "SPC",
   aluminium: "Aluminium",

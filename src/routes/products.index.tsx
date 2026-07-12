@@ -33,6 +33,20 @@ export const Route = createFileRoute("/products/")({
 
 const FAMILIES = [
   {
+    id: "mcm",
+    label: "MCM · Flexible cladding",
+    tag: "Exterior + Interior · Skin",
+    title: "MCM Flexible Cladding",
+    body: "Modified Clay Material — thin, flexible mineral cladding that reads as travertine, brick, rock or timber but installs like tile. Non-combustible, lightweight, priced from 26 SAR/m².",
+    specs: [
+      ["Fire class", "A2-s1,d0"],
+      ["Thickness", "3 mm"],
+      ["Weight", "≈ 4 kg/m²"],
+      ["Lead time", "2 weeks"],
+    ],
+    image: imgB,
+  },
+  {
     id: "wpc",
     label: "WPC · Decking",
     tag: "Exterior · Ground plane",

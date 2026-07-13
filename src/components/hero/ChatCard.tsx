@@ -42,7 +42,7 @@ const QUESTIONS: { label: string; Icon: typeof Mountain }[] = [
   { label: "Which material is right for my project?", Icon: Sparkles },
   { label: "I'd like to request free samples", Icon: Package },
   { label: "I need a quotation for my project", Icon: FileText },
-  { label: "Can I visualize my project before I decide?", Icon: ImageIcon },
+  { label: "Can I see a preview before deciding?", Icon: ImageIcon },
   { label: "I need technical information", Icon: Info },
   { label: "I'm an architect or designer", Icon: User },
   { label: "Tell me about your installation service", Icon: Wrench },
@@ -56,13 +56,13 @@ const MATERIALS: {
   to: "/products" | "/products/$family";
   familyParam?: string;
 }[] = [
-  { label: "MCM Panels", sub: "Flexible Stone", Icon: Waves, image: matMaterials, to: "/products" },
-  { label: "Travertine", sub: "& Stone", Icon: Mountain, image: matGallery, to: "/products" },
-  { label: "WPC Decking", sub: "Outdoor", Icon: TreePine, image: matDesign, to: "/products/$family", familyParam: "wpc" },
-  { label: "WPC Wall Panels", sub: "Interior", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
-  { label: "EPS Systems", sub: "Insulation", Icon: Layers, image: matVisualizer, to: "/products" },
-  { label: "SPC Flooring", sub: "Interior", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
-];
+    { label: "MCM Panels", sub: "Flexible Stone", Icon: Waves, image: matMaterials, to: "/products" },
+    { label: "Travertine", sub: "& Stone", Icon: Mountain, image: matGallery, to: "/products" },
+    { label: "WPC Decking", sub: "Outdoor", Icon: TreePine, image: matDesign, to: "/products/$family", familyParam: "wpc" },
+    { label: "WPC Panels", sub: "Interior", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
+    { label: "EPS Systems", sub: "Insulation", Icon: Layers, image: matVisualizer, to: "/products" },
+    { label: "SPC Flooring", sub: "Interior", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
+  ];
 
 // Mobile shows first 3, tablet+ shows all 4
 const ACTIONS: { label: string; Icon: typeof Mountain; to: string }[] = [
@@ -95,6 +95,12 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
     const text = q ?? value;
     if (q) setValue(q);
     onSend?.(text);
+  };
+
+  const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (e.deltaY !== 0) {
+      e.currentTarget.scrollLeft += e.deltaY;
+    }
   };
 
   return (
@@ -184,7 +190,10 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             <MessageCircle className="h-3 w-3 text-copper" strokeWidth={1.8} />
             Popular questions
           </div>
-          <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2">
+          <div 
+            className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2 [@media(max-height:850px)]:flex [@media(max-height:850px)]:w-full [@media(max-height:850px)]:snap-x [@media(max-height:850px)]:snap-mandatory [@media(max-height:850px)]:overflow-x-auto [@media(max-height:850px)]:pb-2 custom-scroll"
+            onWheel={onWheel}
+          >
             {QUESTIONS.map(({ label, Icon }, i) => {
               // Mobile: first 4. Tablet: first 6. Desktop: all 8.
               const visibility =
@@ -198,7 +207,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.3 + i * 0.04, duration: 0.4 }}
                   whileHover={{ y: -2 }}
-                  className={`${visibility} flex min-w-0 items-center gap-1.5 rounded-lg border border-copper-light/35 bg-canvas px-2 py-1.5 text-left text-[0.62rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep sm:gap-2 sm:px-2.5 sm:py-2 sm:text-[0.68rem] lg:gap-2.5 lg:rounded-xl lg:px-3 lg:py-2.5 lg:text-[0.75rem]`}
+                  className={`${visibility} flex min-w-0 [@media(max-height:850px)]:shrink-0 [@media(max-height:850px)]:snap-start items-center gap-1.5 rounded-lg border border-copper-light/35 bg-canvas px-2 py-1.5 text-left text-[0.62rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep sm:gap-2 sm:px-2.5 sm:py-2 sm:text-[0.68rem] lg:gap-2.5 lg:rounded-xl lg:px-3 lg:py-2.5 lg:text-[0.75rem]`}
                 >
                   <Icon className="h-3 w-3 shrink-0 text-copper lg:h-4 lg:w-4" strokeWidth={1.8} />
                   <span className="min-w-0">{label}</span>
@@ -246,10 +255,13 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           </div>
 
           {/* Tablet+: image cards */}
-          <div className="hidden grid-cols-3 gap-2 sm:grid lg:grid-cols-6 lg:gap-2.5">
+          <div 
+            className="hidden sm:grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-2.5 [@media(max-height:850px)]:flex [@media(max-height:850px)]:w-full [@media(max-height:850px)]:snap-x [@media(max-height:850px)]:snap-mandatory [@media(max-height:850px)]:overflow-x-auto [@media(max-height:850px)]:pb-2 custom-scroll"
+            onWheel={onWheel}
+          >
             {MATERIALS.map(({ label, sub, image, to, familyParam }, i) => {
               const cardClass =
-                "group relative block aspect-[4/3] [@media(max-height:850px)]:aspect-video overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2";
+                "group relative block aspect-[4/3] [@media(max-height:850px)]:aspect-[4/3] overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2 [@media(max-height:850px)]:shrink-0 [@media(max-height:850px)]:snap-start [@media(max-height:850px)]:w-36 lg:[@media(max-height:850px)]:w-40";
               const inner = (
                 <>
                   <img
@@ -325,6 +337,22 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
 
       {/* glassy voice orb embedded at bottom-center of the card */}
       <VoiceOrb />
+
+      <style>{`
+        .custom-scroll::-webkit-scrollbar {
+          height: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+          background: rgba(180, 89, 44, 0.25);
+          border-radius: 4px;
+        }
+        .custom-scroll:hover::-webkit-scrollbar-thumb {
+          background: rgba(180, 89, 44, 0.6);
+        }
+      `}</style>
     </motion.div>
   );
 }

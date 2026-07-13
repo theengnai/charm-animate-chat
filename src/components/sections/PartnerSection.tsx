@@ -63,22 +63,22 @@ export function PartnerSection({ active }: { active: boolean }) {
       transition={{ duration: 0.4 }}
       className="grid h-full w-full grid-cols-1 items-center gap-6 overflow-hidden px-5 pt-20 pb-16 md:gap-10 md:px-8 md:pt-24 md:pb-28 lg:grid-cols-2 lg:gap-16 lg:px-20"
     >
-        {/* left: title + contact info */}
-        <div className="relative flex flex-col justify-center">
-          <span className="eyebrow text-copper">Become a Partner</span>
-          <div className="mt-4 overflow-hidden">
-            {"Build with Ecosmart.".split(" ").map((word, i) => (
-              <motion.span
-                key={`${word}-${i}`}
-                initial={{ y: 80, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="display-serifish mr-3 inline-block text-4xl md:text-6xl lg:text-7xl [@media(max-height:850px)]:text-5xl [@media(max-height:750px)]:text-4xl"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </div>
+      {/* left: title + contact info */}
+      <div className="relative flex flex-col justify-center">
+        <span className="eyebrow text-copper">Become a Partner</span>
+        <div className="mt-4 overflow-hidden">
+          {"Build with Ecosmart.".split(" ").map((word, i) => (
+            <motion.span
+              key={`${word}-${i}`}
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              className="display-serifish mr-3 inline-block text-4xl md:text-6xl lg:text-7xl [@media(max-height:850px)]:text-5xl [@media(max-height:750px)]:text-4xl"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </div>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

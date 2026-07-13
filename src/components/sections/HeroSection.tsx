@@ -14,7 +14,7 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden px-4 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-12 lg:pt-24 lg:pb-16"
+        className="relative flex h-full w-full flex-col items-center justify-center [@media(max-height:850px)]:justify-start overflow-hidden px-4 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-12 lg:pt-24 lg:pb-16 [@media(max-height:850px)]:pb-4"
       >
         {/* headline */}
         <motion.h1

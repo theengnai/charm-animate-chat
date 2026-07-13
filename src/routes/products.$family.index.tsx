@@ -166,11 +166,7 @@ function FamilyPage() {
                       </div>
                       <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
                     </div>
-                    {p.price !== undefined ? (
-                      <div className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-ink">
-                        SAR {p.price}
-                      </div>
-                    ) : null}
+                    
                   </div>
                 </Link>
               </ScaleIn>

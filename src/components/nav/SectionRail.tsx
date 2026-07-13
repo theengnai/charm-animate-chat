@@ -10,7 +10,6 @@ export function SectionRail({ labels, active, onPick }: SectionRailProps) {
   return (
     <>
       <DesktopRail labels={labels} active={active} onPick={onPick} />
-      <MobileRail labels={labels} active={active} onPick={onPick} />
     </>
   );
 }
@@ -19,7 +18,7 @@ function DesktopRail({ labels, active, onPick }: SectionRailProps) {
   return (
     <nav
       aria-label="Sections"
-      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 md:block"
+      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
     >
       <ul className="flex flex-col items-end gap-5">
         {labels.map((label, i) => {
@@ -54,42 +53,6 @@ function DesktopRail({ labels, active, onPick }: SectionRailProps) {
                     </motion.span>
                   )}
                 </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-  );
-}
-
-function MobileRail({ labels, active, onPick }: SectionRailProps) {
-  return (
-    <nav
-      aria-label="Sections"
-      className="fixed right-2 top-1/2 z-40 -translate-y-1/2 md:hidden"
-    >
-      <ul className="flex flex-col items-end gap-1">
-        {labels.map((label, i) => {
-          const isActive = i === active;
-          return (
-            <li key={label} className="flex items-center">
-              <button
-                type="button"
-                onClick={() => onPick(i)}
-                aria-label={`Go to section ${i + 1}: ${label}`}
-                aria-current={isActive ? "true" : undefined}
-                className="grid h-8 w-8 place-items-center"
-              >
-                <motion.span
-                  initial={false}
-                  animate={{
-                    scale: isActive ? 1.2 : 1,
-                    backgroundColor: isActive ? "var(--copper)" : "rgba(60,40,25,0.35)",
-                  }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-1.5 w-1.5 rounded-full"
-                />
               </button>
             </li>
           );

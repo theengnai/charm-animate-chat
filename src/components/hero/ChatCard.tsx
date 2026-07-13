@@ -5,7 +5,6 @@ import {
   ArrowUp,
   Sparkles,
   Mountain,
-  Flame,
   LayoutGrid,
   TreePine,
   Waves,
@@ -15,6 +14,12 @@ import {
   Compass,
   FileText,
   Layers,
+  Home,
+  Image as ImageIcon,
+  User,
+  Wrench,
+  Info,
+  MessageCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import matMaterials from "@/assets/section-materials.jpg";
@@ -31,14 +36,15 @@ const PLACEHOLDERS = [
   "Plan a warm minimal interior in flexible stone…",
 ];
 
-const TOPICS: { label: string; Icon: typeof Mountain }[] = [
-  { label: "Travertine", Icon: Mountain },
-  { label: "Terracotta", Icon: Flame },
-  { label: "MCM Panels", Icon: LayoutGrid },
-  { label: "WPC Decking", Icon: TreePine },
-  { label: "Flexible Stone", Icon: Waves },
-  { label: "SPC Flooring", Icon: Square },
-  { label: "EPS Systems", Icon: Package },
+const QUESTIONS: { label: string; Icon: typeof Mountain }[] = [
+  { label: "I want to renovate my villa façade", Icon: Home },
+  { label: "Which material is right for my project?", Icon: Sparkles },
+  { label: "Can I visualize my project before I decide?", Icon: ImageIcon },
+  { label: "I need a quotation for my project", Icon: FileText },
+  { label: "I'm an architect or designer", Icon: User },
+  { label: "I'd like to request free samples", Icon: Package },
+  { label: "Tell me about your installation service", Icon: Wrench },
+  { label: "I need technical information", Icon: Info },
 ];
 
 

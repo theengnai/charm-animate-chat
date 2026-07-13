@@ -180,11 +180,11 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           style={{ background: "color-mix(in oklab, var(--canvas-2) 60%, transparent)" }}
         >
           {/* Popular questions */}
-          <div className="mb-2 flex items-center gap-1.5 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:gap-2 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5 [@media(max-height:750px)]:hidden">
+          <div className="mb-2 flex items-center gap-1.5 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:gap-2 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5">
             <MessageCircle className="h-3 w-3 text-copper" strokeWidth={1.8} />
             Popular questions
           </div>
-          <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2 [@media(max-height:750px)]:hidden">
+          <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2">
             {QUESTIONS.map(({ label, Icon }, i) => {
               // Mobile: first 4. Tablet: first 6. Desktop: all 8.
               const visibility =
@@ -207,7 +207,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             })}
           </div>
 
-          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4 [@media(max-height:850px)]:my-2 [@media(max-height:750px)]:hidden" />
+          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4 [@media(max-height:850px)]:my-2" />
 
           {/* Explore materials */}
           <div className="mb-2 flex items-baseline gap-2.5 sm:mb-2.5 sm:gap-3 [@media(max-height:850px)]:mb-1.5">
@@ -247,9 +247,9 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
 
           {/* Tablet+: image cards */}
           <div className="hidden grid-cols-3 gap-2 sm:grid lg:grid-cols-6 lg:gap-2.5">
-            {MATERIALS.map(({ label, sub, Icon, image, to, familyParam }, i) => {
+            {MATERIALS.map(({ label, sub, image, to, familyParam }, i) => {
               const cardClass =
-                "group relative block aspect-square overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2";
+                "group relative block aspect-[4/3] [@media(max-height:850px)]:aspect-video overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2";
               const inner = (
                 <>
                   <img
@@ -258,9 +258,6 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
-                  <div className="absolute left-1/2 top-2 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full bg-canvas shadow-sm lg:top-3 lg:h-7 lg:w-7">
-                    <Icon className="h-3 w-3 text-copper lg:h-3.5 lg:w-3.5" strokeWidth={1.8} />
-                  </div>
                   <div className="absolute inset-x-0 bottom-0 p-2 lg:p-2.5">
                     <div className="text-[0.62rem] font-semibold leading-tight text-canvas lg:text-[0.78rem]">
                       {label}
@@ -293,13 +290,13 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             })}
           </div>
 
-          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4 [@media(max-height:850px)]:my-2 [@media(max-height:800px)]:hidden" />
+          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4 [@media(max-height:850px)]:my-2" />
 
           {/* Quick actions */}
-          <div className="mb-2 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5 [@media(max-height:800px)]:hidden">
+          <div className="mb-2 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5">
             Quick actions
           </div>
-          <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 lg:gap-2.5 [@media(max-height:800px)]:hidden">
+          <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 lg:gap-2.5">
             {ACTIONS.map(({ label, Icon, to }, i) => {
               // Mobile shows first 3; tablet+ shows all
               const visibility = i < 3 ? "" : "hidden sm:inline-flex";

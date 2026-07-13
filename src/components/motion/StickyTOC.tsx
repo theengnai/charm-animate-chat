@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 
-export type TOCItem = { id: string; label: string };
+export type TOCItem = { id: string; label: string; subItems?: TOCItem[] };
 
 export function StickyTOC({
   items,
@@ -15,7 +15,8 @@ export function StickyTOC({
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
-    items.forEach((it) => {
+    const allItems = items.flatMap(it => [it, ...(it.subItems || [])]);
+    allItems.forEach((it) => {
       const el = document.getElementById(it.id);
       if (!el) return;
       const io = new IntersectionObserver(
@@ -41,26 +42,50 @@ export function StickyTOC({
               {eyebrow}
             </div>
           ) : null}
-          <nav className="mt-6 flex flex-col gap-1">
+          <nav className="mt-6 flex flex-col gap-0">
             {items.map((it) => {
-              const isActive = active === it.id;
+              const isSectionActive = active === it.id || (it.subItems?.some(sub => sub.id === active));
               return (
-                <a
-                  key={it.id}
-                  href={`#${it.id}`}
-                  className={`group flex items-center gap-3 border-l-2 py-2 pl-4 text-sm transition-colors ${
-                    isActive
-                      ? "border-copper text-ink"
-                      : "border-line/60 text-ink-soft hover:text-ink"
-                  }`}
-                >
-                  <span
-                    className={`h-1 w-1 rounded-full transition-all ${
-                      isActive ? "w-4 bg-copper" : "bg-ink-soft/50"
+                <div key={it.id} className="flex flex-col">
+                  <a
+                    href={`#${it.id}`}
+                    className={`group flex items-center gap-3 border-l-2 py-2 pl-4 text-sm transition-colors ${
+                      isSectionActive
+                        ? "border-copper text-ink"
+                        : "border-line/60 text-ink-soft hover:text-ink"
                     }`}
-                  />
-                  {it.label}
-                </a>
+                  >
+                    <span
+                      className={`h-1 w-1 rounded-full transition-all ${
+                        isSectionActive ? "w-4 bg-copper" : "bg-ink-soft/50"
+                      }`}
+                    />
+                    {it.label}
+                  </a>
+                  {it.subItems && it.subItems.length > 0 && (
+                    <div className={`flex flex-col border-l-2 py-1 pb-2 ${isSectionActive ? "border-copper/30" : "border-line/60"}`}>
+                      {it.subItems.map((sub) => {
+                        const isSubActive = active === sub.id;
+                        return (
+                          <a
+                            key={sub.id}
+                            href={`#${sub.id}`}
+                            className={`group flex items-center gap-3 py-1.5 pl-4 text-xs transition-colors ${
+                              isSubActive ? "text-ink" : "text-ink-soft hover:text-ink"
+                            }`}
+                          >
+                            <span
+                              className={`h-1 w-1 rounded-full transition-all ${
+                                isSubActive ? "bg-copper" : "bg-transparent group-hover:bg-ink-soft/30"
+                              }`}
+                            />
+                            {sub.label}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>

@@ -32,90 +32,172 @@ export const Route = createFileRoute("/products/")({
   component: ProductsPage,
 });
 
-const FAMILIES = [
+type ProductCard = {
+  id: string;
+  tag: string;
+  title: string;
+  body: string;
+  specs?: [string, string][];
+  image: string;
+  isComingSoon?: boolean;
+  viewAllLink?: string;
+};
+
+type Section = {
+  id: string;
+  label: string;
+  title: string;
+  intro: string;
+  cards: ProductCard[];
+};
+
+const SECTIONS: Section[] = [
   {
-    id: "mcm",
-    label: "MCM · Flexible cladding",
-    tag: "Exterior + Interior · Skin",
-    title: "MCM Flexible Cladding",
-    body: "Modified Clay Material — thin, flexible mineral cladding that reads as travertine, brick, rock or timber but installs like tile. Non-combustible, lightweight, priced from 26 SAR/m².",
-    specs: [
-      ["Fire class", "A2-s1,d0"],
-      ["Thickness", "3 mm"],
-      ["Weight", "≈ 4 kg/m²"],
-      ["Lead time", "2 weeks"],
+    id: "architectural-finishes",
+    label: "Architectural Finishes",
+    title: "Architectural Finishes",
+    // TODO: Client to review placeholder intro copy
+    intro: "Surface materials that shape light, weather well, and install with intention.",
+    cards: [
+      {
+        id: "flexible-clay-stone-panels",
+        tag: "Exterior + Interior · Skin",
+        title: "Flexible Clay-Stone Panels",
+        body: "Modified Clay Material — thin, flexible mineral cladding that reads as travertine, brick, rock or timber but installs like tile. Non-combustible, lightweight, priced from 26 SAR/m².",
+        specs: [
+          ["Fire class", "A2-s1,d0"],
+          ["Thickness", "3 mm"],
+          ["Weight", "≈ 4 kg/m²"],
+          ["Lead time", "2 weeks"],
+        ],
+        image: mcmCover.url,
+        viewAllLink: "mcm",
+      },
+      {
+        id: "eps-decorative-facades",
+        // TODO: Client to replace placeholder tag, body, specs, and image
+        tag: "Exterior · Details",
+        title: "EPS Decorative Façades",
+        body: "Lightweight architectural mouldings and cornices with a hard polyurea shell for sharp, lasting details.",
+        specs: [
+          ["Fire class", "TODO"],
+          ["Thickness", "TODO"],
+          ["Weight", "TODO"],
+          ["Lead time", "TODO"],
+        ],
+        image: imgA,
+      },
+      {
+        id: "wpc",
+        tag: "Exterior · Ground plane",
+        title: "WPC Decking",
+        body: "Warm oak, linen and charcoal composite boards engineered for salt air, direct sun and hidden fixings. The board that ages instead of failing.",
+        specs: [
+          ["Fire class", "B-s1,d0"],
+          ["Board thickness", "22 mm"],
+          ["Warranty", "10 years"],
+          ["Lead time", "3 weeks"],
+        ],
+        image: imgA,
+        viewAllLink: "wpc",
+      },
+      {
+        id: "pvc-wood-panels",
+        // TODO: Client to replace placeholder tag, body, specs, and image
+        tag: "Interior · Walls",
+        title: "PVC Wood Panels",
+        body: "Durable, moisture-resistant fluted panels that bring the warmth of timber without the maintenance.",
+        specs: [
+          ["Fire class", "TODO"],
+          ["Thickness", "TODO"],
+          ["Weight", "TODO"],
+          ["Lead time", "TODO"],
+        ],
+        image: imgB,
+      },
+      {
+        id: "pu-stone",
+        // TODO: Client to replace placeholder tag, body, specs, and image
+        tag: "Interior + Exterior · Walls",
+        title: "PU Stone",
+        body: "Ultra-lightweight polyurethane stone panels for rapid, mortar-free feature walls.",
+        specs: [
+          ["Fire class", "TODO"],
+          ["Thickness", "TODO"],
+          ["Weight", "TODO"],
+          ["Lead time", "TODO"],
+        ],
+        image: imgC,
+      },
     ],
-    image: mcmCover.url,
   },
   {
-    id: "wpc",
-    label: "WPC · Decking",
-    tag: "Exterior · Ground plane",
-    title: "WPC Decking & Cladding",
-    body: "Warm oak, linen and charcoal composite boards engineered for salt air, direct sun and hidden fixings. The board that ages instead of failing.",
-    specs: [
-      ["Fire class", "B-s1,d0"],
-      ["Board thickness", "22 mm"],
-      ["Warranty", "10 years"],
-      ["Lead time", "3 weeks"],
+    id: "smart-construction",
+    label: "Smart Construction Systems",
+    title: "Smart Construction Systems",
+    // TODO: Client to review placeholder intro copy
+    intro: "Structural solutions engineered to reduce site time and material waste.",
+    cards: [
+      {
+        id: "lightweight-concrete-wall-panels",
+        // TODO: Client to replace placeholder tag, body, specs, and image
+        tag: "Structure · Walls",
+        title: "Lightweight Concrete Wall Panels",
+        body: "Pre-cast lightweight concrete panels that replace traditional blockwork, speeding up partitioning.",
+        specs: [
+          ["Fire class", "TODO"],
+          ["Thickness", "TODO"],
+          ["Weight", "TODO"],
+          ["Lead time", "TODO"],
+        ],
+        image: imgD,
+      },
     ],
-    image: imgA,
   },
   {
-    id: "spc",
-    label: "SPC · Interior floors",
-    tag: "Interior · Underfoot",
-    title: "SPC Flooring",
-    body: "Stone-firm, silent, waterproof. A quiet floor for hotels, workplaces and villas where the finish has to look calm the day after the party.",
-    specs: [
-      ["Wear class", "AC5"],
-      ["Fire class", "Bfl-s1"],
-      ["Warranty", "15 years"],
-      ["Lead time", "2 weeks"],
+    id: "future-solutions",
+    label: "Future Solutions",
+    title: "Future Solutions",
+    // TODO: Client to review placeholder intro copy
+    intro: "Systems currently in development for the next generation of GCC builds.",
+    cards: [
+      {
+        id: "t-floor-hourdi",
+        // TODO: Client to replace placeholder tag, body, and image
+        tag: "Structure · Floors",
+        title: "T-Floor Hourdi System",
+        body: "A lighter, faster hollow-core flooring system.",
+        isComingSoon: true,
+        image: imgE,
+      },
+      {
+        id: "hybrid-precast",
+        // TODO: Client to replace placeholder tag, body, and image
+        tag: "Structure · Complete",
+        title: "Hybrid Precast Building Systems",
+        body: "Volumetric and panelized precast elements for rapid assembly.",
+        isComingSoon: true,
+        image: imgA,
+      },
+      {
+        id: "3d-modular",
+        // TODO: Client to replace placeholder tag, body, and image
+        tag: "Structure · Modular",
+        title: "3D Modular Construction",
+        body: "Fully finished modular units craned directly into place.",
+        isComingSoon: true,
+        image: imgB,
+      },
+      {
+        id: "portable-building",
+        // TODO: Client to replace placeholder tag, body, and image
+        tag: "Structure · Temporary",
+        title: "Portable Building Solutions",
+        body: "High-performance temporary and relocatable structures.",
+        isComingSoon: true,
+        image: imgC,
+      },
     ],
-    image: imgB,
-  },
-  {
-    id: "aluminium",
-    label: "Aluminium · Louvers",
-    tag: "Exterior · Skin",
-    title: "Aluminium Louvers",
-    body: "Blades, fins and screens for solar shading and rainscreens. Powder-coated or anodised, sized to your grid, delivered pre-drilled to the substructure.",
-    specs: [
-      ["Fire class", "A1"],
-      ["Finish", "Anodised · Powder"],
-      ["Warranty", "20 years"],
-      ["Lead time", "4 weeks"],
-    ],
-    image: imgE,
-  },
-  {
-    id: "panels",
-    label: "Panels · Interior walls",
-    tag: "Interior · Vertical",
-    title: "Wall Panels",
-    body: "Acoustic linen, slatted oak and mineral cast panels for lobbies, corridors and living rooms. The walls that quiet the room instead of decorating it.",
-    specs: [
-      ["Acoustic (NRC)", "0.70"],
-      ["Fire class", "B-s2,d0"],
-      ["Warranty", "10 years"],
-      ["Lead time", "3 weeks"],
-    ],
-    image: imgD,
-  },
-  {
-    id: "custom",
-    label: "Custom · Bespoke",
-    tag: "Anywhere",
-    title: "Custom Fabrication",
-    body: "When the catalogue doesn't fit, we build to fit. Bespoke sizes, colours, perforations and finishes — with a full-scale mock-up before production.",
-    specs: [
-      ["Minimum run", "40 m²"],
-      ["Prototype", "1:1 mock-up"],
-      ["Lead time", "6–8 weeks"],
-      ["MOQ pricing", "on request"],
-    ],
-    image: imgC,
   },
 ];
 
@@ -163,6 +245,7 @@ function ProductsPage() {
             The library
           </div>
           <p className="display-serifish mt-6 text-2xl leading-[1.25] md:text-4xl">
+            {/* TODO: Review and update this copy — "Five families" no longer matches the new 3-section structure */}
             Not a catalogue of everything —{" "}
             <HighlightSweep>a considered set of systems</HighlightSweep>{" "}
             we know how to draw, deliver and defend on site. Five families, forty-two finishes, one supervisor at every install.
@@ -172,56 +255,94 @@ function ProductsPage() {
 
       {/* Sticky TOC of families with BlurFocus imagery + AlternatingSlide spec rows */}
       <StickyTOC
-        eyebrow="Families"
-        items={FAMILIES.map((f) => ({ id: f.id, label: f.label }))}
+        eyebrow="Library"
+        items={SECTIONS.map((s) => ({ 
+          id: s.id, 
+          label: s.label,
+          subItems: s.cards.map((c) => ({ id: c.id, label: c.title }))
+        }))}
       >
-        {FAMILIES.map((f, i) => (
-          <article
-            key={f.id}
-            id={f.id}
-            className="scroll-mt-28 border-b border-line/40 pb-24 last:border-b-0"
-          >
-            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                <img
-                  src={f.image}
-                  alt={f.title}
-                  className="h-full w-full object-cover"
-                />
-              </BlurFocus>
-              <div>
-                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-                  0{i + 1} · {f.tag}
-                </div>
-                <h3 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
-                  {f.title}
-                </h3>
-                <p className="mt-6 text-base leading-relaxed text-ink-soft">
-                  {f.body}
-                </p>
-                <div className="mt-10 space-y-2">
-                  {f.specs.map((row, j) => (
-                    <AlternatingSlide key={row[0]} index={j}>
-                      <div className="flex items-center justify-between border-b border-line/50 py-3 font-mono text-xs uppercase tracking-[0.2em]">
-                        <span className="text-ink-soft">{row[0]}</span>
-                        <span className="text-ink">{row[1]}</span>
-                      </div>
-                    </AlternatingSlide>
-                  ))}
-                </div>
-                {f.id !== "custom" ? (
-                  <Link
-                    to="/products/$family"
-                    params={{ family: f.id }}
-                    className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
-                  >
-                    <span className="font-medium tracking-wide">View all {f.title.split(" ")[0]}</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
-                  </Link>
-                ) : null}
-              </div>
+        {SECTIONS.map((section) => (
+          <div key={section.id} id={section.id} className="scroll-mt-28 border-b border-line/40 mb-32 pb-32 last:mb-0 last:border-b-0 last:pb-0">
+            <div className="mb-12">
+              <h2 className="display-serifish text-3xl md:text-5xl text-ink">
+                {section.title}
+                {section.id === "future-solutions" && (
+                  <span className="ml-4 inline-flex items-center rounded-full bg-line/50 px-3 py-1 align-middle font-mono text-[0.62rem] uppercase tracking-widest text-ink-soft">
+                    Coming Soon
+                  </span>
+                )}
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg text-ink-soft">{section.intro}</p>
             </div>
-          </article>
+
+            <div className="space-y-32">
+              {section.cards.map((f, i) => (
+                <article key={f.id} id={f.id} className="scroll-mt-28">
+                  <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+                    <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                      <img
+                        src={f.image}
+                        alt={f.title}
+                        className="h-full w-full object-cover"
+                      />
+                    </BlurFocus>
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                          0{i + 1} · {f.tag}
+                        </div>
+                        {f.isComingSoon && (
+                          <div className="rounded bg-canvas-2 px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+                            In development
+                          </div>
+                        )}
+                      </div>
+                      <h3 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
+                        {f.title}
+                      </h3>
+                      <p className="mt-6 text-base leading-relaxed text-ink-soft">
+                        {f.body}
+                      </p>
+
+                      {f.isComingSoon ? (
+                        <div className="mt-10 border-t border-line/50 pt-4 font-mono text-xs uppercase tracking-[0.2em] text-ink-soft">
+                          Details coming soon
+                        </div>
+                      ) : (
+                        <div className="mt-10 space-y-2">
+                          {f.specs?.map((row, j) => (
+                            <AlternatingSlide key={row[0]} index={j}>
+                              <div className="flex items-center justify-between border-b border-line/50 py-3 font-mono text-xs uppercase tracking-[0.2em]">
+                                <span className="text-ink-soft">{row[0]}</span>
+                                <span className="text-ink">{row[1]}</span>
+                              </div>
+                            </AlternatingSlide>
+                          ))}
+                        </div>
+                      )}
+
+                      {f.viewAllLink && (
+                        <Link
+                          to="/products/$family"
+                          params={{ family: f.viewAllLink }}
+                          className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
+                        >
+                          <span className="font-medium tracking-wide">
+                            View all {f.title.split(" ")[0]}
+                          </span>
+                          <ArrowRight
+                            className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                            strokeWidth={2}
+                          />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         ))}
       </StickyTOC>
 

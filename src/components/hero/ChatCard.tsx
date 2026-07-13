@@ -5,7 +5,6 @@ import {
   ArrowUp,
   Sparkles,
   Mountain,
-  Flame,
   LayoutGrid,
   TreePine,
   Waves,
@@ -15,6 +14,12 @@ import {
   Compass,
   FileText,
   Layers,
+  Home,
+  Image as ImageIcon,
+  User,
+  Wrench,
+  Info,
+  MessageCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import matMaterials from "@/assets/section-materials.jpg";
@@ -31,14 +36,15 @@ const PLACEHOLDERS = [
   "Plan a warm minimal interior in flexible stone…",
 ];
 
-const TOPICS: { label: string; Icon: typeof Mountain }[] = [
-  { label: "Travertine", Icon: Mountain },
-  { label: "Terracotta", Icon: Flame },
-  { label: "MCM Panels", Icon: LayoutGrid },
-  { label: "WPC Decking", Icon: TreePine },
-  { label: "Flexible Stone", Icon: Waves },
-  { label: "SPC Flooring", Icon: Square },
-  { label: "EPS Systems", Icon: Package },
+const QUESTIONS: { label: string; Icon: typeof Mountain }[] = [
+  { label: "I want to renovate my villa façade", Icon: Home },
+  { label: "Which material is right for my project?", Icon: Sparkles },
+  { label: "Can I visualize my project before I decide?", Icon: ImageIcon },
+  { label: "I need a quotation for my project", Icon: FileText },
+  { label: "I'm an architect or designer", Icon: User },
+  { label: "I'd like to request free samples", Icon: Package },
+  { label: "Tell me about your installation service", Icon: Wrench },
+  { label: "I need technical information", Icon: Info },
 ];
 
 
@@ -174,92 +180,91 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           className="px-4 py-4 md:px-6 md:py-6"
           style={{ background: "color-mix(in oklab, var(--canvas-2) 60%, transparent)" }}
         >
-          <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
-            Suggested topics
+          <div className="mb-3 flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft/80 md:text-[0.7rem] md:tracking-[0.32em]">
+            <MessageCircle className="h-3 w-3 text-copper" strokeWidth={1.8} />
+            Popular questions
           </div>
-          <div className="flex flex-wrap gap-1.5 md:gap-2.5">
-            {TOPICS.map(({ label, Icon }, i) => (
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-4 md:gap-2">
+            {QUESTIONS.map(({ label, Icon }, i) => (
               <motion.button
                 key={label}
                 type="button"
-                onClick={() => submit(`Tell me about ${label}`)}
+                onClick={() => submit(label)}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.3 + i * 0.05, duration: 0.4 }}
+                transition={{ delay: 1.3 + i * 0.04, duration: 0.4 }}
                 whileHover={{ y: -2 }}
-                className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-canvas px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
+                className="flex min-w-0 items-center gap-2 rounded-xl border border-copper-light/35 bg-canvas px-2.5 py-2 text-left text-[0.72rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2.5 md:px-3 md:py-2.5 md:text-[0.78rem]"
               >
-                <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
-                {label}
+                <Icon className="h-3.5 w-3.5 shrink-0 text-copper md:h-4 md:w-4" strokeWidth={1.8} />
+                <span className="min-w-0">{label}</span>
               </motion.button>
             ))}
           </div>
 
-          <div className="hidden md:block">
-            <div className="my-4 h-px w-full bg-ink/5" />
+          <div className="my-4 h-px w-full bg-ink/5" />
 
-            <div className="mb-3 flex items-baseline gap-3">
-              <div className="font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
-                Explore materials
-              </div>
-              <Link
-                to="/products"
-                className="text-[0.7rem] text-copper hover:text-copper-deep hover:underline"
-              >
-                Browse all →
-              </Link>
+          <div className="mb-3 flex items-baseline gap-3">
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft/80 md:text-[0.7rem] md:tracking-[0.32em]">
+              Explore materials
             </div>
-            <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-2.5">
-              {MATERIALS.map(({ label, sub, Icon, image, to, familyParam }, i) => {
-                const cardClass =
-                  "group relative block aspect-[3/4] overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2";
-                const inner = (
-                  <>
-                    <img
-                      src={image}
-                      alt={label}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
-                    <div className="absolute left-1/2 top-3 -translate-x-1/2 grid h-7 w-7 place-items-center rounded-full bg-canvas shadow-sm md:h-8 md:w-8">
-                      <Icon className="h-3.5 w-3.5 text-copper md:h-4 md:w-4" strokeWidth={1.8} />
+            <Link
+              to="/products"
+              className="text-[0.65rem] text-copper hover:text-copper-deep hover:underline md:text-[0.7rem]"
+            >
+              Browse all →
+            </Link>
+          </div>
+          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-2.5">
+            {MATERIALS.map(({ label, sub, Icon, image, to, familyParam }, i) => {
+              const cardClass =
+                "group relative block aspect-square overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2";
+              const inner = (
+                <>
+                  <img
+                    src={image}
+                    alt={label}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
+                  <div className="absolute left-1/2 top-2 -translate-x-1/2 grid h-6 w-6 place-items-center rounded-full bg-canvas shadow-sm md:top-3 md:h-8 md:w-8">
+                    <Icon className="h-3 w-3 text-copper md:h-4 md:w-4" strokeWidth={1.8} />
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-2 md:p-3">
+                    <div className="text-[0.68rem] font-semibold leading-tight text-canvas md:text-sm">
+                      {label}
                     </div>
-                    <div className="absolute inset-x-0 bottom-0 p-2.5 md:p-3">
-                      <div className="text-[0.72rem] font-semibold leading-tight text-canvas md:text-sm">
-                        {label}
-                      </div>
-                      <div className="text-[0.62rem] leading-tight text-canvas/75 md:text-[0.7rem]">
-                        {sub}
-                      </div>
+                    <div className="text-[0.58rem] leading-tight text-canvas/75 md:text-[0.7rem]">
+                      {sub}
                     </div>
-                  </>
-                );
-                return (
-                  <motion.div
-                    key={label}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.55 + i * 0.05, duration: 0.4 }}
-                    whileHover={{ y: -2 }}
-                  >
-                    {to === "/products/$family" && familyParam ? (
-                      <Link to="/products/$family" params={{ family: familyParam }} className={cardClass}>
-                        {inner}
-                      </Link>
-                    ) : (
-                      <Link to="/products" className={cardClass}>
-                        {inner}
-                      </Link>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            <div className="my-4 h-px w-full bg-ink/5" />
+                  </div>
+                </>
+              );
+              return (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.55 + i * 0.05, duration: 0.4 }}
+                  whileHover={{ y: -2 }}
+                >
+                  {to === "/products/$family" && familyParam ? (
+                    <Link to="/products/$family" params={{ family: familyParam }} className={cardClass}>
+                      {inner}
+                    </Link>
+                  ) : (
+                    <Link to="/products" className={cardClass}>
+                      {inner}
+                    </Link>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
-          <div className="mb-3 font-mono text-[0.7rem] uppercase tracking-[0.32em] text-ink-soft/80">
+          <div className="my-4 h-px w-full bg-ink/5" />
+
+          <div className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft/80 md:text-[0.7rem] md:tracking-[0.32em]">
             Quick actions
           </div>
           <div className="flex flex-wrap gap-1.5 md:gap-2.5">

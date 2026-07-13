@@ -124,16 +124,16 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
         }}
       >
         {/* input row */}
-        <div className="relative flex items-center gap-2 px-2 py-2 md:gap-3 md:px-4 md:py-3">
+        <div className="relative flex items-center gap-1.5 px-1.5 py-1.5 md:gap-3 md:px-3 md:py-2.5">
           <div
-            className="ml-1 hidden h-9 w-9 shrink-0 place-items-center rounded-xl sm:grid"
+            className="ml-1 hidden h-8 w-8 shrink-0 place-items-center rounded-lg sm:grid md:h-9 md:w-9 md:rounded-xl"
             style={{
               background:
                 "linear-gradient(135deg, rgba(240,199,154,0.35), rgba(216,144,96,0.18))",
               border: "1px solid rgba(180,89,44,0.25)",
             }}
           >
-            <Sparkles className="h-4 w-4 text-copper" strokeWidth={1.6} />
+            <Sparkles className="h-3.5 w-3.5 text-copper md:h-4 md:w-4" strokeWidth={1.6} />
           </div>
 
           <div className="relative min-w-0 flex-1">
@@ -141,11 +141,11 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full bg-transparent px-3 py-4 text-base text-ink outline-none md:px-5 md:py-5 md:text-xl"
+              className="w-full bg-transparent px-2.5 py-2.5 text-sm text-ink outline-none md:px-4 md:py-3.5 md:text-base"
               aria-label="Ask Ecosmart"
             />
             {!value && (
-              <span className="pointer-events-none absolute left-3 top-1/2 max-w-full -translate-y-1/2 truncate pr-2 text-base text-ink-soft/55 md:left-5 md:text-xl">
+              <span className="pointer-events-none absolute left-2.5 top-1/2 max-w-full -translate-y-1/2 truncate pr-2 text-sm text-ink-soft/55 md:left-4 md:text-base">
                 {typed}
                 <span className="ml-0.5 inline-block w-[2px] animate-[caret_1s_steps(2)_infinite] bg-copper/70">
                   &nbsp;
@@ -159,7 +159,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             onClick={() => submit()}
             whileHover={{ scale: 1.04, y: -1 }}
             whileTap={{ scale: 0.96 }}
-            className="mr-1 flex h-11 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-medium text-canvas md:h-12 md:px-5 md:text-[0.95rem]"
+            className="mr-0.5 flex h-9 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium text-canvas md:mr-1 md:h-10 md:rounded-xl md:px-4 md:text-sm"
             style={{
               background:
                 "linear-gradient(135deg,#f0c79a 0%,#d89060 45%,#b4592c 100%)",
@@ -168,7 +168,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             aria-label="Consult"
           >
             <span className="hidden sm:inline">Consult</span>
-            <ArrowUp className="h-4 w-4 rotate-45" strokeWidth={2.4} />
+            <ArrowUp className="h-3.5 w-3.5 rotate-45 md:h-4 md:w-4" strokeWidth={2.4} />
           </motion.button>
         </div>
 
@@ -177,14 +177,14 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
 
         {/* suggested topics row */}
         <div
-          className="px-4 py-4 md:px-6 md:py-6"
+          className="px-3 py-3 md:px-5 md:py-5"
           style={{ background: "color-mix(in oklab, var(--canvas-2) 60%, transparent)" }}
         >
-          <div className="mb-3 flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft/80 md:text-[0.7rem] md:tracking-[0.32em]">
+          <div className="mb-2.5 flex items-center gap-2 font-mono text-[0.58rem] uppercase tracking-[0.24em] text-ink-soft/80 md:text-[0.68rem] md:tracking-[0.3em]">
             <MessageCircle className="h-3 w-3 text-copper" strokeWidth={1.8} />
             Popular questions
           </div>
-          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-4 md:gap-2">
+          <div className="grid grid-cols-2 gap-1.5 md:grid-cols-4 md:gap-2">
             {QUESTIONS.map(({ label, Icon }, i) => (
               <motion.button
                 key={label}
@@ -194,9 +194,9 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3 + i * 0.04, duration: 0.4 }}
                 whileHover={{ y: -2 }}
-                className="flex min-w-0 items-center gap-2 rounded-xl border border-copper-light/35 bg-canvas px-2.5 py-2 text-left text-[0.72rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2.5 md:px-3 md:py-2.5 md:text-[0.78rem]"
+                className="flex min-w-0 items-center gap-1.5 rounded-lg border border-copper-light/35 bg-canvas px-2 py-1.5 text-left text-[0.65rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2.5 md:rounded-xl md:px-3 md:py-2.5 md:text-[0.75rem]"
               >
-                <Icon className="h-3.5 w-3.5 shrink-0 text-copper md:h-4 md:w-4" strokeWidth={1.8} />
+                <Icon className="h-3 w-3 shrink-0 text-copper md:h-4 md:w-4" strokeWidth={1.8} />
                 <span className="min-w-0">{label}</span>
               </motion.button>
             ))}

@@ -190,10 +190,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             <MessageCircle className="h-3 w-3 text-copper" strokeWidth={1.8} />
             Popular questions
           </div>
-          <div 
-            className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2 [@media(max-height:850px)]:flex [@media(max-height:850px)]:w-full [@media(max-height:850px)]:snap-x [@media(max-height:850px)]:snap-mandatory [@media(max-height:850px)]:overflow-x-auto [@media(max-height:850px)]:pb-2 custom-scroll"
-            onWheel={onWheel}
-          >
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-2">
             {QUESTIONS.map(({ label, Icon }, i) => {
               // Mobile: first 4. Tablet: first 6. Desktop: all 8.
               const visibility =
@@ -207,7 +204,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.3 + i * 0.04, duration: 0.4 }}
                   whileHover={{ y: -2 }}
-                  className={`${visibility} flex min-w-0 [@media(max-height:850px)]:shrink-0 [@media(max-height:850px)]:snap-start items-center gap-1.5 rounded-lg border border-copper-light/35 bg-canvas px-2 py-1.5 text-left text-[0.62rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep sm:gap-2 sm:px-2.5 sm:py-2 sm:text-[0.68rem] lg:gap-2.5 lg:rounded-xl lg:px-3 lg:py-2.5 lg:text-[0.75rem]`}
+                  className={`${visibility} flex min-w-0 items-center gap-1.5 rounded-lg border border-copper-light/35 bg-canvas px-2 py-1.5 text-left text-[0.62rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep sm:gap-2 sm:px-2.5 sm:py-2 sm:text-[0.68rem] lg:gap-2.5 lg:rounded-xl lg:px-3 lg:py-2.5 lg:text-[0.75rem]`}
                 >
                   <Icon className="h-3 w-3 shrink-0 text-copper lg:h-4 lg:w-4" strokeWidth={1.8} />
                   <span className="min-w-0">{label}</span>
@@ -231,37 +228,14 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             </Link>
           </div>
 
-          {/* Mobile: name-only chips */}
-          <div className="grid grid-cols-2 gap-1.5 sm:hidden">
-            {MATERIALS.map(({ label, Icon, to, familyParam }) => {
-              const cls =
-                "flex min-w-0 items-center gap-1.5 rounded-lg border border-copper-light/35 bg-canvas px-2 py-1.5 text-left text-[0.62rem] leading-tight text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep";
-              const inner = (
-                <>
-                  <Icon className="h-3 w-3 shrink-0 text-copper" strokeWidth={1.8} />
-                  <span className="min-w-0 truncate">{label}</span>
-                </>
-              );
-              return to === "/products/$family" && familyParam ? (
-                <Link key={label} to="/products/$family" params={{ family: familyParam }} className={cls}>
-                  {inner}
-                </Link>
-              ) : (
-                <Link key={label} to="/products" className={cls}>
-                  {inner}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Tablet+: image cards */}
+          {/* Explore materials cards */}
           <div 
-            className="hidden sm:grid grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-2.5 [@media(max-height:850px)]:flex [@media(max-height:850px)]:w-full [@media(max-height:850px)]:snap-x [@media(max-height:850px)]:snap-mandatory [@media(max-height:850px)]:overflow-x-auto [@media(max-height:850px)]:pb-2 custom-scroll"
+            className="flex w-full snap-x snap-mandatory gap-1.5 overflow-x-auto pb-2 custom-scroll sm:gap-2 lg:grid lg:grid-cols-6 lg:gap-2.5 lg:overflow-visible lg:pb-0 [@media(max-height:700px)]:!flex [@media(max-height:700px)]:!w-full [@media(max-height:700px)]:!overflow-x-auto"
             onWheel={onWheel}
           >
             {MATERIALS.map(({ label, sub, image, to, familyParam }, i) => {
               const cardClass =
-                "group relative block aspect-[4/3] [@media(max-height:850px)]:aspect-[4/3] overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2 [@media(max-height:850px)]:shrink-0 [@media(max-height:850px)]:snap-start [@media(max-height:850px)]:w-36 lg:[@media(max-height:850px)]:w-40";
+                "group relative block aspect-[4/3] overflow-hidden rounded-lg sm:rounded-xl border border-copper-light/25 bg-canvas-2 shrink-0 snap-start w-24 sm:w-28 lg:w-auto lg:shrink lg:snap-align-none [@media(max-height:700px)]:!w-32";
               const inner = (
                 <>
                   <img
@@ -269,12 +243,12 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
                     alt={label}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-2 lg:p-2.5">
-                    <div className="text-[0.62rem] font-semibold leading-tight text-canvas lg:text-[0.78rem]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-1.5 sm:p-2 lg:p-2.5">
+                    <div className="text-[0.55rem] sm:text-[0.62rem] font-semibold leading-tight text-canvas lg:text-[0.78rem]">
                       {label}
                     </div>
-                    <div className="text-[0.52rem] leading-tight text-canvas/75 lg:text-[0.62rem]">
+                    <div className="text-[0.45rem] sm:text-[0.52rem] leading-tight text-canvas/80 lg:text-[0.62rem]">
                       {sub}
                     </div>
                   </div>
@@ -308,25 +282,24 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
           <div className="mb-2 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5">
             Quick actions
           </div>
-          <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 lg:gap-2.5">
+          <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 lg:gap-2.5">
             {ACTIONS.map(({ label, Icon, to }, i) => {
-              // Mobile shows first 3; tablet+ shows all
-              const visibility = i < 3 ? "" : "hidden sm:inline-flex";
+              // Mobile shows all 4 in a 2x2 grid
+              const visibility = "";
               return (
-                <motion.div
+                  <motion.div
                   key={label}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.7 + i * 0.05, duration: 0.4 }}
                   whileHover={{ y: -2 }}
-                  className={visibility === "" ? "" : "hidden sm:block"}
                 >
                   <Link
                     to={to}
-                    className="flex min-w-0 items-center justify-center gap-1 rounded-full border border-copper-light/35 bg-canvas px-2 py-1 text-[0.6rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-[0.68rem] lg:gap-2 lg:px-3.5 lg:text-[0.75rem]"
+                    className="flex min-w-0 shrink-0 snap-start items-center justify-center gap-1 rounded-full border border-copper-light/35 bg-canvas px-2.5 py-1.5 text-[0.62rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-[0.68rem] lg:gap-2 lg:px-3.5 lg:text-[0.75rem]"
                   >
                     <Icon className="h-3 w-3 shrink-0 text-copper lg:h-3.5 lg:w-3.5" strokeWidth={1.8} />
-                    <span className="truncate">{label}</span>
+                    <span className="whitespace-nowrap">{label}</span>
                   </Link>
                 </motion.div>
               );

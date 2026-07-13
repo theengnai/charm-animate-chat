@@ -56,6 +56,7 @@ export function IntroOverlay() {
               src={logoUrl}
               alt="ECOSMART"
               className="h-12 md:h-16 w-auto"
+              style={{ filter: "brightness(0) invert(1)" }}
               initial={{ clipPath: "inset(0 100% 0 0)" }}
               animate={{ clipPath: "inset(0 0% 0 0)" }}
               transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1], delay: 0.25 }}

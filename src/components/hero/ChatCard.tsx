@@ -202,20 +202,20 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             ))}
           </div>
 
-          <div className="my-4 h-px w-full bg-ink/5" />
+          <div className="my-3 h-px w-full bg-ink/5 md:my-4" />
 
-          <div className="mb-3 flex items-baseline gap-3">
-            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft/80 md:text-[0.7rem] md:tracking-[0.32em]">
+          <div className="mb-2.5 flex items-baseline gap-3">
+            <div className="font-mono text-[0.58rem] uppercase tracking-[0.24em] text-ink-soft/80 md:text-[0.68rem] md:tracking-[0.3em]">
               Explore materials
             </div>
             <Link
               to="/products"
-              className="text-[0.65rem] text-copper hover:text-copper-deep hover:underline md:text-[0.7rem]"
+              className="text-[0.6rem] text-copper hover:text-copper-deep hover:underline md:text-[0.68rem]"
             >
               Browse all →
             </Link>
           </div>
-          <div className="grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-2.5">
+          <div className="grid grid-cols-3 gap-1.5 md:grid-cols-6 md:gap-2.5">
             {MATERIALS.map(({ label, sub, Icon, image, to, familyParam }, i) => {
               const cardClass =
                 "group relative block aspect-square overflow-hidden rounded-xl border border-copper-light/25 bg-canvas-2";

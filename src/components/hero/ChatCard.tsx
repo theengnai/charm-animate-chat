@@ -262,9 +262,9 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             })}
           </div>
 
-          <div className="my-4 h-px w-full bg-ink/5" />
+          <div className="my-3 h-px w-full bg-ink/5 md:my-4" />
 
-          <div className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft/80 md:text-[0.7rem] md:tracking-[0.32em]">
+          <div className="mb-2.5 font-mono text-[0.58rem] uppercase tracking-[0.24em] text-ink-soft/80 md:text-[0.68rem] md:tracking-[0.3em]">
             Quick actions
           </div>
           <div className="flex flex-wrap gap-1.5 md:gap-2.5">
@@ -278,7 +278,7 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
               >
                 <Link
                   to={to}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-canvas px-2.5 py-1.5 text-[0.7rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-4 md:py-2 md:text-sm"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-copper-light/35 bg-canvas px-2 py-1 text-[0.65rem] text-ink/85 transition-colors hover:border-copper hover:bg-copper-light/15 hover:text-copper-deep md:gap-2 md:px-3.5 md:py-1.5 md:text-[0.78rem]"
                 >
                   <Icon className="h-3 w-3 text-copper md:h-3.5 md:w-3.5" strokeWidth={1.8} />
                   {label}

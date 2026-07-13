@@ -54,7 +54,7 @@ export function SectionShell({
                     delay: 0.2 + i * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="display-serifish mr-3 inline-block text-4xl md:text-6xl lg:text-7xl"
+                  className="display-serifish mr-3 inline-block text-4xl md:text-6xl lg:text-7xl [@media(max-height:850px)]:text-5xl [@media(max-height:750px)]:text-4xl"
                 >
                   {word}
                 </motion.span>
@@ -78,7 +78,7 @@ export function SectionShell({
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.7 }}
-                className="mt-4 max-w-md text-[0.8rem] leading-relaxed text-ink-soft md:mt-6 md:text-[0.95rem]"
+                className="mt-4 max-w-md text-[0.8rem] leading-relaxed text-ink-soft md:mt-6 md:text-[0.95rem] [@media(max-height:850px)]:hidden"
               >
                 {meta.body}
               </motion.p>

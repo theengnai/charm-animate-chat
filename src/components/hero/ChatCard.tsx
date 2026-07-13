@@ -176,15 +176,15 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
 
         {/* body */}
         <div
-          className="px-2.5 py-2.5 sm:px-4 sm:py-4 lg:px-5 lg:py-5"
+          className="px-2.5 py-2.5 sm:px-4 sm:py-4 lg:px-5 lg:py-5 [@media(max-height:850px)]:py-3 [@media(max-height:750px)]:py-2"
           style={{ background: "color-mix(in oklab, var(--canvas-2) 60%, transparent)" }}
         >
           {/* Popular questions */}
-          <div className="mb-2 flex items-center gap-1.5 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:gap-2 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em]">
+          <div className="mb-2 flex items-center gap-1.5 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:gap-2 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5 [@media(max-height:750px)]:hidden">
             <MessageCircle className="h-3 w-3 text-copper" strokeWidth={1.8} />
             Popular questions
           </div>
-          <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2">
+          <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-4 lg:gap-2 [@media(max-height:750px)]:hidden">
             {QUESTIONS.map(({ label, Icon }, i) => {
               // Mobile: first 4. Tablet: first 6. Desktop: all 8.
               const visibility =
@@ -207,10 +207,10 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             })}
           </div>
 
-          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4" />
+          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4 [@media(max-height:850px)]:my-2 [@media(max-height:750px)]:hidden" />
 
           {/* Explore materials */}
-          <div className="mb-2 flex items-baseline gap-2.5 sm:mb-2.5 sm:gap-3">
+          <div className="mb-2 flex items-baseline gap-2.5 sm:mb-2.5 sm:gap-3 [@media(max-height:850px)]:mb-1.5">
             <div className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em]">
               Explore materials
             </div>
@@ -293,13 +293,13 @@ export function ChatCard({ onSend }: { onSend?: (q?: string) => void }) {
             })}
           </div>
 
-          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4" />
+          <div className="my-2.5 h-px w-full bg-ink/5 lg:my-4 [@media(max-height:850px)]:my-2 [@media(max-height:800px)]:hidden" />
 
           {/* Quick actions */}
-          <div className="mb-2 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em]">
+          <div className="mb-2 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-ink-soft/80 sm:mb-2.5 sm:text-[0.62rem] sm:tracking-[0.24em] lg:text-[0.68rem] lg:tracking-[0.3em] [@media(max-height:850px)]:mb-1.5 [@media(max-height:800px)]:hidden">
             Quick actions
           </div>
-          <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 lg:gap-2.5">
+          <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2 lg:gap-2.5 [@media(max-height:800px)]:hidden">
             {ACTIONS.map(({ label, Icon, to }, i) => {
               // Mobile shows first 3; tablet+ shows all
               const visibility = i < 3 ? "" : "hidden sm:inline-flex";

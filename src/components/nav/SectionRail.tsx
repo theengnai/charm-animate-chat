@@ -32,15 +32,12 @@ function DesktopRail({ labels, active, onPick }: SectionRailProps) {
                 aria-current={isActive ? "true" : undefined}
               >
                 <span
-                  className={`font-mono text-[0.65rem] uppercase tracking-[0.22em] transition-all duration-500 translate-x-2 text-ink-soft opacity-0 ${
-                    isActive
-                      ? "translate-x-0 text-ink opacity-100"
-                      : "group-hover:translate-x-0 group-hover:opacity-100"
-                  }`}
+                  className="font-mono text-[0.65rem] uppercase tracking-[0.22em] transition-all duration-500 translate-x-2 text-ink-soft opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-ink"
                 >
                   <span className="mr-2 text-copper">{String(i + 1).padStart(2, "0")}</span>
                   {label}
                 </span>
+
                 <span className="relative grid h-4 w-4 place-items-center">
                   <span className="h-1 w-1 rounded-full bg-ink-soft/50 transition-all group-hover:bg-ink-soft" />
                   {isActive && (

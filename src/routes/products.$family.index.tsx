@@ -11,6 +11,7 @@ import { FAMILIES, productsByFamily, type Product } from "@/data/products";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
   mcm: "MCM",
+  pu: "PU",
   wpc: "WPC",
   spc: "SPC",
   aluminium: "Aluminium",

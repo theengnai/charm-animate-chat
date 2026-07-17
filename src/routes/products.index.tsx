@@ -53,49 +53,15 @@ type Section = {
 
 const SECTIONS: Section[] = [
   {
-    id: "construction-systems",
-    label: "Construction Systems",
-    title: "Construction Systems",
-    intro: "Structural and envelope systems engineered to the Saudi Building Code — designed to reduce site time and wet trades while adding integral thermal and acoustic performance.",
-    cards: [
-      {
-        id: "smart-wall-panels",
-        tag: "Structure · Walls",
-        title: "Smart Wall Panels",
-        body: "Precast lightweight concrete panels with tongue-and-groove edges for rapid, mortar-light dry assembly. Internal partition, external façade and fair-faced variants — in place of blockwork, with integral thermal and acoustic performance.",
-        specs: [
-          ["Reference", "EN 14992"],
-          ["Fire performance", "ASTM E84 / EN 13501-1"],
-          ["Thermal", "ASTM C518 / EN 12667"],
-          ["Acoustic", "ISO 10140 / ASTM E90"],
-        ],
-        image: imgD,
-      },
-      {
-        id: "eps-decorative-facades",
-        tag: "Exterior · Façade details",
-        title: "EPS Decorative Façades",
-        body: "Shaped EPS decorative elements — cornices, mouldings, bands and insulated panels — bonded to the substrate and finished with reinforced mesh, basecoat, primer and decorative topcoat. Decoration and insulation in one system.",
-        specs: [
-          ["EPS density", "EN 13163 / ISO 845"],
-          ["Thermal conductivity", "ASTM C518 / EN 12667"],
-          ["Compressive strength (EPS)", "ISO 844 / EN 826"],
-          ["Reaction to fire (system)", "EN 13501-1"],
-        ],
-        image: imgA,
-      },
-    ],
-  },
-  {
     id: "architectural-finishes",
     label: "Decoration & Finishing",
     title: "Decoration & Finishing",
     intro: "Finishing product lines manufactured in Sudair — for interior and exterior surfaces where the material must be honest, durable and buildable.",
     cards: [
       {
-        id: "mcm-flexible-stone",
+        id: "flexible-clay-stone-panels",
         tag: "Exterior + Interior · 100% Saudi-made",
-        title: "MCM Flexible Stone",
+        title: "Flexible Clay-Stone Tiles",
         body: "A flexible modified clay-stone tile that bends to follow flat and curved surfaces, applied like a thin tile with adhesive. EcoSmart is the only manufacturer of flexible tiles in Saudi Arabia, produced with 100% Saudi-sourced raw materials — a primary Vision 2030 / IKTVA position.",
         specs: [
           ["Origin", "100% Saudi-made"],
@@ -109,7 +75,7 @@ const SECTIONS: Section[] = [
       {
         id: "pu-stone",
         tag: "Interior + Exterior · Walls",
-        title: "PU Stone",
+        title: "PU Stone Decorative Tiles",
         body: "Lightweight polyurethane tiles that reproduce the appearance and texture of natural stone — far faster to install than real stone cladding. Adhesive-fixed, easy to cut and shape.",
         specs: [
           ["Reference", "EN 13501-1 / ASTM E84"],
@@ -120,9 +86,9 @@ const SECTIONS: Section[] = [
         image: imgC,
       },
       {
-        id: "wpc-decking",
+        id: "wpc",
         tag: "Exterior · Ground plane",
-        title: "WPC Decking",
+        title: "WPC External Decking",
         body: "Wood-plastic composite decking — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the factory installation values.",
         specs: [
           ["Reference", "EN 15534 family"],
@@ -134,48 +100,127 @@ const SECTIONS: Section[] = [
         viewAllLink: "wpc",
       },
       {
-        id: "spc-flooring",
-        tag: "Interior · Floors",
-        title: "SPC Flooring",
-        body: "Stone-plastic composite rigid-core click flooring for interior use. Dimensionally stable, waterproof, and installed as a floating floor with no adhesive and no wet trades — quick to install, quick to reoccupy.",
+        id: "wpc-doors",
+        tag: "Interior · Doors",
+        title: "WPC Door Panels",
+        body: "Wood-plastic composite door leaves — moisture-resistant, dimensionally stable, termite/rot resistant. Suited to bathrooms and wet areas where timber warps.",
         specs: [
-          ["Reaction to fire", "EN 13501-1"],
-          ["Locking system", "Click / floating floor"],
-          ["Underlay", "IXPE · integrated or separate per SKU"],
-          ["Maintenance", "Damp mop; avoid steam / abrasives"],
+          ["Reference", "EN 13501-1"],
+          ["Water absorption / swelling", "EN 317"],
+          ["Density", "ISO 1183"],
+          ["Fire-rated door-set", "Confirm by certificate"],
         ],
         image: imgB,
-        viewAllLink: "spc",
+      },
+      {
+        id: "pvc-wood-panels",
+        tag: "Interior · Walls",
+        title: "PVC Wood Panels",
+        body: "PVC wall panels with a wood-effect finish. Moisture-resistant, dimensionally stable and cut to opening sizes.",
+        specs: [
+          ["Reference", "EN 13501-1"],
+          ["Cutting", "Fine-tooth saw / utility knife"],
+          ["Fixing", "Adhesive and/or battens"],
+          ["Maintenance", "Dust / wipe clean"],
+        ],
+        image: imgB,
       },
     ],
   },
   {
-    id: "future-solutions",
-    label: "Future Solutions",
-    title: "Future Solutions — Coming Soon",
-    intro: "Additional products from the EcoSmart range currently in development. Technical data sheets and detailed information will follow — contact us for early availability.",
+    id: "smart-construction",
+    label: "Construction Systems",
+    title: "Construction Systems",
+    intro: "Structural and envelope systems engineered to the Saudi Building Code — designed to reduce site time and wet trades while adding integral thermal and acoustic performance.",
     cards: [
-      { id: "t-floor-hourdi", tag: "Structure · Floors", title: "Enhanced T-Floor Hourdi System", body: "Precast T-beams with EPS hourdi infill and structural topping — lower self-weight than a solid slab.", image: imgE, isComingSoon: true },
-      { id: "hybrid-precast", tag: "Structure · Complete frame", title: "Hybrid Precast Building System", body: "Precast columns, beams, stairs and fences combined with lightweight wall panels and T-floor decks.", image: imgA, isComingSoon: true },
-      { id: "3d-modular", tag: "Structure · Modular", title: "3D Curved Modular System", body: "Volumetric modular units including curved-angle geometries — fabricated and fitted-out off site.", image: imgB, isComingSoon: true },
-      { id: "portable-cabins", tag: "Structure · Ready-to-use", title: "Portable Cabins (insulated)", body: "Ready-to-use insulated cabins on an insulated wall system with a high-end structural frame.", image: imgC, isComingSoon: true },
-      { id: "wpc-doors", tag: "Interior · Doors", title: "WPC Door Panels", body: "Moisture-resistant, dimensionally stable door leaves for wet areas where timber warps.", image: imgB, isComingSoon: true },
-      { id: "wpc-windows", tag: "Openings · Windows", title: "WPC Windows", body: "Wood-plastic composite window profiles suited to Saudi climate.", image: imgA, isComingSoon: true },
-      { id: "spc-interior-wall", tag: "Interior · Walls", title: "SPC Interior Wall", body: "Rigid-core SPC panels for interior wall surfaces.", image: imgE, isComingSoon: true },
-      { id: "pvc-wood-panels", tag: "Interior · Walls", title: "PVC Wood Panels", body: "PVC wall panels with a wood-effect finish — moisture-resistant and dimensionally stable.", image: imgB, isComingSoon: true },
-      { id: "pvc-marble-sheets", tag: "Interior · Walls", title: "PVC Marble Sheets", body: "PVC sheets with a marble-effect finish for interior walls and joinery.", image: imgD, isComingSoon: true },
-      { id: "aluminium-louvers", tag: "Exterior · Screens", title: "Aluminium Louvers", body: "Sun-shading and screening louvers for façades and rooftop plant enclosures.", image: imgE, isComingSoon: true },
+      {
+        id: "lightweight-concrete-wall-panels",
+        tag: "Structure · Walls",
+        title: "Lightweight Concrete Wall Panels",
+        body: "Precast lightweight concrete panels with tongue-and-groove edges for rapid, mortar-light dry assembly. Internal partition, external façade and fair-faced variants — in place of blockwork, with integral thermal and acoustic performance.",
+        specs: [
+          ["Reference", "EN 14992"],
+          ["Fire performance", "ASTM E84 / EN 13501-1"],
+          ["Thermal", "ASTM C518 / EN 12667"],
+          ["Acoustic", "ISO 10140 / ASTM E90"],
+        ],
+        image: imgD,
+      },
+      {
+        id: "t-floor-hourdi",
+        tag: "Structure · Floors",
+        title: "Enhanced T-Floor Hourdi System",
+        body: "Precast T-beams + EPS T-shaped hourdi infill blocks + in-situ reinforced structural topping — lower self-weight than a solid slab, with combined structural and thermal performance.",
+        specs: [
+          ["Reference", "EN 15037"],
+          ["Design", "Project structural designer"],
+          ["EPS density", "EN 13163 / ISO 845"],
+          ["Thermal (deck)", "ASTM C518 / EN 12667"],
+        ],
+        image: imgE,
+      },
+      {
+        id: "hybrid-precast",
+        tag: "Structure · Complete frame",
+        title: "Hybrid Precast Building System",
+        body: "Precast columns, beams, stairs and fences combined with our lightweight concrete wall panels (in place of cast shear walls) and T-floor hourdi decks — a single-source precast-plus-panel structural package.",
+        specs: [
+          ["Reference", "EN 13369"],
+          ["Design", "Saudi Building Code (SBC)"],
+          ["Concrete grade", "ASTM C39 / EN 12390-3"],
+          ["Seismic / wind", "SBC"],
+        ],
+        image: imgA,
+      },
+      {
+        id: "3d-modular",
+        tag: "Structure · Modular",
+        title: "Enhanced 3D Curved Modular System",
+        body: "Volumetric modular units including curved-angle geometries — a Saudi-distinctive capability. Modules are fabricated and fitted-out off site, then set onto prepared foundations.",
+        specs: [
+          ["Design", "Saudi Building Code (SBC)"],
+          ["Thermal envelope", "ASTM C518 / EN 12667"],
+          ["Acoustic (inter-module)", "ISO 10140"],
+          ["Fire performance", "EN 13501 / SBC"],
+        ],
+        image: imgB,
+      },
+      {
+        id: "portable-building",
+        tag: "Structure · Ready-to-use",
+        title: "Portable Cabins (insulated)",
+        body: "Ready-to-use insulated cabins built on EcoSmart's insulated wall system with a high-end structural frame — not a basic container fit-out. Delivered as finished, habitable units for site offices, accommodation, clinics and amenity units.",
+        specs: [
+          ["Wall / roof U-value", "ASTM C518 / EN 12667"],
+          ["Structural / wind", "SBC"],
+          ["Electrical", "SBC / SEC"],
+          ["Fire performance", "EN 13501 / SBC"],
+        ],
+        image: imgC,
+      },
+      {
+        id: "eps-decorative-facades",
+        tag: "Exterior · Façade details",
+        title: "EPS Insulated Decorative Façades",
+        body: "Shaped EPS decorative elements — cornices, mouldings, bands and insulated panels — bonded to the substrate and finished with reinforced mesh, basecoat, primer and decorative topcoat. Decoration and insulation in one system.",
+        specs: [
+          ["EPS density", "EN 13163 / ISO 845"],
+          ["Thermal conductivity", "ASTM C518 / EN 12667"],
+          ["Compressive strength (EPS)", "ISO 844 / EN 826"],
+          ["Reaction to fire (system)", "EN 13501-1"],
+        ],
+        image: imgA,
+      },
     ],
   },
 ];
 
 const KPIS = [
-  { v: 6, s: "", l: "Flagship products released" },
-  { v: 10, s: "+", l: "In development" },
+  { v: 6, s: "", l: "Construction systems" },
+  { v: 10, s: "", l: "Finishing product lines" },
   { v: 100, s: "%", l: "Manufactured in Saudi Arabia" },
   { v: 1, s: "", l: "KSA maker of flexible clay-stone" },
 ];
-
 
 const SWATCHES = [
   { name: "Ivory Travertine", hex: "#f9f7f5" },
@@ -224,10 +269,10 @@ function ProductsPage() {
       {/* Sticky TOC of families with BlurFocus imagery + AlternatingSlide spec rows */}
       <StickyTOC
         eyebrow="Library"
-        items={SECTIONS.map((s) => ({
-          id: s.id,
+        items={SECTIONS.map((s) => ({ 
+          id: s.id, 
           label: s.label,
-          subItems: s.id === "future-solutions" ? [] : s.cards.map((c) => ({ id: c.id, label: c.title }))
+          subItems: s.cards.map((c) => ({ id: c.id, label: c.title }))
         }))}
       >
         {SECTIONS.map((section) => (
@@ -244,65 +289,40 @@ function ProductsPage() {
               <p className="mt-4 max-w-2xl text-lg text-ink-soft">{section.intro}</p>
             </div>
 
-            {section.id === "future-solutions" ? (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {section.cards.map((f) => (
-                  <div
-                    key={f.id}
-                    className="group relative overflow-hidden rounded-xl border border-line/60 bg-canvas-2/40 p-6 transition-colors hover:border-copper/50"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">
-                        {f.tag}
-                      </div>
-                      <div className="rounded bg-canvas px-2 py-0.5 font-mono text-[0.55rem] uppercase tracking-[0.28em] text-ink-soft">
-                        In development
-                      </div>
-                    </div>
-                    <h3 className="display-serifish mt-4 text-xl leading-tight text-ink">
-                      {f.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-ink-soft">{f.body}</p>
-                  </div>
-                ))}
-                <div className="col-span-full mt-6 flex flex-wrap items-center gap-4 border-t border-line/40 pt-6">
-                  <p className="text-sm text-ink-soft">
-                    Interested in early availability or project-specific enquiries?
-                  </p>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-canvas transition-transform hover:-translate-y-0.5"
-                  >
-                    Contact our team
-                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-32">
-                {section.cards.map((f, i) => (
-                  <article key={f.id} id={f.id} className="scroll-mt-28">
-                    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-                      <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                        <img
-                          src={f.image}
-                          alt={f.title}
-                          className="h-full w-full object-cover"
-                        />
-                      </BlurFocus>
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-                            0{i + 1} · {f.tag}
-                          </div>
+            <div className="space-y-32">
+              {section.cards.map((f, i) => (
+                <article key={f.id} id={f.id} className="scroll-mt-28">
+                  <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+                    <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                      <img
+                        src={f.image}
+                        alt={f.title}
+                        className="h-full w-full object-cover"
+                      />
+                    </BlurFocus>
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                          0{i + 1} · {f.tag}
                         </div>
-                        <h3 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
-                          {f.title}
-                        </h3>
-                        <p className="mt-6 text-base leading-relaxed text-ink-soft">
-                          {f.body}
-                        </p>
+                        {f.isComingSoon && (
+                          <div className="rounded bg-canvas-2 px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
+                            In development
+                          </div>
+                        )}
+                      </div>
+                      <h3 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
+                        {f.title}
+                      </h3>
+                      <p className="mt-6 text-base leading-relaxed text-ink-soft">
+                        {f.body}
+                      </p>
 
+                      {f.isComingSoon ? (
+                        <div className="mt-10 border-t border-line/50 pt-4 font-mono text-xs uppercase tracking-[0.2em] text-ink-soft">
+                          Details coming soon
+                        </div>
+                      ) : (
                         <div className="mt-10 space-y-2">
                           {f.specs?.map((row, j) => (
                             <AlternatingSlide key={row[0]} index={j}>
@@ -313,29 +333,28 @@ function ProductsPage() {
                             </AlternatingSlide>
                           ))}
                         </div>
+                      )}
 
-                        {f.viewAllLink && (
-                          <Link
-                            to="/products/$family"
-                            params={{ family: f.viewAllLink }}
-                            className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
-                          >
-                            <span className="font-medium tracking-wide">
-                              View all {f.title.split(" ")[0]}
-                            </span>
-                            <ArrowRight
-                              className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                              strokeWidth={2}
-                            />
-                          </Link>
-                        )}
-                      </div>
+                      {f.viewAllLink && (
+                        <Link
+                          to="/products/$family"
+                          params={{ family: f.viewAllLink }}
+                          className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
+                        >
+                          <span className="font-medium tracking-wide">
+                            View all {f.title.split(" ")[0]}
+                          </span>
+                          <ArrowRight
+                            className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                            strokeWidth={2}
+                          />
+                        </Link>
+                      )}
                     </div>
-                  </article>
-                ))}
-              </div>
-            )}
-
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         ))}
       </StickyTOC>

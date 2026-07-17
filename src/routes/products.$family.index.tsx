@@ -83,43 +83,6 @@ function FamilyPage() {
   const [filter, setFilter] = useState<FilterKey>("All");
   const filtered = filter === "All" ? items : items.filter((p) => p.application === filter);
 
-  // Coming-soon families — no detailed catalog yet
-  if (family.key === "Aluminium" || family.key === "Panels") {
-    return (
-      <div className="min-h-screen bg-canvas text-ink">
-        <TopBar />
-        <section className="relative flex min-h-[60vh] items-center overflow-hidden px-5 pt-32 pb-16 md:px-10">
-          <img src={family.cover} alt="" className="animate-hero-kenburns absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/60 to-ink/90" />
-          <div className="relative z-10 mx-auto w-full max-w-3xl text-center">
-            <Link to="/products" className="inline-flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/70 hover:text-canvas">
-              <ArrowLeft className="h-3 w-3" /> All products
-            </Link>
-            <div className="mt-8 inline-flex items-center rounded-full bg-canvas/10 px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/80 backdrop-blur-sm">
-              In development
-            </div>
-            <h1 className="display-serifish mt-6 text-4xl leading-[1.02] text-canvas sm:text-5xl md:text-6xl">
-              {family.name}
-            </h1>
-            <p className="mt-6 max-w-xl mx-auto text-base text-canvas/80 md:text-lg">
-              This range is part of our upcoming line-up and is not yet released with detailed specifications. Contact our team for early availability and project-specific enquiries.
-            </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Link to="/contact" className="rounded-full bg-canvas px-6 py-3 text-sm font-medium text-ink transition-transform hover:-translate-y-0.5">
-                Contact our team
-              </Link>
-              <Link to="/products" className="rounded-full border border-canvas/40 px-6 py-3 text-sm font-medium text-canvas transition-colors hover:bg-canvas/10">
-                Browse released products
-              </Link>
-            </div>
-          </div>
-        </section>
-        <SiteFooter />
-        <WhatsAppButton />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-canvas text-ink">
       <TopBar />

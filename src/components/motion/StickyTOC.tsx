@@ -1,4 +1,13 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode, type MouseEvent } from "react";
+
+function scrollToId(e: MouseEvent<HTMLAnchorElement>, id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  e.preventDefault();
+  const y = el.getBoundingClientRect().top + window.scrollY - 96;
+  window.scrollTo({ top: y, behavior: "smooth" });
+  if (history.replaceState) history.replaceState(null, "", `#${id}`);
+}
 
 export type TOCItem = { id: string; label: string; subItems?: TOCItem[] };
 
@@ -49,6 +58,7 @@ export function StickyTOC({
                 <div key={it.id} className="flex flex-col">
                   <a
                     href={`#${it.id}`}
+                    onClick={(e) => scrollToId(e, it.id)}
                     className={`group flex items-center gap-3 border-l-2 py-2 pl-4 text-sm transition-colors ${
                       isSectionActive
                         ? "border-copper text-ink"
@@ -70,6 +80,7 @@ export function StickyTOC({
                           <a
                             key={sub.id}
                             href={`#${sub.id}`}
+                            onClick={(e) => scrollToId(e, sub.id)}
                             className={`group flex items-center gap-3 py-1.5 pl-4 text-xs transition-colors ${
                               isSubActive ? "text-ink" : "text-ink-soft hover:text-ink"
                             }`}

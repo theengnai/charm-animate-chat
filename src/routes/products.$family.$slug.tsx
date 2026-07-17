@@ -223,10 +223,10 @@ function ProductPage() {
               ) : (
                 <div
                   className="flex h-full w-full flex-col justify-between p-6 sm:p-8"
-                  style={{ background: `linear-gradient(135deg, ${product.colors[0] ?? "#c9b39a"} 0%, ${product.colors[1] ?? product.colors[0] ?? "#8a7a68"} 100%)` }}
+                  style={{ backgroundColor: product.colors[0] ?? "#c9b39a" }}
                 >
-                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-canvas/85">{product.code}</span>
-                  <span className="display-serifish text-4xl leading-[1.05] text-canvas drop-shadow-sm sm:text-5xl">{product.name}</span>
+                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-canvas/85 mix-blend-difference">{product.code}</span>
+                  <span className="display-serifish text-4xl leading-[1.05] text-canvas mix-blend-difference sm:text-5xl">{product.name}</span>
                 </div>
               )}
               {product.details ? (

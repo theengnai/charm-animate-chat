@@ -17,6 +17,7 @@ import projectImg6 from "@/assets/about/sol-building.jpg";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
   mcm: "MCM",
+  pu: "PU",
   wpc: "WPC",
   spc: "SPC",
   aluminium: "Aluminium",

@@ -60,7 +60,7 @@ export type Product = {
   slug: string;
   name: string;
   code: string;
-  family: "MCM" | "WPC" | "SPC" | "Aluminium" | "Panels";
+  family: "MCM" | "PU" | "WPC" | "SPC" | "Aluminium" | "Panels";
   application: "Interior" | "Exterior" | "Both";
   finish: string;
   colors: string[];

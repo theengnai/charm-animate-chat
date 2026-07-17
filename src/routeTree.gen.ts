@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisualizerRouteImport } from './routes/visualizer'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SamplesRouteImport } from './routes/samples'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -24,6 +25,11 @@ import { Route as ProductsFamilySlugRouteImport } from './routes/products.$famil
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
   path: '/visualizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SamplesRoute = SamplesRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visualizer': typeof VisualizerRoute
   '/products/': typeof ProductsIndexRoute
   '/products/$family/$slug': typeof ProductsFamilySlugRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visualizer': typeof VisualizerRoute
   '/products': typeof ProductsIndexRoute
   '/products/$family/$slug': typeof ProductsFamilySlugRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/resources': typeof ResourcesRoute
   '/samples': typeof SamplesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visualizer': typeof VisualizerRoute
   '/products/': typeof ProductsIndexRoute
   '/products/$family/$slug': typeof ProductsFamilySlugRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/resources'
     | '/samples'
+    | '/sitemap.xml'
     | '/visualizer'
     | '/products/'
     | '/products/$family/$slug'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/resources'
     | '/samples'
+    | '/sitemap.xml'
     | '/visualizer'
     | '/products'
     | '/products/$family/$slug'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/resources'
     | '/samples'
+    | '/sitemap.xml'
     | '/visualizer'
     | '/products/'
     | '/products/$family/$slug'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   ResourcesRoute: typeof ResourcesRoute
   SamplesRoute: typeof SamplesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VisualizerRoute: typeof VisualizerRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
   ProductsFamilySlugRoute: typeof ProductsFamilySlugRoute
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/visualizer'
       fullPath: '/visualizer'
       preLoaderRoute: typeof VisualizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/samples': {
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   ResourcesRoute: ResourcesRoute,
   SamplesRoute: SamplesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   VisualizerRoute: VisualizerRoute,
   ProductsIndexRoute: ProductsIndexRoute,
   ProductsFamilySlugRoute: ProductsFamilySlugRoute,

@@ -5,8 +5,15 @@ import { SiteFooter } from "@/components/common/SiteFooter";
 import { BlurFocus } from "@/components/motion/BlurFocus";
 import { AlternatingSlide } from "@/components/motion/AlternatingSlide";
 import { ScaleIn } from "@/components/motion/ScaleIn";
+import { ClipReveal } from "@/components/motion/ClipReveal";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { FAMILIES, PRODUCTS, productsByFamily, type Product } from "@/data/products";
+import projectImg1 from "@/assets/about/sol-facade.jpg";
+import projectImg2 from "@/assets/about/sol-architect.jpg";
+import projectImg3 from "@/assets/about/sol-interior.jpg";
+import projectImg4 from "@/assets/about/detail-fabric.jpg";
+import projectImg5 from "@/assets/about/hero-facade.jpg";
+import projectImg6 from "@/assets/about/sol-building.jpg";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
   mcm: "MCM",
@@ -16,11 +23,92 @@ const FAMILY_SLUGS: Record<string, Product["family"]> = {
   panels: "Panels",
 };
 
+type RelatedProject = {
+  tag: string;
+  title: string;
+  body: string;
+  img: string;
+};
+
+const RELATED_PROJECTS: Record<Product["family"], RelatedProject[]> = {
+  MCM: [
+    {
+      tag: "Finishing · Interior + Exterior",
+      title: "Flexible Clay-Stone Wraps",
+      body: "Continuous wraps of columns, curves and corners with our flexible clay-stone tile — 100% Saudi-made.",
+      img: projectImg1,
+    },
+    {
+      tag: "Finishing · Façade",
+      title: "Decorative Façade Cladding",
+      body: "Lightweight stone-look finishes over insulated substrates, combining aesthetics with thermal performance.",
+      img: projectImg5,
+    },
+  ],
+  WPC: [
+    {
+      tag: "Finishing · Exterior",
+      title: "WPC Decking & Cladding",
+      body: "Weather-resistant wood-plastic composite decking and wall cladding for villas, poolsides and commercial terraces.",
+      img: projectImg6,
+    },
+    {
+      tag: "Finishing · Interior",
+      title: "WPC Door & Wall Interiors",
+      body: "Humidity-stable door leaves, frames and wall panels in bathrooms, kitchens and high-traffic corridors.",
+      img: projectImg3,
+    },
+  ],
+  SPC: [
+    {
+      tag: "Finishing · Interior",
+      title: "SPC Flooring Fit-Outs",
+      body: "Stone-polymer click flooring in residential and commercial spaces where water resistance and durability matter.",
+      img: projectImg3,
+    },
+    {
+      tag: "Finishing · Hospitality",
+      title: "High-Traffic Surface Solutions",
+      body: "Silent, waterproof flooring for retail, hospitality and office fit-outs across Saudi Arabia.",
+      img: projectImg2,
+    },
+  ],
+  Aluminium: [
+    {
+      tag: "Finishing · Façade",
+      title: "Sun-Controlled Louvers",
+      body: "Aluminium louvers cut solar gain while maintaining airflow and views across building envelopes.",
+      img: projectImg5,
+    },
+    {
+      tag: "Construction Systems · Modular",
+      title: "Curved Modular Buildings",
+      body: "Architectural modular envelopes where metalwork and precision detailing complete the form.",
+      img: projectImg4,
+    },
+  ],
+  Panels: [
+    {
+      tag: "Construction Systems · Façade",
+      title: "EPS Insulated Decorative Façades",
+      body: "Shaped EPS cornices, bands and decorative profiles bonded to the substrate and finished with reinforced render.",
+      img: projectImg5,
+    },
+    {
+      tag: "Construction Systems · Residential",
+      title: "Hybrid Precast Residential",
+      body: "Precast columns, beams and stairs framed with lightweight concrete wall panels and T-floor hourdi decks.",
+      img: projectImg2,
+    },
+  ],
+};
+
 type LoaderData = {
   product: Product;
   family: typeof FAMILIES[number];
   related: Product[];
   familySlug: string;
+  projects: RelatedProject[];
 };
 
 export const Route = createFileRoute("/products/$family/$slug")({
@@ -31,7 +119,8 @@ export const Route = createFileRoute("/products/$family/$slug")({
     if (!product || product.family !== familyKey) throw notFound();
     const family = FAMILIES.find((f) => f.key === familyKey)!;
     const related = productsByFamily(familyKey).filter((p) => p.slug !== product.slug).slice(0, 3);
-    return { product, family, related, familySlug: params.family.toLowerCase() };
+    const projects = RELATED_PROJECTS[familyKey];
+    return { product, family, related, familySlug: params.family.toLowerCase(), projects };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -83,7 +172,7 @@ export const Route = createFileRoute("/products/$family/$slug")({
 });
 
 function ProductPage() {
-  const { product, family, related, familySlug } = Route.useLoaderData() as LoaderData;
+  const { product, family, related, familySlug, projects } = Route.useLoaderData() as LoaderData;
 
   const baseSpecs: [string, string][] = [
     ["Code", product.code],
@@ -228,6 +317,57 @@ function ProductPage() {
             </div>
           </section>
         </>
+      ) : null}
+
+      {/* Related projects */}
+      {projects.length > 0 ? (
+        <section className="border-t border-line/60 bg-canvas-2/30 px-5 py-24 md:px-10 md:py-32">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                  Real-world applications
+                </div>
+                <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
+                  Projects using this product.
+                </h2>
+              </div>
+              <Link
+                to="/projects"
+                className="font-mono text-xs uppercase tracking-[0.22em] text-ink-soft underline-offset-4 hover:text-copper hover:underline"
+              >
+                View all applications →
+              </Link>
+            </div>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((p, i) => (
+                <ScaleIn key={p.title} delay={i * 0.08}>
+                  <div className="group overflow-hidden rounded-2xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/40 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.15)]">
+                    <ClipReveal direction="up" className="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={p.img}
+                        alt={p.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </ClipReveal>
+                    <div className="p-6">
+                      <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">
+                        {p.tag}
+                      </div>
+                      <h3 className="display-serifish mt-3 text-xl md:text-2xl leading-tight">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                        {p.body}
+                      </p>
+                    </div>
+                  </div>
+                </ScaleIn>
+              ))}
+            </div>
+          </div>
+        </section>
       ) : null}
 
       {/* Related */}

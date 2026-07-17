@@ -80,6 +80,12 @@ export const FAMILIES = [
     cover: mcm15.url,
   },
   {
+    key: "PU",
+    name: "PU Stone Cladding",
+    poem: "Stone-quiet weight, without the mass.",
+    cover: imgC,
+  },
+  {
     key: "WPC",
     name: "WPC Decking & Cladding",
     poem: "Warm underfoot. Weathered by design.",

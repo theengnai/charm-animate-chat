@@ -1,4 +1,13 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode, type MouseEvent } from "react";
+
+function scrollToId(e: MouseEvent<HTMLAnchorElement>, id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  e.preventDefault();
+  const y = el.getBoundingClientRect().top + window.scrollY - 96;
+  window.scrollTo({ top: y, behavior: "smooth" });
+  if (history.replaceState) history.replaceState(null, "", `#${id}`);
+}
 
 export type TOCItem = { id: string; label: string; subItems?: TOCItem[] };
 

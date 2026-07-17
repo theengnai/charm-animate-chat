@@ -196,7 +196,7 @@ function FamilyPage() {
         </div>
       </section>
 
-      {family.key === "PU" ? <PUDetails /> : null}
+      {family.key === "PU" ? <PUInfo /> : null}
 
       <CTABand
         eyebrow="Not sure which fits?"

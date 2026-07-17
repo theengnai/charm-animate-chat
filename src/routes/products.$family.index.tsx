@@ -7,7 +7,8 @@ import { CTABand } from "@/components/common/CTABand";
 
 import { ScaleIn } from "@/components/motion/ScaleIn";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { FAMILIES, productsByFamily, type Product } from "@/data/products";
+import { FAMILIES, productsByFamily, PU_LIFESTYLE, type Product } from "@/data/products";
+import { Feather, Wrench, Layers, Shield, Sparkles } from "lucide-react";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
   mcm: "MCM",

@@ -243,7 +243,7 @@ const SWATCHES = [
 
 function ProductsPage() {
   return (
-    <div className="min-h-screen bg-canvas text-ink">
+    <div className="min-h-screen overflow-x-clip bg-canvas text-ink">
       <TopBar />
 
       <StoryHero

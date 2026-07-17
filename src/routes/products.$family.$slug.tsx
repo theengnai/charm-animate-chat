@@ -201,7 +201,8 @@ function ProductPage() {
     : baseSpecs;
 
   return (
-    <div className="min-h-screen bg-canvas text-ink">
+    <div className="min-h-screen overflow-x-clip bg-canvas text-ink">
+
       <TopBar />
 
       {/* Hero */}
@@ -216,16 +217,16 @@ function ProductPage() {
           </Link>
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-            <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+            <BlurFocus className="relative aspect-[4/3] overflow-hidden rounded-2xl sm:aspect-[4/5]">
               {product.cover ? (
                 <img src={product.cover} alt={product.name} className="h-full w-full object-cover" />
               ) : (
                 <div
-                  className="flex h-full w-full flex-col justify-between p-8"
+                  className="flex h-full w-full flex-col justify-between p-6 sm:p-8"
                   style={{ background: `linear-gradient(135deg, ${product.colors[0] ?? "#c9b39a"} 0%, ${product.colors[1] ?? product.colors[0] ?? "#8a7a68"} 100%)` }}
                 >
                   <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-canvas/85">{product.code}</span>
-                  <span className="display-serifish text-5xl leading-[1.05] text-canvas drop-shadow-sm">{product.name}</span>
+                  <span className="display-serifish text-4xl leading-[1.05] text-canvas drop-shadow-sm sm:text-5xl">{product.name}</span>
                 </div>
               )}
               {product.details ? (
@@ -234,6 +235,7 @@ function ProductPage() {
                 </span>
               ) : null}
             </BlurFocus>
+
 
             <div>
               <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
@@ -265,15 +267,16 @@ function ProductPage() {
                 <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
                   Colourway
                 </div>
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
                   {product.colors.map((c) => (
                     <span
                       key={c}
-                      className="h-12 w-12 rounded-full border border-line/60 shadow-[0_6px_20px_-10px_rgba(0,0,0,0.4)]"
+                      className="h-9 w-9 rounded-full border border-line/60 shadow-[0_6px_20px_-10px_rgba(0,0,0,0.4)] sm:h-12 sm:w-12"
                       style={{ backgroundColor: c }}
                     />
                   ))}
                 </div>
+
               </div>
 
               <div className="mt-12 flex flex-wrap items-center gap-3">

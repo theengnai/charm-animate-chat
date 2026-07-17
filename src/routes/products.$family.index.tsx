@@ -85,7 +85,8 @@ function FamilyPage() {
   const filtered = filter === "All" ? items : items.filter((p) => p.application === filter);
 
   return (
-    <div className="min-h-screen bg-canvas text-ink">
+    <div className="min-h-screen overflow-x-clip bg-canvas text-ink">
+
       <TopBar />
 
       {/* Hero — compact */}
@@ -169,14 +170,15 @@ function FamilyPage() {
                       <span>·</span>
                       <span>{p.finish}</span>
                     </div>
-                    <div className="mt-3 flex items-center justify-between">
-                      <div className="flex gap-1">
-                        {p.colors.map((c) => (
-                          <span key={c} className="h-4 w-4 rounded-full border border-line/60" style={{ backgroundColor: c }} />
+                    <div className="mt-3 flex items-center justify-between gap-2">
+                      <div className="flex min-w-0 flex-wrap gap-1">
+                        {p.colors.slice(0, 6).map((c) => (
+                          <span key={c} className="h-3 w-3 shrink-0 rounded-full border border-line/60 sm:h-4 sm:w-4" style={{ backgroundColor: c }} />
                         ))}
                       </div>
-                      <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="h-4 w-4 shrink-0 text-copper transition-transform group-hover:translate-x-1" />
                     </div>
+
                   </div>
                 </Link>
               </ScaleIn>

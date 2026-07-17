@@ -60,9 +60,9 @@ const MATERIALS: {
     { label: "Mcm", sub: "Flexible stone", Icon: Waves, image: matMaterials, to: "/products" },
     { label: "EPS", sub: "Insulation", Icon: Mountain, image: matVisualizer, to: "/products" },
     { label: "WPC Decking", sub: "Outdoor", Icon: TreePine, image: matDesign, to: "/products/$family", familyParam: "wpc" },
-    { label: "PVC Wood Panels", sub: "Interior", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
+    { label: "PVC Wood Panels", sub: "panels", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
     { label: "PU Stone", sub: "Decorative tiles", Icon: Layers, image: matGallery, to: "/products" },
-    { label: "Smart Wall Panels", sub: "Interior", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
+    { label: "Smart Wall Panels", sub: "panels", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
   ];
 
 // Mobile shows first 3, tablet+ shows all 4

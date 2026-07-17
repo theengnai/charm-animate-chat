@@ -57,12 +57,12 @@ const MATERIALS: {
   to: "/products" | "/products/$family";
   familyParam?: string;
 }[] = [
-    { label: "MCM Panels", sub: "Flexible Stone", Icon: Waves, image: matMaterials, to: "/products" },
-    { label: "Travertine", sub: "& Stone", Icon: Mountain, image: matGallery, to: "/products" },
+    { label: "Mcm", sub: "Flexible stone", Icon: Waves, image: matMaterials, to: "/products" },
+    { label: "EPS", sub: "Insulation", Icon: Mountain, image: matVisualizer, to: "/products" },
     { label: "WPC Decking", sub: "Outdoor", Icon: TreePine, image: matDesign, to: "/products/$family", familyParam: "wpc" },
-    { label: "WPC Panels", sub: "Interior", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
-    { label: "EPS Systems", sub: "Insulation", Icon: Layers, image: matVisualizer, to: "/products" },
-    { label: "SPC Flooring", sub: "Interior", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
+    { label: "PVC Wood Panels", sub: "Interior", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },
+    { label: "PU Stone", sub: "Decorative tiles", Icon: Layers, image: matGallery, to: "/products" },
+    { label: "Smart Wall Panels", sub: "Interior", Icon: Square, image: matSamples, to: "/products/$family", familyParam: "spc" },
   ];
 
 // Mobile shows first 3, tablet+ shows all 4

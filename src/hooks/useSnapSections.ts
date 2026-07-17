@@ -18,7 +18,9 @@ function findScrollableAncestor(start: EventTarget | null): HTMLElement | null {
 export function useSnapSections(count: number) {
   const [active, setActive] = useState(0);
   const locked = useRef(false);
-  const touchStart = useRef<{ y: number; el: HTMLElement | null } | null>(null);
+  const touchStart = useRef<
+    { x: number; y: number; t: number; el: HTMLElement | null } | null
+  >(null);
 
   const go = useCallback(
     (i: number) => {
@@ -57,8 +59,13 @@ export function useSnapSections(count: number) {
       else if (e.key === "End") go(count - 1);
     };
     const onTouchStart = (e: TouchEvent) => {
-      const y = e.touches[0]?.clientY ?? null;
-      if (y == null) {
+      // Ignore multi-touch (pinch/zoom, two-finger scroll)
+      if (e.touches.length !== 1) {
+        touchStart.current = null;
+        return;
+      }
+      const t0 = e.touches[0];
+      if (!t0) {
         touchStart.current = null;
         return;
       }
@@ -68,14 +75,28 @@ export function useSnapSections(count: number) {
         touchStart.current = null;
         return;
       }
-      touchStart.current = { y, el: findScrollableAncestor(e.target) };
+      touchStart.current = {
+        x: t0.clientX,
+        y: t0.clientY,
+        t: Date.now(),
+        el: findScrollableAncestor(e.target),
+      };
     };
     const onTouchEnd = (e: TouchEvent) => {
-      if (touchStart.current == null) return;
-      const dy = touchStart.current.y - (e.changedTouches[0]?.clientY ?? 0);
-      const scrollable = touchStart.current.el;
+      const start = touchStart.current;
       touchStart.current = null;
-      if (Math.abs(dy) <= 40) return;
+      if (!start) return;
+      // Require a valid end touch — bail if the browser didn't report one.
+      const end = e.changedTouches[0];
+      if (!end) return;
+      const dy = start.y - end.clientY;
+      const dx = start.x - end.clientX;
+      const dt = Date.now() - start.t;
+      // Ignore taps, long presses, and horizontal swipes.
+      if (Math.abs(dy) < 60) return;
+      if (Math.abs(dx) > Math.abs(dy)) return;
+      if (dt > 800) return;
+      const scrollable = start.el;
       if (scrollable) {
         const atTop = scrollable.scrollTop <= 0;
         const atBottom =
@@ -98,4 +119,5 @@ export function useSnapSections(count: number) {
 
   return { active, go };
 }
+
 

@@ -412,7 +412,17 @@ function ProductPage() {
                     className="group block overflow-hidden rounded-xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/50"
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
-                      <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                      {p.cover ? (
+                        <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                      ) : (
+                        <div
+                          className="flex h-full w-full flex-col justify-between p-4 transition-transform duration-[1200ms] group-hover:scale-105"
+                          style={{ background: `linear-gradient(135deg, ${p.colors[0] ?? "#c9b39a"} 0%, ${p.colors[1] ?? p.colors[0] ?? "#8a7a68"} 100%)` }}
+                        >
+                          <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-canvas/80">{p.code}</span>
+                          <span className="display-serifish text-2xl leading-tight text-canvas drop-shadow-sm">{p.name}</span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-4">
                       <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">{p.code}</div>

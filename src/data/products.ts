@@ -117,7 +117,7 @@ export const FAMILIES = [
     key: "PU",
     name: "PU Stone Cladding",
     poem: "Stone-quiet weight, without the mass.",
-    cover: imgC,
+    cover: puHero.url,
   },
   {
     key: "WPC",

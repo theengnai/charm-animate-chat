@@ -224,10 +224,10 @@ function ProductsPage() {
       {/* Sticky TOC of families with BlurFocus imagery + AlternatingSlide spec rows */}
       <StickyTOC
         eyebrow="Library"
-        items={SECTIONS.map((s) => ({ 
-          id: s.id, 
+        items={SECTIONS.map((s) => ({
+          id: s.id,
           label: s.label,
-          subItems: s.cards.map((c) => ({ id: c.id, label: c.title }))
+          subItems: s.id === "future-solutions" ? [] : s.cards.map((c) => ({ id: c.id, label: c.title }))
         }))}
       >
         {SECTIONS.map((section) => (

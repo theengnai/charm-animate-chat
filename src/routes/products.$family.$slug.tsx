@@ -5,8 +5,15 @@ import { SiteFooter } from "@/components/common/SiteFooter";
 import { BlurFocus } from "@/components/motion/BlurFocus";
 import { AlternatingSlide } from "@/components/motion/AlternatingSlide";
 import { ScaleIn } from "@/components/motion/ScaleIn";
+import { ClipReveal } from "@/components/motion/ClipReveal";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { FAMILIES, PRODUCTS, productsByFamily, type Product } from "@/data/products";
+import projectImg1 from "@/assets/about/sol-facade.jpg";
+import projectImg2 from "@/assets/about/sol-architect.jpg";
+import projectImg3 from "@/assets/about/sol-interior.jpg";
+import projectImg4 from "@/assets/about/detail-fabric.jpg";
+import projectImg5 from "@/assets/about/hero-facade.jpg";
+import projectImg6 from "@/assets/about/sol-building.jpg";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
   mcm: "MCM",

@@ -85,7 +85,8 @@ function FamilyPage() {
   const filtered = filter === "All" ? items : items.filter((p) => p.application === filter);
 
   return (
-    <div className="min-h-screen bg-canvas text-ink">
+    <div className="min-h-screen overflow-x-clip bg-canvas text-ink">
+
       <TopBar />
 
       {/* Hero — compact */}

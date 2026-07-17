@@ -99,7 +99,7 @@ export type Product = {
   finish: string;
   colors: string[];
   fireRating: string;
-  cover: string;
+  cover?: string;
   poem: string;
   price?: number;
   currency?: "SAR";

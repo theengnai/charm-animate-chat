@@ -244,40 +244,65 @@ function ProductsPage() {
               <p className="mt-4 max-w-2xl text-lg text-ink-soft">{section.intro}</p>
             </div>
 
-            <div className="space-y-32">
-              {section.cards.map((f, i) => (
-                <article key={f.id} id={f.id} className="scroll-mt-28">
-                  <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-                    <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                      <img
-                        src={f.image}
-                        alt={f.title}
-                        className="h-full w-full object-cover"
-                      />
-                    </BlurFocus>
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-                          0{i + 1} · {f.tag}
-                        </div>
-                        {f.isComingSoon && (
-                          <div className="rounded bg-canvas-2 px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
-                            In development
-                          </div>
-                        )}
+            {section.id === "future-solutions" ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {section.cards.map((f) => (
+                  <div
+                    key={f.id}
+                    className="group relative overflow-hidden rounded-xl border border-line/60 bg-canvas-2/40 p-6 transition-colors hover:border-copper/50"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">
+                        {f.tag}
                       </div>
-                      <h3 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
-                        {f.title}
-                      </h3>
-                      <p className="mt-6 text-base leading-relaxed text-ink-soft">
-                        {f.body}
-                      </p>
-
-                      {f.isComingSoon ? (
-                        <div className="mt-10 border-t border-line/50 pt-4 font-mono text-xs uppercase tracking-[0.2em] text-ink-soft">
-                          Details coming soon
+                      <div className="rounded bg-canvas px-2 py-0.5 font-mono text-[0.55rem] uppercase tracking-[0.28em] text-ink-soft">
+                        In development
+                      </div>
+                    </div>
+                    <h3 className="display-serifish mt-4 text-xl leading-tight text-ink">
+                      {f.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-ink-soft">{f.body}</p>
+                  </div>
+                ))}
+                <div className="col-span-full mt-6 flex flex-wrap items-center gap-4 border-t border-line/40 pt-6">
+                  <p className="text-sm text-ink-soft">
+                    Interested in early availability or project-specific enquiries?
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-canvas transition-transform hover:-translate-y-0.5"
+                  >
+                    Contact our team
+                    <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-32">
+                {section.cards.map((f, i) => (
+                  <article key={f.id} id={f.id} className="scroll-mt-28">
+                    <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+                      <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                        <img
+                          src={f.image}
+                          alt={f.title}
+                          className="h-full w-full object-cover"
+                        />
+                      </BlurFocus>
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                            0{i + 1} · {f.tag}
+                          </div>
                         </div>
-                      ) : (
+                        <h3 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
+                          {f.title}
+                        </h3>
+                        <p className="mt-6 text-base leading-relaxed text-ink-soft">
+                          {f.body}
+                        </p>
+
                         <div className="mt-10 space-y-2">
                           {f.specs?.map((row, j) => (
                             <AlternatingSlide key={row[0]} index={j}>
@@ -288,28 +313,29 @@ function ProductsPage() {
                             </AlternatingSlide>
                           ))}
                         </div>
-                      )}
 
-                      {f.viewAllLink && (
-                        <Link
-                          to="/products/$family"
-                          params={{ family: f.viewAllLink }}
-                          className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
-                        >
-                          <span className="font-medium tracking-wide">
-                            View all {f.title.split(" ")[0]}
-                          </span>
-                          <ArrowRight
-                            className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                            strokeWidth={2}
-                          />
-                        </Link>
-                      )}
+                        {f.viewAllLink && (
+                          <Link
+                            to="/products/$family"
+                            params={{ family: f.viewAllLink }}
+                            className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
+                          >
+                            <span className="font-medium tracking-wide">
+                              View all {f.title.split(" ")[0]}
+                            </span>
+                            <ArrowRight
+                              className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                              strokeWidth={2}
+                            />
+                          </Link>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            )}
+
           </div>
         ))}
       </StickyTOC>

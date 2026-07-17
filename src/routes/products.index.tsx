@@ -86,6 +86,7 @@ const SECTIONS: Section[] = [
           ["Installation", "Direct adhesive mount"],
         ],
         image: imgC,
+        viewAllLink: "pu",
       },
 
       {

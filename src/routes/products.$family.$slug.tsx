@@ -87,6 +87,20 @@ const RELATED_PROJECTS: Record<Product["family"], RelatedProject[]> = {
       img: projectImg4,
     },
   ],
+  PU: [
+    {
+      tag: "Finishing · Feature Walls",
+      title: "PU Stone Feature Walls",
+      body: "Lightweight polyurethane stone panels wrapping fireplaces, reception walls and lobby columns — the depth of quarried stone, a fraction of the weight.",
+      img: projectImg5,
+    },
+    {
+      tag: "Finishing · Hospitality",
+      title: "Hospitality & Villa Facades",
+      body: "Adhesive-fixed PU stone panels across boutique hotel façades and villa entries — installed in a fraction of the time of natural stone.",
+      img: projectImg1,
+    },
+  ],
   Panels: [
     {
       tag: "Construction Systems · Façade",
@@ -134,7 +148,7 @@ export const Route = createFileRoute("/products/$family/$slug")({
         { name: "description", content: `${product.poem} ${product.code} · ${product.finish} finish · fire class ${product.fireRating}.` },
         { property: "og:title", content: title },
         { property: "og:description", content: product.poem },
-        { property: "og:image", content: product.cover },
+        { property: "og:image", content: product.cover || family.cover },
       ],
     };
   },
@@ -202,7 +216,17 @@ function ProductPage() {
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-              <img src={product.cover} alt={product.name} className="h-full w-full object-cover" />
+              {product.cover ? (
+                <img src={product.cover} alt={product.name} className="h-full w-full object-cover" />
+              ) : (
+                <div
+                  className="flex h-full w-full flex-col justify-between p-8"
+                  style={{ background: `linear-gradient(135deg, ${product.colors[0] ?? "#c9b39a"} 0%, ${product.colors[1] ?? product.colors[0] ?? "#8a7a68"} 100%)` }}
+                >
+                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-canvas/85">{product.code}</span>
+                  <span className="display-serifish text-5xl leading-[1.05] text-canvas drop-shadow-sm">{product.name}</span>
+                </div>
+              )}
               {product.details ? (
                 <span className="absolute left-4 top-4 rounded-full bg-copper/95 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.24em] text-canvas">
                   Featured product
@@ -388,7 +412,17 @@ function ProductPage() {
                     className="group block overflow-hidden rounded-xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/50"
                   >
                     <div className="relative aspect-[4/5] overflow-hidden">
-                      <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                      {p.cover ? (
+                        <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                      ) : (
+                        <div
+                          className="flex h-full w-full flex-col justify-between p-4 transition-transform duration-[1200ms] group-hover:scale-105"
+                          style={{ background: `linear-gradient(135deg, ${p.colors[0] ?? "#c9b39a"} 0%, ${p.colors[1] ?? p.colors[0] ?? "#8a7a68"} 100%)` }}
+                        >
+                          <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-canvas/80">{p.code}</span>
+                          <span className="display-serifish text-2xl leading-tight text-canvas drop-shadow-sm">{p.name}</span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-4">
                       <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">{p.code}</div>

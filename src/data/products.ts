@@ -60,7 +60,7 @@ export type Product = {
   slug: string;
   name: string;
   code: string;
-  family: "MCM" | "WPC" | "SPC" | "Aluminium" | "Panels";
+  family: "MCM" | "PU" | "WPC" | "SPC" | "Aluminium" | "Panels";
   application: "Interior" | "Exterior" | "Both";
   finish: string;
   colors: string[];
@@ -78,6 +78,12 @@ export const FAMILIES = [
     name: "MCM Flexible Cladding",
     poem: "Stone and clay, thin as fabric.",
     cover: mcm15.url,
+  },
+  {
+    key: "PU",
+    name: "PU Stone Cladding",
+    poem: "Stone-quiet weight, without the mass.",
+    cover: imgC,
   },
   {
     key: "WPC",
@@ -257,6 +263,26 @@ const pnlSlatDetails: ProductDetails = {
   gallery: [imgB, imgA, imgD],
 };
 
+const puStoneDetails: ProductDetails = {
+  description:
+    "Lightweight polyurethane stone panels reproducing the texture and tonal depth of quarried stone — up to 75% lighter than natural stone and up to 3× faster to install. Advanced molding captures authentic grain; interlocking edges align without specialist masonry.",
+  useCases: [
+    "Feature walls, fireplaces and lobby columns",
+    "Boutique hotel and villa façades",
+    "Reception backdrops and hospitality interiors",
+  ],
+  specs: [
+    ["Material", "Polyurethane composite"],
+    ["Panel size", "1200 × 600 × 50 mm"],
+    ["Weight", "3.5 – 5.2 kg/m²"],
+    ["Fire rating", "Class B1 · ASTM E84 tested"],
+    ["Weather range", "−40 °C to 60 °C · UV stable"],
+    ["Installation", "Direct adhesive mount + interlocking edges"],
+    ["Certified values", "Issued against test certificate on request"],
+  ],
+  gallery: [imgC, imgE, imgD],
+};
+
 // -------- Full catalog (12 per family) --------
 
 export const PRODUCTS: Product[] = [
@@ -305,6 +331,16 @@ export const PRODUCTS: Product[] = [
   { slug: "mcm-wood-tile", name: "Wood Tile", code: "MCM-WT", family: "MCM", application: "Both", finish: "Wood grain", colors: ["#ab8770", "#ffffff", "#f9f7f5", "#e2d0a9", "#c6b48d", "#b4b4b4", "#727272", "#000000"], fireRating: "A2-s1,d0", cover: mcm41.url, poem: "Grain without weight.", price: 26 },
   { slug: "mcm-woven", name: "Woven", code: "MCM-W", family: "MCM", application: "Both", finish: "Patterned", colors: ["#ab8770", "#ffffff", "#f9f7f5", "#e2d0a9", "#c6b48d", "#b4b4b4", "#727272", "#000000"], fireRating: "A2-s1,d0", cover: mcm42.url, poem: "Thin cladding, deep effect.", price: 28 },
   { slug: "mcm-zig-skyline", name: "Zig Skyline", code: "MCM-ZS", family: "MCM", application: "Both", finish: "Patterned", colors: ["#ab8770", "#ffffff", "#f9f7f5", "#e2d0a9", "#c6b48d", "#b4b4b4", "#727272", "#000000"], fireRating: "A2-s1,d0", cover: mcm43.url, poem: "Thin cladding, deep effect.", price: 28 },
+
+  // ============ PU Stone (8) ============
+  { slug: "pu-beige-slate", name: "Beige Slate", code: "PU-BS", family: "PU", application: "Both", finish: "Slate", colors: ["#c9b39a", "#a8927a", "#8a7a68"], fireRating: "B1 · ASTM E84", cover: "", poem: "Stone-quiet weight, without the mass.", details: puStoneDetails },
+  { slug: "pu-charcoal-slate", name: "Charcoal Slate", code: "PU-CS", family: "PU", application: "Both", finish: "Slate", colors: ["#3a3530", "#2a2622", "#5c5854"], fireRating: "B1 · ASTM E84", cover: "", poem: "Dark stone, feather-light.", details: puStoneDetails },
+  { slug: "pu-ivory-ledgestone", name: "Ivory Ledgestone", code: "PU-IL", family: "PU", application: "Both", finish: "Ledgestone", colors: ["#e5ddd0", "#dbc9b3", "#c4beb5"], fireRating: "B1 · ASTM E84", cover: "", poem: "A wall stacked in ivory." },
+  { slug: "pu-sandstone-ledgestone", name: "Sandstone Ledgestone", code: "PU-SL", family: "PU", application: "Both", finish: "Ledgestone", colors: ["#c9a48a", "#a8836b", "#8a6a4a"], fireRating: "B1 · ASTM E84", cover: "", poem: "Warm strata, quiet weight." },
+  { slug: "pu-brick-red", name: "Brick Red", code: "PU-BR", family: "PU", application: "Both", finish: "Brick", colors: ["#8a3a1c", "#6b2f15", "#b4592c"], fireRating: "B1 · ASTM E84", cover: "", poem: "Red brick, no mortar." },
+  { slug: "pu-brick-grey", name: "Brick Grey", code: "PU-BG", family: "PU", application: "Both", finish: "Brick", colors: ["#8a8580", "#5c5854", "#a8a39e"], fireRating: "B1 · ASTM E84", cover: "", poem: "A wall, softly grey." },
+  { slug: "pu-cream-travertine", name: "Cream Travertine", code: "PU-CT", family: "PU", application: "Both", finish: "Travertine", colors: ["#e5d8c0", "#c9b39a", "#a8927a"], fireRating: "B1 · ASTM E84", cover: "", poem: "Old stone, thin as skin." },
+  { slug: "pu-rustic-mosaic", name: "Rustic Mosaic", code: "PU-RM", family: "PU", application: "Both", finish: "Mosaic", colors: ["#8a6a4a", "#c9a48a", "#5c5854"], fireRating: "B1 · ASTM E84", cover: "", poem: "Fragments, held in step." },
 
   // ============ WPC (12) ============
   { slug: "wpc-oak-deep", name: "Deep Oak Deck", code: "WPC-OD-140", family: "WPC", application: "Exterior", finish: "Brushed", colors: ["#6b4a2f", "#8a6a4a", "#3d2b1c"], fireRating: "B-s1,d0", cover: imgA, poem: "Long grain, deep shadow.", details: wpcOakDetails },

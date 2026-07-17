@@ -194,6 +194,8 @@ function FamilyPage() {
         </div>
       </section>
 
+      {family.key === "PU" ? <PUDetails /> : null}
+
       <CTABand
         eyebrow="Not sure which fits?"
         title="Request a sample — we'll send it from Sudair."

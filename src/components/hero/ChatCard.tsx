@@ -20,6 +20,7 @@ import {
   Wrench,
   Info,
   MessageCircle,
+  BookOpen,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import matMaterials from "@/assets/section-materials.jpg";
@@ -40,7 +41,7 @@ const PLACEHOLDERS = [
 const QUESTIONS: { label: string; Icon: typeof Mountain }[] = [
   { label: "I want to renovate my villa façade", Icon: Home },
   { label: "Which material is right for my project?", Icon: Sparkles },
-  { label: "I'd like to request free samples", Icon: Package },
+  { label: "Request a product catalog", Icon: BookOpen },
   { label: "I need a quotation for my project", Icon: FileText },
   { label: "Can I see a preview before deciding?", Icon: ImageIcon },
   { label: "I need technical information", Icon: Info },

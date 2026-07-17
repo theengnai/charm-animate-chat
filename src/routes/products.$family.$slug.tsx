@@ -172,7 +172,7 @@ export const Route = createFileRoute("/products/$family/$slug")({
 });
 
 function ProductPage() {
-  const { product, family, related, familySlug } = Route.useLoaderData() as LoaderData;
+  const { product, family, related, familySlug, projects } = Route.useLoaderData() as LoaderData;
 
   const baseSpecs: [string, string][] = [
     ["Code", product.code],
@@ -317,6 +317,57 @@ function ProductPage() {
             </div>
           </section>
         </>
+      ) : null}
+
+      {/* Related projects */}
+      {projects.length > 0 ? (
+        <section className="border-t border-line/60 bg-canvas-2/30 px-5 py-24 md:px-10 md:py-32">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+                  Real-world applications
+                </div>
+                <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
+                  Projects using this product.
+                </h2>
+              </div>
+              <Link
+                to="/projects"
+                className="font-mono text-xs uppercase tracking-[0.22em] text-ink-soft underline-offset-4 hover:text-copper hover:underline"
+              >
+                View all applications →
+              </Link>
+            </div>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((p, i) => (
+                <ScaleIn key={p.title} delay={i * 0.08}>
+                  <div className="group overflow-hidden rounded-2xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/40 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.15)]">
+                    <ClipReveal direction="up" className="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={p.img}
+                        alt={p.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </ClipReveal>
+                    <div className="p-6">
+                      <div className="font-mono text-[0.58rem] uppercase tracking-[0.28em] text-copper">
+                        {p.tag}
+                      </div>
+                      <h3 className="display-serifish mt-3 text-xl md:text-2xl leading-tight">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                        {p.body}
+                      </p>
+                    </div>
+                  </div>
+                </ScaleIn>
+              ))}
+            </div>
+          </div>
+        </section>
       ) : null}
 
       {/* Related */}

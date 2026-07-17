@@ -255,9 +255,9 @@ function ProductPage() {
               <div className="mt-10 space-y-2">
                 {specs.map((row, j) => (
                   <AlternatingSlide key={row[0]} index={j}>
-                    <div className="flex items-center justify-between border-b border-line/50 py-3 font-mono text-xs uppercase tracking-[0.2em]">
-                      <span className="text-ink-soft">{row[0]}</span>
-                      <span className="text-ink">{row[1]}</span>
+                    <div className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] items-baseline gap-4 border-b border-line/50 py-3 font-mono text-xs uppercase tracking-[0.2em]">
+                      <span className="min-w-0 text-left text-ink-soft">{row[0]}</span>
+                      <span className="min-w-0 justify-self-end text-right text-ink">{row[1]}</span>
                     </div>
                   </AlternatingSlide>
                 ))}

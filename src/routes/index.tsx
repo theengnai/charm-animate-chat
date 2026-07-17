@@ -69,7 +69,7 @@ const SECTIONS: Record<number, SectionMeta> = {
     index: 3, total: TOTAL,
     eyebrow: "Products",
     title: "Curated products and material systems.",
-    subtitle: "Travertine, terracotta, terrazzo.",
+    subtitle: "MCM, EPS, WPC, PVC, PU Stone & Smart Wall Panels.",
     body:
       "A living library of architectural materials — sourced, vetted, and ready to specify. Filter by finish, format, performance, or feeling.",
     bullets: ["Sourced & vetted", "Ready to specify", "Filter by finish or format"],

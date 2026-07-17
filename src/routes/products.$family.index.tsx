@@ -134,7 +134,9 @@ function FamilyPage() {
         </div>
       </section>
 
-      {family.key === "PU" ? <PUIntro /> : null}
+      {family.key === "PU" ? <PUGridHeader count={items.length} /> : null}
+
+
 
       {/* Product grid — dense */}
       <section className="px-5 py-16 md:px-10 md:py-24">

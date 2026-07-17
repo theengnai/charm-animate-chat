@@ -48,6 +48,40 @@ import mcm40 from "@/assets/mcm/mcm-wood-spot.webp.asset.json";
 import mcm41 from "@/assets/mcm/mcm-wood-tile.webp.asset.json";
 import mcm42 from "@/assets/mcm/mcm-woven.webp.asset.json";
 import mcm43 from "@/assets/mcm/mcm-zig-skyline.webp.asset.json";
+// PU Stone — swatches from EcoSmart PU Stone Cladding brief
+import pu101 from "@/assets/pu/pu-p10-1.jpg.asset.json";
+import pu102 from "@/assets/pu/pu-p10-2.jpg.asset.json";
+import pu103 from "@/assets/pu/pu-p10-3.jpg.asset.json";
+import pu104 from "@/assets/pu/pu-p10-4.jpg.asset.json";
+import pu105 from "@/assets/pu/pu-p10-5.jpg.asset.json";
+import pu106 from "@/assets/pu/pu-p10-6.jpg.asset.json";
+import pu107 from "@/assets/pu/pu-p10-7.jpg.asset.json";
+import pu108 from "@/assets/pu/pu-p10-8.jpg.asset.json";
+import pu109 from "@/assets/pu/pu-p10-9.jpg.asset.json";
+import pu111 from "@/assets/pu/pu-p11-1.jpg.asset.json";
+import pu112 from "@/assets/pu/pu-p11-2.jpg.asset.json";
+import pu113 from "@/assets/pu/pu-p11-3.jpg.asset.json";
+import pu114 from "@/assets/pu/pu-p11-4.jpg.asset.json";
+import pu115 from "@/assets/pu/pu-p11-5.jpg.asset.json";
+import pu116 from "@/assets/pu/pu-p11-6.jpg.asset.json";
+import pu117 from "@/assets/pu/pu-p11-7.jpg.asset.json";
+import pu118 from "@/assets/pu/pu-p11-8.jpg.asset.json";
+import pu119 from "@/assets/pu/pu-p11-9.jpg.asset.json";
+import pu121 from "@/assets/pu/pu-p12-1.jpg.asset.json";
+import pu122 from "@/assets/pu/pu-p12-2.jpg.asset.json";
+import pu123 from "@/assets/pu/pu-p12-3.jpg.asset.json";
+import pu124 from "@/assets/pu/pu-p12-4.jpg.asset.json";
+import pu125 from "@/assets/pu/pu-p12-5.jpg.asset.json";
+import puHero from "@/assets/pu/pu-page_1.jpg.asset.json";
+import puLife1 from "@/assets/pu/pu-page_2.jpg.asset.json";
+import puLife2 from "@/assets/pu/pu-img_p5_1.jpg.asset.json";
+import puLife3 from "@/assets/pu/pu-img_p13_1.jpg.asset.json";
+import puLife4 from "@/assets/pu/pu-img_p4_1.jpg.asset.json";
+import puLife5 from "@/assets/pu/pu-img_p4_2.jpg.asset.json";
+import puLife6 from "@/assets/pu/pu-img_p4_3.jpg.asset.json";
+import puLife7 from "@/assets/pu/pu-img_p4_4.jpg.asset.json";
+
+export const PU_LIFESTYLE = [puHero.url, puLife1.url, puLife2.url, puLife3.url, puLife4.url, puLife5.url, puLife6.url, puLife7.url];
 
 export type ProductDetails = {
   description: string;

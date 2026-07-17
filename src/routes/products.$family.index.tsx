@@ -409,9 +409,9 @@ function PUInfo() {
           </div>
           <div className="divide-y divide-line/50 rounded-2xl border border-line/60 bg-canvas-2/40">
             {PU_SPECS.map(([k, v]) => (
-              <div key={k} className="grid grid-cols-[120px_1fr] items-baseline gap-4 px-6 py-4 md:grid-cols-[160px_1fr] md:gap-6 md:px-7 md:py-5">
-                <span className="text-left font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">{k}</span>
-                <span className="text-right text-sm text-ink md:text-base">{v}</span>
+              <div key={k} className="flex items-baseline gap-4 px-6 py-4 md:gap-6 md:px-7 md:py-5">
+                <span className="w-[120px] shrink-0 font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft md:w-[160px]">{k}</span>
+                <span className="flex-1 text-right text-sm text-ink md:text-base">{v}</span>
               </div>
             ))}
           </div>

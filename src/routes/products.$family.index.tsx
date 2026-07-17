@@ -7,7 +7,7 @@ import { CTABand } from "@/components/common/CTABand";
 
 import { ScaleIn } from "@/components/motion/ScaleIn";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { FAMILIES, productsByFamily, PU_LIFESTYLE, type Product } from "@/data/products";
+import { FAMILIES, productsByFamily, type Product } from "@/data/products";
 import { Feather, Wrench, Layers, Shield, Sparkles } from "lucide-react";
 
 const FAMILY_SLUGS: Record<string, Product["family"]> = {
@@ -134,7 +134,9 @@ function FamilyPage() {
         </div>
       </section>
 
-      {family.key === "PU" ? <PUIntro /> : null}
+      {family.key === "PU" ? <PUGridHeader count={items.length} /> : null}
+
+
 
       {/* Product grid — dense */}
       <section className="px-5 py-16 md:px-10 md:py-24">
@@ -153,10 +155,10 @@ function FamilyPage() {
                     ) : (
                       <div
                         className="flex h-full w-full flex-col justify-between p-4 transition-transform duration-[1200ms] group-hover:scale-105"
-                        style={{ background: `linear-gradient(135deg, ${p.colors[0] ?? "#c9b39a"} 0%, ${p.colors[1] ?? p.colors[0] ?? "#8a7a68"} 100%)` }}
+                        style={{ backgroundColor: p.colors[0] ?? "#c9b39a" }}
                       >
-                        <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-canvas/80">{p.code}</span>
-                        <span className="display-serifish text-2xl leading-tight text-canvas drop-shadow-sm">{p.name}</span>
+                        <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-canvas/85 mix-blend-difference">{p.code}</span>
+                        <span className="display-serifish text-2xl leading-tight text-canvas mix-blend-difference">{p.name}</span>
                       </div>
                     )}
                     {p.details ? (
@@ -194,7 +196,7 @@ function FamilyPage() {
         </div>
       </section>
 
-      {family.key === "PU" ? <PUDetails /> : null}
+      {family.key === "PU" ? <PUInfo /> : null}
 
       <CTABand
         eyebrow="Not sure which fits?"
@@ -250,7 +252,37 @@ const PU_STEPS = [
   { n: "04", title: "Finish & seal", body: "Fill joints with colour-matched sealant. Apply protective coating for lasting results." },
 ];
 
-function PUIntro() {
+const PU_APPLICATIONS = [
+  { title: "Facade cladding", body: "Exterior building envelopes — lightweight enough to specify without re-engineering the substructure." },
+  { title: "Feature walls", body: "Statement interior walls in lobbies, reception areas and residential living rooms." },
+  { title: "Hospitality interiors", body: "Restaurants, hotels and spas — warm textures that photograph beautifully under gallery lighting." },
+  { title: "Commercial fit-out", body: "Retail, offices and showrooms where fast installation and low structural load matter most." },
+];
+
+const PU_SUSTAINABILITY = [
+  { k: "Lower embodied load", v: "Up to 75% lighter than natural stone — smaller trucks, smaller cranes, smaller footprint." },
+  { k: "Less waste on site", v: "Precise panel dimensions and clean cuts reduce off-cuts versus quarried stone." },
+  { k: "Long service life", v: "UV stable, moisture resistant, colour-fast — designed to outlast typical fit-out cycles." },
+];
+
+function PUGridHeader({ count }: { count: number }) {
+  return (
+    <section className="border-t border-line/60 bg-canvas px-5 pt-16 md:px-10 md:pt-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">The catalog</div>
+        <h2 className="display-serifish mt-3 text-3xl leading-tight md:text-5xl">
+          Textures, tones & patterns.
+        </h2>
+        <p className="mt-4 max-w-2xl text-ink-soft md:text-lg">
+          {count} finishes — rough stone, sandstone, brick, slate and sculpted 3D panels —
+          all in the same lightweight PU system. Swatches shown as solid colour; real texture on request.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function PUInfo() {
   return (
     <>
       {/* Vision */}
@@ -301,27 +333,33 @@ function PUIntro() {
         </div>
       </section>
 
-
-      {/* Section heading before the grid */}
-      <section className="border-t border-line/60 bg-canvas px-5 pt-16 md:px-10 md:pt-24">
+      {/* Applications */}
+      <section className="border-t border-line/60 bg-canvas px-5 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">The catalog</div>
-          <h2 className="display-serifish mt-3 text-3xl leading-tight md:text-5xl">
-            Textures, tones & patterns.
-          </h2>
-          <p className="mt-4 max-w-2xl text-ink-soft md:text-lg">
-            Twenty-three finishes — split-face stone, warm brick, sandstone and sculpted 3D panels —
-            all in the same lightweight PU system.
-          </p>
+          <div className="mb-12 max-w-2xl">
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">Where it lives</div>
+            <h2 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
+              Four settings, one system.
+            </h2>
+            <p className="mt-4 text-ink-soft md:text-lg">
+              The same panel envelope carries facade, feature wall, hospitality and commercial work —
+              same specification, same installation crew.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 md:gap-6">
+            {PU_APPLICATIONS.map((a, i) => (
+              <div key={a.title} className="flex gap-5 rounded-2xl border border-line/60 bg-canvas-2/40 p-6 md:p-7">
+                <div className="font-mono text-sm text-copper">{String(i + 1).padStart(2, "0")}</div>
+                <div>
+                  <h3 className="display-serifish text-xl md:text-2xl">{a.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft md:text-base">{a.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-    </>
-  );
-}
 
-function PUDetails() {
-  return (
-    <>
       {/* PU vs Traditional */}
       <section className="border-t border-line/60 bg-ink px-5 py-24 text-canvas md:px-10 md:py-32">
         <div className="mx-auto max-w-7xl">
@@ -406,6 +444,37 @@ function PUDetails() {
           </div>
         </div>
       </section>
+
+      {/* Sustainability & Warranty */}
+      <section className="border-t border-line/60 bg-canvas px-5 py-24 md:px-10 md:py-32">
+        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:gap-16">
+          <div>
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">Sustainability</div>
+            <h2 className="display-serifish mt-4 text-3xl leading-tight md:text-5xl">
+              Lighter buildings, longer service.
+            </h2>
+            <ul className="mt-8 space-y-5">
+              {PU_SUSTAINABILITY.map((s) => (
+                <li key={s.k} className="border-l-2 border-copper/60 pl-5">
+                  <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">{s.k}</div>
+                  <p className="mt-1 text-ink-soft md:text-lg">{s.v}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-line/60 bg-canvas-2/40 p-8 md:p-10">
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">Warranty & compliance</div>
+            <h3 className="display-serifish mt-4 text-2xl md:text-3xl">Backed by test data.</h3>
+            <ul className="mt-6 space-y-4 text-sm leading-relaxed text-ink-soft md:text-base">
+              <li><strong className="text-ink">Fire:</strong> Class B1, ASTM E84 tested — certificate issued on request.</li>
+              <li><strong className="text-ink">Weather:</strong> UV & moisture stable, rated −40 °C to 60 °C for exterior use.</li>
+              <li><strong className="text-ink">Warranty:</strong> 10-year colour and structural warranty, subject to specified installation.</li>
+              <li><strong className="text-ink">Documentation:</strong> TDS, MSDS and installation manual supplied per project.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
+

@@ -87,6 +87,20 @@ const RELATED_PROJECTS: Record<Product["family"], RelatedProject[]> = {
       img: projectImg4,
     },
   ],
+  PU: [
+    {
+      tag: "Finishing · Feature Walls",
+      title: "PU Stone Feature Walls",
+      body: "Lightweight polyurethane stone panels wrapping fireplaces, reception walls and lobby columns — the depth of quarried stone, a fraction of the weight.",
+      img: projectImg5,
+    },
+    {
+      tag: "Finishing · Hospitality",
+      title: "Hospitality & Villa Facades",
+      body: "Adhesive-fixed PU stone panels across boutique hotel façades and villa entries — installed in a fraction of the time of natural stone.",
+      img: projectImg1,
+    },
+  ],
   Panels: [
     {
       tag: "Construction Systems · Façade",

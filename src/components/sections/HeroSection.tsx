@@ -47,7 +47,7 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}
           >
-            Specify travertine, terracotta, MCM and sustainable cladding — tuned to your project.
+            Ask about our construction systems and finishing products — manufactured in Sudair, Saudi Arabia.
           </motion.p>
         </div>
       </motion.div>

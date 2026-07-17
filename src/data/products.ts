@@ -108,155 +108,151 @@ export const FAMILIES = [
 const COVERS = [imgA, imgB, imgC, imgD, imgE, imgF];
 
 // -------- Authored (rich) details for the first two products in each family --------
+// Technical values are issued against the relevant test certificate and are shown as
+// "To be confirmed" rather than estimated — per the EcoSmart TDS methodology.
 
 const wpcOakDetails: ProductDetails = {
   description:
-    "Deep Oak Deck is our flagship co-extruded WPC board — a dense, capped profile milled from recycled hardwood fibre and virgin polymer. The long-grain emboss is pressed under heat, then brushed by hand for a matte, foot-friendly finish that stays cool underfoot in GCC sun.",
+    "A wood-plastic composite (WPC) decking board — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the factory installation values.",
   useCases: [
     "Rooftop terraces and pool surrounds",
     "Villa gardens and shaded balconies",
-    "Hospitality decks with heavy foot traffic",
+    "Deck areas requiring dry, drainable installation",
   ],
   specs: [
-    ["Board width", "140 mm"],
-    ["Thickness", "23 mm (capped)"],
-    ["Length", "2.2 m / 3.6 m"],
-    ["Weight", "3.1 kg / m"],
-    ["Slip rating", "R11"],
-    ["Warranty", "15 years residential"],
+    ["Reference standard family", "EN 15534"],
+    ["Reaction to fire", "EN 13501-1 · certificate on request"],
+    ["Board dimensions", "Manufacturer spec · TBC"],
+    ["Installation", "Concealed clip on joist substructure"],
+    ["Maintenance", "Sweep / rinse periodically"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgA, imgD, imgC],
 };
 
 const wpcLinenDetails: ProductDetails = {
   description:
-    "Linen WPC Cladding is a wide-board rainscreen system — sanded to a soft, textile-like surface that softens facades under harsh light. Ventilated behind, it opens the wall to airflow while shrugging off humidity and salt spray.",
+    "A WPC cladding profile for ventilated rainscreen use — moisture-resistant, dimensionally stable, low-maintenance. Suits façades where humidity and thermal movement would degrade timber.",
   useCases: [
-    "Villa and townhouse facades",
+    "Villa and townhouse façades",
     "Boundary walls and garden screens",
-    "Ceiling soffits under pergolas",
+    "Soffits under pergolas",
   ],
   specs: [
-    ["Board width", "160 mm"],
-    ["Thickness", "20 mm"],
-    ["Length", "2.9 m"],
-    ["Coverage", "0.46 m per board"],
-    ["Fixing", "Concealed clip on aluminium sub-frame"],
-    ["Warranty", "10 years exterior"],
+    ["Reference standard family", "EN 15534"],
+    ["Reaction to fire", "EN 13501-1 · certificate on request"],
+    ["Substructure", "Aluminium sub-frame, project-specific"],
+    ["Fixing", "Concealed clip"],
+    ["Maintenance", "Wipe / rinse; avoid abrasives"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgC, imgA, imgE],
 };
 
 const spcNordicDetails: ProductDetails = {
   description:
-    "Nordic Ash SPC is a rigid-core click floor with a limestone-composite body — dimensionally stable across the seasonal swing of Gulf interiors. A 0.5 mm wear layer over a matte-embossed decor keeps it quiet, warm and honest.",
+    "SPC (stone-plastic composite) rigid-core click flooring for interior use. Dimensionally stable, waterproof, and installed as a floating floor with no wet trades.",
   useCases: [
-    "Apartments and studios",
+    "Apartments and residential fit-out",
     "Boutique retail and showrooms",
-    "Offices with under-floor cabling",
+    "Offices and light commercial interiors",
   ],
   specs: [
-    ["Plank size", "1220 × 180 mm"],
-    ["Thickness", "5.0 mm + 1.5 mm IXPE"],
-    ["Wear layer", "0.5 mm"],
-    ["Locking system", "Uniclic 5G"],
-    ["Sound reduction", "19 dB"],
-    ["Warranty", "20 years residential / 10 commercial"],
+    ["Reaction to fire", "EN 13501-1 · certificate on request"],
+    ["Locking system", "Click / floating floor"],
+    ["Substrate", "Level, dry, sound"],
+    ["Underlay", "IXPE · integrated or separate per SKU"],
+    ["Maintenance", "Damp mop; avoid steam / abrasives"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgB, imgA, imgD],
 };
 
 const spcTerraDetails: ProductDetails = {
   description:
-    "Terra Grain is a warm, clay-toned SPC plank textured to catch raking morning light. The surface reads like handmade terracotta but installs like a floating floor — no adhesive, no wet trades, no downtime.",
+    "A warm, terra-toned SPC plank for interior surfaces. Installs as a floating floor over a prepared substrate — no adhesive, no wet trades, no downtime.",
   useCases: [
     "Family rooms and majlises",
-    "Wellness spaces and yoga studios",
+    "Wellness spaces and studios",
     "Cafés and slow-hospitality interiors",
   ],
   specs: [
-    ["Plank size", "1220 × 228 mm"],
-    ["Thickness", "5.5 mm + 1.5 mm IXPE"],
-    ["Wear layer", "0.55 mm"],
-    ["Locking system", "Valinge 2G"],
-    ["Sound reduction", "21 dB"],
-    ["Warranty", "20 years residential"],
+    ["Reaction to fire", "EN 13501-1 · certificate on request"],
+    ["Locking system", "Click / floating floor"],
+    ["Expansion gap", "Per factory installation guidance"],
+    ["Maintenance", "Damp mop; avoid abrasives"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgA, imgC, imgE],
 };
 
 const aluBladeDetails: ProductDetails = {
   description:
-    "Blade Louver 70 is a solid-extrusion aluminium fin — 70 mm on the visible face, cut and mitred to length in our Sharjah workshop. Anodised to a soft grey that resists chalking and holds true under decade-long UV.",
+    "Aluminium blade for sun-shading and screening — cut and finished to project length, installed on a project-designed substructure.",
   useCases: [
-    "Facade sun-shading",
+    "Façade sun-shading",
     "Rooftop plant screens",
-    "Car-park and podium enclosures",
+    "Podium enclosures and privacy screens",
   ],
   specs: [
-    ["Blade depth", "70 mm"],
-    ["Wall thickness", "2.0 mm"],
-    ["Max length", "6.0 m"],
-    ["Fixing", "Concealed sub-frame, M8 stainless"],
-    ["Finish", "Class II anodised"],
-    ["Warranty", "15 years finish"],
+    ["Substructure", "Project-designed"],
+    ["Fixing", "Concealed sub-frame, stainless"],
+    ["Finish", "Anodised / powder — project spec"],
+    ["Wind design", "Saudi Building Code (SBC)"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgE, imgF, imgD],
 };
 
 const aluFinDetails: ProductDetails = {
   description:
-    "Fin Louver 40 is a slim, powder-coated blade for tighter rhythms and lighter facades — closer spacing, sharper shadow lines, softer visual weight than the 70. Ideal where the louver is meant to be felt rather than seen.",
+    "A slim aluminium fin for tighter rhythms and lighter façades — closer spacing, sharper shadow lines, softer visual weight. Used where the louver is meant to be felt rather than seen.",
   useCases: [
-    "Boutique retail facades",
+    "Boutique retail façades",
     "Balcony privacy screens",
     "Interior room dividers",
   ],
   specs: [
-    ["Blade depth", "40 mm"],
-    ["Wall thickness", "1.6 mm"],
-    ["Max length", "4.5 m"],
     ["Fixing", "Top and bottom rail"],
-    ["Finish", "Polyester powder, 60 μm"],
-    ["Warranty", "10 years finish"],
+    ["Finish", "Polyester powder — project spec"],
+    ["Wind design", "Saudi Building Code (SBC)"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgF, imgE, imgA],
 };
 
 const pnlLinenDetails: ProductDetails = {
   description:
-    "Linen Acoustic Panel is a 30 mm PET-core panel wrapped in a woven linen face — sound-absorbent (NRC 0.85) and hand-finished at the edges. Cut on our CNC to any polygon, on-site fitted, dust-free.",
+    "An interior wall panel line — cut and finished for interior surfaces and joinery, aligned to the EcoSmart PVC Laminated Foam Interior Line and PVC Laminated Foam Board Sheets.",
   useCases: [
-    "Meeting rooms and board rooms",
-    "Podcast and content studios",
-    "Hospitality lounges",
+    "Meeting rooms and reception areas",
+    "Residential feature walls",
+    "Hospitality interiors",
   ],
   specs: [
-    ["Panel size", "1200 × 2400 mm"],
-    ["Thickness", "30 mm"],
-    ["Core", "PET felt, 100% recycled"],
-    ["NRC", "0.85"],
-    ["Fire", "B-s2,d0"],
-    ["Fixing", "Concealed z-clip"],
+    ["Reaction to fire", "EN 13501-1 · certificate on request"],
+    ["Substrate", "Sound, clean, dry"],
+    ["Fixing", "Adhesive and/or concealed fixing"],
+    ["Maintenance", "Wipe clean; avoid abrasives"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgC, imgD, imgB],
 };
 
 const pnlSlatDetails: ProductDetails = {
   description:
-    "Slatted Oak Panel is a real-wood veneer over a PET acoustic backer — the warmth of oak with the quiet of felt. Slats are pre-mitred at ends so runs finish clean without a trim.",
+    "A slatted wall panel for interior feature surfaces — cut to length, installed on prepared substrate with adhesive and/or concealed fixings.",
   useCases: [
     "Feature walls in living areas",
     "Reception backdrops",
     "TV walls and headboards",
   ],
   specs: [
-    ["Panel size", "600 × 2400 mm"],
-    ["Thickness", "22 mm"],
-    ["Slat pitch", "30 mm on / 15 mm off"],
-    ["Veneer", "European oak, 0.6 mm"],
-    ["Fire", "B-s2,d0"],
+    ["Reaction to fire", "EN 13501-1 · certificate on request"],
+    ["Substrate", "Sound, clean, dry"],
     ["Fixing", "Adhesive + concealed screw"],
+    ["Maintenance", "Dust / wipe clean; avoid abrasives"],
+    ["Certified values", "Issued against test certificate on request"],
   ],
   gallery: [imgB, imgA, imgD],
 };

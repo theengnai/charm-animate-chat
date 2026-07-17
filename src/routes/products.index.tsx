@@ -22,10 +22,10 @@ import mcmCover from "@/assets/mcm/mcm-ivory-travertine.webp.asset.json";
 export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
-      { title: "Products — Ecosmart Architectural Materials" },
-      { name: "description", content: "Five families of façade, cladding, interior and outdoor systems — curated for how they age, install and hold up in the GCC climate." },
-      { property: "og:title", content: "Products — Ecosmart" },
-      { property: "og:description", content: "Materials engineered for the way buildings actually live." },
+      { title: "Products — EcoSmart | Construction Systems & Finishing Products" },
+      { name: "description", content: "EcoSmart's product library — construction systems (lightweight concrete panels, T-floor hourdi, hybrid precast, curved modular, portable cabins, EPS façades) and decoration & finishing lines (flexible clay-stone, PU stone, WPC, SPC, PVC), all manufactured in Sudair." },
+      { property: "og:title", content: "Products — EcoSmart" },
+      { property: "og:description", content: "Construction systems and finishing products, manufactured in Saudi Arabia." },
       { property: "og:image", content: hero },
     ],
   }),
@@ -54,173 +54,187 @@ type Section = {
 const SECTIONS: Section[] = [
   {
     id: "architectural-finishes",
-    label: "Architectural Finishes",
-    title: "Architectural Finishes",
-    // TODO: Client to review placeholder intro copy
-    intro: "Surface materials that shape light, weather well, and install with intention.",
+    label: "Decoration & Finishing",
+    title: "Decoration & Finishing",
+    intro: "Finishing product lines manufactured in Sudair — for interior and exterior surfaces where the material must be honest, durable and buildable.",
     cards: [
       {
         id: "flexible-clay-stone-panels",
-        tag: "Exterior + Interior · Skin",
-        title: "Flexible Clay-Stone Panels",
-        body: "Modified Clay Material — thin, flexible mineral cladding that reads as travertine, brick, rock or timber but installs like tile. Non-combustible, lightweight, priced from 26 SAR/m².",
+        tag: "Exterior + Interior · 100% Saudi-made",
+        title: "Flexible Clay-Stone Tiles",
+        body: "A flexible modified clay-stone tile that bends to follow flat and curved surfaces, applied like a thin tile with adhesive. EcoSmart is the only manufacturer of flexible tiles in Saudi Arabia, produced with 100% Saudi-sourced raw materials — a primary Vision 2030 / IKTVA position.",
         specs: [
-          ["Fire class", "A2-s1,d0"],
-          ["Thickness", "3 mm"],
-          ["Weight", "≈ 4 kg/m²"],
-          ["Lead time", "2 weeks"],
+          ["Origin", "100% Saudi-made"],
+          ["Reference", "EN 13501-1 / ASTM E84"],
+          ["Water absorption", "ISO 10545-3"],
+          ["Bond strength", "EN 1348"],
         ],
         image: mcmCover.url,
         viewAllLink: "mcm",
       },
       {
-        id: "eps-decorative-facades",
-        // TODO: Client to replace placeholder tag, body, specs, and image
-        tag: "Exterior · Details",
-        title: "EPS Decorative Façades",
-        body: "Lightweight architectural mouldings and cornices with a hard polyurea shell for sharp, lasting details.",
+        id: "pu-stone",
+        tag: "Interior + Exterior · Walls",
+        title: "PU Stone Decorative Tiles",
+        body: "Lightweight polyurethane tiles that reproduce the appearance and texture of natural stone — far faster to install than real stone cladding. Adhesive-fixed, easy to cut and shape.",
         specs: [
-          ["Fire class", "TODO"],
-          ["Thickness", "TODO"],
-          ["Weight", "TODO"],
-          ["Lead time", "TODO"],
+          ["Reference", "EN 13501-1 / ASTM E84"],
+          ["Density", "ISO 845"],
+          ["Water absorption", "ISO 62"],
+          ["UV / weathering", "ASTM G154"],
         ],
-        image: imgA,
+        image: imgC,
       },
       {
         id: "wpc",
         tag: "Exterior · Ground plane",
-        title: "WPC Decking",
-        body: "Warm oak, linen and charcoal composite boards engineered for salt air, direct sun and hidden fixings. The board that ages instead of failing.",
+        title: "WPC External Decking",
+        body: "Wood-plastic composite decking — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the factory installation values.",
         specs: [
-          ["Fire class", "B-s1,d0"],
-          ["Board thickness", "22 mm"],
-          ["Warranty", "10 years"],
-          ["Lead time", "3 weeks"],
+          ["Reference", "EN 15534 family"],
+          ["Reaction to fire", "EN 13501-1"],
+          ["Installation", "Concealed clip"],
+          ["Maintenance", "Sweep / rinse"],
         ],
         image: imgA,
         viewAllLink: "wpc",
       },
       {
-        id: "pvc-wood-panels",
-        // TODO: Client to replace placeholder tag, body, specs, and image
-        tag: "Interior · Walls",
-        title: "PVC Wood Panels",
-        body: "Durable, moisture-resistant fluted panels that bring the warmth of timber without the maintenance.",
+        id: "wpc-doors",
+        tag: "Interior · Doors",
+        title: "WPC Door Panels",
+        body: "Wood-plastic composite door leaves — moisture-resistant, dimensionally stable, termite/rot resistant. Suited to bathrooms and wet areas where timber warps.",
         specs: [
-          ["Fire class", "TODO"],
-          ["Thickness", "TODO"],
-          ["Weight", "TODO"],
-          ["Lead time", "TODO"],
+          ["Reference", "EN 13501-1"],
+          ["Water absorption / swelling", "EN 317"],
+          ["Density", "ISO 1183"],
+          ["Fire-rated door-set", "Confirm by certificate"],
         ],
         image: imgB,
       },
       {
-        id: "pu-stone",
-        // TODO: Client to replace placeholder tag, body, specs, and image
-        tag: "Interior + Exterior · Walls",
-        title: "PU Stone",
-        body: "Ultra-lightweight polyurethane stone panels for rapid, mortar-free feature walls.",
+        id: "pvc-wood-panels",
+        tag: "Interior · Walls",
+        title: "PVC Wood Panels",
+        body: "PVC wall panels with a wood-effect finish. Moisture-resistant, dimensionally stable and cut to opening sizes.",
         specs: [
-          ["Fire class", "TODO"],
-          ["Thickness", "TODO"],
-          ["Weight", "TODO"],
-          ["Lead time", "TODO"],
+          ["Reference", "EN 13501-1"],
+          ["Cutting", "Fine-tooth saw / utility knife"],
+          ["Fixing", "Adhesive and/or battens"],
+          ["Maintenance", "Dust / wipe clean"],
         ],
-        image: imgC,
+        image: imgB,
       },
     ],
   },
   {
     id: "smart-construction",
-    label: "Smart Construction Systems",
-    title: "Smart Construction Systems",
-    // TODO: Client to review placeholder intro copy
-    intro: "Structural solutions engineered to reduce site time and material waste.",
+    label: "Construction Systems",
+    title: "Construction Systems",
+    intro: "Structural and envelope systems engineered to the Saudi Building Code — designed to reduce site time and wet trades while adding integral thermal and acoustic performance.",
     cards: [
       {
         id: "lightweight-concrete-wall-panels",
-        // TODO: Client to replace placeholder tag, body, specs, and image
         tag: "Structure · Walls",
         title: "Lightweight Concrete Wall Panels",
-        body: "Pre-cast lightweight concrete panels that replace traditional blockwork, speeding up partitioning.",
+        body: "Precast lightweight concrete panels with tongue-and-groove edges for rapid, mortar-light dry assembly. Internal partition, external façade and fair-faced variants — in place of blockwork, with integral thermal and acoustic performance.",
         specs: [
-          ["Fire class", "TODO"],
-          ["Thickness", "TODO"],
-          ["Weight", "TODO"],
-          ["Lead time", "TODO"],
+          ["Reference", "EN 14992"],
+          ["Fire performance", "ASTM E84 / EN 13501-1"],
+          ["Thermal", "ASTM C518 / EN 12667"],
+          ["Acoustic", "ISO 10140 / ASTM E90"],
         ],
         image: imgD,
       },
-    ],
-  },
-  {
-    id: "future-solutions",
-    label: "Future Solutions",
-    title: "Future Solutions",
-    // TODO: Client to review placeholder intro copy
-    intro: "Systems currently in development for the next generation of GCC builds.",
-    cards: [
       {
         id: "t-floor-hourdi",
-        // TODO: Client to replace placeholder tag, body, and image
         tag: "Structure · Floors",
-        title: "T-Floor Hourdi System",
-        body: "A lighter, faster hollow-core flooring system.",
-        isComingSoon: true,
+        title: "Enhanced T-Floor Hourdi System",
+        body: "Precast T-beams + EPS T-shaped hourdi infill blocks + in-situ reinforced structural topping — lower self-weight than a solid slab, with combined structural and thermal performance.",
+        specs: [
+          ["Reference", "EN 15037"],
+          ["Design", "Project structural designer"],
+          ["EPS density", "EN 13163 / ISO 845"],
+          ["Thermal (deck)", "ASTM C518 / EN 12667"],
+        ],
         image: imgE,
       },
       {
         id: "hybrid-precast",
-        // TODO: Client to replace placeholder tag, body, and image
-        tag: "Structure · Complete",
-        title: "Hybrid Precast Building Systems",
-        body: "Volumetric and panelized precast elements for rapid assembly.",
-        isComingSoon: true,
+        tag: "Structure · Complete frame",
+        title: "Hybrid Precast Building System",
+        body: "Precast columns, beams, stairs and fences combined with our lightweight concrete wall panels (in place of cast shear walls) and T-floor hourdi decks — a single-source precast-plus-panel structural package.",
+        specs: [
+          ["Reference", "EN 13369"],
+          ["Design", "Saudi Building Code (SBC)"],
+          ["Concrete grade", "ASTM C39 / EN 12390-3"],
+          ["Seismic / wind", "SBC"],
+        ],
         image: imgA,
       },
       {
         id: "3d-modular",
-        // TODO: Client to replace placeholder tag, body, and image
         tag: "Structure · Modular",
-        title: "3D Modular Construction",
-        body: "Fully finished modular units craned directly into place.",
-        isComingSoon: true,
+        title: "Enhanced 3D Curved Modular System",
+        body: "Volumetric modular units including curved-angle geometries — a Saudi-distinctive capability. Modules are fabricated and fitted-out off site, then set onto prepared foundations.",
+        specs: [
+          ["Design", "Saudi Building Code (SBC)"],
+          ["Thermal envelope", "ASTM C518 / EN 12667"],
+          ["Acoustic (inter-module)", "ISO 10140"],
+          ["Fire performance", "EN 13501 / SBC"],
+        ],
         image: imgB,
       },
       {
         id: "portable-building",
-        // TODO: Client to replace placeholder tag, body, and image
-        tag: "Structure · Temporary",
-        title: "Portable Building Solutions",
-        body: "High-performance temporary and relocatable structures.",
-        isComingSoon: true,
+        tag: "Structure · Ready-to-use",
+        title: "Portable Cabins (insulated)",
+        body: "Ready-to-use insulated cabins built on EcoSmart's insulated wall system with a high-end structural frame — not a basic container fit-out. Delivered as finished, habitable units for site offices, accommodation, clinics and amenity units.",
+        specs: [
+          ["Wall / roof U-value", "ASTM C518 / EN 12667"],
+          ["Structural / wind", "SBC"],
+          ["Electrical", "SBC / SEC"],
+          ["Fire performance", "EN 13501 / SBC"],
+        ],
         image: imgC,
+      },
+      {
+        id: "eps-decorative-facades",
+        tag: "Exterior · Façade details",
+        title: "EPS Insulated Decorative Façades",
+        body: "Shaped EPS decorative elements — cornices, mouldings, bands and insulated panels — bonded to the substrate and finished with reinforced mesh, basecoat, primer and decorative topcoat. Decoration and insulation in one system.",
+        specs: [
+          ["EPS density", "EN 13163 / ISO 845"],
+          ["Thermal conductivity", "ASTM C518 / EN 12667"],
+          ["Compressive strength (EPS)", "ISO 844 / EN 826"],
+          ["Reaction to fire (system)", "EN 13501-1"],
+        ],
+        image: imgA,
       },
     ],
   },
 ];
 
 const KPIS = [
-  { v: 42, s: "", l: "Standard finishes" },
-  { v: 180, s: "+", l: "Projects delivered" },
-  { v: 25, s: " yr", l: "Design life target" },
-  { v: 65, s: "%", l: "Recycled content · avg." },
+  { v: 6, s: "", l: "Construction systems" },
+  { v: 10, s: "", l: "Finishing product lines" },
+  { v: 100, s: "%", l: "Manufactured in Saudi Arabia" },
+  { v: 1, s: "", l: "KSA maker of flexible clay-stone" },
 ];
 
 const SWATCHES = [
-  { name: "Deep Oak", hex: "#6b4a2f" },
-  { name: "Linen", hex: "#c9b39a" },
+  { name: "Ivory Travertine", hex: "#f9f7f5" },
+  { name: "Beige Travertine", hex: "#e2d0a9" },
+  { name: "Cream Travertine", hex: "#c6b48d" },
+  { name: "Ancient Wood", hex: "#ab8770" },
+  { name: "Rammed Earth", hex: "#a06b48" },
+  { name: "Desert Brick", hex: "#8b5a3c" },
+  { name: "Grey Travertine", hex: "#b4b4b4" },
+  { name: "Slate Stone", hex: "#727272" },
   { name: "Charcoal", hex: "#2a2622" },
-  { name: "Nordic Ash", hex: "#d8c9b0" },
-  { name: "Terra", hex: "#a06b48" },
-  { name: "Basalt", hex: "#4a4744" },
-  { name: "Anodised Silver", hex: "#8a8580" },
-  { name: "Anodised Bronze", hex: "#8b5a3c" },
-  { name: "Copper", hex: "#b4592c" },
-  { name: "Mineral Bone", hex: "#e5ddd0" },
-  { name: "Slate", hex: "#5c5854" },
-  { name: "Reed", hex: "#c4beb5" },
+  { name: "Najdi Stone", hex: "#c9b39a" },
+  { name: "Silver Mist", hex: "#8a8580" },
+  { name: "Snow Rock", hex: "#ffffff" },
 ];
 
 function ProductsPage() {
@@ -230,12 +244,12 @@ function ProductsPage() {
 
       <StoryHero
         eyebrow="Products library"
-        title="Materials that"
-        emphasis="shape architecture."
-        subcopy="Five families of façade, cladding, interior and outdoor systems — curated for how they age in the GCC climate."
+        title="Construction systems and"
+        emphasis="finishing products."
+        subcopy="Manufactured in Sudair Industrial City, Riyadh — two ranges built for the Saudi market."
         image={hero}
-        primary={{ label: "Talk to a specialist", to: "/contact" }}
-        secondary={{ label: "Order sample kit", to: "/samples" }}
+        primary={{ label: "Talk to our team", to: "/contact" }}
+        secondary={{ label: "Request a sample", to: "/samples" }}
       />
 
       {/* Intro — HighlightSweep */}
@@ -245,10 +259,9 @@ function ProductsPage() {
             The library
           </div>
           <p className="display-serifish mt-6 text-2xl leading-[1.25] md:text-4xl">
-            {/* TODO: Review and update this copy — "Five families" no longer matches the new 3-section structure */}
-            Not a catalogue of everything —{" "}
-            <HighlightSweep>a considered set of systems</HighlightSweep>{" "}
-            we know how to draw, deliver and defend on site. Five families, forty-two finishes, one supervisor at every install.
+            Two ranges,{" "}
+            <HighlightSweep>manufactured in Saudi Arabia</HighlightSweep>{" "}
+            — construction systems that replace conventional frames and blockwork, plus finishing products from the only KSA maker of flexible clay-stone. Every product carries a Technical Data Sheet and an Installation Manual.
           </p>
         </div>
       </section>
@@ -350,10 +363,10 @@ function ProductsPage() {
       <section className="border-y border-line/60 bg-canvas-2/40 px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-            Performance
+            The range
           </div>
           <h2 className="display-serifish mt-4 max-w-3xl text-3xl md:text-5xl">
-            Numbers we're comfortable defending.
+            The Ecosmart product ranges, at a glance.
           </h2>
           <div className="mt-14 grid grid-cols-2 gap-10 md:grid-cols-4">
             {KPIS.map((k) => (
@@ -374,10 +387,10 @@ function ProductsPage() {
       <section className="px-5 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-7xl">
           <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-            Finish library
+            Finish library · selected
           </div>
           <h2 className="display-serifish mt-4 max-w-3xl text-3xl md:text-5xl">
-            Twelve finishes to start. Forty-two to specify.
+            A sample of the tones we work in.
           </h2>
           <div className="mt-14 grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-6">
             {SWATCHES.map((sw, i) => (
@@ -399,9 +412,9 @@ function ProductsPage() {
 
       <CTABand
         eyebrow="Not sure which fits?"
-        title="Order a curated eight-chip kit — free within the UAE."
+        title="Request a sample — we'll send it from Sudair."
         href="/samples"
-        cta="Request a kit"
+        cta="Request a sample"
       />
 
       <SiteFooter />

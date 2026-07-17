@@ -1,28 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Package, Truck, Sparkles, Leaf } from "lucide-react";
+import { Package, Sparkles } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
-import { PinnedSwap } from "@/components/motion/PinnedSwap";
 import { SvgLineDraw } from "@/components/motion/SvgLineDraw";
 import { ScaleIn } from "@/components/motion/ScaleIn";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import hero from "@/assets/pages/hero-samples.jpg";
-import chip1 from "@/assets/section-materials.jpg";
-import chip2 from "@/assets/section-samples.jpg";
-import chip3 from "@/assets/section-design.jpg";
-import chip4 from "@/assets/section-gallery.jpg";
 
 export const Route = createFileRoute("/samples")({
   head: () => ({
     meta: [
-      { title: "Sample Kits — Ecosmart" },
-      { name: "description", content: "Order a curated Ecosmart sample kit — up to eight material chips shipped in a linen envelope, delivered in three business days." },
-      { property: "og:title", content: "Sample Kits — Ecosmart" },
-      { property: "og:description", content: "Touch it before you specify it." },
+      { title: "Samples — EcoSmart" },
+      { name: "description", content: "Request physical samples of EcoSmart finishing products — flexible clay-stone, PU stone, WPC, SPC, PVC — from our Sudair manufacturing facility." },
+      { property: "og:title", content: "Samples — EcoSmart" },
+      { property: "og:description", content: "Hold the material before you specify." },
       { property: "og:image", content: hero },
     ],
   }),
@@ -30,23 +25,16 @@ export const Route = createFileRoute("/samples")({
 });
 
 const STEPS = [
-  { n: "01", t: "Curate", d: "Tell us the project. We shortlist eight chips that answer the brief — not eighty that don't." },
-  { n: "02", t: "Confirm", d: "You confirm the shortlist and your shipping address in a single reply." },
-  { n: "03", t: "Delivered", d: "In three business days a linen envelope arrives — chips, spec cards, and a project note." },
+  { n: "01", t: "Tell us", d: "Share the project, the product you'd like to see, and the address to ship to." },
+  { n: "02", t: "We match", d: "We select the right chips from our finishing lines against your brief and confirm what we'll send." },
+  { n: "03", t: "Sent from Sudair", d: "The sample ships from our facility in Sudair Industrial City with its specification card." },
 ];
 
-const KITS = [
-  { tag: "Coastal", title: "Coastal Residence", body: "Warm oak WPC, linen composite panels, brushed aluminium fins — a palette that survives salt air without going grey.", img: chip1, chips: ["Deep Oak", "Linen", "Anod. Silver", "Basalt"] },
-  { tag: "Hospitality", title: "Boutique Hotel", body: "Slat oak walls, textured mineral panels, a soft charcoal accent — chosen for how they read under low lobby light.", img: chip2, chips: ["Slat Oak", "Mineral", "Charcoal", "Copper"] },
-  { tag: "Workplace", title: "Corporate Lobby", body: "Basalt SPC underfoot, mineral panel walls, aluminium wave ceiling — quiet enough for a conversation, honest enough for a client.", img: chip3, chips: ["Basalt", "Mineral", "Wave Alu", "Reed"] },
-  { tag: "Villa", title: "Private Villa", body: "Deep oak decking, linen walls, and a copper accent — a domestic palette that reads warm on any project scale.", img: chip4, chips: ["Deep Oak", "Linen", "Copper", "Nordic Ash"] },
-];
-
-const KIT_CONTENTS = [
-  { label: "8× material chips", desc: "150 × 100 mm, real material, real finish." },
-  { label: "Spec cards", desc: "One per chip — dimensions, fire class, warranty." },
-  { label: "Project note", desc: "A handwritten line about the palette we shortlisted." },
-  { label: "Linen envelope", desc: "FSC linen, closes with a copper stud, returnable." },
+const CONTENTS = [
+  { label: "Physical sample", desc: "Real material, real finish — cut from the same production line as your project." },
+  { label: "Specification card", desc: "Product name, reference standards and the certified values available on request." },
+  { label: "TDS reference", desc: "Pointer to the full Technical Data Sheet and Installation Manual." },
+  { label: "Project note", desc: "A short line about why we shortlisted this material for the brief you sent." },
 ];
 
 function SamplesPage() {
@@ -55,23 +43,22 @@ function SamplesPage() {
       <TopBar />
 
       <StoryHero
-        eyebrow="Sample kits"
-        title="Touch it before you"
-        emphasis="specify it."
-        subcopy="A curated eight-chip kit, shipped in a linen envelope, delivered in three business days. Free within the UAE."
+        eyebrow="Samples"
+        title="Hold the material"
+        emphasis="before you specify."
+        subcopy="Samples of our finishing products — flexible clay-stone tiles, PU stone, WPC, SPC and PVC lines — issued on request from our Sudair facility."
         image={hero}
-        primary={{ label: "Request a kit", to: "/contact" }}
+        primary={{ label: "Request a sample", to: "/contact" }}
         secondary={{ label: "See the products", to: "/products" }}
       />
 
-      {/* SvgLineDraw 3-step process */}
       <section className="relative border-t border-line/60 px-5 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-4xl">
           <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
             How it works
           </div>
           <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
-            Three steps, three days.
+            Three steps.
           </h2>
 
           <div className="relative mt-20 grid gap-16">
@@ -96,51 +83,17 @@ function SamplesPage() {
         </div>
       </section>
 
-      {/* PinnedSwap kit carousel */}
-      <PinnedSwap
-        eyebrow="Curated kits"
-        title="Four kits,"
-        titleEm="four conversations."
-        items={KITS}
-        renderItem={(k) => (
-          <div className="grid w-full gap-10 lg:grid-cols-2 lg:gap-16">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-              <img src={k.img} alt={k.title} className="h-full w-full object-cover" />
-              <div className="absolute left-4 top-4 rounded-full bg-canvas/90 px-3 py-1 font-mono text-[0.6rem] uppercase tracking-[0.22em]">
-                {k.tag}
-              </div>
-            </div>
-            <div className="flex flex-col justify-center">
-              <h3 className="display-serifish text-3xl leading-tight md:text-5xl">
-                {k.title}
-              </h3>
-              <p className="mt-5 max-w-xl text-base text-ink-soft">{k.body}</p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                {k.chips.map((c) => (
-                  <span
-                    key={c}
-                    className="rounded-full border border-line px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft"
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      />
-
-      {/* NEW — What's in a kit (ScaleIn diagram) */}
+      {/* What comes with a sample */}
       <section className="px-5 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-            Inside the envelope
+            What arrives
           </div>
           <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
-            Everything you need. Nothing you don't.
+            Enough to specify with confidence.
           </h2>
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {KIT_CONTENTS.map((c, i) => (
+            {CONTENTS.map((c, i) => (
               <ScaleIn key={c.label} delay={i * 0.08}>
                 <div className="h-full rounded-2xl border border-line/60 bg-canvas p-6 md:p-8">
                   <div className="display-serifish text-4xl text-copper">
@@ -155,26 +108,22 @@ function SamplesPage() {
         </div>
       </section>
 
-      {/* NEW — Shipping & lead-time info strip */}
+      {/* Shipping strip — honest */}
       <section className="border-y border-line/60 bg-ink px-5 py-16 text-canvas md:px-10">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
-          {[
-            { Icon: Truck, l: "UAE delivery", v: "3 business days · free" },
-            { Icon: Package, l: "GCC & International", v: "5–7 business days · from $35" },
-            { Icon: Leaf, l: "Packaging", v: "FSC linen · carbon-neutral" },
-          ].map((s) => (
-            <div key={s.l} className="flex items-start gap-4">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-copper/20 text-copper-light">
-                <s.Icon className="h-4 w-4" />
-              </span>
-              <div>
-                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
-                  {s.l}
-                </div>
-                <div className="mt-1 text-base">{s.v}</div>
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-start gap-4">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-copper/20 text-copper-light">
+              <Package className="h-4 w-4" />
+            </span>
+            <div>
+              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
+                Dispatch
+              </div>
+              <div className="mt-1 text-base">
+                Samples ship from Sudair Industrial City, Riyadh. Lead time confirmed when we reply to your request.
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
@@ -187,11 +136,10 @@ function SamplesPage() {
           </Reveal>
           <RevealGroup className="mt-10 divide-y divide-line/60" stagger={0.05}>
             {[
-              { q: "How much does a kit cost?", a: "Free within the UAE. Nominal international shipping fee (typically $35 USD) that we credit against your first order." },
-              { q: "How many chips can I request?", a: "Up to eight per kit. Larger project briefs can request additional kits — we don't gatekeep samples." },
-              { q: "How fast do they ship?", a: "Three business days from confirmation within the UAE, five to seven internationally." },
-              { q: "Are the chip colours accurate?", a: "As accurate as physical printing allows — for the final spec we always recommend a full-size sample panel." },
-              { q: "Can I keep the chips?", a: "Yes. If you'd like to return them once specified, we re-issue them to another studio and credit your account." },
+              { q: "Which products can I request as a sample?", a: "Our Decoration & Finishing lines — flexible clay-stone tiles, PU stone tiles, WPC door panels and decking, SPC flooring, PVC marble sheets, PVC laminated foam boards, PVC wood panels and the PVC laminated foam interior line." },
+              { q: "How do I request one?", a: "Send a brief message describing the project, product and address. We'll confirm what we can send and the lead time." },
+              { q: "Do the samples come with test certificates?", a: "Samples come with a specification card. Project-specific test certificates for the certified values (fire, thermal, acoustic, water absorption etc.) are issued on request against the intended application." },
+              { q: "Are the colours accurate?", a: "As accurate as a small chip allows. For final specification of textured or natural-looking finishes we recommend a larger sample panel — ask us and we'll arrange it." },
             ].map((f) => (
               <details key={f.q} data-reveal-item className="group py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
@@ -209,9 +157,9 @@ function SamplesPage() {
 
       <CTABand
         eyebrow="Ready?"
-        title="Request your kit — we'll ship in three days."
+        title="Request a sample — we'll send it from Sudair."
         href="/contact"
-        cta="Request a kit"
+        cta="Request a sample"
       />
 
       <SiteFooter />

@@ -85,7 +85,7 @@ export function PartnerSection({ active }: { active: boolean }) {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="mt-4 max-w-md text-[0.8rem] leading-relaxed text-ink-soft md:mt-6 md:text-[0.95rem] [@media(max-height:850px)]:hidden"
         >
-          Join EcoSmart's growing network of architects, distributors, contractors and solution partners across Saudi Arabia and the GCC.
+          Join EcoSmart's growing network of developers, contractors, distributors and design partners across Saudi Arabia — for our construction systems and finishing product lines manufactured in Sudair.
         </motion.p>
 
         <motion.ul
@@ -98,23 +98,21 @@ export function PartnerSection({ active }: { active: boolean }) {
             <span className="grid h-9 w-9 place-items-center rounded-full border border-copper/30 bg-copper-light/10 text-copper">
               <Mail className="h-4 w-4" strokeWidth={1.6} />
             </span>
-            <a href="mailto:partners@ecosmart.ae" className="hover:text-copper">
-              partners@ecosmart.ae
+            <a href="mailto:hello@ecosmart.sa" className="hover:text-copper">
+              hello@ecosmart.sa
             </a>
           </li>
           <li className="flex items-center gap-3">
             <span className="grid h-9 w-9 place-items-center rounded-full border border-copper/30 bg-copper-light/10 text-copper">
               <Phone className="h-4 w-4" strokeWidth={1.6} />
             </span>
-            <a href="tel:+97140000000" className="hover:text-copper">
-              +971 4 000 0000
-            </a>
+            <span className="text-ink-soft">Contact form · reply within 1 business day</span>
           </li>
           <li className="flex items-center gap-3">
             <span className="grid h-9 w-9 place-items-center rounded-full border border-copper/30 bg-copper-light/10 text-copper">
               <MapPin className="h-4 w-4" strokeWidth={1.6} />
             </span>
-            <span className="text-ink-soft">Dubai, United Arab Emirates</span>
+            <span className="text-ink-soft">Sudair Industrial City · Riyadh, KSA</span>
           </li>
         </motion.ul>
       </div>

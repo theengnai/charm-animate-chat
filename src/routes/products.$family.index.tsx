@@ -143,7 +143,17 @@ function FamilyPage() {
                   className="group block overflow-hidden rounded-xl border border-line/60 bg-canvas transition-all hover:-translate-y-1 hover:border-copper/50 hover:shadow-[0_18px_50px_-22px_rgba(0,0,0,0.35)]"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                    {p.cover ? (
+                      <img src={p.cover} alt={p.name} className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                    ) : (
+                      <div
+                        className="flex h-full w-full flex-col justify-between p-4 transition-transform duration-[1200ms] group-hover:scale-105"
+                        style={{ background: `linear-gradient(135deg, ${p.colors[0] ?? "#c9b39a"} 0%, ${p.colors[1] ?? p.colors[0] ?? "#8a7a68"} 100%)` }}
+                      >
+                        <span className="font-mono text-[0.55rem] uppercase tracking-[0.22em] text-canvas/80">{p.code}</span>
+                        <span className="display-serifish text-2xl leading-tight text-canvas drop-shadow-sm">{p.name}</span>
+                      </div>
+                    )}
                     {p.details ? (
                       <span className="absolute left-3 top-3 rounded-full bg-copper/95 px-2 py-0.5 font-mono text-[0.55rem] uppercase tracking-[0.2em] text-canvas">
                         Featured

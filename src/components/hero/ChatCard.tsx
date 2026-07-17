@@ -20,6 +20,7 @@ import {
   Wrench,
   Info,
   MessageCircle,
+  BookOpen,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import matMaterials from "@/assets/section-materials.jpg";

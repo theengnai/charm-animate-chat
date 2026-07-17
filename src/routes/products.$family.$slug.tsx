@@ -266,15 +266,16 @@ function ProductPage() {
                 <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">
                   Colourway
                 </div>
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
                   {product.colors.map((c) => (
                     <span
                       key={c}
-                      className="h-12 w-12 rounded-full border border-line/60 shadow-[0_6px_20px_-10px_rgba(0,0,0,0.4)]"
+                      className="h-9 w-9 rounded-full border border-line/60 shadow-[0_6px_20px_-10px_rgba(0,0,0,0.4)] sm:h-12 sm:w-12"
                       style={{ backgroundColor: c }}
                     />
                   ))}
                 </div>
+
               </div>
 
               <div className="mt-12 flex flex-wrap items-center gap-3">

@@ -301,24 +301,6 @@ function PUIntro() {
         </div>
       </section>
 
-      {/* Lifestyle strip */}
-      <section className="border-t border-line/60 bg-canvas px-5 py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">In context</div>
-              <h2 className="display-serifish mt-3 text-2xl md:text-4xl">Textures in place.</h2>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
-            {PU_LIFESTYLE.slice(0, 4).map((src, i) => (
-              <div key={i} className="aspect-[4/5] overflow-hidden rounded-xl">
-                <img src={src} alt="" className="h-full w-full object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Section heading before the grid */}
       <section className="border-t border-line/60 bg-canvas px-5 pt-16 md:px-10 md:pt-24">

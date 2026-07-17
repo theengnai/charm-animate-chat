@@ -263,6 +263,26 @@ const pnlSlatDetails: ProductDetails = {
   gallery: [imgB, imgA, imgD],
 };
 
+const puStoneDetails: ProductDetails = {
+  description:
+    "Lightweight polyurethane stone panels reproducing the texture and tonal depth of quarried stone — up to 75% lighter than natural stone and up to 3× faster to install. Advanced molding captures authentic grain; interlocking edges align without specialist masonry.",
+  useCases: [
+    "Feature walls, fireplaces and lobby columns",
+    "Boutique hotel and villa façades",
+    "Reception backdrops and hospitality interiors",
+  ],
+  specs: [
+    ["Material", "Polyurethane composite"],
+    ["Panel size", "1200 × 600 × 50 mm"],
+    ["Weight", "3.5 – 5.2 kg/m²"],
+    ["Fire rating", "Class B1 · ASTM E84 tested"],
+    ["Weather range", "−40 °C to 60 °C · UV stable"],
+    ["Installation", "Direct adhesive mount + interlocking edges"],
+    ["Certified values", "Issued against test certificate on request"],
+  ],
+  gallery: [imgC, imgE, imgD],
+};
+
 // -------- Full catalog (12 per family) --------
 
 export const PRODUCTS: Product[] = [

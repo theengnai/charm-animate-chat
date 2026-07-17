@@ -218,7 +218,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         aria-hidden
         className="pointer-events-none absolute left-6 top-1/2 z-[1] hidden -translate-y-1/2 origin-left -rotate-90 font-mono text-[0.55rem] uppercase tracking-[0.5em] text-ink-soft/45 md:block"
       >
-        ECOSMART AI · 2026 · ENGINEERED WITHIN
+        ECOSMART · 2026 · BUILD BETTER. BUILD SAUDI.
       </div>
 
       <div className="relative z-10 h-full w-full">{children}</div>

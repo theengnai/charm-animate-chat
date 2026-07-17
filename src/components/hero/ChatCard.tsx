@@ -57,7 +57,7 @@ const MATERIALS: {
   to: "/products" | "/products/$family";
   familyParam?: string;
 }[] = [
-    { label: "Mcm", sub: "Flexible stone", Icon: Waves, image: matMaterials, to: "/products" },
+    { label: "MCM", sub: "Flexible stone", Icon: Waves, image: matMaterials, to: "/products" },
     { label: "EPS", sub: "Insulation", Icon: Mountain, image: matVisualizer, to: "/products" },
     { label: "WPC Decking", sub: "Outdoor", Icon: TreePine, image: matDesign, to: "/products/$family", familyParam: "wpc" },
     { label: "PVC Wood Panels", sub: "panels", Icon: LayoutGrid, image: matTechnical, to: "/products/$family", familyParam: "panels" },

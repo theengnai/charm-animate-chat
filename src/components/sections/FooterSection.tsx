@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { Brain, Box, Users, FileText, Truck, ShieldCheck } from "lucide-react";
+import { Brain, Layers, Wrench, FileText, Factory, ShieldCheck } from "lucide-react";
 
 const SERVICES = [
-  { icon: Brain, label: "AI Material Advisor" },
-  { icon: Box, label: "Free Project Visualization" },
-  { icon: Users, label: "Professional Design Services" },
-  { icon: FileText, label: "Technical Documentation" },
-  { icon: Truck, label: "GCC Delivery & Logistics" },
-  { icon: ShieldCheck, label: "Quality Assurance & Warranty" },
+  { icon: Brain, label: "Ecosmart AI Product Assistant" },
+  { icon: Layers, label: "Construction Systems + Finishing" },
+  { icon: Wrench, label: "Technical & Project Support" },
+  { icon: FileText, label: "TDS + Installation Manuals" },
+  { icon: Factory, label: "Manufactured in Sudair, KSA" },
+  { icon: ShieldCheck, label: "Test Certificates on Request" },
 ];
 
 export function FooterSection({ active }: { active: boolean }) {
@@ -27,8 +27,8 @@ export function FooterSection({ active }: { active: boolean }) {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="eyebrow"
         >
-          A System,
-          <span className="text-copper"> Not Just A Material.</span>
+          Build Better.
+          <span className="text-copper"> Build Saudi.</span>
         </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -69,7 +69,7 @@ export function FooterSection({ active }: { active: boolean }) {
         className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 md:flex-row"
       >
         <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-ink-soft">
-          © 2026 ECOSMART Solutions
+          © 2026 EcoSmart · مصنع إنتيجرا بيلد للتصنيع · CR No. 1009200656
         </span>
         <div className="flex items-center gap-5 text-ink-soft">
           {["LinkedIn", "Instagram", "WhatsApp"].map((s) => (

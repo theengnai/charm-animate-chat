@@ -180,9 +180,9 @@ function FamilyPage() {
 
       <CTABand
         eyebrow="Not sure which fits?"
-        title="Order a curated eight-chip kit — free within the UAE."
+        title="Request a sample — we'll send it from Sudair."
         href="/samples"
-        cta="Request a kit"
+        cta="Request a sample"
       />
 
       <SiteFooter />

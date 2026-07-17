@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Clock } from "lucide-react";
 import { TopBar } from "@/components/nav/TopBar";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { CTABand } from "@/components/common/CTABand";
 import { StoryHero } from "@/components/common/StoryHero";
-import { StackingCards } from "@/components/motion/StackingCards";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealGroup } from "@/components/motion/RevealGroup";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -14,10 +13,10 @@ import hero from "@/assets/pages/hero-contact.jpg";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Ecosmart" },
-      { name: "description", content: "Talk to Ecosmart. Dubai, Riyadh and Doha showrooms. We reply within one business day." },
-      { property: "og:title", content: "Contact — Ecosmart" },
-      { property: "og:description", content: "Let's build something enduring." },
+      { title: "Contact — EcoSmart" },
+      { name: "description", content: "Talk to EcoSmart. Manufacturing in Sudair Industrial City, Riyadh, Saudi Arabia." },
+      { property: "og:title", content: "Contact — EcoSmart" },
+      { property: "og:description", content: "Sudair Industrial City, Riyadh — Saudi Arabia." },
       { property: "og:image", content: hero },
     ],
   }),
@@ -25,22 +24,16 @@ export const Route = createFileRoute("/contact")({
 });
 
 const CHANNELS = [
-  { Icon: MessageCircle, label: "WhatsApp", value: "+971 50 000 0000", href: "https://wa.me/971500000000" },
-  { Icon: Mail, label: "Email", value: "hello@ecosmart.ae", href: "mailto:hello@ecosmart.ae" },
-  { Icon: Phone, label: "Phone", value: "+971 4 000 0000", href: "tel:+97140000000" },
-];
-
-const SHOWROOMS = [
-  { n: "01", tag: "Headquarters", city: "Dubai", addr: "Al Quoz Industrial 3, Dubai, UAE", hours: "Sun–Thu · 9:00–18:00", phone: "+971 4 000 0000" },
-  { n: "02", tag: "Showroom", city: "Riyadh", addr: "Olaya District, Riyadh, KSA", hours: "Sun–Thu · 9:00–18:00", phone: "+966 11 000 0000" },
-  { n: "03", tag: "Showroom", city: "Doha", addr: "West Bay, Doha, Qatar", hours: "Sun–Thu · 9:00–18:00", phone: "+974 4 000 0000" },
+  { Icon: Mail, label: "Email", value: "hello@ecosmart.sa", href: "mailto:hello@ecosmart.sa" },
+  { Icon: MapPin, label: "Manufacturing", value: "Sudair Industrial City, Riyadh", href: "#location" },
+  { Icon: Clock, label: "Reply", value: "Within one business day", href: "mailto:hello@ecosmart.sa" },
 ];
 
 const FAQ = [
-  { q: "What are your lead times?", a: "Stock items ship in 3–5 business days. Made-to-order runs 4–8 weeks depending on scope." },
-  { q: "Is there a minimum order?", a: "No minimum. We supply anything from a single sample chip to a full-tower façade." },
-  { q: "Do you ship internationally?", a: "Yes, worldwide. UAE, KSA and Qatar via our own logistics; other regions via bonded partners." },
-  { q: "What warranty do you offer?", a: "Standard 10-year product warranty on all Ecosmart lines. Commercial project terms available." },
+  { q: "Where are your products manufactured?", a: "In Sudair Industrial City, Riyadh, Saudi Arabia — under our manufacturing entity مصنع إنتيجرا بيلد للتصنيع, CR No. 1009200656." },
+  { q: "Can you share technical values and certificates?", a: "Yes. Every product carries a Technical Data Sheet and an Installation Manual. Project-specific test certificates are issued on request against the certified figures." },
+  { q: "Do you deliver outside Saudi Arabia?", a: "Our primary market is Saudi Arabia. Delivery outside KSA is possible — send us the project and we'll respond." },
+  { q: "How do I request a sample?", a: "Use the request form on the Samples page, or write to hello@ecosmart.sa with your project details and the finishing product you'd like to see." },
 ];
 
 function ContactPage() {
@@ -53,14 +46,13 @@ function ContactPage() {
       <StoryHero
         eyebrow="Get in touch"
         title="Let's talk"
-        emphasis="surfaces."
-        subcopy="WhatsApp, email, phone, or a walk through one of three showrooms. We reply within one business day, every day."
+        emphasis="your project."
+        subcopy="Email, WhatsApp or write to us directly. Manufacturing in Sudair Industrial City, Riyadh. We reply within one business day."
         image={hero}
-        primary={{ label: "Message us on WhatsApp", to: "/contact" }}
-        secondary={{ label: "Visit a showroom", to: "/contact" }}
+        primary={{ label: "Email us", to: "/contact" }}
+        secondary={{ label: "Browse products", to: "/products" }}
       />
 
-      {/* Channels — Reveal stagger */}
       <section className="border-t border-line/60 px-5 py-24 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Reveal>
@@ -95,50 +87,46 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* StackingCards showrooms */}
-      <StackingCards
-        labelN="02"
-        labelText="Showrooms"
-        title="Three cities,"
-        titleEm="one team."
-        description="Every showroom holds the full material library and a specification team who can walk you through your project on the spot."
-        items={SHOWROOMS}
-        renderItem={(s) => (
-          <div className="flex flex-col justify-between w-full max-w-[22rem] md:max-w-md max-h-full mx-auto aspect-square rounded-2xl border border-line/60 bg-canvas p-6 md:p-12 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
-            <div className="flex items-start justify-between">
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-ink-soft mt-1">
-                {s.n}
-              </span>
-              <span className="grid h-12 w-12 md:h-14 md:w-14 place-items-center rounded-full border border-copper/30 bg-canvas text-copper">
-                <MapPin className="h-5 w-5 md:h-6 md:w-6" strokeWidth={1.5} />
-              </span>
+      {/* Location card */}
+      <section id="location" className="border-t border-line/60 bg-canvas-2/40 px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
+              Manufacturing
+            </div>
+            <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
+              Sudair Industrial City, Riyadh.
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-6 rounded-3xl border border-line/60 bg-canvas p-8 md:grid-cols-3 md:p-12">
+            <div>
+              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">Facility</div>
+              <div className="mt-2 text-base">مصنع إنتيجرا بيلد للتصنيع</div>
+              <div className="mt-1 text-sm text-ink-soft">Integra Build Manufacturing</div>
             </div>
             <div>
-              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-                {s.tag}
-              </div>
-              <h3 className="display-serifish mt-2 text-3xl leading-tight md:text-4xl lg:text-5xl">
-                {s.city}
-              </h3>
-              <div className="mt-4 space-y-1 text-sm text-ink-soft">
-                <div>{s.addr}</div>
-                <div>{s.hours}</div>
-                <div>{s.phone}</div>
-              </div>
+              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">Address</div>
+              <div className="mt-2 text-base">Sudair Industrial City</div>
+              <div className="mt-1 text-sm text-ink-soft">Riyadh, Saudi Arabia</div>
+            </div>
+            <div>
+              <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">Registration</div>
+              <div className="mt-2 text-base">CR No. 1009200656</div>
+              <div className="mt-1 text-sm text-ink-soft">ecosmart.sa</div>
             </div>
           </div>
-        )}
-      />
+        </div>
+      </section>
 
       {/* Form */}
-      <section className="border-t border-line/60 bg-canvas-2/40 px-5 py-24 md:px-10">
+      <section className="border-t border-line/60 px-5 py-24 md:px-10">
         <div className="mx-auto max-w-3xl">
           <Reveal>
             <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-              Or write to us
+              Write to us
             </div>
             <h2 className="display-serifish mt-3 text-3xl md:text-5xl">
-              Tell us what you're building.
+              Tell us about the project.
             </h2>
           </Reveal>
           <form
@@ -176,11 +164,10 @@ function ContactPage() {
                   className="mt-2 w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm outline-none focus:border-copper"
                 >
                   <option>Sample request</option>
-                  <option>Quote / pricing</option>
-                  <option>Project consultation</option>
-                  <option>Design services</option>
-                  <option>Visualizer early access</option>
-                  <option>Press</option>
+                  <option>Product enquiry</option>
+                  <option>Technical data sheet / certificate</option>
+                  <option>Project support</option>
+                  <option>Distributor / partnership</option>
                   <option>Careers</option>
                 </select>
               </label>
@@ -207,44 +194,11 @@ function ContactPage() {
                   We've got it
                 </div>
                 <div className="mt-2">
-                  Reference #ES-2607-{Math.floor(Math.random() * 9000 + 1000)} — we'll reply within one business day.
+                  Thanks — we'll reply within one business day.
                 </div>
               </div>
             ) : null}
           </form>
-        </div>
-      </section>
-
-      {/* Map */}
-      <section className="border-t border-line/60">
-        <iframe
-          title="Ecosmart Dubai HQ"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.9!2d55.226!3d25.126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2sAl+Quoz+Industrial+3!5e0!3m2!1sen!2sae!4v1700000000000"
-          className="h-[420px] w-full grayscale"
-          loading="lazy"
-        />
-      </section>
-
-      {/* NEW — Response times & office hours */}
-      <section className="border-t border-line/60 bg-ink px-5 py-20 text-canvas md:px-10">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
-          {[
-            { Icon: Clock, l: "First reply", v: "Within 1 business day" },
-            { Icon: Clock, l: "Office hours", v: "Sun–Thu · 9:00–18:00 GST" },
-            { Icon: Clock, l: "After hours", v: "WhatsApp is monitored until 22:00" },
-          ].map((s) => (
-            <div key={s.l} className="flex items-start gap-4">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-copper/20 text-copper-light">
-                <s.Icon className="h-4 w-4" />
-              </span>
-              <div>
-                <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-canvas/60">
-                  {s.l}
-                </div>
-                <div className="mt-1 text-base">{s.v}</div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -277,9 +231,9 @@ function ContactPage() {
 
       <CTABand
         eyebrow="Not ready to write?"
-        title="Order a sample kit and we'll be in touch when it ships."
+        title="Request a sample — we'll send it from Sudair."
         href="/samples"
-        cta="Request a kit"
+        cta="Request a sample"
       />
 
       <SiteFooter />

@@ -21,17 +21,17 @@ import detailFabric from "@/assets/about/detail-fabric.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — EcoSmart | Façade Systems & Architectural Materials" },
+      { title: "About — EcoSmart | Saudi Manufacturer of Construction & Finishing Products" },
       {
         name: "description",
         content:
-          "EcoSmart is a specialized provider of façade systems, architectural materials and design-driven surface solutions across Saudi Arabia and the GCC.",
+          "EcoSmart is a Saudi manufacturer of construction systems and decoration & finishing products, based in Sudair Industrial City, Riyadh — aligned to Vision 2030 and the Saudi Building Code.",
       },
       { property: "og:title", content: "About — EcoSmart" },
       {
         property: "og:description",
         content:
-          "Façade systems, architectural materials and design-driven surface solutions across Saudi Arabia and the GCC.",
+          "Saudi manufacturer of construction systems and finishing products — Sudair Industrial City, Riyadh.",
       },
       { property: "og:image", content: heroFacade },
     ],
@@ -40,38 +40,39 @@ export const Route = createFileRoute("/about")({
 });
 
 const EXPERTISE = [
-  { n: "01", Icon: LayoutGrid, title: "Façade Systems", body: "Comprehensive curtain wall, ventilated façade, and cladding solutions engineered for performance and aesthetic precision." },
-  { n: "02", Icon: Triangle, title: "Architectural Surfaces", body: "Premium surface materials — stone, composite panels, and engineered finishes — for exterior and interior architectural applications." },
-  { n: "03", Icon: Home, title: "Interior Finishes", body: "Curated interior materials including wall panels, feature surfaces, and decorative finishes that elevate every space." },
-  { n: "04", Icon: TreePine, title: "Outdoor Solutions", body: "Weather-resistant decking, pergola systems, and landscape materials designed for the demanding GCC climate." },
-  { n: "05", Icon: Contrast, title: "Technical Design Support", body: "End-to-end technical guidance — from material selection and specification to detailed shop drawings and installation oversight." },
+  { n: "01", Icon: LayoutGrid, title: "Lightweight Concrete Wall Panels", body: "Precast lightweight concrete panels with tongue-and-groove edges — internal partitions, external façade and fair-faced variants that replace blockwork with a faster, mortar-light dry assembly." },
+  { n: "02", Icon: Triangle, title: "Enhanced T-Floor Hourdi", body: "Precast T-beams with EPS T-shaped hourdi infill and an in-situ structural topping — lower self-weight than a solid slab, with integral thermal performance." },
+  { n: "03", Icon: Home, title: "Hybrid Precast Building System", body: "Precast columns, beams, stairs and fences combined with our wall panels and T-floor hourdi decks — a precast frame with built-in insulation and acoustic performance." },
+  { n: "04", Icon: TreePine, title: "Enhanced 3D Curved Modular", body: "Volumetric modular buildings — including curved-angle modules, a Saudi-distinctive capability that goes beyond the straight geometries of conventional modular." },
+  { n: "05", Icon: Contrast, title: "Decoration & Finishing", body: "PU stone tiles, flexible clay-stone tiles (100% Saudi-made — the only KSA manufacturer), WPC and SPC lines, PVC marble sheets and PVC panel systems for interiors and façades." },
 ];
 
 const APPROACH = [
-  { Icon: Layers, title: "Material Expertise", body: "Deep product knowledge across façade, surface, and finishing categories to guide you to the right solution." },
-  { Icon: Compass, title: "Design Guidance", body: "Collaborative support from concept to specification — helping architects and designers make confident material decisions." },
-  { Icon: Eye, title: "Visualization Support", body: "Digital tools and rendered previews that let you see exactly how materials will look in your project before commitment." },
-  { Icon: Wrench, title: "Technical Assistance", body: "Detailed specifications, shop drawings, and engineering support to ensure seamless integration and installation." },
-  { Icon: Truck, title: "Reliable Supply", body: "Established partnerships with leading global manufacturers, ensuring consistent quality and timely delivery across the GCC." },
+  { Icon: Layers, title: "Manufactured in Sudair", body: "Every product is manufactured at our facility in Sudair Industrial City, Riyadh — under our manufacturing entity مصنع إنتيجرا بيلد للتصنيع (Integra Build Manufacturing), CR No. 1009200656." },
+  { Icon: Compass, title: "SBC-aligned by design", body: "Structural design across our systems is engineered to the Saudi Building Code. Frame design and connections are project-engineered with your structural designer." },
+  { Icon: Eye, title: "Values against the certificate", body: "Technical values are issued against the relevant test certificate and confirmed for the specified application — they are shown as 'To be confirmed' rather than estimated." },
+  { Icon: Wrench, title: "Installation, documented", body: "Every product carries an Installation Manual — tools, storage, surface prep, procedure, jointing, quality checks, health & safety and maintenance." },
+  { Icon: Truck, title: "Tuned to KSA climate", body: "From the insulated wall system of our portable cabins to the humidity-resistant WPC door leaves — our products are made for the reality of Saudi conditions." },
 ];
 
 const SOLUTIONS = [
-  { n: "01", cat: "Exterior", title: "Façade & Cladding Systems", body: "Engineered panel systems and ventilated façades for high-performance building envelopes.", img: solArchitect },
-  { n: "02", cat: "Surfaces", title: "Architectural Surfaces", body: "Premium stone, composite, and mineral surfaces for contemporary architecture.", img: solFacade },
-  { n: "03", cat: "Finishes", title: "Interior & Outdoor Finishes", body: "Curated materials for interior feature walls, outdoor living, and landscape applications.", img: solInterior },
+  { n: "01", cat: "Construction Systems", title: "Structural & Envelope Systems", body: "Lightweight concrete wall panels, T-floor hourdi, hybrid precast frames, curved modular units, portable cabins and EPS insulated decorative façades.", img: solArchitect },
+  { n: "02", cat: "Decoration & Finishing", title: "Finishing Products", body: "Flexible clay-stone tiles, PU stone tiles, WPC and SPC lines, PVC marble sheets, PVC laminated foam board, PVC wood panels and WPC window & door frames.", img: solFacade },
+  { n: "03", cat: "Support", title: "Technical & Project Support", body: "System selection, certificate confirmation and installation method statements — tailored to the site and delivered from a single team.", img: solInterior },
 ];
 
 const STRIP = [solArchitect, detailFabric, solFacade, solInterior, solArchitect, detailFabric, solFacade, solInterior];
 
 const FOOTER_COLS = [
-  { h: "Solutions", items: ["Façade Systems", "Architectural Surfaces", "Interior Finishes", "Outdoor Solutions", "Custom Projects"] },
-  { h: "Company", items: ["About", "Our Vision", "Team", "Careers"] },
-  { h: "Support", items: ["Technical Specs", "Design Guidance", "Visualization", "Downloads"] },
-  { h: "Resources", items: ["Product Library", "Case Studies", "Journal", "Certifications"] },
+  { h: "Construction Systems", items: ["Lightweight Concrete Wall Panels", "T-Floor Hourdi", "Hybrid Precast", "Curved Modular", "Portable Cabins", "EPS Façades"] },
+  { h: "Decoration & Finishing", items: ["Flexible Clay-Stone", "PU Stone Tiles", "WPC", "SPC", "PVC Marble Sheets", "PVC Wood Panels"] },
+  { h: "Support", items: ["Technical Data Sheets", "Installation Manuals", "Test Certificates", "Project Support"] },
+  { h: "Company", items: ["About", "Contact", "Vision 2030 / IKTVA", "ecosmart.sa"] },
 ];
 
 const VISION_TEXT =
-  "To become the leading platform for architectural surface and façade solutions in Saudi Arabia and the GCC, connecting innovative materials, design expertise and modern customer experiences.";
+  "To lead Saudi manufacturing of construction systems and finishing products — combining SBC-engineered systems with 100% Saudi-made finishing lines that support Vision 2030 and IKTVA, and build better for Saudi.";
+
 
 function SectionLabel({ n, children, tone = "dark" }: { n: string; children: React.ReactNode; tone?: "dark" | "light" }) {
   const color = tone === "light" ? "text-canvas/70" : "text-ink-soft";
@@ -282,12 +283,12 @@ function AboutPage() {
           </div>
 
           <h1 className="display-serifish mt-8 text-5xl leading-[1.02] tracking-tight text-canvas md:text-6xl lg:text-7xl">
-            Façade systems.<br />
-            Architectural <em className="italic text-copper">materials.</em>
+            Build Better.<br />
+            Build <em className="italic text-copper">Saudi.</em>
           </h1>
 
           <p className="mt-8 max-w-xl text-sm leading-relaxed text-canvas/80 md:text-base">
-            EcoSmart is a specialized provider of façade systems, architectural materials and design-driven surface solutions. We help architects, developers, and designers choose, visualize, and implement better surfaces — from concept through installation.
+            EcoSmart is a Saudi manufacturer of construction systems and decoration & finishing products, based in Sudair Industrial City, Riyadh — aligned to Vision 2030, IKTVA and the Saudi Building Code.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -295,14 +296,14 @@ function AboutPage() {
               href="#expertise"
               className="group inline-flex items-center gap-2 rounded-full bg-canvas px-6 py-3 text-sm text-ink transition-transform hover:-translate-y-0.5"
             >
-              <span className="font-medium tracking-wide">Explore our expertise</span>
+              <span className="font-medium tracking-wide">Explore what we make</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="group inline-flex items-center gap-2 rounded-full border border-canvas/40 px-6 py-3 text-sm text-canvas transition-all hover:border-canvas"
             >
-              Order a sample
+              Request a sample
             </a>
           </div>
 
@@ -386,9 +387,9 @@ function AboutPage() {
 
           <div className="mt-16 grid grid-cols-1 gap-10 border-t border-line/60 pt-10 md:grid-cols-3 md:gap-16">
             {[
-              { k: "Focus", v: "Premium architectural materials and façade solutions — helping clients choose, visualize, and implement better surfaces." },
-              { k: "Market", v: "Saudi Arabia and the GCC — serving architects, developers, designers, and contractors across the region." },
-              { k: "Difference", v: "Bridging innovative materials with digital tools, design expertise, and a modern customer experience." },
+              { k: "Focus", v: "Manufacturing construction systems and decoration & finishing products for the Saudi market — engineered to the Saudi Building Code." },
+              { k: "Market", v: "Saudi Arabia — from Sudair Industrial City in Riyadh, serving developers, contractors, architects and site operators nationwide." },
+              { k: "Difference", v: "A hybrid frame + panels + hourdi floor system in one package; the only manufacturer of flexible clay-stone tiles in KSA; curved modular capability; 100% Saudi-sourced raw materials on our flexible tile line." },
             ].map((b) => (
               <div key={b.k}>
                 <span className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-ink-soft">{b.k}</span>
@@ -426,25 +427,25 @@ function AboutPage() {
             <div>
               <h2 className="display-serifish text-5xl leading-[1.02] md:text-6xl lg:text-7xl">
                 Let's build<br />
-                <em className="italic text-copper">together.</em>
+                <em className="italic text-copper">Saudi.</em>
               </h2>
               <p className="mt-8 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">
-                Bring a project, a specification, or a question. We're here to help you find the right materials and bring your vision to life.
+                Bring a project or a specification question. We'll help match the right EcoSmart system and issue the certified values you need.
               </p>
 
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <a
-                  href="mailto:hello@ecosmart.ae"
+                  href="mailto:hello@ecosmart.sa"
                   className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm text-canvas transition-transform hover:-translate-y-0.5"
                 >
-                  <span className="font-medium tracking-wide">Request samples</span>
+                  <span className="font-medium tracking-wide">Request a sample</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
                 </a>
                 <a
-                  href="mailto:hello@ecosmart.ae"
+                  href="mailto:hello@ecosmart.sa"
                   className="group inline-flex items-center gap-2 rounded-full border border-ink/20 px-6 py-3 text-sm text-ink transition-all hover:border-ink/40"
                 >
-                  Get a quote
+                  Talk to our team
                 </a>
               </div>
             </div>
@@ -458,10 +459,14 @@ function AboutPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_3fr] lg:gap-16">
             <div>
               <img src={logoUrl} alt="Ecosmart" className="h-10 w-auto md:h-12" />
-              <div className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-copper/80">Engineered Within</div>
+              <div className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-copper/80">Build Better. Build Saudi.</div>
               <p className="mt-8 max-w-xs text-sm leading-relaxed text-[#d9d4cb]/70">
-                Façade systems. Architectural materials. Design-driven solutions.
+                Saudi manufacturer of construction systems and decoration & finishing products. Sudair Industrial City, Riyadh.
               </p>
+              <div className="mt-6 space-y-1 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-[#d9d4cb]/50">
+                <div>مصنع إنتيجرا بيلد للتصنيع</div>
+                <div>CR No. 1009200656 · ecosmart.sa</div>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -480,17 +485,17 @@ function AboutPage() {
 
           <div className="mt-16 border-t border-white/10 pt-8">
             <div className="mb-8">
-              <div className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-copper/80">Audiences</div>
+              <div className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-copper/80">Serving</div>
               <ul className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 text-sm text-[#d9d4cb]/80 md:grid-cols-4 md:max-w-2xl">
-                <li>Architects</li>
                 <li>Developers</li>
-                <li>Designers</li>
                 <li>Contractors</li>
+                <li>Architects</li>
+                <li>Site operators</li>
               </ul>
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-[#d9d4cb]/60">
-              <span>© 2026 ECOSMART. All rights reserved.</span>
+              <span>© 2026 EcoSmart · مصنع إنتيجرا بيلد للتصنيع. All rights reserved.</span>
               <div className="flex items-center gap-6">
                 <a href="#" className="hover:text-white">Instagram</a>
                 <a href="#" className="hover:text-white">LinkedIn</a>

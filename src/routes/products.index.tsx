@@ -74,17 +74,20 @@ const SECTIONS: Section[] = [
       },
       {
         id: "pu-stone",
-        tag: "Interior + Exterior · Walls",
-        title: "PU Stone Decorative Tiles",
-        body: "Lightweight polyurethane tiles that reproduce the appearance and texture of natural stone — far faster to install than real stone cladding. Adhesive-fixed, easy to cut and shape.",
+        tag: "Interior + Exterior · Walls & Façades",
+        title: "PU Stone Cladding",
+        body: "Lightweight polyurethane stone panels that reproduce the texture and tonal variation of quarried stone — up to 75% lighter than natural stone and up to 3× faster to install. Advanced molding captures authentic grain and depth, while the intuitive interlocking system means no specialised masonry skills are required. Suited to feature walls, fireplaces, façades and hospitality interiors.",
         specs: [
-          ["Reference", "EN 13501-1 / ASTM E84"],
-          ["Density", "ISO 845"],
-          ["Water absorption", "ISO 62"],
-          ["UV / weathering", "ASTM G154"],
+          ["Material", "Polyurethane composite"],
+          ["Panel size", "1200 × 600 × 50 mm"],
+          ["Weight", "3.5 – 5.2 kg/m²"],
+          ["Fire rating", "Class B1 (ASTM E84 tested)"],
+          ["Weather range", "−40 °C to 60 °C · UV stable"],
+          ["Installation", "Direct adhesive mount"],
         ],
         image: imgC,
       },
+
       {
         id: "wpc",
         tag: "Exterior · Ground plane",

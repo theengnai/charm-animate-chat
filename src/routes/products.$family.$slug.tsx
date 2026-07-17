@@ -216,7 +216,17 @@ function ProductPage() {
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <BlurFocus className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-              <img src={product.cover} alt={product.name} className="h-full w-full object-cover" />
+              {product.cover ? (
+                <img src={product.cover} alt={product.name} className="h-full w-full object-cover" />
+              ) : (
+                <div
+                  className="flex h-full w-full flex-col justify-between p-8"
+                  style={{ background: `linear-gradient(135deg, ${product.colors[0] ?? "#c9b39a"} 0%, ${product.colors[1] ?? product.colors[0] ?? "#8a7a68"} 100%)` }}
+                >
+                  <span className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-canvas/85">{product.code}</span>
+                  <span className="display-serifish text-5xl leading-[1.05] text-canvas drop-shadow-sm">{product.name}</span>
+                </div>
+              )}
               {product.details ? (
                 <span className="absolute left-4 top-4 rounded-full bg-copper/95 px-3 py-1 font-mono text-[0.58rem] uppercase tracking-[0.24em] text-canvas">
                   Featured product

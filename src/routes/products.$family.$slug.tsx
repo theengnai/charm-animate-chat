@@ -148,7 +148,7 @@ export const Route = createFileRoute("/products/$family/$slug")({
         { name: "description", content: `${product.poem} ${product.code} · ${product.finish} finish · fire class ${product.fireRating}.` },
         { property: "og:title", content: title },
         { property: "og:description", content: product.poem },
-        { property: "og:image", content: product.cover },
+        { property: "og:image", content: product.cover || family.cover },
       ],
     };
   },

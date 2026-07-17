@@ -23,11 +23,92 @@ const FAMILY_SLUGS: Record<string, Product["family"]> = {
   panels: "Panels",
 };
 
+type RelatedProject = {
+  tag: string;
+  title: string;
+  body: string;
+  img: string;
+};
+
+const RELATED_PROJECTS: Record<Product["family"], RelatedProject[]> = {
+  MCM: [
+    {
+      tag: "Finishing · Interior + Exterior",
+      title: "Flexible Clay-Stone Wraps",
+      body: "Continuous wraps of columns, curves and corners with our flexible clay-stone tile — 100% Saudi-made.",
+      img: projectImg1,
+    },
+    {
+      tag: "Finishing · Façade",
+      title: "Decorative Façade Cladding",
+      body: "Lightweight stone-look finishes over insulated substrates, combining aesthetics with thermal performance.",
+      img: projectImg5,
+    },
+  ],
+  WPC: [
+    {
+      tag: "Finishing · Exterior",
+      title: "WPC Decking & Cladding",
+      body: "Weather-resistant wood-plastic composite decking and wall cladding for villas, poolsides and commercial terraces.",
+      img: projectImg6,
+    },
+    {
+      tag: "Finishing · Interior",
+      title: "WPC Door & Wall Interiors",
+      body: "Humidity-stable door leaves, frames and wall panels in bathrooms, kitchens and high-traffic corridors.",
+      img: projectImg3,
+    },
+  ],
+  SPC: [
+    {
+      tag: "Finishing · Interior",
+      title: "SPC Flooring Fit-Outs",
+      body: "Stone-polymer click flooring in residential and commercial spaces where water resistance and durability matter.",
+      img: projectImg3,
+    },
+    {
+      tag: "Finishing · Hospitality",
+      title: "High-Traffic Surface Solutions",
+      body: "Silent, waterproof flooring for retail, hospitality and office fit-outs across Saudi Arabia.",
+      img: projectImg2,
+    },
+  ],
+  Aluminium: [
+    {
+      tag: "Finishing · Façade",
+      title: "Sun-Controlled Louvers",
+      body: "Aluminium louvers cut solar gain while maintaining airflow and views across building envelopes.",
+      img: projectImg5,
+    },
+    {
+      tag: "Construction Systems · Modular",
+      title: "Curved Modular Buildings",
+      body: "Architectural modular envelopes where metalwork and precision detailing complete the form.",
+      img: projectImg4,
+    },
+  ],
+  Panels: [
+    {
+      tag: "Construction Systems · Façade",
+      title: "EPS Insulated Decorative Façades",
+      body: "Shaped EPS cornices, bands and decorative profiles bonded to the substrate and finished with reinforced render.",
+      img: projectImg5,
+    },
+    {
+      tag: "Construction Systems · Residential",
+      title: "Hybrid Precast Residential",
+      body: "Precast columns, beams and stairs framed with lightweight concrete wall panels and T-floor hourdi decks.",
+      img: projectImg2,
+    },
+  ],
+};
+
 type LoaderData = {
   product: Product;
   family: typeof FAMILIES[number];
   related: Product[];
   familySlug: string;
+  projects: RelatedProject[];
 };
 
 export const Route = createFileRoute("/products/$family/$slug")({

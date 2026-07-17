@@ -119,7 +119,8 @@ export const Route = createFileRoute("/products/$family/$slug")({
     if (!product || product.family !== familyKey) throw notFound();
     const family = FAMILIES.find((f) => f.key === familyKey)!;
     const related = productsByFamily(familyKey).filter((p) => p.slug !== product.slug).slice(0, 3);
-    return { product, family, related, familySlug: params.family.toLowerCase() };
+    const projects = RELATED_PROJECTS[familyKey];
+    return { product, family, related, familySlug: params.family.toLowerCase(), projects };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {

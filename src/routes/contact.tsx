@@ -30,7 +30,7 @@ const CHANNELS = [
 ];
 
 const FAQ = [
-  { q: "Where are your products manufactured?", a: "In Saudi Arabia — designed, produced and delivered by EcoSmart (CR No. 1009200656)." },
+  { q: "Where is EcoSmart based?", a: "In Saudi Arabia — designed, produced and delivered by EcoSmart (CR No. 1009200656)." },
   { q: "Can you share technical values and certificates?", a: "Yes. Every product carries a Technical Data Sheet and an Installation Manual. Project-specific test certificates are issued on request against the certified figures." },
   { q: "Do you deliver outside Saudi Arabia?", a: "Our primary market is Saudi Arabia. Delivery outside KSA is possible — send us the project and we'll respond." },
   { q: "How do I request a sample?", a: "Use the request form on the Samples page, or write to hello@ecosmart.sa with your project details and the finishing product you'd like to see." },

@@ -85,7 +85,7 @@ export function PartnerSection({ active }: { active: boolean }) {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="mt-4 max-w-md text-[0.8rem] leading-relaxed text-ink-soft md:mt-6 md:text-[0.95rem] [@media(max-height:850px)]:hidden"
         >
-          Join EcoSmart's growing network of developers, contractors, distributors and design partners across Saudi Arabia — for our construction systems and finishing product lines manufactured in Sudair.
+          Join EcoSmart's growing network of developers, contractors, distributors and design partners across Saudi Arabia — for our construction systems and finishing product lines delivered by EcoSmart.
         </motion.p>
 
         <motion.ul
@@ -112,7 +112,7 @@ export function PartnerSection({ active }: { active: boolean }) {
             <span className="grid h-9 w-9 place-items-center rounded-full border border-copper/30 bg-copper-light/10 text-copper">
               <MapPin className="h-4 w-4" strokeWidth={1.6} />
             </span>
-            <span className="text-ink-soft">Sudair Industrial City · Riyadh, KSA</span>
+            <span className="text-ink-soft">Riyadh, Saudi Arabia</span>
           </li>
         </motion.ul>
       </div>

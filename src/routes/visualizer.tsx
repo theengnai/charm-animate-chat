@@ -69,7 +69,7 @@ function VisualizerPage() {
 
       <CTABand
         eyebrow="In the meantime"
-        title="Order a sample — we'll send it from Sudair."
+        title="Order a sample — we'll send it to you."
         href="/samples"
         cta="Request a sample"
       />

@@ -38,11 +38,11 @@ export function SiteFooter() {
         <div>
           <img src={logo} alt="EcoSmart" className="h-9 w-auto brightness-0 invert" />
           <p className="mt-6 max-w-sm text-sm text-canvas/70">
-            Saudi manufacturer of construction systems and decoration &amp; finishing products. Build Better. Build Saudi.
+            Saudi company delivering construction systems and decoration &amp; finishing products. Build Better. Build Saudi.
           </p>
           <div className="mt-8 space-y-1 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-canvas/50">
-            <div>مصنع إنتيجرا بيلد للتصنيع</div>
-            <div>Sudair Industrial City · Riyadh, KSA</div>
+            <div>شركة إيكوسمارت</div>
+            <div>Riyadh, Saudi Arabia</div>
             <div>hello@ecosmart.sa · ecosmart.sa</div>
             <div>CR No. 1009200656</div>
           </div>
@@ -70,7 +70,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-canvas/10">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-6 py-6 text-xs text-canvas/50 md:flex-row md:items-center md:px-10">
-          <div>© {new Date().getFullYear()} EcoSmart · مصنع إنتيجرا بيلد للتصنيع. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} EcoSmart · شركة إيكوسمارت. All rights reserved.</div>
           <div className="flex gap-6">
             <a href="#" className="hover:text-canvas">Instagram</a>
             <a href="#" className="hover:text-canvas">LinkedIn</a>

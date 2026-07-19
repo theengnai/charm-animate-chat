@@ -130,7 +130,7 @@ const COVERS = [imgA, imgB, imgC, imgD, imgE, imgF];
 
 const wpcOakDetails: ProductDetails = {
   description:
-    "A wood-plastic composite (WPC) decking board — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the factory installation values.",
+    "A wood-plastic composite (WPC) decking board — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the product installation values.",
   useCases: [
     "Rooftop terraces and pool surrounds",
     "Villa gardens and shaded balconies",
@@ -139,7 +139,7 @@ const wpcOakDetails: ProductDetails = {
   specs: [
     ["Reference standard family", "EN 15534"],
     ["Reaction to fire", "EN 13501-1 · certificate on request"],
-    ["Board dimensions", "Manufacturer spec · TBC"],
+    ["Board dimensions", "Product spec · TBC"],
     ["Installation", "Concealed clip on joist substructure"],
     ["Maintenance", "Sweep / rinse periodically"],
     ["Certified values", "Issued against test certificate on request"],
@@ -196,7 +196,7 @@ const spcTerraDetails: ProductDetails = {
   specs: [
     ["Reaction to fire", "EN 13501-1 · certificate on request"],
     ["Locking system", "Click / floating floor"],
-    ["Expansion gap", "Per factory installation guidance"],
+    ["Expansion gap", "Per product installation guidance"],
     ["Maintenance", "Damp mop; avoid abrasives"],
     ["Certified values", "Issued against test certificate on request"],
   ],

@@ -200,7 +200,7 @@ function FamilyPage() {
 
       <CTABand
         eyebrow="Not sure which fits?"
-        title="Request a sample — we'll send it from Sudair."
+        title="Request a sample — we'll send it to you."
         href="/samples"
         cta="Request a sample"
       />

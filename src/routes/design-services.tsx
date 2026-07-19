@@ -35,7 +35,7 @@ const PROCESS = [
   { t: "Match", d: "We match the right systems and finishing products." },
   { t: "Confirm", d: "We issue the certified values you need." },
   { t: "Method", d: "We share the Installation Manual and tailor it to the site." },
-  { t: "Manufacture", d: "Panels, floors and finishing products manufactured in Sudair." },
+  { t: "Deliver", d: "Panels, floors and finishing products delivered by EcoSmart." },
   { t: "Deliver", d: "Delivered in the sequence the crane and crew need." },
   { t: "Support", d: "We stay reachable through erection and finishing." },
 ];

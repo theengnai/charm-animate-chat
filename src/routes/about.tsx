@@ -21,17 +21,17 @@ import detailFabric from "@/assets/about/detail-fabric.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — EcoSmart | Saudi Manufacturer of Construction & Finishing Products" },
+      { title: "About — EcoSmart | Saudi Company for Construction & Finishing Products" },
       {
         name: "description",
         content:
-          "EcoSmart is a Saudi manufacturer of construction systems and decoration & finishing products, based in Sudair Industrial City, Riyadh — aligned to Vision 2030 and the Saudi Building Code.",
+          "EcoSmart is a Saudi company delivering construction systems and decoration & finishing products, based in Riyadh, Saudi Arabia — aligned to Vision 2030 and the Saudi Building Code.",
       },
       { property: "og:title", content: "About — EcoSmart" },
       {
         property: "og:description",
         content:
-          "Saudi manufacturer of construction systems and finishing products — Sudair Industrial City, Riyadh.",
+          "Saudi company delivering construction systems and finishing products — Riyadh, Saudi Arabia.",
       },
       { property: "og:image", content: heroFacade },
     ],
@@ -44,11 +44,11 @@ const EXPERTISE = [
   { n: "02", Icon: Triangle, title: "Enhanced T-Floor Hourdi", body: "Precast T-beams with EPS T-shaped hourdi infill and an in-situ structural topping — lower self-weight than a solid slab, with integral thermal performance." },
   { n: "03", Icon: Home, title: "Hybrid Precast Building System", body: "Precast columns, beams, stairs and fences combined with our wall panels and T-floor hourdi decks — a precast frame with built-in insulation and acoustic performance." },
   { n: "04", Icon: TreePine, title: "Enhanced 3D Curved Modular", body: "Volumetric modular buildings — including curved-angle modules, a Saudi-distinctive capability that goes beyond the straight geometries of conventional modular." },
-  { n: "05", Icon: Contrast, title: "Decoration & Finishing", body: "PU stone tiles, flexible clay-stone tiles (100% Saudi-made — the only KSA manufacturer), WPC and SPC lines, PVC marble sheets and PVC panel systems for interiors and façades." },
+  { n: "05", Icon: Contrast, title: "Decoration & Finishing", body: "PU stone tiles, flexible clay-stone tiles (100% Saudi — an EcoSmart exclusive in KSA), WPC and SPC lines, PVC marble sheets and PVC panel systems for interiors and façades." },
 ];
 
 const APPROACH = [
-  { Icon: Layers, title: "Manufactured in Sudair", body: "Every product is manufactured at our facility in Sudair Industrial City, Riyadh — under our manufacturing entity مصنع إنتيجرا بيلد للتصنيع (Integra Build Manufacturing), CR No. 1009200656." },
+  { Icon: Layers, title: "Delivered by EcoSmart", body: "Every product is developed and delivered by EcoSmart — a Saudi company (CR No. 1009200656) serving projects nationwide." },
   { Icon: Compass, title: "SBC-aligned by design", body: "Structural design across our systems is engineered to the Saudi Building Code. Frame design and connections are project-engineered with your structural designer." },
   { Icon: Eye, title: "Values against the certificate", body: "Technical values are issued against the relevant test certificate and confirmed for the specified application — they are shown as 'To be confirmed' rather than estimated." },
   { Icon: Wrench, title: "Installation, documented", body: "Every product carries an Installation Manual — tools, storage, surface prep, procedure, jointing, quality checks, health & safety and maintenance." },
@@ -71,7 +71,7 @@ const FOOTER_COLS = [
 ];
 
 const VISION_TEXT =
-  "To lead Saudi manufacturing of construction systems and finishing products — combining SBC-engineered systems with 100% Saudi-made finishing lines that support Vision 2030 and IKTVA, and build better for Saudi.";
+  "To lead Saudi delivery of construction systems and finishing products — combining SBC-engineered systems with 100% Saudi-made finishing lines that support Vision 2030 and IKTVA, and build better for Saudi.";
 
 
 function SectionLabel({ n, children, tone = "dark" }: { n: string; children: React.ReactNode; tone?: "dark" | "light" }) {
@@ -288,7 +288,7 @@ function AboutPage() {
           </h1>
 
           <p className="mt-8 max-w-xl text-sm leading-relaxed text-canvas/80 md:text-base">
-            EcoSmart is a Saudi manufacturer of construction systems and decoration & finishing products, based in Sudair Industrial City, Riyadh — aligned to Vision 2030, IKTVA and the Saudi Building Code.
+            EcoSmart is a Saudi company delivering construction systems and decoration & finishing products, based in Riyadh, Saudi Arabia — aligned to Vision 2030, IKTVA and the Saudi Building Code.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -387,9 +387,9 @@ function AboutPage() {
 
           <div className="mt-16 grid grid-cols-1 gap-10 border-t border-line/60 pt-10 md:grid-cols-3 md:gap-16">
             {[
-              { k: "Focus", v: "Manufacturing construction systems and decoration & finishing products for the Saudi market — engineered to the Saudi Building Code." },
-              { k: "Market", v: "Saudi Arabia — from Sudair Industrial City in Riyadh, serving developers, contractors, architects and site operators nationwide." },
-              { k: "Difference", v: "A hybrid frame + panels + hourdi floor system in one package; the only manufacturer of flexible clay-stone tiles in KSA; curved modular capability; 100% Saudi-sourced raw materials on our flexible tile line." },
+              { k: "Focus", v: "Delivering construction systems and decoration & finishing products for the Saudi market — engineered to the Saudi Building Code." },
+              { k: "Market", v: "Saudi Arabia — from Riyadh in Riyadh, serving developers, contractors, architects and site operators nationwide." },
+              { k: "Difference", v: "A hybrid frame + panels + hourdi floor system in one package; the exclusive KSA source for flexible clay-stone tiles; curved modular capability; 100% Saudi-sourced raw materials on our flexible tile line." },
             ].map((b) => (
               <div key={b.k}>
                 <span className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-ink-soft">{b.k}</span>
@@ -461,10 +461,10 @@ function AboutPage() {
               <img src={logoUrl} alt="Ecosmart" className="h-10 w-auto md:h-12" />
               <div className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-copper/80">Build Better. Build Saudi.</div>
               <p className="mt-8 max-w-xs text-sm leading-relaxed text-[#d9d4cb]/70">
-                Saudi manufacturer of construction systems and decoration & finishing products. Sudair Industrial City, Riyadh.
+                Saudi company delivering construction systems and decoration & finishing products. Riyadh, Saudi Arabia.
               </p>
               <div className="mt-6 space-y-1 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-[#d9d4cb]/50">
-                <div>مصنع إنتيجرا بيلد للتصنيع</div>
+                <div>شركة إيكوسمارت</div>
                 <div>CR No. 1009200656 · ecosmart.sa</div>
               </div>
             </div>
@@ -495,7 +495,7 @@ function AboutPage() {
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6 font-mono text-[0.6rem] uppercase tracking-[0.28em] text-[#d9d4cb]/60">
-              <span>© 2026 EcoSmart · مصنع إنتيجرا بيلد للتصنيع. All rights reserved.</span>
+              <span>© 2026 EcoSmart · شركة إيكوسمارت. All rights reserved.</span>
               <div className="flex items-center gap-6">
                 <a href="#" className="hover:text-white">Instagram</a>
                 <a href="#" className="hover:text-white">LinkedIn</a>

@@ -62,8 +62,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Drop materials onto your plan or render and watch surfaces resolve at the right scale, joint, and tone — no plug-ins, no waiting.",
     bullets: ["Real-time preview", "No plug-ins", "Any plan or render"],
     image: imgVisualizer,
-    primaryCta: { label: "Try the visualizer" },
-    secondaryCta: { label: "Watch a demo" },
+    primaryCta: { label: "Try the visualizer", href: "/visualizer" },
+    secondaryCta: { label: "Watch a demo", href: "/visualizer" },
   },
   2: {
     index: 3, total: TOTAL,
@@ -74,8 +74,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "A living library of architectural materials — sourced, vetted, and ready to specify. Filter by finish, format, performance, or feeling.",
     bullets: ["Sourced & vetted", "Ready to specify", "Filter by finish or format"],
     image: imgMaterials,
-    primaryCta: { label: "Explore the library" },
-    secondaryCta: { label: "Talk to a specialist" },
+    primaryCta: { label: "Explore the library", href: "/products" },
+    secondaryCta: { label: "Talk to a specialist", href: "/contact" },
   },
   3: {
     index: 4, total: TOTAL,
@@ -86,8 +86,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Browse built work using the same materials and systems — façades, interiors, and details documented for reference and reuse.",
     bullets: ["Façades & interiors", "Documented details", "For reference and reuse"],
     image: imgGallery,
-    primaryCta: { label: "Browse projects" },
-    secondaryCta: { label: "Submit your project" },
+    primaryCta: { label: "Browse projects", href: "/projects" },
+    secondaryCta: { label: "Submit your project", href: "/contact" },
   },
   4: {
     index: 5, total: TOTAL,
@@ -98,8 +98,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Order curated sample boxes shipped across the GCC. Every sample arrives with its specification card and finish reference.",
     bullets: ["Shipped across the GCC", "Specification card included", "Finish reference on every chip"],
     image: imgSamples,
-    primaryCta: { label: "Request samples" },
-    secondaryCta: { label: "View sample kits" },
+    primaryCta: { label: "Request samples", href: "/samples" },
+    secondaryCta: { label: "View sample kits", href: "/samples" },
   },
   5: {
     index: 6, total: TOTAL,
@@ -110,8 +110,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Our team pairs your concept with the right material palette, climate response, and detailing — so every line you draw is already buildable.",
     bullets: ["Material palette", "Climate response", "Buildable detailing"],
     image: imgDesign,
-    primaryCta: { label: "Start a design brief" },
-    secondaryCta: { label: "See design services" },
+    primaryCta: { label: "Start a design brief", href: "/design-services" },
+    secondaryCta: { label: "See design services", href: "/design-services" },
   },
   6: {
     index: 7, total: TOTAL,
@@ -122,8 +122,8 @@ const SECTIONS: Record<number, SectionMeta> = {
       "Every product carries its full technical record — CAD blocks, BIM, test data and environmental declarations — ready to drop into your set.",
     bullets: ["CAD & BIM", "Test data", "Environmental declarations"],
     image: imgTechnical,
-    primaryCta: { label: "Download spec pack" },
-    secondaryCta: { label: "Open BIM library" },
+    primaryCta: { label: "Download spec pack", href: "/resources" },
+    secondaryCta: { label: "Open BIM library", href: "/resources" },
   },
 };
 

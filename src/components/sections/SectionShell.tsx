@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 export interface SectionCta {
   label: string;
   onClick?: () => void;
+  href?: string;
 }
 
 export interface SectionMeta {
@@ -92,35 +94,53 @@ export function SectionShell({
                 transition={{ duration: 0.7, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
                 className="mt-8 flex flex-nowrap items-center gap-2 md:gap-3"
               >
-                {meta.primaryCta && (
-                  <motion.button
-                    type="button"
-                    onClick={meta.primaryCta.onClick}
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="group inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-xs text-canvas md:px-6 md:py-3 md:text-sm"
-                    style={{
-                      background:
-                        "linear-gradient(135deg,#d89060 0%,#b4592c 100%)",
-                      boxShadow: "0 14px 30px -10px rgba(180,89,44,0.5)",
-                    }}
-                  >
-                    <span className="font-medium tracking-wide">{meta.primaryCta.label}</span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2} />
-                  </motion.button>
-                )}
-                {meta.secondaryCta && (
-                  <button
-                    type="button"
-                    onClick={meta.secondaryCta.onClick}
-                    className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-4 py-2.5 text-xs text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04] md:px-6 md:py-3 md:text-sm"
-                  >
+                {meta.primaryCta && (() => {
+                  const primaryClass = "group inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-xs text-canvas md:px-6 md:py-3 md:text-sm";
+                  const primaryStyle = {
+                    background: "linear-gradient(135deg,#d89060 0%,#b4592c 100%)",
+                    boxShadow: "0 14px 30px -10px rgba(180,89,44,0.5)",
+                  } as const;
+                  const inner = (
+                    <>
+                      <span className="font-medium tracking-wide">{meta.primaryCta.label}</span>
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2} />
+                    </>
+                  );
+                  return meta.primaryCta.href ? (
+                    <Link to={meta.primaryCta.href} className={primaryClass} style={primaryStyle}>
+                      {inner}
+                    </Link>
+                  ) : (
+                    <motion.button
+                      type="button"
+                      onClick={meta.primaryCta.onClick}
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className={primaryClass}
+                      style={primaryStyle}
+                    >
+                      {inner}
+                    </motion.button>
+                  );
+                })()}
+                {meta.secondaryCta && (() => {
+                  const secondaryClass = "group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink/20 bg-canvas/40 px-4 py-2.5 text-xs text-ink transition-all hover:border-ink/40 hover:bg-ink/[0.04] md:px-6 md:py-3 md:text-sm";
+                  const inner = (
                     <span className="relative">
                       {meta.secondaryCta.label}
                       <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-copper transition-all duration-300 group-hover:w-full" />
                     </span>
-                  </button>
-                )}
+                  );
+                  return meta.secondaryCta.href ? (
+                    <Link to={meta.secondaryCta.href} className={secondaryClass}>
+                      {inner}
+                    </Link>
+                  ) : (
+                    <button type="button" onClick={meta.secondaryCta.onClick} className={secondaryClass}>
+                      {inner}
+                    </button>
+                  );
+                })()}
               </motion.div>
             )}
           </div>

@@ -250,7 +250,7 @@ function ProductsPage() {
         eyebrow="Products library"
         title="Construction systems and"
         emphasis="finishing products."
-        subcopy="Manufactured in Riyadh, Saudi Arabia — two ranges built for the Saudi market."
+        subcopy="Based in Riyadh, Saudi Arabia — two ranges built for the Saudi market."
         image={hero}
         primary={{ label: "Talk to our team", to: "/contact" }}
         secondary={{ label: "Request a sample", to: "/samples" }}

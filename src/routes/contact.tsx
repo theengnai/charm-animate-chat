@@ -25,12 +25,12 @@ export const Route = createFileRoute("/contact")({
 
 const CHANNELS = [
   { Icon: Mail, label: "Email", value: "hello@ecosmart.sa", href: "mailto:hello@ecosmart.sa" },
-  { Icon: MapPin, label: "Manufacturing", value: "Riyadh, Saudi Arabia", href: "#location" },
+  { Icon: MapPin, label: "Location", value: "Riyadh, Saudi Arabia", href: "#location" },
   { Icon: Clock, label: "Reply", value: "Within one business day", href: "mailto:hello@ecosmart.sa" },
 ];
 
 const FAQ = [
-  { q: "Where are your products manufactured?", a: "In Riyadh, Saudi Arabia, Saudi Arabia — under our manufacturing entity شركة إيكوسمارت, CR No. 1009200656." },
+  { q: "Where are your products manufactured?", a: "In Saudi Arabia — designed, produced and delivered by EcoSmart (CR No. 1009200656)." },
   { q: "Can you share technical values and certificates?", a: "Yes. Every product carries a Technical Data Sheet and an Installation Manual. Project-specific test certificates are issued on request against the certified figures." },
   { q: "Do you deliver outside Saudi Arabia?", a: "Our primary market is Saudi Arabia. Delivery outside KSA is possible — send us the project and we'll respond." },
   { q: "How do I request a sample?", a: "Use the request form on the Samples page, or write to hello@ecosmart.sa with your project details and the finishing product you'd like to see." },
@@ -47,7 +47,7 @@ function ContactPage() {
         eyebrow="Get in touch"
         title="Let's talk"
         emphasis="your project."
-        subcopy="Email, WhatsApp or write to us directly. Manufacturing in Riyadh, Saudi Arabia. We reply within one business day."
+        subcopy="Email, WhatsApp or write to us directly. Based in Riyadh, Saudi Arabia. We reply within one business day."
         image={hero}
         primary={{ label: "Email us", to: "/contact" }}
         secondary={{ label: "Browse products", to: "/products" }}

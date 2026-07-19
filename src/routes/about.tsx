@@ -48,7 +48,7 @@ const EXPERTISE = [
 ];
 
 const APPROACH = [
-  { Icon: Layers, title: "Delivered by EcoSmart", body: "Every product is manufactured at our facility in Riyadh, Saudi Arabia — under our manufacturing entity شركة إيكوسمارت (EcoSmart), CR No. 1009200656." },
+  { Icon: Layers, title: "Delivered by EcoSmart", body: "Every product is developed and delivered by EcoSmart — a Saudi company (CR No. 1009200656) serving projects nationwide." },
   { Icon: Compass, title: "SBC-aligned by design", body: "Structural design across our systems is engineered to the Saudi Building Code. Frame design and connections are project-engineered with your structural designer." },
   { Icon: Eye, title: "Values against the certificate", body: "Technical values are issued against the relevant test certificate and confirmed for the specified application — they are shown as 'To be confirmed' rather than estimated." },
   { Icon: Wrench, title: "Installation, documented", body: "Every product carries an Installation Manual — tools, storage, surface prep, procedure, jointing, quality checks, health & safety and maintenance." },

@@ -60,7 +60,7 @@ const APPLICATIONS = [
     n: "05",
     tag: "Finishing · Interior + Exterior",
     title: "Flexible Clay-Stone Wraps",
-    body: "Continuous wraps of columns, curves and corners with our flexible clay-stone tile — 100% Saudi-made, the only manufacturer in KSA.",
+    body: "Continuous wraps of columns, curves and corners with our flexible clay-stone tile — 100% Saudi — an EcoSmart exclusive in KSA.",
     img: p1,
   },
   {

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/samples")({
   head: () => ({
     meta: [
       { title: "Samples — EcoSmart" },
-      { name: "description", content: "Request physical samples of EcoSmart finishing products — flexible clay-stone, PU stone, WPC, SPC, PVC — from our Sudair manufacturing facility." },
+      { name: "description", content: "Request physical samples of EcoSmart finishing products — flexible clay-stone, PU stone, WPC, SPC, PVC — from EcoSmart." },
       { property: "og:title", content: "Samples — EcoSmart" },
       { property: "og:description", content: "Hold the material before you specify." },
       { property: "og:image", content: hero },
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/samples")({
 const STEPS = [
   { n: "01", t: "Tell us", d: "Share the project, the product you'd like to see, and the address to ship to." },
   { n: "02", t: "We match", d: "We select the right chips from our finishing lines against your brief and confirm what we'll send." },
-  { n: "03", t: "Sent from Sudair", d: "The sample ships from our facility in Sudair Industrial City with its specification card." },
+  { n: "03", t: "Shipped by EcoSmart", d: "The sample ships from our facility in Riyadh with its specification card." },
 ];
 
 const CONTENTS = [
@@ -46,7 +46,7 @@ function SamplesPage() {
         eyebrow="Samples"
         title="Hold the material"
         emphasis="before you specify."
-        subcopy="Samples of our finishing products — flexible clay-stone tiles, PU stone, WPC, SPC and PVC lines — issued on request from our Sudair facility."
+        subcopy="Samples of our finishing products — flexible clay-stone tiles, PU stone, WPC, SPC and PVC lines — issued on request from our team."
         image={hero}
         primary={{ label: "Request a sample", to: "/contact" }}
         secondary={{ label: "See the products", to: "/products" }}
@@ -120,7 +120,7 @@ function SamplesPage() {
                 Dispatch
               </div>
               <div className="mt-1 text-base">
-                Samples ship from Sudair Industrial City, Riyadh. Lead time confirmed when we reply to your request.
+                Samples ship from Riyadh, Saudi Arabia. Lead time confirmed when we reply to your request.
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@ function SamplesPage() {
 
       <CTABand
         eyebrow="Ready?"
-        title="Request a sample — we'll send it from Sudair."
+        title="Request a sample — we'll send it to you."
         href="/contact"
         cta="Request a sample"
       />

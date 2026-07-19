@@ -34,7 +34,7 @@ const CONSTRUCTION_SYSTEMS: [string, string][] = [
 
 const FINISHING: [string, string][] = [
   ["PU Stone Decorative Tiles", "Lightweight polyurethane stone-effect tiles — adhesive-fixed, far faster than natural stone cladding."],
-  ["Flexible Clay-Stone Tiles", "100% Saudi-made — the only manufacturer in KSA. Bends to follow flat and curved surfaces."],
+  ["Flexible Clay-Stone Tiles", "100% Saudi — an EcoSmart exclusive in KSA. Bends to follow flat and curved surfaces."],
   ["WPC Door Panels", "Wood-plastic composite door leaves — moisture-resistant and dimensionally stable in KSA humidity."],
   ["PVC Marble Sheets", "PVC sheets in marble patterns for interior wall and ceiling applications."],
   ["PVC Laminated Foam Board Sheets", "Laminated foam-core PVC board for interior surfaces and joinery."],
@@ -57,7 +57,7 @@ const CATEGORIES = [
     id: "finishing",
     label: "Decoration & Finishing",
     Icon: FileText,
-    intro: "One TDS and one Installation Manual per finishing product — for the finishing lines manufactured at Sudair.",
+    intro: "One TDS and one Installation Manual per finishing product — for EcoSmart's finishing lines.",
     files: FINISHING,
   },
 ];

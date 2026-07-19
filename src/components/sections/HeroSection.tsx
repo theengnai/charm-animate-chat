@@ -47,7 +47,7 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.6 }}
           >
-            Ask about our construction systems and finishing products — manufactured in Sudair, Saudi Arabia.
+            Ask about our construction systems and finishing products — delivered by EcoSmart, Saudi Arabia.
           </motion.p>
         </div>
       </motion.div>

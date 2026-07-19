@@ -26,13 +26,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Saudi manufacturer of construction systems and decoration & finishing products. Sudair Industrial City, Riyadh. Aligned to Vision 2030 and the Saudi Building Code.",
+          "Saudi company delivering construction systems and decoration & finishing products. Riyadh, Saudi Arabia. Aligned to Vision 2030 and the Saudi Building Code.",
       },
       { property: "og:title", content: "EcoSmart — Build Better. Build Saudi." },
       {
         property: "og:description",
         content:
-          "Construction systems and finishing products, manufactured in Saudi Arabia.",
+          "Construction systems and finishing products, delivered across Saudi Arabia.",
       },
     ],
   }),

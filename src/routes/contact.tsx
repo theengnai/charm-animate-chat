@@ -14,9 +14,9 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — EcoSmart" },
-      { name: "description", content: "Talk to EcoSmart. Manufacturing in Sudair Industrial City, Riyadh, Saudi Arabia." },
+      { name: "description", content: "Talk to EcoSmart. Based in Riyadh, Saudi Arabia." },
       { property: "og:title", content: "Contact — EcoSmart" },
-      { property: "og:description", content: "Sudair Industrial City, Riyadh — Saudi Arabia." },
+      { property: "og:description", content: "Riyadh, Saudi Arabia." },
       { property: "og:image", content: hero },
     ],
   }),
@@ -25,12 +25,12 @@ export const Route = createFileRoute("/contact")({
 
 const CHANNELS = [
   { Icon: Mail, label: "Email", value: "hello@ecosmart.sa", href: "mailto:hello@ecosmart.sa" },
-  { Icon: MapPin, label: "Manufacturing", value: "Sudair Industrial City, Riyadh", href: "#location" },
+  { Icon: MapPin, label: "Manufacturing", value: "Riyadh, Saudi Arabia", href: "#location" },
   { Icon: Clock, label: "Reply", value: "Within one business day", href: "mailto:hello@ecosmart.sa" },
 ];
 
 const FAQ = [
-  { q: "Where are your products manufactured?", a: "In Sudair Industrial City, Riyadh, Saudi Arabia — under our manufacturing entity مصنع إنتيجرا بيلد للتصنيع, CR No. 1009200656." },
+  { q: "Where are your products manufactured?", a: "In Riyadh, Saudi Arabia, Saudi Arabia — under our manufacturing entity شركة إيكوسمارت, CR No. 1009200656." },
   { q: "Can you share technical values and certificates?", a: "Yes. Every product carries a Technical Data Sheet and an Installation Manual. Project-specific test certificates are issued on request against the certified figures." },
   { q: "Do you deliver outside Saudi Arabia?", a: "Our primary market is Saudi Arabia. Delivery outside KSA is possible — send us the project and we'll respond." },
   { q: "How do I request a sample?", a: "Use the request form on the Samples page, or write to hello@ecosmart.sa with your project details and the finishing product you'd like to see." },
@@ -47,7 +47,7 @@ function ContactPage() {
         eyebrow="Get in touch"
         title="Let's talk"
         emphasis="your project."
-        subcopy="Email, WhatsApp or write to us directly. Manufacturing in Sudair Industrial City, Riyadh. We reply within one business day."
+        subcopy="Email, WhatsApp or write to us directly. Manufacturing in Riyadh, Saudi Arabia. We reply within one business day."
         image={hero}
         primary={{ label: "Email us", to: "/contact" }}
         secondary={{ label: "Browse products", to: "/products" }}
@@ -92,21 +92,21 @@ function ContactPage() {
         <div className="mx-auto max-w-5xl">
           <Reveal>
             <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-copper">
-              Manufacturing
+              Location
             </div>
             <h2 className="display-serifish mt-4 text-3xl md:text-5xl">
-              Sudair Industrial City, Riyadh.
+              Riyadh, Saudi Arabia.
             </h2>
           </Reveal>
           <div className="mt-10 grid gap-6 rounded-3xl border border-line/60 bg-canvas p-8 md:grid-cols-3 md:p-12">
             <div>
               <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">Facility</div>
-              <div className="mt-2 text-base">مصنع إنتيجرا بيلد للتصنيع</div>
-              <div className="mt-1 text-sm text-ink-soft">Integra Build Manufacturing</div>
+              <div className="mt-2 text-base">شركة إيكوسمارت</div>
+              <div className="mt-1 text-sm text-ink-soft">EcoSmart</div>
             </div>
             <div>
               <div className="font-mono text-[0.62rem] uppercase tracking-[0.28em] text-ink-soft">Address</div>
-              <div className="mt-2 text-base">Sudair Industrial City</div>
+              <div className="mt-2 text-base">Riyadh</div>
               <div className="mt-1 text-sm text-ink-soft">Riyadh, Saudi Arabia</div>
             </div>
             <div>
@@ -231,7 +231,7 @@ function ContactPage() {
 
       <CTABand
         eyebrow="Not ready to write?"
-        title="Request a sample — we'll send it from Sudair."
+        title="Request a sample — we'll send it to you."
         href="/samples"
         cta="Request a sample"
       />

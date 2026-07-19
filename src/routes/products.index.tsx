@@ -23,9 +23,9 @@ export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Products — EcoSmart | Construction Systems & Finishing Products" },
-      { name: "description", content: "EcoSmart's product library — construction systems (lightweight concrete panels, T-floor hourdi, hybrid precast, curved modular, portable cabins, EPS façades) and decoration & finishing lines (flexible clay-stone, PU stone, WPC, SPC, PVC), all manufactured in Sudair." },
+      { name: "description", content: "EcoSmart's product library — construction systems (lightweight concrete panels, T-floor hourdi, hybrid precast, curved modular, portable cabins, EPS façades) and decoration & finishing lines (flexible clay-stone, PU stone, WPC, SPC, PVC), all delivered by EcoSmart." },
       { property: "og:title", content: "Products — EcoSmart" },
-      { property: "og:description", content: "Construction systems and finishing products, manufactured in Saudi Arabia." },
+      { property: "og:description", content: "Construction systems and finishing products, delivered across Saudi Arabia." },
       { property: "og:image", content: hero },
     ],
   }),
@@ -56,13 +56,13 @@ const SECTIONS: Section[] = [
     id: "architectural-finishes",
     label: "Decoration & Finishing",
     title: "Decoration & Finishing",
-    intro: "Finishing product lines manufactured in Sudair — for interior and exterior surfaces where the material must be honest, durable and buildable.",
+    intro: "Finishing product lines delivered by EcoSmart — for interior and exterior surfaces where the material must be honest, durable and buildable.",
     cards: [
       {
         id: "flexible-clay-stone-panels",
         tag: "Exterior + Interior · 100% Saudi-made",
         title: "Flexible Clay-Stone Tiles",
-        body: "A flexible modified clay-stone tile that bends to follow flat and curved surfaces, applied like a thin tile with adhesive. EcoSmart is the only manufacturer of flexible tiles in Saudi Arabia, produced with 100% Saudi-sourced raw materials — a primary Vision 2030 / IKTVA position.",
+        body: "A flexible modified clay-stone tile that bends to follow flat and curved surfaces, applied like a thin tile with adhesive. EcoSmart is the exclusive Saudi source for flexible tiles, produced with 100% Saudi-sourced raw materials — a primary Vision 2030 / IKTVA position.",
         specs: [
           ["Origin", "100% Saudi-made"],
           ["Reference", "EN 13501-1 / ASTM E84"],
@@ -93,7 +93,7 @@ const SECTIONS: Section[] = [
         id: "wpc",
         tag: "Exterior · Ground plane",
         title: "WPC External Decking",
-        body: "Wood-plastic composite decking — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the factory installation values.",
+        body: "Wood-plastic composite decking — moisture-resistant, dimensionally stable and suited to KSA humidity. Joist spacing, expansion gaps and end gaps are product-specific — follow the product installation values.",
         specs: [
           ["Reference", "EN 15534 family"],
           ["Reaction to fire", "EN 13501-1"],
@@ -222,7 +222,7 @@ const SECTIONS: Section[] = [
 const KPIS = [
   { v: 6, s: "", l: "Construction systems" },
   { v: 10, s: "", l: "Finishing product lines" },
-  { v: 100, s: "%", l: "Manufactured in Saudi Arabia" },
+  { v: 100, s: "%", l: "Delivered across Saudi Arabia" },
   { v: 1, s: "", l: "KSA maker of flexible clay-stone" },
 ];
 
@@ -250,7 +250,7 @@ function ProductsPage() {
         eyebrow="Products library"
         title="Construction systems and"
         emphasis="finishing products."
-        subcopy="Manufactured in Sudair Industrial City, Riyadh — two ranges built for the Saudi market."
+        subcopy="Manufactured in Riyadh, Saudi Arabia — two ranges built for the Saudi market."
         image={hero}
         primary={{ label: "Talk to our team", to: "/contact" }}
         secondary={{ label: "Request a sample", to: "/samples" }}
@@ -264,7 +264,7 @@ function ProductsPage() {
           </div>
           <p className="display-serifish mt-6 text-2xl leading-[1.25] md:text-4xl">
             Two ranges,{" "}
-            <HighlightSweep>manufactured in Saudi Arabia</HighlightSweep>{" "}
+            <HighlightSweep>delivered across Saudi Arabia</HighlightSweep>{" "}
             — construction systems that replace conventional frames and blockwork, plus finishing products from the only KSA maker of flexible clay-stone. Every product carries a Technical Data Sheet and an Installation Manual.
           </p>
         </div>
@@ -416,7 +416,7 @@ function ProductsPage() {
 
       <CTABand
         eyebrow="Not sure which fits?"
-        title="Request a sample — we'll send it from Sudair."
+        title="Request a sample — we'll send it to you."
         href="/samples"
         cta="Request a sample"
       />

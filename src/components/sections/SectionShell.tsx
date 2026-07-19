@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 export interface SectionCta {
   label: string;
   onClick?: () => void;
+  href?: string;
 }
 
 export interface SectionMeta {

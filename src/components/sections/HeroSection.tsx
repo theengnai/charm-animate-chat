@@ -1,10 +1,21 @@
 import { motion } from "framer-motion";
-import { ChatCard } from "@/components/hero/ChatCard";
 import { HeroStage } from "@/components/hero/HeroStage";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
 export function HeroSection({ active }: { active: boolean; onPickItem?: (i: number) => void }) {
-  const [, setPulse] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const onMessage = (e: MessageEvent) => {
+      if (e.data && e.data.type === "ecosmart-widget-height") {
+        const iframe = iframeRef.current;
+        if (iframe) iframe.style.height = e.data.height + "px";
+      }
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+
   if (!active) return null;
 
   return (
@@ -33,12 +44,22 @@ export function HeroSection({ active }: { active: boolean; onPickItem?: (i: numb
           Find the right <span className="text-copper">materials</span> for your projects.
         </motion.h1>
 
-        {/* chat centerpiece */}
+        {/* chat centerpiece — embedded EcoSmart AI Consultant */}
         <div className="relative z-10 mt-4 flex w-full flex-col items-center sm:mt-6 lg:mt-8">
-          <ChatCard
-            onSend={() => {
-              setPulse(true);
-              window.setTimeout(() => setPulse(false), 900);
+          <iframe
+            ref={iframeRef}
+            id="ecosmart-widget"
+            src="https://demo.neuro-systems.org"
+            title="EcoSmart AI Consultant"
+            allow="microphone"
+            style={{
+              width: "100%",
+              maxWidth: "760px",
+              height: "600px",
+              border: "none",
+              display: "block",
+              margin: "0 auto",
+              background: "transparent",
             }}
           />
           <motion.p

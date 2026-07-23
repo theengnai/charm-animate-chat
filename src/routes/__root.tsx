@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -125,6 +126,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const showFloatingWidget = pathname !== "/";
+
+  useEffect(() => {
+    if (!showFloatingWidget) return;
+    const existing = document.querySelector<HTMLScriptElement>(
+      'script[data-ecosmart-embed="true"]',
+    );
+    if (existing) return;
+    const s = document.createElement("script");
+    s.src = "https://demo.neuro-systems.org/embed.js";
+    s.async = true;
+    s.dataset.ecosmartEmbed = "true";
+    document.body.appendChild(s);
+  }, [showFloatingWidget]);
 
   return (
     <QueryClientProvider client={queryClient}>

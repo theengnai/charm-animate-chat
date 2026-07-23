@@ -150,3 +150,8 @@
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 }
+
+/* AI widget launcher sits to the left of the WhatsApp button so both share the bottom row. */
+button[aria-label="Chat with EcoSmart AI"] {
+  right: 108px !important;
+}
